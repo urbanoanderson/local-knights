@@ -1,0 +1,39 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Controls.CustomNumericUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Controls"
+             Background="{DynamicResource ControlBackgroundBrush}"
+             Foreground="{DynamicResource ControlForegroundBrush}">
+    <UserControl.Resources>
+        <Style x:Key="NumericButtonStyle" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+            <Setter Property="Width" Value="26" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="ValueTextBox"
+                 Text="{Binding DisplayValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                 Style="{StaticResource ModernTextBox}"
+                 VerticalContentAlignment="Center"
+                 MinHeight="30"
+                 PreviewTextInput="ValueTextBox_PreviewTextInput"
+                 LostFocus="ValueTextBox_LostFocus"
+                 PreviewKeyDown="ValueTextBox_PreviewKeyDown"
+                 ToolTip="{Binding ToolTip, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0,0,0" VerticalAlignment="Center">
+            <Button Style="{StaticResource NumericButtonStyle}" Content="▼" Click="DecrementButton_Click" Margin="0,0,4,0" />
+            <Button Style="{StaticResource NumericButtonStyle}" Content="▲" Click="IncrementButton_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

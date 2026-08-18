@@ -1,0 +1,69 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
+             xmlns:svg="clr-namespace:SharpVectors.Converters;assembly=SharpVectors.Converters.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}">
+
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,35">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <svg:SvgViewbox Source="/Resources/Icon/logo.svg"
+                                Width="144"
+                                Height="144"
+                                Stretch="Uniform"
+                                HorizontalAlignment="Center"
+                                Margin="0,40,0,10" />
+                <TextBlock Text="{Binding ClubDashboard}"
+                    Style="{DynamicResource PageTitle}"
+                    HorizontalAlignment="Center"
+                    TextAlignment="Center" />
+            </StackPanel>
+
+            <!-- Dashboard Cards -->
+            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Style="{DynamicResource Card}" Margin="0,0,0,11" Width="300">
+                    <Button Content="{Binding Players}" Command="{Binding PlayersCommand}"
+                            Style="{DynamicResource PrimaryButton}" HorizontalAlignment="Stretch" />
+                </Border>
+
+                <Border Grid.Row="1" Style="{DynamicResource Card}" Margin="0,0,0,11" Width="300">
+                    <Button Content="{Binding Games}" Command="{Binding GamesCommand}"
+                            Style="{DynamicResource PrimaryButton}" HorizontalAlignment="Stretch" />
+                </Border>
+
+                <Border Grid.Row="2" Style="{DynamicResource Card}" Margin="0,0,0,11" Width="300">
+                    <Button Content="{Binding Competitions}" Command="{Binding CompetitionsCommand}"
+                            Style="{DynamicResource PrimaryButton}" HorizontalAlignment="Stretch" />
+                </Border>
+
+                <Border Grid.Row="3" Style="{DynamicResource Card}" Margin="0,0,0,11" Width="300">
+                    <Button Content="{Binding Preferences}" Command="{Binding PreferencesCommand}"
+                            Style="{DynamicResource PrimaryButton}" HorizontalAlignment="Stretch" />
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

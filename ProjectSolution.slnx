@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="LocalKnights.Common/LocalKnights.Common.csproj" />
+  <Project Path="LocalKnights.Common.Tests/LocalKnights.Common.Tests.csproj" />
+  <Project Path="LocalKnights.WindowsDesktop/LocalKnights.WindowsDesktop.csproj" />
+  <Project Path="LocalKnights.WindowsDesktop.Tests/LocalKnights.WindowsDesktop.Tests.csproj" />
+  <!-- <Project Path="LocalKnights.AvaloniaDesktop/LocalKnights.AvaloniaDesktop.csproj" /> -->
+</Solution>

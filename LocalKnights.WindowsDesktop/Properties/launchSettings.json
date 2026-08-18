@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LocalKnights.WindowsDesktop": {
+      "commandName": "Project",
+      "launchBrowser": false
+    }
+  }
+}

@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Local Knights</AssemblyName>
+    <Version>0.9.1.1</Version>
+    <ApplicationIcon>Resources\Icon\logo-bg.ico</ApplicationIcon>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icon\logo-bg.ico" />
+    <Resource Include="Resources\Icon\logo-bg.png" />
+    <Resource Include="Resources\Icon\logo.png" />
+    <Resource Include="Resources\Icon\logo.svg" />
+    <Resource Include="Resources\Icon\default-profile.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.0" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.0" />
+    <PackageReference Include="FreeDataExportsv2" Version="1.0.200" />
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocalKnights.Common\LocalKnights.Common.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyGoDll" AfterTargets="Build">
+    <Copy SourceFiles="..\Scripts\ChessPairingWrapper\chesspairing.dll" DestinationFolder="$(OutputPath)" />
+  </Target>
+
+</Project>

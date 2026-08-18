@@ -1,0 +1,498 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.CompetitionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
+             xmlns:controls="clr-namespace:LocalKnights.WindowsDesktop.Controls"
+            xmlns:models="clr-namespace:LocalKnights.Common.Models;assembly=LocalKnights.Common"
+             mc:Ignorable="d"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="CompetitionStateTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CompetitionStateBrushKey}" Value="InfoBrush">
+                    <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CompetitionStateBrushKey}" Value="WarningBrush">
+                    <Setter Property="Foreground" Value="{DynamicResource WarningBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding CompetitionStateBrushKey}" Value="SuccessBrush">
+                    <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="{Binding CompetitionPage}"
+                   Style="{DynamicResource PageTitle}" />
+
+        <TabControl Grid.Row="1" Style="{StaticResource ModernTabControl}" ItemContainerStyle="{StaticResource ModernTabItem}" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
+                <TabItem Header="{Binding InformationTabHeader}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+                        <StackPanel Margin="20,12,20,20">
+                        <TextBlock Text="{Binding TitleLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding CompetitionTitle, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{DynamicResource ModernTextBox}"
+                                 IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
+                                 Margin="0,0,0,12" />
+
+                        <TextBlock Text="{Binding DescriptionLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding CompetitionDescription, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{DynamicResource ModernTextBox}"
+                                 IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
+                                 Margin="0,0,0,12"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 MinHeight="100" />
+
+                        <TextBlock Text="{Binding StateLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding CompetitionStateDisplay, Mode=OneWay}" Style="{StaticResource CompetitionStateTextBoxStyle}" IsReadOnly="True" Margin="0,0,0,12" />
+
+                        <TextBlock Text="{Binding WinnerLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding WinnerDisplayName, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12" />
+
+                        <TextBlock Text="{Binding TimeFormatLabel}" Style="{DynamicResource LabelText}" />
+                        <ComboBox ItemsSource="{Binding TimeFormatOptions}"
+                                  SelectedItem="{Binding SelectedTimeFormat, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{DynamicResource ModernComboBox}"
+                                  IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
+                                  Margin="0,0,0,12">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding RatedLabel}" Style="{DynamicResource LabelText}" />
+                        <CheckBox IsChecked="{Binding IsCompetitionRated}"
+                                  Style="{DynamicResource ModernCheckBox}"
+                                  IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
+                                  Margin="0,0,0,12" />
+
+                        <TextBlock Text="{Binding TypeLabel}" Style="{DynamicResource LabelText}" />
+                        <ComboBox ItemsSource="{Binding CompetitionTypeOptions}"
+                                  SelectedItem="{Binding SelectedCompetitionType, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{DynamicResource ModernComboBox}"
+                                  IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
+                                  Margin="0,0,0,12">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <StackPanel Visibility="{Binding IsNumberOfRoundsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock Text="{Binding NumberOfRoundsLabel}" Style="{DynamicResource LabelText}" />
+                            <controls:CustomNumericUpDown Value="{Binding CompetitionNumberOfRounds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue=1, FallbackValue=1}"
+                                                         Minimum="1"
+                                                         Maximum="30"
+                                                         IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
+                                                         Margin="0,0,0,12" />
+                        </StackPanel>
+
+                        <StackPanel Visibility="{Binding IsDoubleRoundRobinVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock Text="{Binding DoubleRoundRobinLabel}" Style="{DynamicResource LabelText}" />
+                            <CheckBox IsChecked="{Binding IsCompetitionDoubleRoundRobin}"
+                                      Style="{DynamicResource ModernCheckBox}"
+                                      IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
+                                      Margin="0,0,0,12" />
+                        </StackPanel>
+
+                        <StackPanel Visibility="{Binding IsByeValueVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock Text="{Binding ByeValueLabel}" Style="{DynamicResource LabelText}" />
+                            <ComboBox ItemsSource="{Binding ByeValues}"
+                                      SelectedItem="{Binding CompetitionByeValue, UpdateSourceTrigger=PropertyChanged}"
+                                      Style="{DynamicResource ModernComboBox}"
+                                      IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
+                                      Margin="0,0,0,12" />
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding ParticipantsLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding ParticipantSearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{DynamicResource ModernAutoSuggestInput}"
+                                 Tag="{Binding SearchPlaceholder}"
+                                 ToolTip="{Binding SearchPlaceholder}"
+                                 IsEnabled="{Binding IsParticipantEditEnabled}"
+                                 Margin="0,0,0,8"
+                                 Visibility="{Binding IsParticipantEditEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                        <Border Margin="0,0,0,12">
+                            <Border.Style>
+                                <Style TargetType="Border" BasedOn="{StaticResource SuggestionListContainer}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsParticipantSearchVisible}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <ListBox ItemsSource="{Binding ParticipantSearchResults}" Style="{DynamicResource ModernSuggestionList}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                            <Button Grid.Column="1"
+                                                    Content="{Binding DataContext.AddParticipantButtonLabel, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    Command="{Binding DataContext.AddParticipantCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{StaticResource SuggestionItemButton}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+
+                        <DataGrid ItemsSource="{Binding ParticipantTableRows}"
+                                  Style="{DynamicResource ModernDataGrid}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  IsReadOnly="True"
+                                  Height="220"
+                                  Margin="0,0,0,12">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.DisplayNameLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DisplayName}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="2*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.IdentifierNameLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button x:Name="ParticipantIdentifierLink"
+                                                        Content="{Binding IdentifierName}"
+                                                        Command="{Binding DataContext.OpenParticipantPlayerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        HorizontalAlignment="Left"
+                                                        Padding="0"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Cursor="Hand"
+                                                        Foreground="{DynamicResource LinkBrush}">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="Button">
+                                                                        <ContentPresenter />
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </Button.Style>
+                                                    <Button.ContentTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding}"
+                                                                       Foreground="{DynamicResource LinkBrush}"
+                                                                       TextDecorations="Underline" />
+                                                        </DataTemplate>
+                                                    </Button.ContentTemplate>
+                                                </Button>
+                                                <TextBlock x:Name="ParticipantIdentifierText"
+                                                           Text="{Binding IdentifierName}"
+                                                           Visibility="Collapsed" />
+                                            </Grid>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding CanNavigateToPlayer}" Value="False">
+                                                    <Setter TargetName="ParticipantIdentifierLink" Property="Visibility" Value="Collapsed" />
+                                                    <Setter TargetName="ParticipantIdentifierText" Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="1.2*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.RatingLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding RatingDisplay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="80" MinWidth="80">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.RemoveParticipantButtonLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="❌"
+                                                    Command="{Binding DataContext.RemoveParticipantCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{DynamicResource SecondaryButton}"
+                                                    IsEnabled="{Binding DataContext.IsParticipantEditEnabled, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    Padding="4,0"
+                                                    VerticalContentAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    MinHeight="0"
+                                                    Margin="0" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="{Binding RoundsTabHeader}">
+                    <Grid Margin="20,0,20,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{Binding CurrentRoundLabelDisplay}" Style="{DynamicResource BodyText}" Margin="0,0,0,12" />
+
+                        <DataGrid Grid.Row="1" ItemsSource="{Binding PairingTableRows}"
+                                  Style="{DynamicResource ModernDataGrid}"
+                                  ColumnHeaderStyle="{DynamicResource CenteredDataGridColumnHeaderStyle}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  IsReadOnly="True"
+                                  Margin="0,0,0,12"
+                                  VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  MinHeight="120">
+                                <DataGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                    <Style x:Key="CenteredDataGridTextBlockStyle" TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="0" />
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                    </Style>
+                                    <Style x:Key="CenteredLinkTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CenteredDataGridTextBlockStyle}">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="{DynamicResource LinkBrush}" />
+                                        <Setter Property="TextDecorations" Value="Underline" />
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="MinHeight" Value="28" />
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Padding" Value="6,2" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="Auto" MinWidth="60" Binding="{Binding TableNumber}" ElementStyle="{StaticResource CenteredDataGridTextBlockStyle}" IsReadOnly="True">
+                                        <DataGridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource CenteredDataGridTextBlockStyle}" Text="{Binding DataContext.TableNumberLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTextColumn.HeaderTemplate>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Width="2*" MinWidth="150" Binding="{Binding WhitePlayerName}" ElementStyle="{StaticResource CenteredDataGridTextBlockStyle}" IsReadOnly="True">
+                                        <DataGridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource CenteredDataGridTextBlockStyle}" Text="{Binding DataContext.WhitePlayerLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTextColumn.HeaderTemplate>
+                                    </DataGridTextColumn>
+                                    <DataGridTemplateColumn Width="120" MinWidth="100" IsReadOnly="False">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource CenteredDataGridTextBlockStyle}" Text="{Binding DataContext.ResultLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock Text="{Binding ResultDisplay}"
+                                                            Visibility="{Binding DataContext.IsDisplayingCurrentRound, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToInverseConverter}}"
+                                                            VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
+
+                                                        <ComboBox ItemsSource="{Binding DataContext.ActiveResultOptions, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                            SelectedItem="{Binding SelectedResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Visibility="{Binding DataContext.IsDisplayingCurrentRound, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                            HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"
+                                                            MinHeight="22" Padding="2" Margin="0"
+                                                            VerticalContentAlignment="Center"
+                                                            Style="{DynamicResource ModernComboBox}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Width="2*" MinWidth="150" Binding="{Binding BlackPlayerName}" ElementStyle="{StaticResource CenteredDataGridTextBlockStyle}" IsReadOnly="True">
+                                        <DataGridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource CenteredDataGridTextBlockStyle}" Text="{Binding DataContext.BlackPlayerLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTextColumn.HeaderTemplate>
+                                    </DataGridTextColumn>
+                                    <DataGridTemplateColumn Width="Auto" MinWidth="80" IsReadOnly="True">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource CenteredDataGridTextBlockStyle}" Text="{Binding DataContext.GameIdLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <TextBlock Text="{Binding GameIdDisplay}"
+                                                               Style="{StaticResource CenteredLinkTextBlockStyle}"
+                                                               Visibility="{Binding CanNavigateToGame, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                        <TextBlock.InputBindings>
+                                                            <MouseBinding Gesture="LeftClick"
+                                                                          Command="{Binding DataContext.OpenPairingGameCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                          CommandParameter="{Binding}" />
+                                                        </TextBlock.InputBindings>
+                                                    </TextBlock>
+                                                    <TextBlock Text=""
+                                                               Visibility="{Binding CanNavigateToGame, Converter={StaticResource BooleanToInverseConverter}}"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        <TextBlock Grid.Row="2" Text="{Binding ByeDisplay}" Margin="0,0,0,12">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource LabelText}">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ByeDisplay}" Value="">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ByeDisplay}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                        </TextBlock>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,12">
+                            <Button Content="{Binding PreviousPageButtonLabel}" Command="{Binding PreviousRoundCommand}" Style="{DynamicResource SecondaryButton}" Margin="0,0,12,0" />
+                            <TextBlock Text="{Binding RoundIndicator}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,12,0" />
+                            <Button Content="{Binding NextPageButtonLabel}" Command="{Binding NextRoundCommand}" Style="{DynamicResource SecondaryButton}" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{Binding StandingsTabHeader}">
+                    <Grid Margin="20,12,20,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" ItemsSource="{Binding StandingsTableRows}" Style="{DynamicResource ModernDataGrid}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="120">
+                            <DataGrid.Resources>
+                                <Style x:Key="CenteredDataGridTextBlockStyle" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="0" />
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="Auto" Binding="{Binding Classification}" ElementStyle="{StaticResource CenteredDataGridTextBlockStyle}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.ClassificationLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="3*" Binding="{Binding ParticipantName}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.ParticipantLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Binding="{Binding Score}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.ScoreLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Binding="{Binding OldRatingDisplay}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.OldRatingLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Binding="{Binding NewRatingDisplay}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.NewRatingLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Binding="{Binding PerformanceRatingDisplay}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.PerformanceRatingLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="{Binding BackButtonLabel}" Command="{Binding BackCommand}" Style="{DynamicResource SecondaryButton}" Margin="0,0,12,0" />
+            <Button Content="{Binding UndoRoundButtonLabel}" Command="{Binding UndoRoundCommand}" Style="{DynamicResource WarningButton}" Margin="0,0,12,0" Visibility="{Binding IsUndoRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Button Content="{Binding StartCompetitionButtonLabel}" Command="{Binding StartCompetitionCommand}" Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0" Visibility="{Binding IsStartCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsStartCompetitionEnabled}" />
+            <Button Content="{Binding AdvanceRoundButtonLabel}" Command="{Binding AdvanceRoundCommand}" Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0" Visibility="{Binding IsAdvanceRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsAdvanceRoundEnabled}" />
+            <Button Content="{Binding CompleteCompetitionButtonLabel}" Command="{Binding CompleteCompetitionCommand}" Style="{DynamicResource SuccessButton}" Margin="0,0,12,0" Visibility="{Binding IsCompleteCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsCompleteCompetitionEnabled}" />
+            <Button Content="{Binding ExportButtonLabel}" Command="{Binding ExportCommand}" Style="{DynamicResource SuccessButton}" Margin="0,0,12,0" />
+            <Button Content="{Binding DeleteButtonLabel}" Command="{Binding DeleteCommand}" Style="{DynamicResource DangerButton}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

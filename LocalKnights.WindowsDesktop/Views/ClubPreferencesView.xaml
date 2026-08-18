@@ -1,0 +1,239 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.ClubPreferencesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
+             xmlns:controls="clr-namespace:LocalKnights.WindowsDesktop.Controls"
+            xmlns:models="clr-namespace:LocalKnights.Common.Models;assembly=LocalKnights.Common"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}">
+    <UserControl.Resources>
+        <Style x:Key="ReadOnlyFieldStyle" TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}">
+            <Setter Property="Opacity" Value="0.65"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource SideWidthStar}" />
+            <ColumnDefinition Width="{StaticResource FormWidthStar}" />
+            <ColumnDefinition Width="{StaticResource SideWidthStar}" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ClubPreferences}" Style="{DynamicResource PageTitle}"
+                   Margin="0,0,0,30" />
+
+        <!-- Form -->
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+            <StackPanel>
+
+                <!-- Basic Information -->
+                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding BasicInformationHeader}" Style="{DynamicResource SectionTitle}"
+                               Margin="0,0,0,15" />
+
+                    <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBox Text="{Binding DisplayName}" Style="{DynamicResource ModernTextBox}"
+                                 ToolTip="{Binding EditDisplayNameTooltip}" Margin="0,0,0,5" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding DescriptionLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBox Text="{Binding Description}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="96"
+                                 VerticalScrollBarVisibility="Auto"
+                                 Style="{DynamicResource ModernTextBox}" ToolTip="{Binding EditDescriptionTooltip}" Margin="0,0,0,5" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding CreatedAtLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBox Text="{Binding CreatedAtText, Mode=OneWay}" Style="{StaticResource ReadOnlyFieldStyle}"
+                                 IsReadOnly="True" Margin="0,0,0,5" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4">
+                        <TextBlock Text="{Binding UpdatedAtLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBox Text="{Binding UpdatedAtText, Mode=OneWay}" Style="{StaticResource ReadOnlyFieldStyle}"
+                                 IsReadOnly="True" Margin="0,0,0,5" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Rating Parameters -->
+            <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding RatingParametersHeader}" Style="{DynamicResource SectionTitle}"
+                               Margin="0,0,0,15" />
+
+                    <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding RatingSystemLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <ComboBox SelectedValue="{Binding RatingSystem, Mode=TwoWay}" SelectedValuePath="Tag"
+                                  Style="{DynamicResource ModernComboBox}"
+                                  ToolTip="{Binding EditRatingSystemTooltip}" Margin="0,0,0,5">
+                            <ComboBoxItem Tag="{x:Static models:RatingSystem.Glicko2}">Glicko-2</ComboBoxItem>
+                            <ComboBoxItem Tag="{x:Static models:RatingSystem.ELO}">ELO</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="{Binding RatingSystemHelp}" Style="{DynamicResource HelpText}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <controls:CustomNumericUpDown Value="{Binding Rating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Minimum="{Binding MinRating}" Maximum="{Binding MaxRating}" Increment="50" DecimalPlaces="0"
+                                                      Margin="0,0,0,5" ToolTip="{Binding EditRatingTooltip}" />
+                    </StackPanel>
+
+                        <StackPanel Grid.Row="3" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding MinRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <controls:CustomNumericUpDown Value="{Binding MinRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Minimum="100" Maximum="500" Increment="50" DecimalPlaces="0"
+                                          Margin="0,0,0,5" ToolTip="{Binding EditMinRatingTooltip}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="4" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding MaxRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <controls:CustomNumericUpDown Value="{Binding MaxRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          Minimum="3000" Maximum="4000" Increment="50" DecimalPlaces="0"
+                                          Margin="0,0,0,5" ToolTip="{Binding EditMaxRatingTooltip}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="5" Margin="0,0,0,15"
+                                Visibility="{Binding IsGlicko2Selected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <controls:CustomNumericUpDown Value="{Binding Deviation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Minimum="150" Maximum="1000" Increment="10" DecimalPlaces="0"
+                                                      Margin="0,0,0,5" ToolTip="{Binding EditDeviationTooltip}" />
+                    </StackPanel>
+
+                        <StackPanel Grid.Row="6" Margin="0,0,0,15"
+                                Visibility="{Binding IsGlicko2Selected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="{Binding VolatilityLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <controls:CustomNumericUpDown Value="{Binding Volatility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Minimum="0.01" Maximum="0.10" Increment="0.01" DecimalPlaces="2"
+                                                      Margin="0,0,0,5" ToolTip="{Binding EditVolatilityTooltip}" />
+                    </StackPanel>
+
+                        <StackPanel Grid.Row="6" Margin="0,0,0,15"
+                                Visibility="{Binding IsEloSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="{Binding ProvisionalGamesLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <controls:CustomNumericUpDown Value="{Binding ProvisionalGames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Minimum="0" Maximum="100" Increment="1" DecimalPlaces="0"
+                                                      Margin="0,0,0,5" ToolTip="{Binding EditProvisionalGamesTooltip}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Security -->
+            <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding SecurityHeader}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                    <TextBlock Grid.Row="1" Text="{Binding SecurityHelp}" Style="{DynamicResource BodyText}" TextWrapping="Wrap" Margin="0,0,0,15" />
+
+                    <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding CurrentPasswordLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <PasswordBox Style="{DynamicResource ModernPasswordBox}"
+                                     ToolTip="{Binding CurrentPasswordTooltip}"
+                                     PasswordChanged="CurrentPasswordBox_PasswordChanged" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Margin="0,0,0,15">
+                        <TextBlock Text="{Binding NewPasswordLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <PasswordBox Style="{DynamicResource ModernPasswordBox}"
+                                     ToolTip="{Binding NewPasswordTooltip}"
+                                     PasswordChanged="NewPasswordBox_PasswordChanged" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4">
+                        <TextBlock Text="{Binding ConfirmNewPasswordLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <PasswordBox Style="{DynamicResource ModernPasswordBox}"
+                                     ToolTip="{Binding ConfirmNewPasswordTooltip}"
+                                     PasswordChanged="ConfirmNewPasswordBox_PasswordChanged" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Social Media Links -->
+            <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding SocialMediaLinksLabel}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+
+                    <Grid Grid.Row="1" Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" Text="{Binding NewSocialMediaLink, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{DynamicResource ModernTextBox}"
+                                 ToolTip="{Binding EditSocialMediaTooltip}" Margin="0,0,10,0"/>
+                        <Button Grid.Column="1" Content="{Binding AddButtonLabel}" Command="{Binding AddSocialMediaLinkCommand}"
+                                Style="{DynamicResource SecondaryButton}"/>
+                    </Grid>
+
+                    <ListBox Grid.Row="2" x:Name="SocialMediaLinksList" ItemsSource="{Binding SocialMediaLinks}"
+                             Height="120" Style="{DynamicResource ModernListBox}" Margin="0,0,0,15" />
+
+                    <Button Grid.Row="3" Content="{Binding RemoveSelectedLabel}" Command="{Binding RemoveSocialMediaLinkCommand}"
+                            CommandParameter="{Binding SelectedItem, ElementName=SocialMediaLinksList}"
+                            Style="{DynamicResource SecondaryButton}" HorizontalAlignment="Left" />
+                </Grid>
+            </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+                <Button Content="{Binding SaveButtonLabel}" Command="{Binding SaveCommand}"
+                    Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0" VerticalAlignment="Center" Height="Auto"/>
+                <Button Content="{Binding CancelLabel}" Command="{Binding CancelCommand}"
+                    Style="{DynamicResource SecondaryButton}" Margin="0,0,10,0" VerticalAlignment="Center" Height="Auto"/>
+                <Button Content="{Binding DeleteClubButton}" Command="{Binding DeleteClubCommand}"
+                    Style="{DynamicResource DangerButton}" VerticalAlignment="Center" Height="Auto"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

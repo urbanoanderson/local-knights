@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Setup .NET 10
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Extract version from csproj
+      - name: Get version
+        id: get_version
+        shell: pwsh
+        run: |
+          $version = (Select-Xml -Path .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -XPath "//Version").Node.InnerText
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+
+      # Run unit tests before packaging
+      - name: Run tests
+        run: dotnet test ProjectSolution.slnx --configuration Release --no-build --verbosity normal
+
+      # Create tag
+      - name: Create tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git tag v${{ steps.get_version.outputs.version }}
+          git push origin v${{ steps.get_version.outputs.version }}
+
+      # Build your app
+      - name: Build
+        run: dotnet publish .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -c Release -r win-x64 --self-contained true -o out
+
+      # Zip the publish output
+      - name: Create zip artifact
+        id: create_zip
+        shell: pwsh
+        run: |
+          $zipName = "LocalKnights-${{ steps.get_version.outputs.version }}-win-x64-release.zip"
+          Compress-Archive -Path out\* -DestinationPath $zipName
+          echo "zipName=$zipName" >> $env:GITHUB_OUTPUT
+
+      # Generate draft release notes with Release Drafter
+      - name: Generate release notes
+        id: release_notes
+        uses: release-drafter/release-drafter@v6
+        with:
+          tag: v${{ steps.get_version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Create draft release with attached zip and notes
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          draft: true
+          body: ${{ steps.release_notes.outputs.body }}
+          files: ${{ steps.create_zip.outputs.zipName }}
