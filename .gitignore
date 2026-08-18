@@ -1,0 +1,23 @@
+# Binaries
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
