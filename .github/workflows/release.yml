@@ -25,6 +25,12 @@ jobs:
           $version = (Select-Xml -Path .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -XPath "//Version").Node.InnerText
           echo "version=$version" >> $env:GITHUB_OUTPUT
 
+      - name: Restore
+        run: dotnet restore ProjectSolution.slnx -r win-x64
+
+      - name: Build
+        run: dotnet build ProjectSolution.slnx --configuration Release --no-restore
+
       # Run unit tests before packaging
       - name: Run tests
         run: dotnet test ProjectSolution.slnx --configuration Release --no-build --verbosity normal
@@ -37,8 +43,8 @@ jobs:
           git tag v${{ steps.get_version.outputs.version }}
           git push origin v${{ steps.get_version.outputs.version }}
 
-      # Build your app
-      - name: Build
+      # Publish app
+      - name: Publish
         run: dotnet publish .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -c Release -r win-x64 --self-contained true -o out
 
       # Zip the publish output

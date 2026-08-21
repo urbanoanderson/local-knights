@@ -22,7 +22,7 @@ jobs:
 
       # Restore dependencies
       - name: Restore
-        run: dotnet restore ProjectSolution.slnx
+        run: dotnet restore ProjectSolution.slnx -r win-x64
 
       # Build
       - name: Build
