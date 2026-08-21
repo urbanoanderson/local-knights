@@ -13,24 +13,25 @@
 
 <p align="center">
 	Local Knights is a modern Windows desktop app for running chess clubs without subscriptions, server maintenance, or cloud lock-in.
-	Manage players, record games, organize competitions, generate pairings, and maintain club ratings from one polished interface.
+  Manage players, record games, organize competitions, generate pairings, and maintain internal club ratings from one polished interface.
 </p>
 
 ## Why Local Knights
 
-Local Knights is built for clubs that want professional-grade organization software while keeping full control of their own data. Everything runs locally on the club owner's computer, so there is no need for external servers, complicated deployment, or recurring platform fees.
+Local Knights is built for clubs that want practical, capable organization software while keeping full control of their own data. Everything runs locally on the club owner's computer, so there is no need for external servers, complicated deployment, or recurring platform fees.
 
 - Completely free and open source under the MPL-2.0 license
 - Fully local desktop experience with no mandatory cloud dependency
-- Club data stored in a single encrypted SQLite database file using SQLCipher
+- Club data stored in a single password-protected SQLite database file using SQLCipher
 - Simple backup and restore workflow with no server setup required
 - Clean navigation, responsive layouts, dark and light themes, and multilingual support
+- Perfect for community chess clubs, friend groups and school programs that need something more structured than spreadsheets and want a free and open source workflow
 
-## What You Can Do
+## Core Capabilities
 
 ### Run Your Club Day To Day
 
-- Register players and maintain complete club profiles
+- Register players and maintain complete profiles for club members
 - Record individual games and automatically track rating changes
 - Manage competitions from creation to final standings and exporting
 - Keep historical data organized in a single local database
@@ -38,14 +39,14 @@ Local Knights is built for clubs that want professional-grade organization softw
 ### Organize Competitive Play
 
 - Generate pairings for Swiss tournaments using FIDE-approved pairing logic
-- Run Round-Robin events, including support for round scheduling
+- Run Round-Robin events, including support for double Round-Robin format
 - Organize Knockout tournaments and two-player Match competitions
 - Track rounds, pairings, standings, and results in one place
 
 ### Maintain Meaningful Ratings
 
 - Support for both Glicko-2 and Elo rating systems
-- Maintain internal club ratings across different time formats
+- Maintain internal club ratings across different time formats (Bullet, Blitz, Rapid and Classical)
 - Update ratings as games and tournament results are recorded
 
 ### Connect External Chess Profiles
@@ -53,6 +54,8 @@ Local Knights is built for clubs that want professional-grade organization softw
 - Link player profiles to Chess.com, Lichess, FIDE, USCF and other organizations
 - Fetch ratings from supported external platforms during player creation
 - Keep club data aligned with the broader chess ecosystem
+
+![Local Knights demo](Docs/Screenshots/demo.gif)
 
 ## Built For Local Ownership
 
@@ -82,33 +85,7 @@ Getting a club up and running is intentionally simple.
 3. Register players manually or enrich their profiles with Chess.com, Lichess, FIDE, or USCF data.
 4. Start recording games or create a competition and let the app manage pairings, rounds, and standings.
 
-Because the database is stored locally as a single encrypted SQLCipher-backed SQLite file, your operational workflow stays straightforward: create, use, back up, and restore without maintaining any server infrastructure.
-
-### First Launch
-
-![Start page](Docs/Screenshots/start_page.png)
-
-### Club Preferences and Dashboard
-
-![Club preferences](Docs/Screenshots/clubpreferences_page.png)
-
-![Dashboard](Docs/Screenshots/dashboard_page.png)
-
-### Players Management
-
-![Players page](Docs/Screenshots/players_page.png)
-
-![Player profile](Docs/Screenshots/player_page.png)
-
-### Competition Overview
-
-![Competition info](Docs/Screenshots/competition_page_infotab.png)
-
-### Standings and Rounds
-
-![Competition standings](Docs/Screenshots/competition_page_standingstab.png)
-
-![Competition rounds](Docs/Screenshots/competition_page_roundstab.png)
+Because the database is stored locally as a single password-protected SQLite file, your operational workflow stays straightforward: create, use, back up, and restore without maintaining any server infrastructure.
 
 ## Technology
 
@@ -144,6 +121,26 @@ dotnet test ProjectSolution.slnx
 ## Versioning
 
 Local Knights uses the version format `MAJOR.MINOR.REVISION`.
+
+## Privacy & Data Handling
+
+This application is designed with privacy in mind:
+
+- **Local Storage Only**
+  All club data (players, games, competitions) is stored locally on the user’s computer in an SQLite database. The application does not transmit, sync, or share data with external servers or third parties.
+
+- **No Data Collection by the Developer**
+  The developer of this software does not collect, access, or process any personal information entered into the application.
+
+- **Responsibility of Club Owners**
+  Club owners and administrators using this software are responsible for ensuring compliance with applicable data protection laws, including the EU General Data Protection Regulation (GDPR) and Brazil’s Lei Geral de Proteção de Dados (LGPD). This includes informing players about how their data is used, obtaining consent where required, and respecting rights to access, correction, and deletion.
+
+- **Security Recommendations**
+  - Protect access to your computer and database files.
+  - Consider creating strong passwords for protecting real club's databases. Passwords are not backed up by Local Knights or Third Party services. Use password manager softwares to avoid losing access to club data.
+  - Regularly back up your data securely.
+
+**Disclaimer:** This software is provided “as is.” While it facilitates local data management, ultimate responsibility for lawful and compliant use of personal data rests with the club owners and administrators.
 
 ## License
 
