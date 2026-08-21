@@ -88,6 +88,82 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
+  align-items: center;
+}
+
+.topbar-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-switcher {
+  position: relative;
+}
+
+.language-button,
+.language-option {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-soft);
+}
+
+.language-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.language-button:hover,
+.language-option:hover,
+.language-option.is-active {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.language-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 210px;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  background: var(--bg-elevated);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  z-index: 20;
+}
+
+.language-menu[hidden] {
+  display: none;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+}
+
+.flag-emoji {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.topbar-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .topbar a,
@@ -102,18 +178,14 @@ body {
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
-  gap: 32px;
-  align-items: center;
+  display: block;
 }
 
 .hero-copy,
 .hero-card,
 .feature-card,
 .spotlight-stack img,
-.carousel,
-.footer {
+.carousel {
   background: var(--bg-elevated);
   backdrop-filter: blur(18px);
   border: 1px solid var(--line);
@@ -123,13 +195,23 @@ body {
 .hero-copy,
 .hero-card,
 .feature-card,
-.carousel,
-.footer {
+.carousel {
   border-radius: var(--radius-lg);
 }
 
 .hero-copy {
   padding: 34px;
+  background: transparent;
+  backdrop-filter: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.hero-card-wide {
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(320px, 1.04fr);
+  gap: 28px;
+  align-items: stretch;
 }
 
 .eyebrow {
@@ -167,7 +249,7 @@ h3 {
 
 .hero-text,
 .feature-card p,
-.spotlight-item p,
+.spotlight-card p,
 .footer p {
   color: var(--text-soft);
   line-height: 1.7;
@@ -198,6 +280,12 @@ h3 {
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
+.button-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
 .button:hover {
   transform: translateY(-1px);
 }
@@ -225,6 +313,13 @@ h3 {
   padding: 24px;
 }
 
+.hero-preview-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
 .badge-row {
   display: flex;
   flex-wrap: wrap;
@@ -244,7 +339,16 @@ h3 {
 .hero-preview-frame {
   overflow: hidden;
   border-radius: var(--radius-shot);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 211, 111, 0.88);
+  box-shadow: 0 0 0 1px rgba(255, 211, 111, 0.12), 0 0 20px rgba(255, 211, 111, 0.08);
+}
+
+.hero-carousel {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  backdrop-filter: none;
 }
 
 .hero-preview-frame img,
@@ -289,13 +393,45 @@ h3 {
   gap: 18px;
 }
 
-.spotlight-item {
-  padding: 22px 0;
-  border-bottom: 1px solid var(--line);
+.spotlight-card {
+  background: var(--bg-elevated);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
 }
 
-.spotlight-item:last-child {
-  border-bottom: 0;
+.spotlight-card {
+  padding: 24px;
+}
+
+.spotlight-logo-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 32px;
+}
+
+.spotlight-logo {
+  width: min(100%, 400px);
+  height: auto;
+  filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.28));
+}
+
+.demo-frame {
+  overflow: hidden;
+  background: var(--bg-elevated);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.demo-gif {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .spotlight-stack {
@@ -306,10 +442,6 @@ h3 {
 .spotlight-stack img {
   border-radius: var(--radius-shot);
   border: 1px solid var(--line);
-}
-
-.screenshots-section {
-  padding-bottom: 54px;
 }
 
 .carousel {
@@ -329,15 +461,35 @@ h3 {
 }
 
 .carousel-slide {
+  position: relative;
   min-width: 100%;
   margin: 0;
   background: #0b0f15;
 }
 
-.carousel-slide figcaption {
-  padding: 14px 16px 16px;
-  color: var(--text-soft);
-  border-top: 1px solid var(--line);
+.carousel-hover-caption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(8, 12, 18, 0.1), rgba(8, 12, 18, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+.carousel-slide:hover .carousel-hover-caption {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .carousel-button {
@@ -370,26 +522,33 @@ h3 {
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: 16px;
 }
 
 .carousel-dot {
-  width: 10px;
-  height: 10px;
+  width: 28px;
+  height: 6px;
   border-radius: 999px;
   border: 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.14);
   cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease, width 180ms ease;
 }
 
 .carousel-dot.is-active {
-  background: var(--accent);
+  width: 44px;
+  background: linear-gradient(135deg, var(--accent), #99e6ff);
+}
+
+.carousel-dot:hover {
+  transform: translateY(-1px);
 }
 
 .footer {
   margin-bottom: 28px;
-  padding: 22px 24px;
+  padding: 10px 0 28px;
+  border-top: 1px solid var(--line);
 }
 
 .footer p {
@@ -402,6 +561,7 @@ h3 {
 
 @media (max-width: 980px) {
   .hero-grid,
+  .hero-card-wide,
   .spotlight-grid,
   .feature-grid {
     grid-template-columns: 1fr;
@@ -427,6 +587,11 @@ h3 {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 28px;
+  }
+
+  .language-menu {
+    right: auto;
+    left: 0;
   }
 
   .hero-copy,

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local Knights</title>
-  <meta name="description" content="Local Knights is the open source community chess club management software for players, ratings, games, and competitions.">
+  <title data-i18n="pageTitle"></title>
+  <meta name="description" content="" data-i18n-content="pageDescription">
   <link rel="icon" type="image/svg+xml" href="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.svg">
   <link rel="shortcut icon" href="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,42 +19,92 @@
     <nav class="topbar">
       <div class="brand">
         <img src="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.png" alt="Local Knights logo" class="brand-logo">
-        <span>Local Knights</span>
+        <span data-i18n="brandName"></span>
       </div>
       <div class="topbar-links">
-        <a href="../../README.md">README</a>
-        <a href="../../LICENSE">License</a>
-        <a href="../../THIRD-PARTY-NOTICES.md">Third-Party Notices</a>
+        <a href="https://github.com/urbanoanderson/local-knights" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="topbar-icon">
+            <path fill="currentColor" d="M12 2C6.477 2 2 6.59 2 12.252c0 4.529 2.865 8.372 6.839 9.728.5.096.682-.222.682-.493 0-.243-.009-.888-.014-1.743-2.782.617-3.369-1.375-3.369-1.375-.454-1.183-1.11-1.498-1.11-1.498-.908-.636.069-.623.069-.623 1.004.072 1.532 1.056 1.532 1.056.892 1.568 2.341 1.115 2.91.852.091-.666.35-1.115.636-1.371-2.221-.259-4.555-1.14-4.555-5.073 0-1.12.39-2.036 1.029-2.754-.103-.261-.446-1.31.098-2.73 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.838a9.27 9.27 0 0 1 2.504.348c1.909-1.328 2.748-1.052 2.748-1.052.546 1.42.203 2.469.1 2.73.64.718 1.027 1.634 1.027 2.754 0 3.943-2.338 4.811-4.566 5.065.359.32.679.95.679 1.915 0 1.383-.012 2.499-.012 2.839 0 .273.18.593.688.492C19.138 20.62 22 16.779 22 12.252 22 6.59 17.523 2 12 2Z"/>
+          </svg>
+          <span data-i18n="navGithub"></span>
+        </a>
+        <a href="../../LICENSE" data-i18n="navLicense"></a>
+        <a href="../../THIRD-PARTY-NOTICES.md" data-i18n="navThirdParty"></a>
+        <div class="language-switcher" data-language-switcher>
+          <button class="language-button" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select language" data-language-toggle>
+            <span class="flag-emoji" data-current-flag>🇺🇸</span>
+          </button>
+          <div class="language-menu" hidden data-language-menu>
+            <button class="language-option" type="button" data-language-option="en">
+              <span class="flag-emoji">🇺🇸</span>
+              <span data-i18n="langEnglish"></span>
+            </button>
+            <button class="language-option" type="button" data-language-option="pt-BR">
+              <span class="flag-emoji">🇧🇷</span>
+              <span data-i18n="langPortugueseBrazil"></span>
+            </button>
+          </div>
+        </div>
       </div>
     </nav>
 
     <section class="hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Open source. Local-first. Club-ready.</p>
-        <h1>The open source community chess club management software.</h1>
-        <p class="hero-text">
-          Run your chess club from one modern desktop app. Register players, record games, organize competitions,
-          maintain ratings, and keep full ownership of your data without cloud lock-in or server overhead.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="../../README.md">Explore the Project</a>
-          <a class="button button-secondary" href="#screenshots">View Screenshots</a>
+      <div class="hero-card hero-card-wide">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="heroEyebrow"></p>
+          <h1 data-i18n="heroTitle"></h1>
+          <p class="hero-text" data-i18n="heroText"></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/urbanoanderson/local-knights/releases" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="button-icon">
+                <path fill="currentColor" d="M2 3.34 11 2v9H2V3.34Zm10 8h10V.73L12 2.05v9.29ZM2 12.66h9v9.34l-9-1.34v-8Zm10 0h10v10.61L12 22v-9.34Z"/>
+              </svg>
+              <span data-i18n="downloadButton"></span>
+            </a>
+          </div>
         </div>
-        <ul class="hero-points">
-          <li>Free and open source under MPL-2.0</li>
-          <li>Single encrypted SQLite database file using SQLCipher</li>
-          <li>Swiss, Round-Robin, Knockout, and Match support</li>
-        </ul>
-      </div>
 
-      <div class="hero-card">
-        <div class="badge-row">
-          <span class="badge">Windows 10+</span>
-          <span class="badge">.NET 10</span>
-          <span class="badge">Dark + Light</span>
-        </div>
-        <div class="hero-preview-frame">
-          <img src="../Screenshots/dashboard_page.png" alt="Local Knights dashboard preview">
+        <div class="hero-preview-panel">
+          <div class="carousel hero-carousel" data-carousel>
+            <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous screenshot" data-i18n-aria-label="carouselPrev">&#10094;</button>
+
+            <div class="carousel-viewport hero-preview-frame">
+              <div class="carousel-track" data-carousel-track>
+                <figure class="carousel-slide is-active">
+                  <img src="../Screenshots/dashboard_page.png" alt="Dashboard page screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionDashboard"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/players_page.png" alt="Players page screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionPlayers"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/player_page.png" alt="Player profile screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionPlayerProfile"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/game_page.png" alt="Game page screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionGame"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/competition_page_infotab.png" alt="Competition information screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionCompetitionInfo"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/competition_page_roundstab.png" alt="Competition rounds screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionCompetitionRounds"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/competition_page_standingstab.png" alt="Competition standings screenshot">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionCompetitionStandings"></figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <button class="carousel-button" type="button" data-carousel-next aria-label="Next screenshot" data-i18n-aria-label="carouselNext">&#10095;</button>
+          </div>
+
+          <div class="carousel-dots" data-carousel-dots></div>
         </div>
       </div>
     </section>
@@ -63,116 +113,77 @@
   <main>
     <section class="section feature-section">
       <div class="section-heading">
-        <p class="eyebrow">Why Local Knights</p>
-        <h2>Built for organizers who want control, not complexity.</h2>
+        <p class="eyebrow" data-i18n="whyEyebrow"></p>
+        <h2 data-i18n="whyTitle"></h2>
       </div>
       <div class="feature-grid">
         <article class="feature-card">
-          <h3>Own your data</h3>
-          <p>Everything runs locally on the club owner’s computer. No mandatory cloud services, no hosted backend, no subscription dependency.</p>
+          <h3 data-i18n="featureOwnDataTitle"></h3>
+          <p data-i18n="featureOwnDataText"></p>
         </article>
         <article class="feature-card">
-          <h3>Simple backup model</h3>
-          <p>Your club lives in a single encrypted SQLite database file. Backup and restore stay straightforward without server maintenance.</p>
+          <h3 data-i18n="featureBackupTitle"></h3>
+          <p data-i18n="featureBackupText"></p>
         </article>
         <article class="feature-card">
-          <h3>Serious competition support</h3>
-          <p>Manage Swiss, Round-Robin, Knockout, and two-player Match events with pairings, rounds, standings, and results in one workflow.</p>
+          <h3 data-i18n="featureCompetitionTitle"></h3>
+          <p data-i18n="featureCompetitionText"></p>
         </article>
         <article class="feature-card">
-          <h3>Meaningful ratings</h3>
-          <p>Track internal club ratings with Glicko-2 or Elo and keep player strength data organized across multiple time formats.</p>
+          <h3 data-i18n="featureRatingsTitle"></h3>
+          <p data-i18n="featureRatingsText"></p>
         </article>
         <article class="feature-card">
-          <h3>Connected player profiles</h3>
-          <p>Link profiles to Chess.com, Lichess, FIDE, and USCF identifiers and enrich player records with external rating data.</p>
+          <h3 data-i18n="featureProfilesTitle"></h3>
+          <p data-i18n="featureProfilesText"></p>
         </article>
         <article class="feature-card">
-          <h3>Polished day-to-day UX</h3>
-          <p>Modern navigation, responsive layouts, dark and light themes, and multilingual support for English and Brazilian Portuguese.</p>
+          <h3 data-i18n="featureUxTitle"></h3>
+          <p data-i18n="featureUxText"></p>
         </article>
       </div>
     </section>
 
     <section class="section spotlight-section">
       <div class="section-heading narrow">
-        <p class="eyebrow">What you can do</p>
-        <h2>From first sign-in to final standings.</h2>
+        <p class="eyebrow" data-i18n="whoEyebrow"></p>
+        <h2 data-i18n="whoTitle"></h2>
       </div>
       <div class="spotlight-grid">
         <div class="spotlight-copy">
-          <div class="spotlight-item">
-            <h3>Manage your club day to day</h3>
-            <p>Register players, keep rich profiles, record games, and centralize club history in one local-first application.</p>
-          </div>
-          <div class="spotlight-item">
-            <h3>Run structured events</h3>
-            <p>Create competitions, generate pairings, follow each round, and track standings without spreadsheets or ad hoc tooling.</p>
-          </div>
-          <div class="spotlight-item">
-            <h3>Start quickly</h3>
-            <p>Create or open the club database, configure club preferences, add players, and begin recording games or tournaments immediately.</p>
-          </div>
+          <article class="spotlight-card">
+            <h3 data-i18n="audienceClubsTitle"></h3>
+            <p data-i18n="audienceClubsText"></p>
+          </article>
+          <article class="spotlight-card">
+            <h3 data-i18n="audienceGroupsTitle"></h3>
+            <p data-i18n="audienceGroupsText"></p>
+          </article>
+          <article class="spotlight-card">
+            <h3 data-i18n="audienceSchoolsTitle"></h3>
+            <p data-i18n="audienceSchoolsText"></p>
+          </article>
         </div>
-        <div class="spotlight-stack">
-          <img src="../Screenshots/start_page.png" alt="Start page screenshot">
-          <img src="../Screenshots/clubpreferences_page.png" alt="Club preferences screenshot">
+        <div class="spotlight-logo-panel">
+          <img src="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.png" alt="Local Knights logo" class="spotlight-logo">
         </div>
       </div>
     </section>
 
-    <section class="section screenshots-section" id="screenshots">
-      <div class="section-heading">
-        <p class="eyebrow">Screenshots</p>
-        <h2>A quick look at the product.</h2>
+    <section class="section demo-section">
+      <div class="section-heading narrow">
+        <p class="eyebrow" data-i18n="demoEyebrow"></p>
+        <h2 data-i18n="demoTitle"></h2>
       </div>
-
-      <div class="carousel" data-carousel>
-        <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous screenshot">&#10094;</button>
-
-        <div class="carousel-viewport">
-          <div class="carousel-track" data-carousel-track>
-            <figure class="carousel-slide is-active">
-              <img src="../Screenshots/dashboard_page.png" alt="Dashboard page screenshot">
-              <figcaption>Dashboard overview</figcaption>
-            </figure>
-            <figure class="carousel-slide">
-              <img src="../Screenshots/players_page.png" alt="Players page screenshot">
-              <figcaption>Players management</figcaption>
-            </figure>
-            <figure class="carousel-slide">
-              <img src="../Screenshots/player_page.png" alt="Player profile screenshot">
-              <figcaption>Player profile</figcaption>
-            </figure>
-            <figure class="carousel-slide">
-              <img src="../Screenshots/createcompetition_page.png" alt="Create competition screenshot">
-              <figcaption>Competition creation</figcaption>
-            </figure>
-            <figure class="carousel-slide">
-              <img src="../Screenshots/competition_page_infotab.png" alt="Competition information screenshot">
-              <figcaption>Competition information</figcaption>
-            </figure>
-            <figure class="carousel-slide">
-              <img src="../Screenshots/competition_page_standingstab.png" alt="Competition standings screenshot">
-              <figcaption>Standings view</figcaption>
-            </figure>
-            <figure class="carousel-slide">
-              <img src="../Screenshots/competition_page_roundstab.png" alt="Competition rounds screenshot">
-              <figcaption>Rounds and pairings</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <button class="carousel-button" type="button" data-carousel-next aria-label="Next screenshot">&#10095;</button>
+      <div class="demo-frame">
+        <img src="../Screenshots/demo.gif" alt="Local Knights demo animation" class="demo-gif">
       </div>
-
-      <div class="carousel-dots" data-carousel-dots></div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Local Knights is free and open source software released under the MPL-2.0 license.</p>
-    <p>Everything runs locally on your machine, with encrypted SQLite storage and no mandatory cloud backend.</p>
+    <p data-i18n="footerLicense"></p>
+    <p data-i18n="footerAuthor"></p>
   </footer>
 
   <script src="script.js"></script>
