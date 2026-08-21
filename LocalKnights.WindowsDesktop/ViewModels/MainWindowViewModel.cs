@@ -83,6 +83,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public ICommand AboutCommand { get; }
 
         /// <summary>
+        /// Gets the command for opening the project GitHub page in the user's browser.
+        /// </summary>
+        public ICommand ProjectPageCommand { get; }
+
+        /// <summary>
         /// Gets the command for closing the application.
         /// </summary>
         public ICommand ExitCommand { get; }
@@ -140,6 +145,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             SwitchToEnglishCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("en"));
             SwitchToPortugueseCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("pt-BR"));
             AboutCommand = new RelayCommand(_ => ExecuteAbout());
+            ProjectPageCommand = new RelayCommand(_ => ExecuteOpenProjectPage());
             ExitCommand = new RelayCommand(async _ => await ExecuteExitAsync());
             SetPageSize10Command = new RelayCommand(_ => _uiSettingsService.SetPageSize(10));
             SetPageSize50Command = new RelayCommand(_ => _uiSettingsService.SetPageSize(50));
@@ -321,6 +327,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string About => LocalizationHelper.GetString("About");
 
         /// <summary>
+        /// Gets the localized label for the project page menu option.
+        /// </summary>
+        public string ProjectPage => LocalizationHelper.GetString("ProjectPage");
+
+        /// <summary>
         /// Gets the localized label for dark mode option.
         /// </summary>
         public string DarkMode => LocalizationHelper.GetString("DarkMode");
@@ -403,6 +414,14 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _messageBoxService.ShowInfo(message, LocalizationHelper.GetString("About"));
         }
 
+        /// <summary>
+        /// Opens the project's GitHub page in the default browser.
+        /// </summary>
+        private void ExecuteOpenProjectPage()
+        {
+            _fileSystemService.OpenUrl("https://github.com/urbanoanderson/local-knights");
+        }
+
         private async Task ExecuteExitAsync()
         {
             await _databaseService.SaveChangesAsync();
@@ -483,6 +502,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(OpenDatabaseLocation));
             OnPropertyChanged(nameof(HelpMenu));
             OnPropertyChanged(nameof(About));
+            OnPropertyChanged(nameof(ProjectPage));
             OnPropertyChanged(nameof(DarkMode));
             OnPropertyChanged(nameof(ChooseLanguage));
             OnPropertyChanged(nameof(English));

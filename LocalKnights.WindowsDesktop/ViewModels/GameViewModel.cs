@@ -1,8 +1,8 @@
 using System.Globalization;
-using System.Diagnostics;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using LocalKnights.Common.Models;
+using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 using LocalKnights.Common.Helpers;
 using LocalKnights.WindowsDesktop.Converters;
@@ -20,6 +20,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private readonly IPageNavigationService _pageNavigationService;
         private readonly IGameService _gameService;
         private readonly IPlayerService _playerService;
+        private readonly IFileSystemService _fileSystemService;
         private readonly IMessageBoxService _messageBoxService;
         private Game? _currentGame;
 
@@ -68,12 +69,14 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             IPageNavigationService pageNavigationService,
             IGameService gameService,
             IPlayerService playerService,
+            IFileSystemService fileSystemService,
             IMessageBoxService messageBoxService)
         {
             _logger = logger;
             _pageNavigationService = pageNavigationService;
             _gameService = gameService;
             _playerService = playerService;
+            _fileSystemService = fileSystemService;
             _messageBoxService = messageBoxService;
 
             SavePgnCommand = new RelayCommand(async _ => await SavePgnAsync());
@@ -210,11 +213,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             try
             {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = analysisUrl,
-                    UseShellExecute = true
-                });
+                _fileSystemService.OpenUrl(analysisUrl);
             }
             catch (Exception ex)
             {

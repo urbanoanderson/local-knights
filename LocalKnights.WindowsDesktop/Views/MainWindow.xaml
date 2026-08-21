@@ -62,6 +62,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="{Binding HelpMenu}" Style="{DynamicResource ModernMenuItem}">
+                <MenuItem Header="{Binding ProjectPage}" Command="{Binding ProjectPageCommand}" Style="{DynamicResource ModernMenuItem}" />
                 <MenuItem Header="{Binding About}" Command="{Binding AboutCommand}" Style="{DynamicResource ModernMenuItem}" />
             </MenuItem>
         </Menu>

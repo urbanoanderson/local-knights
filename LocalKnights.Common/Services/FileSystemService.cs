@@ -116,6 +116,24 @@ namespace LocalKnights.Common.Services
         }
 
         /// <inheritdoc/>
+        public void OpenUrl(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                _logger.LogWarning("Cannot open URL because it is empty.");
+                return;
+            }
+
+            ProcessStartInfo startInfo = new()
+            {
+                FileName = url,
+                UseShellExecute = true
+            };
+
+            Process.Start(startInfo);
+        }
+
+        /// <inheritdoc/>
         public void DeleteFile(string path)
         {
             File.Delete(path);

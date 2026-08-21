@@ -74,6 +74,12 @@ namespace LocalKnights.Common.Services
         void OpenDirectory(string path);
 
         /// <summary>
+        /// Opens the specified URL in the user's default web browser.
+        /// </summary>
+        /// <param name="url">The URL to open.</param>
+        void OpenUrl(string url);
+
+        /// <summary>
         /// Deletes the specified file.
         /// </summary>
         /// <param name="path">The path of the file to delete.</param>

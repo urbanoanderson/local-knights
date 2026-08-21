@@ -85,6 +85,9 @@
   <data name="About" xml:space="preserve">
     <value>Sobre</value>
   </data>
+  <data name="ProjectPage" xml:space="preserve">
+    <value>Página do Projeto</value>
+  </data>
   <data name="AppNameLabel" xml:space="preserve">
     <value>Aplicativo</value>
   </data>
