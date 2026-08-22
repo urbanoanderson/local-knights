@@ -74,7 +74,7 @@ This makes Local Knights especially attractive for community clubs, schools, and
 - Light and dark themes for different environments and preferences
 - Responsive screens that remain usable across different window sizes
 - Straightforward navigation focused on players, games, competitions, and club settings
-- Localization support currently available in English and Brazilian Portuguese
+- Localization support for different languages
 
 ## Getting Started For Club Owners
 

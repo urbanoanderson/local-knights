@@ -41,6 +41,24 @@
                             <TextBlock Text="{Binding PortugueseFlag}" FontSize="14" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="{Binding Spanish}"
+                              Command="{Binding SwitchToSpanishCommand}"
+                              IsCheckable="True"
+                              IsChecked="{Binding IsSpanishSelected, Mode=OneWay}"
+                              Style="{DynamicResource ModernMenuItem}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="{Binding SpanishFlag}" FontSize="14" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{Binding French}"
+                              Command="{Binding SwitchToFrenchCommand}"
+                              IsCheckable="True"
+                              IsChecked="{Binding IsFrenchSelected, Mode=OneWay}"
+                              Style="{DynamicResource ModernMenuItem}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="{Binding FrenchFlag}" FontSize="14" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                  <!-- <Separator /> -->
                 <MenuItem Header="{Binding ItemsPerPage}" Style="{DynamicResource ModernMenuItem}">

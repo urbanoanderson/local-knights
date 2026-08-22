@@ -1,5 +1,11 @@
 const carousel = document.querySelector("[data-carousel]");
 const languageStorageKey = "local-knights-landing-language";
+const languageMetadata = {
+  en: { flag: "🇺🇸", htmlLang: "en" },
+  "pt-BR": { flag: "🇧🇷", htmlLang: "pt-BR" },
+  es: { flag: "🇪🇸", htmlLang: "es" },
+  fr: { flag: "🇫🇷", htmlLang: "fr" }
+};
 
 const translations = {
   en: {
@@ -11,12 +17,23 @@ const translations = {
     navThirdParty: "Third-Party Notices",
     langEnglish: "English",
     langPortugueseBrazil: "Portuguese (Brazil)",
+    langSpanish: "Spanish",
+    langFrench: "French",
+    selectLanguage: "Select language",
     heroEyebrow: "Open source. Local-first. Club-ready.",
     heroTitle: "The open source community chess club management software",
     heroText: "Run your chess club from one modern desktop app. Register players, record games, organize competitions, maintain internal ratings and keep full ownership of your data without server overhead and completely free.",
     downloadButton: "Download",
     carouselPrev: "Previous screenshot",
     carouselNext: "Next screenshot",
+    carouselGoTo: "Go to screenshot {0}",
+    altDashboard: "Dashboard page screenshot",
+    altPlayers: "Players page screenshot",
+    altPlayerProfile: "Player profile screenshot",
+    altGame: "Game page screenshot",
+    altCompetitionInfo: "Competition information screenshot",
+    altCompetitionRounds: "Competition rounds screenshot",
+    altCompetitionStandings: "Competition standings screenshot",
     captionDashboard: "Dashboard overview with club activity, quick actions, and latest results.",
     captionPlayers: "Players list with searchable records and club member management.",
     captionPlayerProfile: "Detailed player profile with ratings, identities, and match history.",
@@ -60,12 +77,23 @@ const translations = {
     navThirdParty: "Avisos de Terceiros",
     langEnglish: "Inglês",
     langPortugueseBrazil: "Português (Brasil)",
+    langSpanish: "Espanhol",
+    langFrench: "Francês",
+    selectLanguage: "Selecionar idioma",
     heroEyebrow: "Código aberto. Controle total. Pronto para clubes.",
     heroTitle: "Seu gestor de código aberto para clubes de xadrez",
     heroText: "Gerencie seu clube de xadrez em um só aplicativo desktop moderno. Cadastre jogadores, registre partidas, organize competições, mantenha ratings internos e preserve total controle dos seus dados sem dependência de nuvem ou servidores e de forma gratuita.",
     downloadButton: "Baixar",
     carouselPrev: "Imagem anterior",
     carouselNext: "Próxima imagem",
+    carouselGoTo: "Ir para a imagem {0}",
+    altDashboard: "Captura de tela do painel",
+    altPlayers: "Captura de tela da página de jogadores",
+    altPlayerProfile: "Captura de tela do perfil do jogador",
+    altGame: "Captura de tela da página da partida",
+    altCompetitionInfo: "Captura de tela das informações da competição",
+    altCompetitionRounds: "Captura de tela das rodadas da competição",
+    altCompetitionStandings: "Captura de tela da classificação da competição",
     captionDashboard: "Visão geral do painel com atividade do clube, ações rápidas e resultados recentes.",
     captionPlayers: "Lista de jogadores com pesquisa, cadastro e gerenciamento dos membros do clube.",
     captionPlayerProfile: "Perfil detalhado do jogador com ratings, identificadores e histórico de partidas.",
@@ -99,13 +127,134 @@ const translations = {
     demoTitle: "Veja o Local Knights em ação.",
     footerLicense: "© 2026 Local Knights. Licenciado sob a Mozilla Public License 2.0",
     footerAuthor: "Criado por Anderson Urbano"
+  },
+  es: {
+    pageTitle: "Local Knights",
+    pageDescription: "Local Knights es el software de código abierto para gestionar clubes de ajedrez, jugadores, ratings, partidas y competiciones.",
+    brandName: "Local Knights",
+    navGithub: "GitHub",
+    navLicense: "Licencia",
+    navThirdParty: "Avisos de terceros",
+    langEnglish: "Inglés",
+    langPortugueseBrazil: "Portugués (Brasil)",
+    langSpanish: "Español",
+    langFrench: "Francés",
+    selectLanguage: "Seleccionar idioma",
+    heroEyebrow: "Código abierto. Datos locales. Listo para tu club.",
+    heroTitle: "El software de código abierto para gestionar clubes de ajedrez",
+    heroText: "Gestiona tu club de ajedrez desde una única aplicación de escritorio moderna. Registra jugadores y partidas, organiza competiciones, mantén ratings internos y conserva el control total de tus datos sin servidores ni costes.",
+    downloadButton: "Descargar",
+    carouselPrev: "Captura anterior",
+    carouselNext: "Captura siguiente",
+    carouselGoTo: "Ir a la captura {0}",
+    altDashboard: "Captura de pantalla del panel",
+    altPlayers: "Captura de pantalla de la página de jugadores",
+    altPlayerProfile: "Captura de pantalla del perfil del jugador",
+    altGame: "Captura de pantalla de la página de la partida",
+    altCompetitionInfo: "Captura de pantalla de la información de la competición",
+    altCompetitionRounds: "Captura de pantalla de las rondas de la competición",
+    altCompetitionStandings: "Captura de pantalla de la clasificación de la competición",
+    captionDashboard: "Panel general con la actividad del club, acciones rápidas y resultados recientes.",
+    captionPlayers: "Lista de jugadores con búsqueda de registros y gestión de socios del club.",
+    captionPlayerProfile: "Perfil detallado del jugador con ratings, identificadores e historial de partidas.",
+    captionGame: "Ficha de partida para guardar resultados, rivales y ritmos de juego.",
+    captionCompetitionInfo: "Resumen de la competición con su configuración y los datos del torneo.",
+    captionCompetitionRounds: "Gestión de rondas con emparejamientos, tableros y seguimiento de resultados.",
+    captionCompetitionStandings: "Clasificación con puestos, puntuaciones y progreso del torneo.",
+    whyEyebrow: "Por qué Local Knights",
+    whyTitle: "Todo lo que necesita un club, sin complicaciones.",
+    featureOwnDataTitle: "Tus datos son tuyos",
+    featureOwnDataText: "Todo se ejecuta localmente en el ordenador del responsable del club. Sin servicios obligatorios en la nube, servidores externos ni suscripciones.",
+    featureBackupTitle: "Copias de seguridad sencillas",
+    featureBackupText: "Todos los datos del club se guardan en un único archivo de base de datos SQLite protegido con contraseña. Crear o restaurar una copia es tan sencillo como copiar un archivo.",
+    featureCompetitionTitle: "Gestión completa de competiciones",
+    featureCompetitionText: "Gestiona torneos por sistema suizo, todos contra todos y eliminación directa, además de encuentros entre dos jugadores, con emparejamientos, rondas, clasificaciones y resultados exportables.",
+    featureRatingsTitle: "Ratings que importan",
+    featureRatingsText: "Controla los ratings internos del club con Glicko-2 o Elo y organiza la fuerza de juego de cada jugador en distintos ritmos.",
+    featureProfilesTitle: "Perfiles conectados",
+    featureProfilesText: "Vincula perfiles de Chess.com, Lichess, FIDE y otras organizaciones para completar las fichas de los jugadores con datos existentes.",
+    featureUxTitle: "Una experiencia cuidada",
+    featureUxText: "Navegación moderna, diseño adaptable, temas claro y oscuro, y compatibilidad con varios idiomas.",
+    whoEyebrow: "Para quién es",
+    whoTitle: "Creado para grupos que quieren organizar el ajedrez sin cargas innecesarias.",
+    audienceClubsTitle: "Clubes locales de ajedrez",
+    audienceClubsText: "Ideal para clubes comunitarios que quieren gestionar jugadores, partidas, emparejamientos y clasificaciones desde una sola aplicación de escritorio, sin depender de servicios en línea.",
+    audienceGroupsTitle: "Grupos de amigos y pequeñas comunidades",
+    audienceGroupsText: "Una opción práctica para grupos aficionados que buscan algo más organizado que una hoja de cálculo, pero lo bastante sencillo para funcionar en un solo equipo.",
+    audienceSchoolsTitle: "Escuelas y entornos educativos",
+    audienceSchoolsText: "Útil para clubes escolares, aulas y programas educativos que necesitan una herramienta gratuita, sin anuncios, de código abierto y sin licencias ni suscripciones de pago.",
+    demoEyebrow: "Demostración",
+    demoTitle: "Descubre Local Knights en acción.",
+    footerLicense: "© 2026 Local Knights. Publicado bajo la Licencia Pública de Mozilla 2.0",
+    footerAuthor: "Creado por Anderson Urbano"
+  },
+  fr: {
+    pageTitle: "Local Knights",
+    pageDescription: "Local Knights est le logiciel libre de gestion de clubs d’échecs, de joueurs, de classements Elo, de parties et de compétitions.",
+    brandName: "Local Knights",
+    navGithub: "GitHub",
+    navLicense: "Licence",
+    navThirdParty: "Mentions relatives aux tiers",
+    langEnglish: "Anglais",
+    langPortugueseBrazil: "Portugais (Brésil)",
+    langSpanish: "Espagnol",
+    langFrench: "Français",
+    selectLanguage: "Choisir la langue",
+    heroEyebrow: "Logiciel libre. Données locales. Prêt pour votre club.",
+    heroTitle: "Le logiciel libre de gestion des clubs d’échecs",
+    heroText: "Gérez votre club d’échecs depuis une seule application de bureau moderne. Inscrivez les joueurs, enregistrez les parties, organisez les compétitions, gérez les classements Elo internes et gardez la pleine maîtrise de vos données, sans serveur ni frais.",
+    downloadButton: "Télécharger",
+    carouselPrev: "Capture précédente",
+    carouselNext: "Capture suivante",
+    carouselGoTo: "Afficher la capture {0}",
+    altDashboard: "Capture d’écran du tableau de bord",
+    altPlayers: "Capture d’écran de la page des joueurs",
+    altPlayerProfile: "Capture d’écran du profil d’un joueur",
+    altGame: "Capture d’écran de la page d’une partie",
+    altCompetitionInfo: "Capture d’écran des informations de la compétition",
+    altCompetitionRounds: "Capture d’écran des rondes de la compétition",
+    altCompetitionStandings: "Capture d’écran du classement de la compétition",
+    captionDashboard: "Vue d’ensemble de l’activité du club, des actions rapides et des derniers résultats.",
+    captionPlayers: "Liste consultable des joueurs et gestion des membres du club.",
+    captionPlayerProfile: "Profil détaillé d’un joueur avec ses classements Elo, ses identifiants et son historique de parties.",
+    captionGame: "Fiche de partie pour enregistrer le résultat, les adversaires et la cadence.",
+    captionCompetitionInfo: "Vue d’ensemble de la compétition avec sa configuration et les informations du tournoi.",
+    captionCompetitionRounds: "Gestion des rondes avec les appariements, les échiquiers et le suivi des résultats.",
+    captionCompetitionStandings: "Classement présentant les places, les scores et l’avancement du tournoi.",
+    whyEyebrow: "Pourquoi Local Knights",
+    whyTitle: "Toutes les fonctions indispensables à un club, sans la complexité.",
+    featureOwnDataTitle: "Gardez la maîtrise de vos données",
+    featureOwnDataText: "Tout s’exécute localement sur l’ordinateur du responsable du club. Aucun service infonuagique obligatoire, serveur externe ou abonnement requis.",
+    featureBackupTitle: "Sauvegardes simplifiées",
+    featureBackupText: "Toutes les données du club sont réunies dans un seul fichier de base de données SQLite protégé par mot de passe. Sauvegarder ou restaurer vos données revient simplement à copier ce fichier.",
+    featureCompetitionTitle: "Gestion complète des compétitions",
+    featureCompetitionText: "Gérez les tournois au système suisse, toutes rondes et à élimination directe, ainsi que les matchs entre deux joueurs, avec les appariements, les rondes, les classements et l’exportation des résultats.",
+    featureRatingsTitle: "Des classements Elo pertinents",
+    featureRatingsText: "Suivez les classements internes du club avec les systèmes Glicko-2 ou Elo et organisez le niveau des joueurs selon plusieurs cadences.",
+    featureProfilesTitle: "Profils connectés",
+    featureProfilesText: "Associez les profils Chess.com, Lichess, FIDE et d’autres organismes afin d’enrichir les fiches des joueurs avec leurs données existantes.",
+    featureUxTitle: "Une expérience soignée au quotidien",
+    featureUxText: "Navigation moderne, mise en page adaptative, thèmes clair et sombre, et prise en charge de plusieurs langues.",
+    whoEyebrow: "À qui s’adresse-t-il ?",
+    whoTitle: "Conçu pour les groupes qui veulent organiser les échecs sans contraintes inutiles.",
+    audienceClubsTitle: "Clubs d’échecs locaux",
+    audienceClubsText: "Idéal pour les clubs associatifs qui souhaitent gérer joueurs, parties, appariements et classements depuis une seule application de bureau, sans dépendre de services en ligne.",
+    audienceGroupsTitle: "Groupes d’amis et petites communautés",
+    audienceGroupsText: "Une solution pratique pour les groupes passionnés qui recherchent un outil plus structuré qu’un tableur, tout en restant assez simple pour fonctionner sur un seul ordinateur.",
+    audienceSchoolsTitle: "Écoles et établissements d’enseignement",
+    audienceSchoolsText: "Adapté aux clubs scolaires, aux classes et aux programmes éducatifs qui ont besoin d’un outil gratuit, sans publicité, libre et sans licence ni abonnement payant.",
+    demoEyebrow: "Démonstration",
+    demoTitle: "Découvrez Local Knights en action.",
+    footerLicense: "© 2026 Local Knights. Distribué sous la Mozilla Public License 2.0",
+    footerAuthor: "Créé par Anderson Urbano"
   }
 };
 
 function applyLanguage(language) {
   const copy = translations[language] || translations.en;
+  const metadata = languageMetadata[language] || languageMetadata.en;
 
-  document.documentElement.lang = language === "pt-BR" ? "pt-BR" : "en";
+  document.documentElement.lang = metadata.htmlLang;
 
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
@@ -131,14 +280,26 @@ function applyLanguage(language) {
     }
   });
 
+  document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+    const key = element.dataset.i18nAlt;
+
+    if (copy[key]) {
+      element.setAttribute("alt", copy[key]);
+    }
+  });
+
   const currentFlag = document.querySelector("[data-current-flag]");
 
   if (currentFlag) {
-    currentFlag.textContent = language === "pt-BR" ? "🇧🇷" : "🇺🇸";
+    currentFlag.textContent = metadata.flag;
   }
 
   document.querySelectorAll("[data-language-option]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.languageOption === language);
+  });
+
+  document.querySelectorAll("[data-carousel-dot]").forEach((dot, index) => {
+    dot.setAttribute("aria-label", copy.carouselGoTo.replace("{0}", index + 1));
   });
 
   try {
@@ -160,8 +321,12 @@ function resolvePreferredLanguage() {
   if (!translations[preferredLanguage]) {
     const browserLanguage = (navigator.language || navigator.userLanguage || "en").toLowerCase();
 
-    if (browserLanguage === "pt-br" || browserLanguage.startsWith("pt")) {
+    if (browserLanguage.startsWith("pt")) {
       preferredLanguage = "pt-BR";
+    } else if (browserLanguage.startsWith("es")) {
+      preferredLanguage = "es";
+    } else if (browserLanguage.startsWith("fr")) {
+      preferredLanguage = "fr";
     } else {
       preferredLanguage = "en";
     }
@@ -240,7 +405,9 @@ if (carousel) {
       const dot = document.createElement("button");
       dot.type = "button";
       dot.className = "carousel-dot";
-      dot.setAttribute("aria-label", `Go to screenshot ${index + 1}`);
+      dot.dataset.carouselDot = "";
+      const language = resolvePreferredLanguage();
+      dot.setAttribute("aria-label", translations[language].carouselGoTo.replace("{0}", index + 1));
 
       if (index === activeIndex) {
         dot.classList.add("is-active");

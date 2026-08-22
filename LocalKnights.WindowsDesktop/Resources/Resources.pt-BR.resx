@@ -115,6 +115,12 @@
   <data name="Portuguese" xml:space="preserve">
     <value>Português Brasileiro</value>
   </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Espanhol</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Francês</value>
+  </data>
   <data name="SignInToClub" xml:space="preserve">
     <value>Entrar no Clube</value>
   </data>
