@@ -1,43 +1,79 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
 
 jobs:
-  secret-scan:
-    runs-on: ubuntu-latest
+  release:
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'dev'
+    runs-on: windows-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: 0
 
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_CONFIG: .gitleaks.toml
-
-  release:
-    needs: secret-scan
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      # Setup .NET 10
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
 
-      # Extract version from csproj
       - name: Get version
-        id: get_version
+        id: version
         shell: pwsh
         run: |
-          $version = (Select-Xml -Path .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -XPath "//Version").Node.InnerText
-          echo "version=$version" >> $env:GITHUB_OUTPUT
+          $version = (Select-Xml -Path .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -XPath "/Project/PropertyGroup/Version").Node.InnerText
+          if ($version -notmatch '^\d+\.\d+\.\d+(?:\.\d+)?$') {
+            throw "The app version '$version' is not a supported numeric version."
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=v$version" >> $env:GITHUB_OUTPUT
+
+      - name: Read pre-release notes
+        id: prerelease
+        uses: actions/github-script@v7
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        with:
+          script: |
+            const fs = require('fs');
+            let release;
+            try {
+              const response = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: process.env.TAG
+              });
+              release = response.data;
+            } catch (error) {
+              if (error.status === 404) {
+                core.setFailed(`No pre-release exists for ${process.env.TAG}.`);
+                return;
+              }
+              throw error;
+            }
+
+            if (!release.prerelease) {
+              core.setFailed(`${process.env.TAG} is not a pre-release and cannot be promoted.`);
+              return;
+            }
+
+            const prereleaseWarning = /<!-- prerelease-warning:start -->[\s\S]*?<!-- prerelease-warning:end -->\s*/;
+            const stableNotes = (release.body || '## Changes\n\n- No user-facing changes.\n')
+              .replace(prereleaseWarning, '')
+              .trimStart();
+            fs.writeFileSync('release-notes.md', stableNotes);
+            core.setOutput('id', release.id);
 
       - name: Restore
         run: dotnet restore ProjectSolution.slnx -r win-x64
@@ -45,45 +81,44 @@ jobs:
       - name: Build
         run: dotnet build ProjectSolution.slnx --configuration Release --no-restore
 
-      # Run unit tests before packaging
-      - name: Run tests
+      - name: Test
         run: dotnet test ProjectSolution.slnx --configuration Release --no-build --verbosity normal
 
-      # Create tag
-      - name: Create tag
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git tag v${{ steps.get_version.outputs.version }}
-          git push origin v${{ steps.get_version.outputs.version }}
-
-      # Publish app
-      - name: Publish
+      - name: Publish application
         run: dotnet publish .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -c Release -r win-x64 --self-contained true -o out
 
-      # Zip the publish output
       - name: Create zip artifact
-        id: create_zip
+        id: package
         shell: pwsh
-        run: |
-          $zipName = "LocalKnights-${{ steps.get_version.outputs.version }}-win-x64-release.zip"
-          Compress-Archive -Path out\* -DestinationPath $zipName
-          echo "zipName=$zipName" >> $env:GITHUB_OUTPUT
-
-      # Generate draft release notes with Release Drafter
-      - name: Generate release notes
-        id: release_notes
-        uses: release-drafter/release-drafter@v6
-        with:
-          tag: v${{ steps.get_version.outputs.version }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $zipName = "LocalKnights-$env:VERSION-win-x64-release.zip"
+          Compress-Archive -Path out\* -DestinationPath $zipName
+          "path=$zipName" >> $env:GITHUB_OUTPUT
 
-      # Create draft release with attached zip and notes
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.get_version.outputs.version }}
-          draft: true
-          body: ${{ steps.release_notes.outputs.body }}
-          files: ${{ steps.create_zip.outputs.zipName }}
+      - name: Move release tag to merge commit
+        shell: pwsh
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+          MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git tag --force $env:TAG $env:MERGE_SHA
+          git push --force origin "refs/tags/$env:TAG"
+
+      - name: Replace pre-release with stable release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ steps.prerelease.outputs.id }}
+          TAG: ${{ steps.version.outputs.tag }}
+          VERSION: ${{ steps.version.outputs.version }}
+          ASSET: ${{ steps.package.outputs.path }}
+        run: |
+          gh api --method DELETE "repos/${{ github.repository }}/releases/$env:RELEASE_ID"
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to delete the pre-release.' }
+
+          gh release create $env:TAG --verify-tag --title "Local Knights $env:VERSION" --notes-file release-notes.md --latest $env:ASSET
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to create the stable release.' }

@@ -1,5 +1,5 @@
-name-template: 'v$NEXT_PATCH_VERSION'
-tag-template: 'v$NEXT_PATCH_VERSION'
+name-template: 'Local Knights $RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: "🚀 Features"
     labels:
@@ -21,6 +21,9 @@ categories:
 
 change-template: '- $TITLE (#$NUMBER)'
 change-title-escapes: '\<*_&' # escape characters in titles
+no-changes-template: '- No user-facing changes.'
+exclude-labels:
+  - skip-changelog
 version-resolver:
   major:
     labels:
@@ -36,5 +39,5 @@ version-resolver:
       - "bug"
       - "fix"
 template: |
-  ## Changes
-  $CHANGES
+  ## Contributors
+  $CONTRIBUTORS

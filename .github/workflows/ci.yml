@@ -8,16 +8,22 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   secret-scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_CONFIG: .gitleaks.toml
@@ -25,23 +31,248 @@ jobs:
   build-and-test:
     needs: secret-scan
     runs-on: windows-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      # Setup .NET 10
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x' # your target version
+          dotnet-version: '10.0.x'
 
-      # Restore dependencies
       - name: Restore
         run: dotnet restore ProjectSolution.slnx -r win-x64
 
-      # Build
       - name: Build
         run: dotnet build ProjectSolution.slnx --configuration Release --no-restore
 
-      # Run unit tests
       - name: Test
         run: dotnet test ProjectSolution.slnx --configuration Release --no-build --verbosity normal
+
+  prerelease:
+    if: github.event_name == 'push'
+    needs:
+      - secret-scan
+      - build-and-test
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Get version
+        id: version
+        shell: pwsh
+        run: |
+          $version = (Select-Xml -Path .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -XPath "/Project/PropertyGroup/Version").Node.InnerText
+          if ($version -notmatch '^\d+\.\d+\.\d+(?:\.\d+)?$') {
+            throw "The app version '$version' is not a supported numeric version."
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=v$version" >> $env:GITHUB_OUTPUT
+
+      - name: Ensure version is not already released
+        uses: actions/github-script@v7
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        with:
+          script: |
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+            const release = releases.find(item => item.tag_name === process.env.TAG);
+            if (release && !release.prerelease) {
+              core.setFailed(`${process.env.TAG} is already a stable release. Increment the app version before pushing to dev.`);
+            }
+
+      - name: Generate categorized release notes
+        id: release_notes
+        uses: release-drafter/release-drafter@v7
+        with:
+          config-name: file:release-drafter.yml
+          commitish: dev
+          dry-run: true
+          include-pre-releases: false
+          name: Local Knights ${{ steps.version.outputs.version }}
+          tag: ${{ steps.version.outputs.tag }}
+          version: ${{ steps.version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Find previous stable release
+        id: previous_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+            const previous = releases
+              .filter(release => !release.draft && !release.prerelease)
+              .sort((left, right) => new Date(right.published_at) - new Date(left.published_at))[0];
+            core.setOutput('tag', previous?.tag_name ?? '');
+
+      - name: Build pre-release notes
+        shell: pwsh
+        env:
+          CONTRIBUTOR_NOTES: ${{ steps.release_notes.outputs.body }}
+          PREVIOUS_TAG: ${{ steps.previous_release.outputs.tag }}
+        run: |
+          $range = if ($env:PREVIOUS_TAG) { "$env:PREVIOUS_TAG..HEAD" } else { "HEAD" }
+          $commits = @(git log $range --no-merges --pretty=format:'%s%x09%h')
+          if ($LASTEXITCODE -ne 0) {
+            throw "Unable to generate release notes from '$range'."
+          }
+
+          $categories = [ordered]@{
+            feat = @{ Title = 'Features'; Items = [System.Collections.Generic.List[string]]::new() }
+            fix = @{ Title = 'Fixes'; Items = [System.Collections.Generic.List[string]]::new() }
+            docs = @{ Title = 'Documentation'; Items = [System.Collections.Generic.List[string]]::new() }
+            other = @{ Title = 'Other Changes'; Items = [System.Collections.Generic.List[string]]::new() }
+          }
+
+          foreach ($commit in $commits) {
+            $subject, $shortHash = $commit -split "`t", 2
+            if ($subject -match '^(?<type>feat|fix|patch|doc|docs):\s*(?<message>.+)$') {
+              $type = $Matches.type.ToLowerInvariant()
+              $category = switch ($type) {
+                'patch' { 'fix' }
+                'doc' { 'docs' }
+                default { $type }
+              }
+              $message = $Matches.message.Trim()
+            } else {
+              $category = 'other'
+              $message = $subject
+            }
+            $categories[$category].Items.Add("- $message (``$shortHash``)")
+          }
+
+          $notes = [System.Collections.Generic.List[string]]::new()
+          $notes.AddRange([string[]]@(
+            '<!-- prerelease-warning:start -->'
+            '> [!WARNING]'
+            '> **Unstable pre-release.** This build is intended for testing and may contain incomplete or breaking changes. Do not use it for production club data.'
+            '<!-- prerelease-warning:end -->'
+            ''
+            '## Changes'
+          ))
+
+          foreach ($category in $categories.Values) {
+            if ($category.Items.Count -eq 0) { continue }
+            $notes.Add('')
+            $notes.Add("### $($category.Title)")
+            $notes.AddRange([string[]]$category.Items)
+          }
+
+          if ($commits.Count -eq 0) {
+            $notes.Add('')
+            $notes.Add('- No user-facing changes.')
+          }
+
+          if ($env:CONTRIBUTOR_NOTES) {
+            $notes.Add('')
+            $notes.Add($env:CONTRIBUTOR_NOTES.Trim())
+          }
+          $notes | Set-Content -Path release-notes.md
+
+      - name: Publish application
+        run: dotnet publish .\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj -c Release -r win-x64 --self-contained true -o out
+
+      - name: Create zip artifact
+        id: package
+        shell: pwsh
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $zipName = "LocalKnights-$env:VERSION-win-x64-prerelease.zip"
+          Compress-Archive -Path out\* -DestinationPath $zipName
+          "path=$zipName" >> $env:GITHUB_OUTPUT
+
+      - name: Remove older pre-releases
+        uses: actions/github-script@v7
+        env:
+          CURRENT_VERSION: ${{ steps.version.outputs.version }}
+        with:
+          script: |
+            const parseVersion = value => {
+              const match = value.replace(/^v/, '').match(/^(\d+(?:\.\d+){2,3})$/);
+              return match ? match[1].split('.').map(Number) : null;
+            };
+            const compareVersions = (left, right) => {
+              const length = Math.max(left.length, right.length);
+              for (let index = 0; index < length; index++) {
+                const difference = (left[index] ?? 0) - (right[index] ?? 0);
+                if (difference !== 0) return difference;
+              }
+              return 0;
+            };
+
+            const currentVersion = parseVersion(process.env.CURRENT_VERSION);
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+
+            for (const release of releases) {
+              const releaseVersion = parseVersion(release.tag_name);
+              if (!release.prerelease || !releaseVersion || compareVersions(releaseVersion, currentVersion) >= 0) continue;
+
+              await github.rest.repos.deleteRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: release.id
+              });
+              try {
+                await github.rest.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: `tags/${release.tag_name}`
+                });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+              }
+              core.info(`Deleted older pre-release ${release.tag_name}.`);
+            }
+
+      - name: Move pre-release tag to this commit
+        shell: pwsh
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git tag --force $env:TAG $env:GITHUB_SHA
+          git push --force origin "refs/tags/$env:TAG"
+
+      - name: Create or update pre-release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+          VERSION: ${{ steps.version.outputs.version }}
+          ASSET: ${{ steps.package.outputs.path }}
+        run: |
+          $release = gh release view $env:TAG --json isPrerelease 2>$null | ConvertFrom-Json
+          if ($release) {
+            gh release edit $env:TAG --title "Local Knights $env:VERSION" --notes-file release-notes.md --prerelease --draft=false
+          } else {
+            gh release create $env:TAG --verify-tag --title "Local Knights $env:VERSION" --notes-file release-notes.md --prerelease
+          }
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to create or update the pre-release.' }
+          gh release upload $env:TAG $env:ASSET --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to upload the pre-release asset.' }
