@@ -142,9 +142,9 @@ namespace LocalKnights.Common.Helpers.ChessAlgorithms.Pairing
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
 
             return pairings;

@@ -22,7 +22,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private const string SearchQueryParameterKey = "CompetitionsSearchQuery";
         private const string SortParameterKey = "CompetitionsSortParameter";
 
-        private readonly ILogger _logger;
         private readonly IPageNavigationService _pageNavigationService;
         private readonly IUISettingsService _uiSettingsService;
         private readonly ICompetitionService _competitionService;
