@@ -81,10 +81,11 @@ jobs:
           "tag=v$version" >> $env:GITHUB_OUTPUT
 
       - name: Ensure version is not already released
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           TAG: ${{ steps.version.outputs.tag }}
         with:
+          retries: 3
           script: |
             const releases = await github.paginate(github.rest.repos.listReleases, {
               owner: context.repo.owner,
@@ -112,8 +113,9 @@ jobs:
 
       - name: Find previous stable release
         id: previous_release
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
+          retries: 3
           script: |
             const releases = await github.paginate(github.rest.repos.listReleases, {
               owner: context.repo.owner,
@@ -203,10 +205,11 @@ jobs:
           "path=$zipName" >> $env:GITHUB_OUTPUT
 
       - name: Remove older pre-releases
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           CURRENT_VERSION: ${{ steps.version.outputs.version }}
         with:
+          retries: 3
           script: |
             const parseVersion = value => {
               const match = value.replace(/^v/, '').match(/^(\d+(?:\.\d+){2,3})$/);

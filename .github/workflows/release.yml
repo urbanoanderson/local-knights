@@ -41,10 +41,11 @@ jobs:
 
       - name: Read pre-release notes
         id: prerelease
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           TAG: ${{ steps.version.outputs.tag }}
         with:
+          retries: 3
           script: |
             const fs = require('fs');
             let release;
