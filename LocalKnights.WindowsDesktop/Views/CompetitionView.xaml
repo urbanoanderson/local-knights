@@ -356,6 +356,7 @@
 
                                                         <ComboBox ItemsSource="{Binding DataContext.ActiveResultOptions, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                             SelectedItem="{Binding SelectedResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            SelectionChanged="PairingResultComboBox_SelectionChanged"
                                                             Visibility="{Binding DataContext.IsDisplayingCurrentRound, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                             HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"
                                                             MinHeight="22" Padding="2" Margin="0"

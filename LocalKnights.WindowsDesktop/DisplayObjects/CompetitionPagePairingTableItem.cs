@@ -62,10 +62,14 @@ namespace LocalKnights.WindowsDesktop.DisplayObjects
                     field = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(ResultDisplay));
-                    GameResult? parsedResult = FormatHelper.ParseGameResultString(value);
-                    OnSetResult?.Invoke(_competitionPairing, parsedResult);
                 }
             }
+        }
+
+        public void CommitSelectedResult()
+        {
+            GameResult? parsedResult = FormatHelper.ParseGameResultString(SelectedResult);
+            OnSetResult?.Invoke(_competitionPairing, parsedResult);
         }
 
         public string BlackPlayerName { get; set; } = string.Empty;
