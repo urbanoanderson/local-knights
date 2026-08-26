@@ -62,5 +62,10 @@ namespace LocalKnights.WindowsDesktop.Helpers
         /// The default icon for classical time format.
         /// </summary>
         public const string ClassicalTimeFormatIcon = "🎩";
+
+        /// <summary>
+        /// Maximum number of characters to display in the competition page title before truncation.
+        /// </summary>
+        public const int CompetitionPageTitleDisplayMaxLength = 60;
     }
 }

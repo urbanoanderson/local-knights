@@ -542,7 +542,10 @@
     <value>Crear competición</value>
   </data>
   <data name="CompetitionPage" xml:space="preserve">
-    <value>Detalles de la competición</value>
+    <value>Competición: {0}</value>
+  </data>
+  <data name="CompetitionTitleRequiredMessage" xml:space="preserve">
+    <value>El título de la competición es obligatorio.</value>
   </data>
   <data name="TitleLabel" xml:space="preserve">
     <value>Título</value>

@@ -17,6 +17,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private readonly ILogger _logger;
         private readonly IPageNavigationService _pageNavigationService;
         private readonly ICompetitionService _competitionService;
+        private readonly IMessageBoxService _messageBoxService;
         private readonly TimeProvider _timeProvider;
 
         /// <summary>
@@ -25,15 +26,18 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <param name="logger">The logger for recording service events.</param>
         /// <param name="pageNavigationService">The page navigation service.</param>
         /// <param name="competitionService">The competition service.</param>
+        /// <param name="messageBoxService">The message box service.</param>
         /// <param name="timeProvider">The time provider for handling time-related operations.</param>
         public CreateCompetitionViewModel(ILogger logger,
             IPageNavigationService pageNavigationService,
             ICompetitionService competitionService,
+            IMessageBoxService messageBoxService,
             TimeProvider timeProvider)
         {
             _logger = logger;
             _pageNavigationService = pageNavigationService;
             _competitionService = competitionService;
+            _messageBoxService = messageBoxService;
             _timeProvider = timeProvider;
 
             CreateCommand = new RelayCommand(async _ => await CreateCompetitionAsync());
@@ -240,10 +244,15 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
         private async Task CreateCompetitionAsync()
         {
+            if (!TryValidateCompetitionTitle(Title, out string validatedTitle))
+            {
+                return;
+            }
+
             Competition competition = new Competition
             {
                 CreatedAt = _timeProvider.GetUtcNow().DateTime,
-                Title = Title,
+                Title = validatedTitle,
                 Description = Description,
                 Type = Type,
                 TimeFormat = TimeFormat,
@@ -255,6 +264,18 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             await _competitionService.CreateCompetitionAsync(competition);
             _pageNavigationService.HardNavigateTo<CompetitionsViewModel>();
+        }
+
+        private bool TryValidateCompetitionTitle(string? title, out string validatedTitle)
+        {
+            validatedTitle = title?.Trim() ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(validatedTitle))
+            {
+                return true;
+            }
+
+            _messageBoxService.ShowError(LocalizationHelper.GetString("CompetitionTitleRequiredMessage"), LocalizationHelper.GetString("ValidationError"));
+            return false;
         }
 
         private void LoadInitialOptions()

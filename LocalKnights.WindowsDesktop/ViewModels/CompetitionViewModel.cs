@@ -50,7 +50,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <summary>
         /// Localized Texts.
         /// </summary>
-        public string CompetitionPage => $"{AppConstants.DefaultCompetitionIcon} " + LocalizationHelper.GetString("CompetitionPage");
+        public string CompetitionPage => $"{AppConstants.DefaultCompetitionIcon} " + string.Format(LocalizationHelper.GetString("CompetitionPage"), GetDisplayCompetitionTitle());
         public string InformationTabHeader => LocalizationHelper.GetString("InformationTabHeader");
         public string RoundsTabHeader => LocalizationHelper.GetString("RoundsTabHeader");
         public string StandingsTabHeader => LocalizationHelper.GetString("StandingsTabHeader");
@@ -187,9 +187,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 if (Competition != null && Competition.Title != value)
                 {
-                    Competition.Title = value;
+                    if (!TryValidateCompetitionTitle(value, out string validatedTitle))
+                    {
+                        OnPropertyChanged(nameof(CompetitionTitle));
+                        return;
+                    }
+
+                    Competition.Title = validatedTitle;
                     Competition = _competitionService.UpdateCompetitionAsync(Competition).GetAwaiter().GetResult();
                     OnPropertyChanged(nameof(CompetitionTitle));
+                    OnPropertyChanged(nameof(CompetitionPage));
                 }
             }
         }
@@ -490,6 +497,32 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _ = RefreshParticipantSearchResultsAsync();
             RefreshParticipantsTable();
             RefreshPageActionElements();
+        }
+
+        private string GetDisplayCompetitionTitle()
+        {
+            string? title = Competition?.Title;
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                return string.Empty;
+            }
+
+            string trimmedTitle = title.Trim();
+            return trimmedTitle.Length > AppConstants.CompetitionPageTitleDisplayMaxLength
+                ? trimmedTitle[..AppConstants.CompetitionPageTitleDisplayMaxLength] + "..."
+                : trimmedTitle;
+        }
+
+        private bool TryValidateCompetitionTitle(string? title, out string validatedTitle)
+        {
+            validatedTitle = title?.Trim() ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(validatedTitle))
+            {
+                return true;
+            }
+
+            _messageBoxService.ShowError(LocalizationHelper.GetString("CompetitionTitleRequiredMessage"), LocalizationHelper.GetString("ValidationError"));
+            return false;
         }
 
         private void RefreshRoundsTabElements()
