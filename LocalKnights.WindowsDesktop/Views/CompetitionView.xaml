@@ -480,6 +480,20 @@
                                         </DataTemplate>
                                     </DataGridTextColumn.HeaderTemplate>
                                 </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Binding="{Binding BuchholzScoreDisplay}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.BuchholzScoreLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Binding="{Binding SonnebornBergerScoreDisplay}" IsReadOnly="True">
+                                    <DataGridTextColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DataContext.SonnebornBergerScoreLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataTemplate>
+                                    </DataGridTextColumn.HeaderTemplate>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

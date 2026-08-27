@@ -40,6 +40,8 @@ namespace LocalKnights.Common.Helpers
         {
             List<CompetitionStandingEntry> standings = CreateBaseStandingEntries(competition);
             AddStandingPerformanceRatings(competition, standings);
+            AddStandingBuchholzValuesForPlayedOpponents(competition, standings);
+            AddStandingSonnebornBergerValuesForPlayedOpponents(competition, standings);
             ClassifyKnockoutStandings(competition, standings);
 
             return standings;
@@ -77,6 +79,16 @@ namespace LocalKnights.Common.Helpers
         private static void AddStandingBuchholzValues(Competition competition, List<CompetitionStandingEntry> standings)
         {
             if (competition.Type != CompetitionType.SwissSystemTournament)
+            {
+                return;
+            }
+
+            AddStandingBuchholzValuesForPlayedOpponents(competition, standings);
+        }
+
+        private static void AddStandingBuchholzValuesForPlayedOpponents(Competition competition, List<CompetitionStandingEntry> standings)
+        {
+            if (competition.CompetitionPairings == null)
             {
                 return;
             }
@@ -133,6 +145,16 @@ namespace LocalKnights.Common.Helpers
         {
             if (competition.Type != CompetitionType.SwissSystemTournament
                 && competition.Type != CompetitionType.RoundRobinTournament)
+            {
+                return;
+            }
+
+            AddStandingSonnebornBergerValuesForPlayedOpponents(competition, standings);
+        }
+
+        private static void AddStandingSonnebornBergerValuesForPlayedOpponents(Competition competition, List<CompetitionStandingEntry> standings)
+        {
+            if (competition.CompetitionPairings == null)
             {
                 return;
             }

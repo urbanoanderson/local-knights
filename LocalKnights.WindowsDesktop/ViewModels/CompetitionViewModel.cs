@@ -70,6 +70,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string OldRatingLabel => LocalizationHelper.GetString("OldRatingLabel");
         public string NewRatingLabel => LocalizationHelper.GetString("NewRatingLabel");
         public string PerformanceRatingLabel => LocalizationHelper.GetString("PerformanceRatingLabel");
+        public string BuchholzScoreLabel => LocalizationHelper.GetString("BuchholzScoreLabel");
+        public string SonnebornBergerScoreLabel => LocalizationHelper.GetString("SonnebornBergerScoreLabel");
         public string TimeFormatLabel => LocalizationHelper.GetString("TimeFormatLabel");
         public string RatedLabel => LocalizationHelper.GetString("RatedLabel");
         public string NumberOfRoundsLabel => LocalizationHelper.GetString("NumberOfRoundsLabel");
@@ -939,6 +941,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(OldRatingLabel));
             OnPropertyChanged(nameof(NewRatingLabel));
             OnPropertyChanged(nameof(PerformanceRatingLabel));
+            OnPropertyChanged(nameof(BuchholzScoreLabel));
+            OnPropertyChanged(nameof(SonnebornBergerScoreLabel));
             OnPropertyChanged(nameof(RatingLabel));
             RefreshPageActionElements();
             RefreshInformationTabElements();

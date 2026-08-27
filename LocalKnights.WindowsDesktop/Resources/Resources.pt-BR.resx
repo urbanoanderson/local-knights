@@ -574,6 +574,12 @@
   <data name="PerformanceRatingLabel" xml:space="preserve">
     <value>Performance</value>
   </data>
+  <data name="BuchholzScoreLabel" xml:space="preserve">
+    <value>Pontuação Buchholz</value>
+  </data>
+  <data name="SonnebornBergerScoreLabel" xml:space="preserve">
+    <value>Pontuação Sonneborn-Berger</value>
+  </data>
   <data name="RoundsPlaceholder" xml:space="preserve">
     <value>Pareamentos da Rodada</value>
   </data>

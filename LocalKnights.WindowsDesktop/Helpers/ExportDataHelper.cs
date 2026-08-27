@@ -108,7 +108,9 @@ namespace LocalKnights.WindowsDesktop.Helpers
                 .AddCell(LocalizationHelper.GetString("ScoreLabel"), headerStyle)
                 .AddCell(LocalizationHelper.GetString("OldRatingLabel"), headerStyle)
                 .AddCell(LocalizationHelper.GetString("NewRatingLabel"), headerStyle)
-                .AddCell(LocalizationHelper.GetString("PerformanceRatingLabel"), headerStyle);
+                .AddCell(LocalizationHelper.GetString("PerformanceRatingLabel"), headerStyle)
+                .AddCell(LocalizationHelper.GetString("BuchholzScoreLabel"), headerStyle)
+                .AddCell(LocalizationHelper.GetString("SonnebornBergerScoreLabel"), headerStyle);
 
             foreach (CompetitionPageStandingTableItem s in standings)
             {
@@ -118,11 +120,13 @@ namespace LocalKnights.WindowsDesktop.Helpers
                     .AddCell(s.Score, DataType.String)
                     .AddCell(s.OldRatingDisplay, DataType.String)
                     .AddCell(s.NewRatingDisplay, DataType.String)
-                    .AddCell(s.PerformanceRatingDisplay, DataType.String);
+                        .AddCell(s.PerformanceRatingDisplay, DataType.String)
+                        .AddCell(s.BuchholzScoreDisplay, DataType.String)
+                        .AddCell(s.SonnebornBergerScoreDisplay, DataType.String);
             }
 
-            // Column widths (chars): Classification, Participant, Score, OldRating, NewRating, PerformanceRating
-            standingsSheet.ColumnWidths("8", "32", "8", "12", "12");
+                    // Column widths (chars): Classification, Participant, Score, OldRating, NewRating, PerformanceRating, Buchholz, Sonneborn-Berger
+                    standingsSheet.ColumnWidths("8", "32", "8", "12", "12", "16", "14", "18");
             standingsSheet.TabColor = "FF0070C0";
 
             // Add one sheet per round using the full pairing history so ongoing competitions export all rounds and results.

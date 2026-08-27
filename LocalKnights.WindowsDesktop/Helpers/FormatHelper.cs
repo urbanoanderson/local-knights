@@ -208,6 +208,8 @@ namespace LocalKnights.WindowsDesktop.Helpers
                 OldRatingDisplay = FormatRating(standingEntry.Participant.OldRating, clubPreferences.RatingSystem, null, null),
                 NewRatingDisplay = standingEntry.Participant.NewRating == null ? string.Empty : FormatRating(standingEntry.Participant.NewRating, clubPreferences.RatingSystem, null, null),
                 PerformanceRatingDisplay = standingEntry.PerformanceRating?.ToString("F0") ?? string.Empty,
+                BuchholzScoreDisplay = standingEntry.BuchholzScore.ToString("F1"),
+                SonnebornBergerScoreDisplay = standingEntry.SonnebornBergerScore.ToString("F1"),
             };
         }
     }

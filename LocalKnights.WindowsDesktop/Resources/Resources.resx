@@ -610,6 +610,12 @@
     <data name="PerformanceRatingLabel" xml:space="preserve">
       <value>Performance Rating</value>
     </data>
+    <data name="BuchholzScoreLabel" xml:space="preserve">
+      <value>Buchholz Score</value>
+    </data>
+    <data name="SonnebornBergerScoreLabel" xml:space="preserve">
+      <value>Sonneborn-Berger Score</value>
+    </data>
   <data name="DeleteButtonLabel" xml:space="preserve">
     <value>Delete</value>
   </data>

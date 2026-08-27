@@ -13,5 +13,9 @@ namespace LocalKnights.WindowsDesktop.DisplayObjects
         public required string NewRatingDisplay { get; set; } = string.Empty;
 
         public required string PerformanceRatingDisplay { get; set; } = string.Empty;
+
+        public required string BuchholzScoreDisplay { get; set; } = string.Empty;
+
+        public required string SonnebornBergerScoreDisplay { get; set; } = string.Empty;
     }
 }
