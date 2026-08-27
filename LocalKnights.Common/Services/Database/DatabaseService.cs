@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Data;
 using System.Linq.Expressions;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using LocalKnights.Common.Helpers;
@@ -27,6 +28,7 @@ namespace LocalKnights.Common.Services.Database
         /// <param name="logger">The logger for recording service events.</param>
         public DatabaseService(IFileSystemService fileSystemService, ILogger logger)
         {
+            SqliteNativeProvider.Initialize();
             _fileSystemService = fileSystemService;
             _logger = logger;
         }
@@ -101,11 +103,14 @@ namespace LocalKnights.Common.Services.Database
             _fileSystemService.CreateDirectory(clubsDirectory);
             string dbPath = _fileSystemService.GetDbFilePath(clubIdentifier);
 
-            // For SQLCipher, the password is included in the connection string
-            string connectionString = $"Data Source={dbPath};Password={password}";
+            SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder
+            {
+                DataSource = dbPath,
+                Password = password,
+            };
 
             DbContextOptions<ChessClubContext> options = new DbContextOptionsBuilder<ChessClubContext>()
-                .UseSqlite(connectionString)
+                .UseSqlite(connectionStringBuilder.ConnectionString)
                 .Options;
 
             _context = new ChessClubContext(options);
@@ -114,6 +119,13 @@ namespace LocalKnights.Common.Services.Database
             try
             {
                 await _context.Database.OpenConnectionAsync();
+
+                // Force an encrypted schema read so an invalid key fails before schema creation or migration.
+                using (var validationCommand = _context.Database.GetDbConnection().CreateCommand())
+                {
+                    validationCommand.CommandText = "SELECT COUNT(*) FROM sqlite_master;";
+                    await validationCommand.ExecuteScalarAsync();
+                }
 
                 // Disable WAL mode so SQLite uses a single database file instead of creating .db-wal/.db-shm sidecar files.
                 using (var pragmaCommand = _context.Database.GetDbConnection().CreateCommand())

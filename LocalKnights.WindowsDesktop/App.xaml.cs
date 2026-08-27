@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using LocalKnights.Common.Services.Database;
 using LocalKnights.WindowsDesktop.Views;
 using LocalKnights.WindowsDesktop.ViewModels;
 
@@ -27,6 +28,7 @@ public partial class App : Application
 
         try
         {
+            SqliteNativeProvider.Initialize();
             ServiceProviderManager.ConfigureServices();
         }
         catch (Exception ex)

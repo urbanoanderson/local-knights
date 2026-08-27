@@ -167,9 +167,13 @@ namespace LocalKnights.Common.Services.Database
             }
 
             string dbPath = _fileSystemService.GetDbFilePath(identifierName);
-            string connectionString = $"Data Source={dbPath};Password={password}";
+            SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder
+            {
+                DataSource = dbPath,
+                Password = password,
+            };
 
-            await using var connection = new SqliteConnection(connectionString);
+            await using SqliteConnection connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
             try
             {
                 await connection.OpenAsync();
