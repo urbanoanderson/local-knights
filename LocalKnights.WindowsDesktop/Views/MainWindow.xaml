@@ -29,7 +29,7 @@
                               IsChecked="{Binding IsEnglishSelected, Mode=OneWay}"
                               Style="{DynamicResource ModernMenuItem}">
                         <MenuItem.Icon>
-                            <TextBlock Text="{Binding EnglishFlag}" FontSize="14" />
+                            <TextBlock Text="{Binding EnglishFlag}" FontSize="{StaticResource FontSizeBody}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{Binding Portuguese}"
@@ -38,7 +38,7 @@
                               IsChecked="{Binding IsPortugueseSelected, Mode=OneWay}"
                               Style="{DynamicResource ModernMenuItem}">
                         <MenuItem.Icon>
-                            <TextBlock Text="{Binding PortugueseFlag}" FontSize="14" />
+                            <TextBlock Text="{Binding PortugueseFlag}" FontSize="{StaticResource FontSizeBody}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{Binding Spanish}"
@@ -47,7 +47,7 @@
                               IsChecked="{Binding IsSpanishSelected, Mode=OneWay}"
                               Style="{DynamicResource ModernMenuItem}">
                         <MenuItem.Icon>
-                            <TextBlock Text="{Binding SpanishFlag}" FontSize="14" />
+                            <TextBlock Text="{Binding SpanishFlag}" FontSize="{StaticResource FontSizeBody}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{Binding French}"
@@ -56,7 +56,7 @@
                               IsChecked="{Binding IsFrenchSelected, Mode=OneWay}"
                               Style="{DynamicResource ModernMenuItem}">
                         <MenuItem.Icon>
-                            <TextBlock Text="{Binding FrenchFlag}" FontSize="14" />
+                            <TextBlock Text="{Binding FrenchFlag}" FontSize="{StaticResource FontSizeBody}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{Binding German}"
@@ -65,7 +65,7 @@
                               IsChecked="{Binding IsGermanSelected, Mode=OneWay}"
                               Style="{DynamicResource ModernMenuItem}">
                         <MenuItem.Icon>
-                            <TextBlock Text="{Binding GermanFlag}" FontSize="14" />
+                            <TextBlock Text="{Binding GermanFlag}" FontSize="{StaticResource FontSizeBody}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{Binding Russian}"
@@ -74,7 +74,7 @@
                               IsChecked="{Binding IsRussianSelected, Mode=OneWay}"
                               Style="{DynamicResource ModernMenuItem}">
                         <MenuItem.Icon>
-                            <TextBlock Text="{Binding RussianFlag}" FontSize="14" />
+                            <TextBlock Text="{Binding RussianFlag}" FontSize="{StaticResource FontSizeBody}" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -117,7 +117,7 @@
                                     <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                                      From="1"
                                                      To="0.0"
-                                                     Duration="0:0:0.6" />
+                                                     Duration="{StaticResource StatusPulseDuration}" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>

@@ -26,6 +26,18 @@
     <Resource Include="Resources\Icon\logo.png" />
     <Resource Include="Resources\Icon\logo.svg" />
     <Resource Include="Resources\Icon\default-profile.png" />
+    <Resource Include="Resources\Fonts\*.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\THIRD-PARTY-NOTICES.md"
+             Link="THIRD-PARTY-NOTICES.md"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="..\Docs\ThirdPartyLicenses\**\*"
+             Link="ThirdPartyLicenses\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

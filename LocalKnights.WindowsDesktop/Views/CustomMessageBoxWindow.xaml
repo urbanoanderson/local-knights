@@ -15,7 +15,7 @@
         Closing="Window_Closing">
     <Border Background="{DynamicResource BackgroundBrush}"
             BorderBrush="{DynamicResource BorderBrush}"
-            BorderThickness="1"
+            BorderThickness="{StaticResource BorderThicknessDefault}"
             CornerRadius="10"
             Padding="16">
         <Grid>
@@ -25,14 +25,14 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid Grid.Row="0" Margin="{StaticResource SpacingStandardBottom}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="TitleTextBlock"
-                           FontSize="18"
+                           FontSize="{StaticResource FontSizeDialogTitle}"
                            FontWeight="SemiBold"
                            Foreground="{DynamicResource ForegroundBrush}"
                            VerticalAlignment="Center"
@@ -45,7 +45,7 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Foreground="{DynamicResource ForegroundBrush}"
-                        FontSize="18"
+                        FontSize="{StaticResource FontSizeDialogTitle}"
                         FontWeight="Bold"
                         Cursor="Hand"
                         Click="CloseButton_Click"
@@ -65,7 +65,7 @@
                         VerticalAlignment="Top"
                         Background="{DynamicResource InfoBrush}">
                     <TextBlock x:Name="IconTextBlock"
-                               FontSize="24"
+                               FontSize="{StaticResource FontSizeDialogIcon}"
                                FontWeight="Bold"
                                Foreground="White"
                                HorizontalAlignment="Center"
@@ -74,7 +74,7 @@
                 </Border>
 
                 <ScrollViewer Grid.Column="1"
-                              Margin="12,0,0,0"
+                              Margin="{StaticResource SpacingLargeLeft}"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Disabled"
                               MaxHeight="320">

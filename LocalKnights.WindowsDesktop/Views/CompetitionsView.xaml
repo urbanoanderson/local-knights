@@ -9,7 +9,7 @@
              Background="{DynamicResource BackgroundBrush}"
              Foreground="{DynamicResource ForegroundBrush}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,25 +23,25 @@
 
         <TextBox Grid.Row="1"
                  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
-                 Padding="12"
-                 Margin="0,0,0,16"
-                 FontSize="13"
+                 Padding="{StaticResource SpacingLarge}"
+                 Margin="{StaticResource SpacingStandardBottom}"
+                 FontSize="{StaticResource FontSizeCompact}"
                  Background="{DynamicResource BackgroundBrush}"
                  Foreground="{DynamicResource ForegroundBrush}"
                  CaretBrush="{DynamicResource ForegroundBrush}"
-                 BorderThickness="1"
+                 BorderThickness="{StaticResource BorderThicknessDefault}"
                  BorderBrush="{DynamicResource BorderBrush}">
             <TextBox.Template>
                 <ControlTemplate TargetType="TextBox">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4">
+                            CornerRadius="{StaticResource CornerRadiusSmall}">
                         <Grid>
                             <TextBlock IsHitTestVisible="False"
                                        Text="{Binding CompetitionsSearchPlaceholder}"
                                        Foreground="{DynamicResource ForegroundBrush}"
-                                       Padding="12,0"
+                                       Padding="{StaticResource SpacingLargeHorizontal}"
                                        VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
@@ -61,7 +61,10 @@
             </TextBox.Template>
         </TextBox>
 
-        <DataGrid x:Name="CompetitionsDataGrid" Grid.Row="2"
+        <Border Grid.Row="2"
+            Style="{DynamicResource DataGridContainer}"
+            Margin="{StaticResource SpacingStandardBottom}">
+        <DataGrid x:Name="CompetitionsDataGrid"
                   ItemsSource="{Binding Competitions}"
                   Style="{DynamicResource ModernDataGrid}"
                   AutoGenerateColumns="False"
@@ -69,7 +72,6 @@
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   SelectionMode="Single"
-                  Margin="0,0,0,16"
                   Sorting="CompetitionsDataGrid_Sorting"
                   MouseDoubleClick="CompetitionsDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
@@ -91,6 +93,7 @@
                 <DataGridTextColumn Binding="{Binding Winner}" Width="140" />
             </DataGrid.Columns>
         </DataGrid>
+        </Border>
 
         <Grid Grid.Row="3" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
@@ -105,7 +108,7 @@
                 <Button Content="{Binding CreateButtonLabel}"
                         Command="{Binding CreateCompetitionCommand}"
                         Style="{DynamicResource PrimaryButton}"
-                        Margin="12,0,0,0" />
+                        Margin="{StaticResource SpacingLargeLeft}" />
             </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
@@ -115,7 +118,7 @@
                 <TextBlock Text="{Binding CurrentPageDisplay}"
                        Style="{DynamicResource LabelText}"
                        VerticalAlignment="Center"
-                       Margin="12,0" />
+                       Margin="{StaticResource SpacingLargeHorizontal}" />
                 <Button Content="{Binding NextPageButtonLabel}"
                     Command="{Binding NextPageCommand}"
                     Style="{DynamicResource SecondaryButton}" />

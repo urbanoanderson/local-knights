@@ -8,7 +8,7 @@
         <converters:DomainEnumStringConverter x:Key="DomainEnumStringConverter" />
         <converters:BirthDateToAgeConverter x:Key="BirthDateToAgeConverter" />
     </UserControl.Resources>
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -24,25 +24,25 @@
         <!-- Search Bar -->
         <TextBox Grid.Row="1"
                  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
-                 Padding="12"
-                 Margin="0,0,0,16"
-                 FontSize="13"
+                 Padding="{StaticResource SpacingLarge}"
+                 Margin="{StaticResource SpacingStandardBottom}"
+                 FontSize="{StaticResource FontSizeCompact}"
                  Background="{DynamicResource BackgroundBrush}"
                  Foreground="{DynamicResource ForegroundBrush}"
                  CaretBrush="{DynamicResource ForegroundBrush}"
-                 BorderThickness="1"
+                 BorderThickness="{StaticResource BorderThicknessDefault}"
                  BorderBrush="{DynamicResource BorderBrush}">
             <TextBox.Template>
                 <ControlTemplate TargetType="TextBox">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4">
+                            CornerRadius="{StaticResource CornerRadiusSmall}">
                         <Grid>
                             <TextBlock IsHitTestVisible="False"
                                        Text="{Binding PlayersSearchPlaceholder}"
                                        Foreground="{DynamicResource ForegroundBrush}"
-                                       Padding="12,0"
+                                       Padding="{StaticResource SpacingLargeHorizontal}"
                                        VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
@@ -63,7 +63,8 @@
         </TextBox>
 
         <!-- Players Table -->
-        <DataGrid x:Name="PlayersDataGrid" Grid.Row="2" ItemsSource="{Binding Players}" Style="{DynamicResource ModernDataGrid}"
+        <Border Grid.Row="2" Style="{DynamicResource DataGridContainer}">
+        <DataGrid x:Name="PlayersDataGrid" ItemsSource="{Binding Players}" Style="{DynamicResource ModernDataGrid}"
                   AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True" EnableRowVirtualization="True" AlternationCount="2"
                   MouseDoubleClick="PlayersDataGrid_MouseDoubleClick" Sorting="PlayersDataGrid_Sorting">
@@ -100,6 +101,7 @@
                 <DataGridTextColumn Binding="{Binding ClassicalRating}" Width="1*" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
+        </Border>
 
         <!-- Footer with actions and pagination -->
         <Grid Grid.Row="3" Margin="0,16,0,0">
@@ -115,15 +117,15 @@
                 <Button Content="{Binding CreatePlayerButtonLabel}"
                         Command="{Binding CreatePlayerCommand}"
                         Style="{DynamicResource PrimaryButton}"
-                        Margin="12,0,0,0" />
+                        Margin="{StaticResource SpacingLargeLeft}" />
                 <Button Content="{Binding BulkImportButtonLabel}"
                     Command="{Binding BulkImportCommand}"
                     Style="{DynamicResource PrimaryButton}"
-                    Margin="12,0,0,0" />
+                    Margin="{StaticResource SpacingLargeLeft}" />
                 <Button Content="{Binding BulkExportButtonLabel}"
                     Command="{Binding BulkExportCommand}"
                     Style="{DynamicResource SuccessButton}"
-                    Margin="12,0,0,0" />
+                    Margin="{StaticResource SpacingLargeLeft}" />
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
@@ -133,7 +135,7 @@
                 <TextBlock Text="{Binding CurrentPageDisplay}"
                            Style="{DynamicResource LabelText}"
                            VerticalAlignment="Center"
-                           Margin="12,0" />
+                           Margin="{StaticResource SpacingLargeHorizontal}" />
                 <Button Content="{Binding NextPageButtonLabel}"
                         Command="{Binding NextPageCommand}"
                         Style="{DynamicResource SecondaryButton}" />

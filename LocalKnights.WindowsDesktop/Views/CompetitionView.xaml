@@ -27,7 +27,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -40,35 +40,35 @@
 
         <TabControl Grid.Row="1" Style="{StaticResource ModernTabControl}" ItemContainerStyle="{StaticResource ModernTabItem}" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
                 <TabItem Header="{Binding InformationTabHeader}">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="{StaticResource SpacingExtraLargeRight}">
                         <StackPanel Margin="20,12,20,20">
                         <TextBlock Text="{Binding TitleLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionTitle, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="0,0,0,12" />
+                                 Margin="{StaticResource SpacingLargeBottom}" />
 
                         <TextBlock Text="{Binding DescriptionLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionDescription, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="0,0,0,12"
+                                 Margin="{StaticResource SpacingLargeBottom}"
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
                                  MinHeight="100" />
 
                         <TextBlock Text="{Binding StateLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding CompetitionStateDisplay, Mode=OneWay}" Style="{StaticResource CompetitionStateTextBoxStyle}" IsReadOnly="True" Margin="0,0,0,12" />
+                        <TextBox Text="{Binding CompetitionStateDisplay, Mode=OneWay}" Style="{StaticResource CompetitionStateTextBoxStyle}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}" />
 
                         <TextBlock Text="{Binding WinnerLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding WinnerDisplayName, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12" />
+                        <TextBox Text="{Binding WinnerDisplayName, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}" />
 
                         <TextBlock Text="{Binding TimeFormatLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding TimeFormatOptions}"
                                   SelectedItem="{Binding SelectedTimeFormat, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{DynamicResource ModernComboBox}"
                                   IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                  Margin="0,0,0,12">
+                                  Margin="{StaticResource SpacingLargeBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
@@ -80,14 +80,14 @@
                         <CheckBox IsChecked="{Binding IsCompetitionRated}"
                                   Style="{DynamicResource ModernCheckBox}"
                                   IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                  Margin="0,0,0,12" />
+                                  Margin="{StaticResource SpacingLargeBottom}" />
 
                         <TextBlock Text="{Binding TypeLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding CompetitionTypeOptions}"
                                   SelectedItem="{Binding SelectedCompetitionType, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{DynamicResource ModernComboBox}"
                                   IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                  Margin="0,0,0,12">
+                                  Margin="{StaticResource SpacingLargeBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
@@ -101,7 +101,7 @@
                                                          Minimum="1"
                                                          Maximum="30"
                                                          IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                                         Margin="0,0,0,12" />
+                                                         Margin="{StaticResource SpacingLargeBottom}" />
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding IsDoubleRoundRobinVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -109,7 +109,7 @@
                             <CheckBox IsChecked="{Binding IsCompetitionDoubleRoundRobin}"
                                       Style="{DynamicResource ModernCheckBox}"
                                       IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                      Margin="0,0,0,12" />
+                                      Margin="{StaticResource SpacingLargeBottom}" />
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding IsByeValueVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -118,7 +118,7 @@
                                       SelectedItem="{Binding CompetitionByeValue, UpdateSourceTrigger=PropertyChanged}"
                                       Style="{DynamicResource ModernComboBox}"
                                       IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                      Margin="0,0,0,12" />
+                                      Margin="{StaticResource SpacingLargeBottom}" />
                         </StackPanel>
 
                         <TextBlock Text="{Binding ParticipantsLabel}" Style="{DynamicResource LabelText}" />
@@ -127,10 +127,10 @@
                                  Tag="{Binding SearchPlaceholder}"
                                  ToolTip="{Binding SearchPlaceholder}"
                                  IsEnabled="{Binding IsParticipantEditEnabled}"
-                                 Margin="0,0,0,8"
+                                 Margin="{StaticResource SpacingMediumBottom}"
                                  Visibility="{Binding IsParticipantEditEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-                        <Border Margin="0,0,0,12">
+                        <Border Margin="{StaticResource SpacingLargeBottom}">
                             <Border.Style>
                                 <Style TargetType="Border" BasedOn="{StaticResource SuggestionListContainer}">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -149,7 +149,7 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                            <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}" />
                                             <Button Grid.Column="1"
                                                     Content="{Binding DataContext.AddParticipantButtonLabel, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     Command="{Binding DataContext.AddParticipantCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -161,14 +161,15 @@
                             </ListBox>
                         </Border>
 
+                        <Border Style="{DynamicResource DataGridContainer}"
+                            Margin="{StaticResource SpacingLargeBottom}">
                         <DataGrid ItemsSource="{Binding ParticipantTableRows}"
                                   Style="{DynamicResource ModernDataGrid}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   CanUserDeleteRows="False"
                                   IsReadOnly="True"
-                                  Height="220"
-                                  Margin="0,0,0,12">
+                                  Height="220">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="*">
                                     <DataGridTemplateColumn.HeaderTemplate>
@@ -268,6 +269,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
+                        </Border>
 
                         </StackPanel>
                     </ScrollViewer>
@@ -281,19 +283,21 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentRoundLabelDisplay}" Style="{DynamicResource BodyText}" Margin="0,0,0,12" />
+                        <TextBlock Grid.Row="0" Text="{Binding CurrentRoundLabelDisplay}" Style="{DynamicResource BodyText}" Margin="{StaticResource SpacingLargeBottom}" />
 
-                        <DataGrid Grid.Row="1" ItemsSource="{Binding PairingTableRows}"
+                        <Border Grid.Row="1"
+                            Style="{DynamicResource DataGridContainer}"
+                            Margin="{StaticResource SpacingLargeBottom}"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            MinHeight="120">
+                        <DataGrid ItemsSource="{Binding PairingTableRows}"
                                   Style="{DynamicResource ModernDataGrid}"
                                   ColumnHeaderStyle="{DynamicResource CenteredDataGridColumnHeaderStyle}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   CanUserDeleteRows="False"
-                                  IsReadOnly="True"
-                                  Margin="0,0,0,12"
-                                  VerticalAlignment="Stretch"
-                                  HorizontalAlignment="Stretch"
-                                  MinHeight="120">
+                                  IsReadOnly="True">
                                 <DataGrid.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="VerticalAlignment" Value="Center" />
@@ -359,7 +363,7 @@
                                                             SelectionChanged="PairingResultComboBox_SelectionChanged"
                                                             Visibility="{Binding DataContext.IsDisplayingCurrentRound, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                             HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"
-                                                            MinHeight="22" Padding="2" Margin="0"
+                                                            MinHeight="22" Padding="{StaticResource CompactPadding}" Margin="0"
                                                             VerticalContentAlignment="Center"
                                                             Style="{DynamicResource ModernComboBox}" />
                                                 </Grid>
@@ -401,7 +405,8 @@
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-                        <TextBlock Grid.Row="2" Text="{Binding ByeDisplay}" Margin="0,0,0,12">
+                        </Border>
+                        <TextBlock Grid.Row="2" Text="{Binding ByeDisplay}" Margin="{StaticResource SpacingLargeBottom}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource LabelText}">
                                         <Setter Property="Visibility" Value="Visible" />
@@ -416,9 +421,9 @@
                                     </Style>
                                 </TextBlock.Style>
                         </TextBlock>
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,12">
-                            <Button Content="{Binding PreviousPageButtonLabel}" Command="{Binding PreviousRoundCommand}" Style="{DynamicResource SecondaryButton}" Margin="0,0,12,0" />
-                            <TextBlock Text="{Binding RoundIndicator}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,12,0" />
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="{StaticResource SpacingLargeBottom}">
+                            <Button Content="{Binding PreviousPageButtonLabel}" Command="{Binding PreviousRoundCommand}" Style="{DynamicResource SecondaryButton}" Margin="{StaticResource SpacingLargeRight}" />
+                            <TextBlock Text="{Binding RoundIndicator}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingLargeRight}" />
                             <Button Content="{Binding NextPageButtonLabel}" Command="{Binding NextRoundCommand}" Style="{DynamicResource SecondaryButton}" />
                         </StackPanel>
                     </Grid>
@@ -429,7 +434,8 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <DataGrid Grid.Row="0" ItemsSource="{Binding StandingsTableRows}" Style="{DynamicResource ModernDataGrid}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="120">
+                        <Border Grid.Row="0" Style="{DynamicResource DataGridContainer}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="120">
+                        <DataGrid ItemsSource="{Binding StandingsTableRows}" Style="{DynamicResource ModernDataGrid}" AutoGenerateColumns="False" IsReadOnly="True">
                             <DataGrid.Resources>
                                 <Style x:Key="CenteredDataGridTextBlockStyle" TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center" />
@@ -496,17 +502,18 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
+                        </Border>
                     </Grid>
                 </TabItem>
             </TabControl>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="{Binding BackButtonLabel}" Command="{Binding BackCommand}" Style="{DynamicResource SecondaryButton}" Margin="0,0,12,0" />
-            <Button Content="{Binding UndoRoundButtonLabel}" Command="{Binding UndoRoundCommand}" Style="{DynamicResource WarningButton}" Margin="0,0,12,0" Visibility="{Binding IsUndoRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <Button Content="{Binding StartCompetitionButtonLabel}" Command="{Binding StartCompetitionCommand}" Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0" Visibility="{Binding IsStartCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsStartCompetitionEnabled}" />
-            <Button Content="{Binding AdvanceRoundButtonLabel}" Command="{Binding AdvanceRoundCommand}" Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0" Visibility="{Binding IsAdvanceRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsAdvanceRoundEnabled}" />
-            <Button Content="{Binding CompleteCompetitionButtonLabel}" Command="{Binding CompleteCompetitionCommand}" Style="{DynamicResource SuccessButton}" Margin="0,0,12,0" Visibility="{Binding IsCompleteCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsCompleteCompetitionEnabled}" />
-            <Button Content="{Binding ExportButtonLabel}" Command="{Binding ExportCommand}" Style="{DynamicResource SuccessButton}" Margin="0,0,12,0" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="{StaticResource ActionRowTopSpacing}">
+            <Button Content="{Binding BackButtonLabel}" Command="{Binding BackCommand}" Style="{DynamicResource SecondaryButton}" Margin="{StaticResource SpacingLargeRight}" />
+            <Button Content="{Binding UndoRoundButtonLabel}" Command="{Binding UndoRoundCommand}" Style="{DynamicResource WarningButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsUndoRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Button Content="{Binding StartCompetitionButtonLabel}" Command="{Binding StartCompetitionCommand}" Style="{DynamicResource PrimaryButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsStartCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsStartCompetitionEnabled}" />
+            <Button Content="{Binding AdvanceRoundButtonLabel}" Command="{Binding AdvanceRoundCommand}" Style="{DynamicResource PrimaryButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsAdvanceRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsAdvanceRoundEnabled}" />
+            <Button Content="{Binding CompleteCompetitionButtonLabel}" Command="{Binding CompleteCompetitionCommand}" Style="{DynamicResource SuccessButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsCompleteCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsCompleteCompetitionEnabled}" />
+            <Button Content="{Binding ExportButtonLabel}" Command="{Binding ExportCommand}" Style="{DynamicResource SuccessButton}" Margin="{StaticResource SpacingLargeRight}" />
             <Button Content="{Binding DeleteButtonLabel}" Command="{Binding DeleteCommand}" Style="{DynamicResource DangerButton}" />
         </StackPanel>
     </Grid>

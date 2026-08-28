@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <converters:DomainEnumStringConverter x:Key="DomainEnumStringConverter" />
     </UserControl.Resources>
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{StaticResource SideWidthStar}" />
             <ColumnDefinition Width="{StaticResource FormWidthStar}" />
@@ -22,30 +22,30 @@
 
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CreatePlayer}" Style="{DynamicResource PageTitle}"
-               Margin="0,0,0,30" />
+               Margin="{StaticResource PageHeaderBottomSpacing}" />
 
         <!-- Form -->
-        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="{StaticResource SpacingExtraLargeRight}">
             <StackPanel>
 
                 <!-- Required Section -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="{Binding RequiredFields}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
+                        <TextBlock Text="{Binding RequiredFields}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <!-- Identifier Name -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding IdentifierNameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding IdentifierNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding IdentifierName, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateIdentifierNameTooltip}" Margin="0,0,0,5"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateIdentifierNameTooltip}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding LowercaseLettersNumbersMaxHelpText}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
                         <!-- Display Name -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateDisplayNameTooltip}" Margin="0,0,0,5"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateDisplayNameTooltip}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
@@ -57,13 +57,13 @@
                 <!-- ================= -->
 
                 <!-- Ratings Section -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="{Binding RatingsDescription}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
+                        <TextBlock Text="{Binding RatingsDescription}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <!-- Bullet Rating -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding BulletRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding BulletRatingLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -72,11 +72,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding BulletRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                               Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
-                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding BulletDeviationText, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{DynamicResource ModernTextBox}"
@@ -85,8 +85,8 @@
                         </StackPanel>
 
                         <!-- Blitz Rating -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding BlitzRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding BlitzRatingLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -95,11 +95,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding BlitzRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                               Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
-                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding BlitzDeviationText, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{DynamicResource ModernTextBox}"
@@ -108,8 +108,8 @@
                         </StackPanel>
 
                         <!-- Rapid Rating -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding RapidRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding RapidRatingLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -118,11 +118,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding RapidRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                               Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
-                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding RapidDeviationText, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{DynamicResource ModernTextBox}"
@@ -131,8 +131,8 @@
                         </StackPanel>
 
                         <!-- Classical Rating -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding ClassicalRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding ClassicalRatingLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -141,11 +141,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding ClassicalRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                               Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
-                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="0,0,8,0"
+                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding ClassicalDeviationText, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{DynamicResource ModernTextBox}"
@@ -154,8 +154,8 @@
                         </StackPanel>
 
                         <!-- Chess Title -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding ChessTitleLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding ChessTitleLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -179,15 +179,15 @@
                 </Border>
 
                 <!-- External Profiles Section -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
 
-                        <TextBlock Text="{Binding ExternalProfilesLabel}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                        <TextBlock Text="{Binding ExternalProfilesLabel}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <!-- Chess.com Username -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding ChessComUsernameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
-                            <Grid Margin="0,0,0,5">
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding ChessComUsernameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <Grid Margin="{StaticResource SpacingSmallBottom}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="12"/>
@@ -206,9 +206,9 @@
                         </StackPanel>
 
                         <!-- Lichess Username -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding LichessUsernameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
-                            <Grid Margin="0,0,0,5">
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding LichessUsernameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <Grid Margin="{StaticResource SpacingSmallBottom}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="12"/>
@@ -227,9 +227,9 @@
                         </StackPanel>
 
                         <!-- FIDE ID -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding FideIdLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
-                            <Grid Margin="0,0,0,5">
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding FideIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <Grid Margin="{StaticResource SpacingSmallBottom}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="12"/>
@@ -248,18 +248,18 @@
                         </StackPanel>
 
                         <!-- USCF ID -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding UscfIdLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding UscfIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding UscfId, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="0,0,0,5"/>
+                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
                         <!-- CBX ID -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding CbxIdLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding CbxIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding CbxId, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="0,0,0,5"/>
+                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
@@ -267,32 +267,32 @@
                 </Border>
 
                 <!-- Contact Information Section -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
 
-                        <TextBlock Text="{Binding ContactInformationSection}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                        <TextBlock Text="{Binding ContactInformationSection}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <!-- Email -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding EmailLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding EmailLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="0,0,0,5"/>
+                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
                         <!-- Phone -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding PhoneLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding PhoneLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="0,0,0,5"/>
+                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding Max20CharactersHelpText}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
                         <!-- Birth Date -->
-                        <StackPanel Margin="0,0,0,15">
-                            <TextBlock Text="{Binding BirthDateLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding BirthDateLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
-                                        Style="{StaticResource ModernDatePicker}" Margin="0,0,0,5"/>
+                                        Style="{StaticResource ModernDatePicker}" Margin="{StaticResource SpacingSmallBottom}"/>
                             <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
@@ -303,9 +303,9 @@
         </ScrollViewer>
 
         <!-- Buttons -->
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="{StaticResource ActionRowTopSpacing}">
             <Button Content="{Binding CreateButtonLabel}" Command="{Binding CreateCommand}"
-                    Style="{DynamicResource PrimaryButton}" Margin="0,0,20,0"/>
+                    Style="{DynamicResource PrimaryButton}" Margin="{StaticResource SpacingExtraLargeRight}"/>
             <Button Content="{Binding CancelLabel}" Command="{Binding CancelCommand}"
                     Style="{DynamicResource SecondaryButton}"/>
         </StackPanel>

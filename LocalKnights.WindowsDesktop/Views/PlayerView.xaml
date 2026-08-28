@@ -7,11 +7,11 @@
     <UserControl.Resources>
         <converters:DomainEnumStringConverter x:Key="DomainEnumStringConverter" />
         <Style x:Key="ReadOnlyFieldStyle" TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}">
-            <Setter Property="Opacity" Value="0.65"/>
+            <Setter Property="Opacity" Value="{StaticResource MutedOpacity}"/>
             <Setter Property="Cursor" Value="Arrow"/>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{StaticResource SideWidthStar}" />
             <ColumnDefinition Width="{StaticResource FormWidthStar}" />
@@ -24,57 +24,57 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding PlayerProfile}" Style="{DynamicResource PageTitle}" Margin="0,0,0,20" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding PlayerProfile}" Style="{DynamicResource PageTitle}" Margin="{StaticResource SpacingExtraLargeBottom}" />
 
-        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="{StaticResource SpacingExtraLargeRight}">
             <StackPanel>
 
                 <!-- Player Information -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="{Binding PlayerInformationLabel}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
+                        <TextBlock Text="{Binding PlayerInformationLabel}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <Border Width="72"
                                 Height="72"
-                                CornerRadius="8"
-                                Padding="2"
-                                Margin="0,0,0,15"
+                                CornerRadius="{StaticResource CornerRadiusLarge}"
+                                Padding="{StaticResource CompactPadding}"
+                                Margin="{StaticResource SpacingSectionBottom}"
                                 HorizontalAlignment="Left"
                                 ToolTip="{Binding ChessComProfileImageTooltip}"
                                 ClipToBounds="True"
                                 BorderBrush="{DynamicResource CardBorderBrush}"
-                                BorderThickness="1"
+                                BorderThickness="{StaticResource BorderThicknessDefault}"
                                 Background="Transparent">
-                            <Border CornerRadius="6" ClipToBounds="True" Background="Transparent">
+                            <Border CornerRadius="{StaticResource CornerRadiusMedium}" ClipToBounds="True" Background="Transparent">
                                 <Image Source="{Binding ProfileImage}" Stretch="UniformToFill"/>
                             </Border>
                         </Border>
 
                         <!-- Identifier Name (Read-only) -->
-                        <TextBlock Text="{Binding IdentifierNameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding IdentifierNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding IdentifierName, Mode=OneWay}" IsReadOnly="True"
-                                Style="{DynamicResource ReadOnlyFieldStyle}" Margin="0,0,0,15" />
-                        <TextBlock Text="{Binding IdentifierNameCannotChangeHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingSectionBottom}" />
+                        <TextBlock Text="{Binding IdentifierNameCannotChangeHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Display Name -->
-                        <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Creation Date (Read-only) -->
-                        <TextBlock Text="{Binding CreationDateLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding CreationDateLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding CreatedAt, Mode=OneWay}" IsReadOnly="True"
-                                Style="{DynamicResource ReadOnlyFieldStyle}" Margin="0,0,0,15" />
+                                Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingSectionBottom}" />
                     </StackPanel>
                 </Border>
 
                 <!-- Ratings Section (Read-only) -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="{Binding RatingsLabel}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
+                        <TextBlock Text="{Binding RatingsLabel}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
-                        <Grid Margin="0,0,0,15">
+                        <Grid Margin="{StaticResource SpacingSectionBottom}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -88,25 +88,25 @@
 
                             <!-- Bullet Rating -->
                             <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding BulletRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,20,8"/>
-                            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding BulletRating, Mode=OneWay}" ToolTip="{Binding BulletRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="0,0,20,0"/>
+                            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding BulletRating, Mode=OneWay}" ToolTip="{Binding BulletRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingExtraLargeRight}"/>
 
                             <!-- Blitz Rating -->
                             <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding BlitzRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,20,8"/>
-                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding BlitzRating, Mode=OneWay}" ToolTip="{Binding BlitzRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="0,0,20,0"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding BlitzRating, Mode=OneWay}" ToolTip="{Binding BlitzRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingExtraLargeRight}"/>
 
                             <!-- Rapid Rating -->
                             <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding RapidRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,20,8"/>
-                            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding RapidRating, Mode=OneWay}" ToolTip="{Binding RapidRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="0,0,20,0"/>
+                            <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding RapidRating, Mode=OneWay}" ToolTip="{Binding RapidRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingExtraLargeRight}"/>
 
                             <!-- Classical Rating -->
-                            <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding ClassicalRatingLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                            <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding ClassicalRatingLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding ClassicalRating, Mode=OneWay}" ToolTip="{Binding ClassicalRatingTooltip}" IsReadOnly="True" Style="{DynamicResource ReadOnlyFieldStyle}" Margin="0,0,0,0"/>
                         </Grid>
 
                         <!-- Chess Title -->
-                        <TextBlock Text="{Binding ChessTitleLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding ChessTitleLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <ComboBox ItemsSource="{Binding ChessTitles}" SelectedItem="{Binding SelectedChessTitle}"
-                                Style="{DynamicResource ModernComboBox}" Margin="0,0,0,15">
+                                Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingSectionBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
@@ -118,65 +118,65 @@
                 </Border>
 
                 <!-- External Profiles Section -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="{Binding ExternalProfilesLabel}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
+                        <TextBlock Text="{Binding ExternalProfilesLabel}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <!-- Chess.com Username -->
-                        <TextBlock Text="{Binding ChessComUsernameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding ChessComUsernameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding ChessComUsername, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Lichess Username -->
-                        <TextBlock Text="{Binding LichessUsernameLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding LichessUsernameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding LichessUsername, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- FIDE ID -->
-                        <TextBlock Text="{Binding FideIdLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding FideIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding FideId, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- USCF ID -->
-                        <TextBlock Text="{Binding UscfIdLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding UscfIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding UscfId, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- CBX ID -->
-                        <TextBlock Text="{Binding CbxIdLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding CbxIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding CbxId, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                     </StackPanel>
                 </Border>
 
                 <!-- Contact Information Section -->
-                <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                    <StackPanel Margin="20">
-                        <TextBlock Text="{Binding ContactInformationSection}" Style="{DynamicResource SectionTitle}" Margin="0,0,0,15" />
+                <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                    <StackPanel Margin="{StaticResource SpacingExtraLarge}">
+                        <TextBlock Text="{Binding ContactInformationSection}" Style="{DynamicResource SectionTitle}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <!-- Email -->
-                        <TextBlock Text="{Binding EmailLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding EmailLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Phone -->
-                        <TextBlock Text="{Binding PhoneLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding PhoneLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding Max20CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding Max20CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Birth Date -->
-                        <TextBlock Text="{Binding BirthDateLabel}" Style="{DynamicResource LabelText}" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding BirthDateLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{StaticResource ModernDatePicker}" Margin="0,0,0,8" />
-                        <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}" Margin="0,0,0,15"/>
+                                    Style="{StaticResource ModernDatePicker}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
                     </StackPanel>
                 </Border>
 
@@ -186,9 +186,9 @@
         <!-- Action Buttons (fixed footer, always visible) -->
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
             <Button Content="{Binding CancelLabel}" Command="{Binding BackCommand}"
-                    Style="{DynamicResource SecondaryButton}" Margin="0,0,12,0"/>
+                    Style="{DynamicResource SecondaryButton}" Margin="{StaticResource SpacingLargeRight}"/>
             <Button Content="{Binding SaveButtonLabel}" Command="{Binding SaveCommand}"
-                    Style="{DynamicResource PrimaryButton}" Margin="0,0,12,0"/>
+                    Style="{DynamicResource PrimaryButton}" Margin="{StaticResource SpacingLargeRight}"/>
             <Button Content="{Binding DeletePlayerButton}" Command="{Binding DeleteCommand}"
                     Style="{DynamicResource DangerButton}" />
         </StackPanel>

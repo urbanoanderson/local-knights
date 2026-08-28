@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="{DynamicResource BackgroundBrush}"
              Foreground="{DynamicResource ForegroundBrush}">
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{StaticResource SideWidthStar}" />
             <ColumnDefinition Width="{StaticResource FormWidthStar}" />
@@ -16,36 +16,36 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GamePage}" Style="{DynamicResource PageTitle}" Margin="0,0,0,20" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GamePage}" Style="{DynamicResource PageTitle}" Margin="{StaticResource SpacingExtraLargeBottom}" />
 
-        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+        <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="{StaticResource SpacingExtraLargeRight}">
             <StackPanel>
 
-            <Border Style="{DynamicResource Card}" Margin="0,0,0,20">
-                <StackPanel Margin="20">
+            <Border Style="{DynamicResource Card}" Margin="{StaticResource SpacingExtraLargeBottom}">
+                <StackPanel Margin="{StaticResource SpacingExtraLarge}">
                     <TextBlock Text="{Binding GameIdLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding GameIdValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding GameIdValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding CreationDateLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding CreationDateValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding CreationDateValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding ParticipantsLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding ParticipantsValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding ParticipantsValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding TimeFormatLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding TimeFormatValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding TimeFormatValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding ResultLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding ResultValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding ResultValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding RatedLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding RatedValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding RatedValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding RatingChangeLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding RatingChangeValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding RatingChangeValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding CompetitionIdLabel}" Style="{DynamicResource LabelText}" />
-                    <TextBox Text="{Binding CompetitionIdValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBox Text="{Binding CompetitionIdValue, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}"/>
 
                     <TextBlock Text="{Binding PgnLabel}" Style="{DynamicResource LabelText}" />
                     <TextBox Text="{Binding Pgn, UpdateSourceTrigger=PropertyChanged}"
@@ -55,7 +55,7 @@
                              VerticalScrollBarVisibility="Auto"
                              MinHeight="220"
                              MaxHeight="220" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,12">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="{StaticResource SpacingLargeBottom}">
                         <Button Content="{Binding SavePgnButtonLabel}"
                             Command="{Binding SavePgnCommand}"
                             Style="{DynamicResource PrimaryButton}"
@@ -72,7 +72,7 @@
         </ScrollViewer>
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
-            <Button Content="{Binding BackToGamesButtonLabel}" Command="{Binding BackCommand}" Style="{DynamicResource SecondaryButton}" Margin="0,0,12,0"/>
+            <Button Content="{Binding BackToGamesButtonLabel}" Command="{Binding BackCommand}" Style="{DynamicResource SecondaryButton}" Margin="{StaticResource SpacingLargeRight}"/>
             <Button Content="{Binding DeleteGameButton}" Command="{Binding DeleteCommand}" Style="{DynamicResource DangerButton}" />
         </StackPanel>
     </Grid>

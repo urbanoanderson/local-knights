@@ -16,10 +16,18 @@
     <SolidColorBrush x:Key="SecondaryBorderBrush" Color="#404040" />
     <SolidColorBrush x:Key="HighlightBrush" Color="#007BFF" />
     <SolidColorBrush x:Key="PrimaryBrush" Color="#007BFF" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#0056B3" />
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="#004085" />
     <SolidColorBrush x:Key="SecondaryBrush" Color="#ADB5BD" />
     <SolidColorBrush x:Key="SuccessBrush" Color="#28A745" />
+    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#218838" />
+    <SolidColorBrush x:Key="SuccessPressedBrush" Color="#1E7E34" />
     <SolidColorBrush x:Key="DangerBrush" Color="#DC3545" />
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="#C82333" />
+    <SolidColorBrush x:Key="DangerPressedBrush" Color="#BD2130" />
     <SolidColorBrush x:Key="WarningBrush" Color="#CF9C06" />
+    <SolidColorBrush x:Key="WarningHoverBrush" Color="#E8B006" />
+    <SolidColorBrush x:Key="WarningPressedBrush" Color="#AB8204" />
     <SolidColorBrush x:Key="InfoBrush" Color="#17A2B8" />
     <SolidColorBrush x:Key="LinkBrush" Color="#4DA6FF" />
     <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#2D2D30" />

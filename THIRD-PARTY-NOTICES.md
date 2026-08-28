@@ -12,6 +12,18 @@ This file documents third-party libraries, packages, and bundled components used
 
 ## Bundled Or Directly Integrated Components
 
+### Source Sans 3
+
+- Purpose: primary user-interface typeface
+- Upstream: https://github.com/adobe-fonts/source-sans
+- Version bundled in this repository: `3.052`
+- Bundled faces: Regular, Medium, Semibold, and Bold
+- Integration model: embedded WPF font resources; no system installation required
+- Copyright: Copyright 2010-2024 Adobe, with Reserved Font Name `Source`
+- License: SIL Open Font License 1.1
+- License text included at: `Docs/ThirdPartyLicenses/SourceSans3-OFL-1.1.txt`
+- Distribution note: preserve the copyright notice and OFL text with distributed copies
+
 ### chesspairing Go library
 
 - Purpose: used for Swiss and Round-Robin pairing generation through the custom Go wrapper in `Scripts/ChessPairingWrapper`

@@ -16,19 +16,19 @@
                             Height="144"
                             Stretch="Uniform"
                             HorizontalAlignment="Center"
-                            Margin="0,0,0,20" />
+                            Margin="{StaticResource SpacingExtraLargeBottom}" />
             <TextBlock Text="{Binding SignInToClub}" Style="{DynamicResource PageTitle}"
-                       HorizontalAlignment="Center" Margin="0,0,0,20" />
+                       HorizontalAlignment="Center" Margin="{StaticResource SpacingExtraLargeBottom}" />
             <TextBlock Text="{Binding ClubIdentifierLabel}" Style="{DynamicResource LabelText}"
-                       Margin="0,0,0,8" />
+                       Margin="{StaticResource SpacingMediumBottom}" />
             <ComboBox ItemsSource="{Binding Clubs}" SelectedItem="{Binding SelectedClub}"
-                      Style="{DynamicResource ModernComboBox}" Margin="0,0,0,15"
+                      Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingSectionBottom}"
                       ToolTip="{Binding ClubIdentifierTooltip}">
             </ComboBox>
             <TextBlock Text="{Binding PasswordLabel}" Style="{DynamicResource LabelText}"
-                       Margin="0,0,0,8" />
+                       Margin="{StaticResource SpacingMediumBottom}" />
             <PasswordBox Style="{DynamicResource ModernPasswordBox}"
-                         Margin="0,0,0,15"
+                         Margin="{StaticResource SpacingSectionBottom}"
                          ToolTip="{Binding SignInPasswordTooltip}"
                          PasswordChanged="PasswordBox_PasswordChanged"
                          KeyDown="PasswordBox_KeyDown" />
