@@ -97,20 +97,6 @@ jobs:
               core.setFailed(`${process.env.TAG} is already a stable release. Increment the app version before pushing to dev.`);
             }
 
-      - name: Generate categorized release notes
-        id: release_notes
-        uses: release-drafter/release-drafter@v7
-        with:
-          config-name: file:release-drafter.yml
-          commitish: dev
-          dry-run: true
-          include-pre-releases: false
-          name: Local Knights ${{ steps.version.outputs.version }}
-          tag: ${{ steps.version.outputs.tag }}
-          version: ${{ steps.version.outputs.version }}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - name: Find previous stable release
         id: previous_release
         uses: actions/github-script@v9
@@ -130,7 +116,6 @@ jobs:
       - name: Build pre-release notes
         shell: pwsh
         env:
-          CONTRIBUTOR_NOTES: ${{ steps.release_notes.outputs.body }}
           PREVIOUS_TAG: ${{ steps.previous_release.outputs.tag }}
         run: |
           $range = if ($env:PREVIOUS_TAG) { "$env:PREVIOUS_TAG..HEAD" } else { "HEAD" }
@@ -184,11 +169,6 @@ jobs:
           if ($commits.Count -eq 0) {
             $notes.Add('')
             $notes.Add('- No user-facing changes.')
-          }
-
-          if ($env:CONTRIBUTOR_NOTES) {
-            $notes.Add('')
-            $notes.Add($env:CONTRIBUTOR_NOTES.Trim())
           }
           $notes | Set-Content -Path release-notes.md
 
