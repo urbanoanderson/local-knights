@@ -142,13 +142,14 @@ jobs:
           $categories = [ordered]@{
             feat = @{ Title = 'Features'; Items = [System.Collections.Generic.List[string]]::new() }
             fix = @{ Title = 'Fixes'; Items = [System.Collections.Generic.List[string]]::new() }
+             refac = @{ Title = 'Refactors'; Items = [System.Collections.Generic.List[string]]::new() }
             docs = @{ Title = 'Documentation'; Items = [System.Collections.Generic.List[string]]::new() }
             other = @{ Title = 'Other Changes'; Items = [System.Collections.Generic.List[string]]::new() }
           }
 
           foreach ($commit in $commits) {
             $subject, $shortHash = $commit -split "`t", 2
-            if ($subject -match '^(?<type>feat|fix|patch|doc|docs):\s*(?<message>.+)$') {
+             if ($subject -match '^(?<type>feat|fix|patch|refac|doc|docs):\s*(?<message>.+)$') {
               $type = $Matches.type.ToLowerInvariant()
               $category = switch ($type) {
                 'patch' { 'fix' }
