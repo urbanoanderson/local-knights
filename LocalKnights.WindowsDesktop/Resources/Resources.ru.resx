@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BetaTag" xml:space="preserve">
+    <value>БЕТА</value>
+  </data>
+  <data name="ClubMenu" xml:space="preserve">
+    <value>Клуб</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="OpenDatabaseLocation" xml:space="preserve">
+    <value>Открыть расположение базы данных</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="OptionsMenu" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="ProjectPage" xml:space="preserve">
+    <value>Страница проекта</value>
+  </data>
+  <data name="AppNameLabel" xml:space="preserve">
+    <value>Приложение</value>
+  </data>
+  <data name="AppVersionLabel" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="AppCreatorLabel" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="AppLicenseLabel" xml:space="preserve">
+    <value>Лицензия</value>
+  </data>
+  <data name="AppLicenseValue" xml:space="preserve">
+    <value>MPL 2.0</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Тёмная тема</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Выбор языка</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Английский</value>
+  </data>
+  <data name="Portuguese" xml:space="preserve">
+    <value>Португальский (Бразилия)</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Испанский</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Французский</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Немецкий</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="SignInToClub" xml:space="preserve">
+    <value>Вход в клуб</value>
+  </data>
+  <data name="ClubDashboard" xml:space="preserve">
+    <value>Панель управления клубом</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Игроки</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+    <value>Партии</value>
+  </data>
+  <data name="Competitions" xml:space="preserve">
+    <value>Турниры</value>
+  </data>
+  <data name="CreateClub" xml:space="preserve">
+    <value>Создание клуба</value>
+  </data>
+  <data name="ClubPreferences" xml:space="preserve">
+    <value>Настройки клуба</value>
+  </data>
+  <data name="SaveButtonLabel" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="DeleteClubButton" xml:space="preserve">
+    <value>Удалить клуб</value>
+  </data>
+  <data name="DeleteClubConfirmation" xml:space="preserve">
+    <value>Удалить этот клуб и все его данные?</value>
+  </data>
+  <data name="UndoRoundConfirmation" xml:space="preserve">
+    <value>Вы уверены? Будут удалены созданные пары и сохранённые результаты текущего тура.</value>
+  </data>
+  <data name="CompleteCompetitionConfirmation" xml:space="preserve">
+    <value>Вы уверены? После завершения рейтинги могут быть обновлены, а сведения о турнире и результаты партий больше нельзя будет изменить.</value>
+  </data>
+  <data name="PreferencesSavedMessage" xml:space="preserve">
+    <value>Настройки клуба успешно сохранены.</value>
+  </data>
+  <data name="SavePreferencesFailedMessage" xml:space="preserve">
+    <value>Не удалось сохранить настройки клуба.</value>
+  </data>
+  <data name="DeleteClubFailedMessage" xml:space="preserve">
+    <value>Не удалось удалить клуб.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Ошибка проверки</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="SocialMediaLimitMessage" xml:space="preserve">
+    <value>Можно добавить не более 5 ссылок на социальные сети.</value>
+  </data>
+  <data name="EnterClubDisplayNameMessage" xml:space="preserve">
+    <value>Введите отображаемое название клуба.</value>
+  </data>
+  <data name="PasswordsDoNotMatchMessage" xml:space="preserve">
+    <value>Пароли не совпадают.</value>
+  </data>
+  <data name="PasswordRequiredMessage" xml:space="preserve">
+    <value>Необходимо ввести пароль.</value>
+  </data>
+  <data name="CurrentPasswordRequiredMessage" xml:space="preserve">
+    <value>Необходимо ввести текущий пароль.</value>
+  </data>
+  <data name="CurrentPasswordRequiredForDeletionMessage" xml:space="preserve">
+    <value>Для удаления клуба необходимо ввести текущий пароль.</value>
+  </data>
+  <data name="InvalidCurrentPasswordMessage" xml:space="preserve">
+    <value>Неверный текущий пароль.</value>
+  </data>
+  <data name="NewPasswordCannotBeEmptyMessage" xml:space="preserve">
+    <value>Новый пароль не может быть пустым.</value>
+  </data>
+  <data name="IdentifierNameRequiredMessage" xml:space="preserve">
+    <value>Необходимо указать идентификатор.</value>
+  </data>
+  <data name="IdentifierNameInvalidFormatMessage" xml:space="preserve">
+    <value>Идентификатор может содержать только строчные буквы и цифры.</value>
+  </data>
+  <data name="IdentifierNameMaxLengthMessage" xml:space="preserve">
+    <value>Идентификатор должен содержать не более 50 символов.</value>
+  </data>
+  <data name="DisplayNameRequiredMessage" xml:space="preserve">
+    <value>Необходимо указать отображаемое имя.</value>
+  </data>
+  <data name="DisplayNameMaxLengthMessage" xml:space="preserve">
+    <value>Отображаемое имя должно содержать не более 100 символов.</value>
+  </data>
+  <data name="CreatedAtLabel" xml:space="preserve">
+    <value>Создано</value>
+  </data>
+  <data name="UpdatedAtLabel" xml:space="preserve">
+    <value>Обновлено</value>
+  </data>
+  <data name="BulkImportButtonLabel" xml:space="preserve">
+    <value>Массовый импорт</value>
+  </data>
+  <data name="BulkExportButtonLabel" xml:space="preserve">
+    <value>Массовый экспорт</value>
+  </data>
+  <data name="BulkImportResultMessage" xml:space="preserve">
+    <value>Импортировано игроков: {0}; пропущено строк с ошибками или уже существующими игроками: {1}.</value>
+  </data>
+  <data name="BulkExportSuccessMessage" xml:space="preserve">
+    <value>Игроки успешно экспортированы.</value>
+  </data>
+  <data name="DescriptionMaxLengthMessage" xml:space="preserve">
+    <value>Описание должно содержать не более 500 символов.</value>
+  </data>
+  <data name="InvalidRatingMessage" xml:space="preserve">
+    <value>Рейтинг должен быть целым числом.</value>
+  </data>
+  <data name="RatingRangeMessage" xml:space="preserve">
+    <value>Рейтинг должен быть от {0} до {1}.</value>
+  </data>
+  <data name="MinRatingRangeMessage" xml:space="preserve">
+    <value>Минимальный рейтинг должен быть от {0} до {1}.</value>
+  </data>
+  <data name="MaxRatingRangeMessage" xml:space="preserve">
+    <value>Максимальный рейтинг должен быть от {0} до {1}.</value>
+  </data>
+  <data name="RatingBoundsOrderMessage" xml:space="preserve">
+    <value>Минимальный рейтинг должен быть ниже максимального.</value>
+  </data>
+  <data name="InvalidDeviationMessage" xml:space="preserve">
+    <value>Отклонение должно быть допустимым числом.</value>
+  </data>
+  <data name="DeviationRangeMessage" xml:space="preserve">
+    <value>Начальное отклонение должно быть от 150.0 до 1000.0.</value>
+  </data>
+  <data name="InvalidVolatilityMessage" xml:space="preserve">
+    <value>Волатильность должна быть допустимым числом.</value>
+  </data>
+  <data name="VolatilityRangeMessage" xml:space="preserve">
+    <value>Волатильность должна быть от 0.01 до 0.1.</value>
+  </data>
+  <data name="ProvisionalGamesRangeMessage" xml:space="preserve">
+    <value>Количество предварительных партий должно быть от 0 до 100.</value>
+  </data>
+  <data name="RatingSystemLabel" xml:space="preserve">
+    <value>Рейтинговая система</value>
+  </data>
+  <data name="ProvisionalGamesLabel" xml:space="preserve">
+    <value>Предварительные партии</value>
+  </data>
+  <data name="MinRatingLabel" xml:space="preserve">
+    <value>Минимальный рейтинг</value>
+  </data>
+  <data name="MaxRatingLabel" xml:space="preserve">
+    <value>Максимальный рейтинг</value>
+  </data>
+  <data name="RatingSystemHelp" xml:space="preserve">
+    <value>Выберите рейтинговую систему для клуба.</value>
+  </data>
+  <data name="ProvisionalGamesHelp" xml:space="preserve">
+    <value>Количество партий, в течение которых новый игрок имеет предварительный рейтинг в системе Эло.</value>
+  </data>
+  <data name="CreateRatingSystemTooltip" xml:space="preserve">
+    <value>Выберите рейтинговую систему клуба. По умолчанию: Glicko-2.</value>
+  </data>
+  <data name="CreateProvisionalGamesTooltip" xml:space="preserve">
+    <value>Количество предварительных партий для игроков с рейтингом Эло. По умолчанию: 20.</value>
+  </data>
+  <data name="EditRatingSystemTooltip" xml:space="preserve">
+    <value>Выберите рейтинговую систему, используемую клубом.</value>
+  </data>
+  <data name="EditProvisionalGamesTooltip" xml:space="preserve">
+    <value>Количество предварительных партий для новых игроков в системе Эло.</value>
+  </data>
+  <data name="ClubIdentifierTooltip" xml:space="preserve">
+    <value>Выберите клуб из списка. Каждый клуб имеет уникальный идентификатор, содержащий только строчные буквы и цифры.</value>
+  </data>
+  <data name="SignInPasswordTooltip" xml:space="preserve">
+    <value>Введите пароль выбранного клуба. Оставьте поле пустым, если пароль не задан.</value>
+  </data>
+  <data name="CreateIdentifierNameTooltip" xml:space="preserve">
+    <value>Уникальный идентификатор: только строчные буквы и цифры, не более 50 символов. После создания изменить его нельзя.</value>
+  </data>
+  <data name="CreateDisplayNameTooltip" xml:space="preserve">
+    <value>Отображаемое название клуба: не более 100 символов. Может содержать пробелы и быть изменено позднее.</value>
+  </data>
+  <data name="CreateRatingTooltip" xml:space="preserve">
+    <value>Начальный шахматный рейтинг новых игроков ({0}-{1}). По умолчанию: {2}.</value>
+  </data>
+  <data name="CreateMinRatingTooltip" xml:space="preserve">
+    <value>Минимально допустимый рейтинг игроков клуба ({0}-{1}). По умолчанию: {2}.</value>
+  </data>
+  <data name="CreateMaxRatingTooltip" xml:space="preserve">
+    <value>Максимально допустимый рейтинг игроков клуба ({0}-{1}). По умолчанию: {2}.</value>
+  </data>
+  <data name="CreateDeviationTooltip" xml:space="preserve">
+    <value>Начальное отклонение рейтинга ({0}-{1}). Чем меньше значение, тем выше достоверность. По умолчанию: {2}.</value>
+  </data>
+  <data name="CreateVolatilityTooltip" xml:space="preserve">
+    <value>Начальная волатильность рейтинга ({0}-{1}). Чем выше значение, тем быстрее меняется рейтинг. По умолчанию: {2}.</value>
+  </data>
+  <data name="CreateDescriptionTooltip" xml:space="preserve">
+    <value>Необязательное краткое описание клуба (не более 500 символов).</value>
+  </data>
+  <data name="CreatePasswordTooltip" xml:space="preserve">
+    <value>Необязательный пароль для защиты доступа к клубу. Оставьте поле пустым, чтобы не использовать пароль.</value>
+  </data>
+  <data name="CreateConfirmPasswordTooltip" xml:space="preserve">
+    <value>Повторите указанный выше пароль. Значения должны совпадать.</value>
+  </data>
+  <data name="CreateSocialMediaTooltip" xml:space="preserve">
+    <value>Необязательные ссылки на социальные сети (Facebook, Instagram, LinkedIn и т. д.). Не более 5 ссылок.</value>
+  </data>
+  <data name="EditIdentifierNameTooltip" xml:space="preserve">
+    <value>Уникальный идентификатор клуба (только для чтения). После создания клуба изменить его нельзя.</value>
+  </data>
+  <data name="EditDisplayNameTooltip" xml:space="preserve">
+    <value>Изменяемое отображаемое название клуба (не более 100 символов). Может содержать пробелы и прописные буквы.</value>
+  </data>
+  <data name="EditDescriptionTooltip" xml:space="preserve">
+    <value>Необязательное описание клуба (не более 500 символов). Его можно изменить в любое время.</value>
+  </data>
+  <data name="EditRatingTooltip" xml:space="preserve">
+    <value>Начальный шахматный рейтинг новых игроков ({0}-{1}). Применяется только к игрокам, добавленным в дальнейшем.</value>
+  </data>
+  <data name="EditMinRatingTooltip" xml:space="preserve">
+    <value>Минимально допустимый рейтинг игроков клуба ({0}-{1}). Используется при ограничении рейтинга.</value>
+  </data>
+  <data name="EditMaxRatingTooltip" xml:space="preserve">
+    <value>Максимально допустимый рейтинг игроков клуба ({0}-{1}). Используется при ограничении рейтинга.</value>
+  </data>
+  <data name="EditDeviationTooltip" xml:space="preserve">
+    <value>Начальное отклонение рейтинга (150.0-1000.0). Чем меньше значение, тем выше достоверность. Применяется только к игрокам, добавленным в дальнейшем.</value>
+  </data>
+  <data name="EditVolatilityTooltip" xml:space="preserve">
+    <value>Начальная волатильность рейтинга (0.01-0.1). Чем выше значение, тем быстрее меняется рейтинг. Применяется только к игрокам, добавленным в дальнейшем.</value>
+  </data>
+  <data name="EditPasswordTooltip" xml:space="preserve">
+    <value>Изменение пароля клуба. Оставьте поле пустым, чтобы снять защиту паролем. Внимание: пароль необходим для удаления клуба.</value>
+  </data>
+  <data name="EditConfirmPasswordTooltip" xml:space="preserve">
+    <value>Повторите новый пароль. Он должен совпадать с указанным выше.</value>
+  </data>
+  <data name="EditSocialMediaTooltip" xml:space="preserve">
+    <value>Необязательные ссылки на социальные сети (Facebook, Instagram, LinkedIn и т. д.). Не более 5 ссылок.</value>
+  </data>
+  <data name="SignInButton" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="SigningInButton" xml:space="preserve">
+    <value>Выполняется вход...</value>
+  </data>
+  <data name="ClubAlreadyExistsMessage" xml:space="preserve">
+    <value>Клуб с таким идентификатором уже существует.</value>
+  </data>
+  <data name="CreateClubButton" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="ClubIdentifierLabel" xml:space="preserve">
+    <value>Идентификатор клуба</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="IdentifierNameLabel" xml:space="preserve">
+    <value>Идентификатор</value>
+  </data>
+  <data name="AgeLabel" xml:space="preserve">
+    <value>Возраст</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Отображаемое имя</value>
+  </data>
+  <data name="RatingLabel" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="DeviationLabel" xml:space="preserve">
+    <value>Отклонение</value>
+  </data>
+  <data name="GamesPlayedSinceLastYearLabel" xml:space="preserve">
+    <value>Партий сыграно за последний год</value>
+  </data>
+  <data name="VolatilityLabel" xml:space="preserve">
+    <value>Волатильность</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+  </data>
+  <data name="CurrentPasswordLabel" xml:space="preserve">
+    <value>Текущий пароль</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="ConfirmNewPasswordLabel" xml:space="preserve">
+    <value>Подтверждение нового пароля</value>
+  </data>
+  <data name="CurrentPasswordTooltip" xml:space="preserve">
+    <value>Введите текущий пароль клуба для проверки.</value>
+  </data>
+  <data name="NewPasswordTooltip" xml:space="preserve">
+    <value>Введите новый пароль для базы данных клуба.</value>
+  </data>
+  <data name="ConfirmNewPasswordTooltip" xml:space="preserve">
+    <value>Повторите новый пароль. Он должен совпадать с указанным выше.</value>
+  </data>
+  <data name="SocialMediaLinksLabel" xml:space="preserve">
+    <value>Ссылки на социальные сети</value>
+  </data>
+  <data name="AddButtonLabel" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="RemoveSelectedLabel" xml:space="preserve">
+    <value>Удалить выбранное</value>
+  </data>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="PlusButtonLabel" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="CreateButtonLabel" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="CreatePlayerButtonLabel" xml:space="preserve">
+    <value>Создать игрока</value>
+  </data>
+  <data name="ExportButtonLabel" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="ExportFileDialogFilter" xml:space="preserve">
+    <value>Файлы Excel (*.xlsx)|*.xlsx</value>
+  </data>
+  <data name="ExportSuccessMessage" xml:space="preserve">
+    <value>Турнир успешно экспортирован.</value>
+  </data>
+  <data name="ExportCompleteTitle" xml:space="preserve">
+    <value>Экспорт завершён</value>
+  </data>
+  <data name="ExportFailedMessage" xml:space="preserve">
+    <value>Не удалось выполнить экспорт.</value>
+  </data>
+  <data name="NoCompetitionSelectedMessage" xml:space="preserve">
+    <value>Не выбран турнир для экспорта.</value>
+  </data>
+  <data name="ExportInformationSheetName" xml:space="preserve">
+    <value>Сведения</value>
+  </data>
+  <data name="ExportStandingsSheetName" xml:space="preserve">
+    <value>Таблица</value>
+  </data>
+  <data name="ExportRoundSheetNameFormat" xml:space="preserve">
+    <value>Тур {0}</value>
+  </data>
+  <data name="InfoFieldLabel" xml:space="preserve">
+    <value>Поле</value>
+  </data>
+  <data name="InfoValueLabel" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="RequiredInformationHeader" xml:space="preserve">
+    <value>Обязательные сведения</value>
+  </data>
+  <data name="BasicInformationHeader" xml:space="preserve">
+    <value>Основные сведения</value>
+  </data>
+  <data name="RatingParametersHeader" xml:space="preserve">
+    <value>Параметры рейтинга</value>
+  </data>
+  <data name="SecurityHeader" xml:space="preserve">
+    <value>Безопасность</value>
+  </data>
+  <data name="OptionalInformationHeader" xml:space="preserve">
+    <value>Необязательные сведения</value>
+  </data>
+  <data name="IdentifierNameHelp" xml:space="preserve">
+    <value>Уникальный идентификатор (только строчные буквы и цифры, не более 50 символов)</value>
+  </data>
+  <data name="DisplayNameHelp" xml:space="preserve">
+    <value>Отображаемое название клуба (не более 100 символов)</value>
+  </data>
+  <data name="RatingHelp" xml:space="preserve">
+    <value>Начальный рейтинг новых игроков (500-2000, по умолчанию: 1500)</value>
+  </data>
+  <data name="DeviationHelp" xml:space="preserve">
+    <value>Начальное отклонение рейтинга (150.0-1000.0, по умолчанию: 350.0)</value>
+  </data>
+  <data name="VolatilityHelp" xml:space="preserve">
+    <value>Начальная волатильность рейтинга (0.01-0.1, по умолчанию: 0.06)</value>
+  </data>
+  <data name="DescriptionHelp" xml:space="preserve">
+    <value>Краткое описание клуба (не более 500 символов)</value>
+  </data>
+  <data name="PasswordHelp" xml:space="preserve">
+    <value>Пароль для доступа к клубу (оставьте пустым, чтобы не использовать пароль)</value>
+  </data>
+  <data name="ConfirmPasswordHelp" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+  <data name="SecurityHelp" xml:space="preserve">
+    <value>Чтобы изменить пароль клуба, введите текущий пароль, затем дважды введите новый пароль.</value>
+  </data>
+  <data name="SocialMediaHelp" xml:space="preserve">
+    <value>До 5 ссылок на социальные сети (Facebook, Instagram и т. д.)</value>
+  </data>
+  <data name="PlayersPage" xml:space="preserve">
+    <value>Игроки</value>
+  </data>
+  <data name="CompetitionsPage" xml:space="preserve">
+    <value>Турниры</value>
+  </data>
+  <data name="CreateCompetition" xml:space="preserve">
+    <value>Создать турнир</value>
+  </data>
+  <data name="CompetitionPage" xml:space="preserve">
+    <value>Турнир: {0}</value>
+  </data>
+  <data name="CompetitionTitleRequiredMessage" xml:space="preserve">
+    <value>Необходимо указать название турнира.</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="NumberOfRoundsLabel" xml:space="preserve">
+    <value>Количество туров</value>
+  </data>
+  <data name="DoubleRoundRobinLabel" xml:space="preserve">
+    <value>Два круга</value>
+  </data>
+  <data name="ByeValueLabel" xml:space="preserve">
+    <value>Очки за пропуск тура</value>
+  </data>
+  <data name="StateLabel" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="WinnerLabel" xml:space="preserve">
+    <value>Победитель</value>
+  </data>
+  <data name="InformationTabHeader" xml:space="preserve">
+    <value>Сведения</value>
+  </data>
+  <data name="RoundsTabHeader" xml:space="preserve">
+    <value>Туры</value>
+  </data>
+  <data name="RoundPairingsLabel" xml:space="preserve">
+    <value>Пары тура {0}</value>
+  </data>
+  <data name="CurrentRoundSuffix" xml:space="preserve">
+    <value>Текущий</value>
+  </data>
+  <data name="RoundsPlaceholder" xml:space="preserve">
+    <value>Пары тура</value>
+  </data>
+  <data name="RoundIndicator" xml:space="preserve">
+    <value>Тур {0} из {1}</value>
+  </data>
+  <data name="StandingsTabHeader" xml:space="preserve">
+    <value>Турнирная таблица</value>
+  </data>
+    <data name="TableNumberLabel" xml:space="preserve">
+      <value>Номер стола</value>
+    </data>
+    <data name="ClassificationLabel" xml:space="preserve">
+      <value>Место</value>
+    </data>
+    <data name="ParticipantLabel" xml:space="preserve">
+      <value>Участник</value>
+    </data>
+    <data name="ScoreLabel" xml:space="preserve">
+      <value>Очки</value>
+    </data>
+    <data name="OldRatingLabel" xml:space="preserve">
+      <value>Прежний рейтинг</value>
+    </data>
+    <data name="NewRatingLabel" xml:space="preserve">
+      <value>Новый рейтинг</value>
+    </data>
+    <data name="PerformanceRatingLabel" xml:space="preserve">
+      <value>Перформанс-рейтинг</value>
+    </data>
+    <data name="BuchholzScoreLabel" xml:space="preserve">
+      <value>Коэффициент Бухгольца</value>
+    </data>
+    <data name="SonnebornBergerScoreLabel" xml:space="preserve">
+      <value>Коэффициент Зоннеборна-Бергера</value>
+    </data>
+  <data name="DeleteButtonLabel" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="BackButtonLabel" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="StartCompetitionButtonLabel" xml:space="preserve">
+    <value>Начать турнир</value>
+  </data>
+  <data name="AdvanceRoundButtonLabel" xml:space="preserve">
+    <value>Следующий тур</value>
+  </data>
+  <data name="CompleteCompetitionButtonLabel" xml:space="preserve">
+    <value>Завершить турнир</value>
+  </data>
+  <data name="UndoRoundButtonLabel" xml:space="preserve">
+    <value>Отменить тур</value>
+  </data>
+  <data name="PlayerProfile" xml:space="preserve">
+    <value>Профиль игрока</value>
+  </data>
+  <data name="ChessComProfileImageTooltip" xml:space="preserve">
+    <value>Изображение профиля Chess.com</value>
+  </data>
+  <data name="CreatePlayer" xml:space="preserve">
+    <value>Создание игрока</value>
+  </data>
+  <data name="CreationDateLabel" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="StartedAtLabel" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="CompletedAtLabel" xml:space="preserve">
+    <value>Завершение</value>
+  </data>
+  <data name="TimeFormat_Bullet" xml:space="preserve">
+    <value>Пуля</value>
+  </data>
+  <data name="TimeFormat_Blitz" xml:space="preserve">
+    <value>Блиц</value>
+  </data>
+  <data name="TimeFormat_Rapid" xml:space="preserve">
+    <value>Рапид</value>
+  </data>
+  <data name="TimeFormat_Classical" xml:space="preserve">
+    <value>Классика</value>
+  </data>
+  <data name="ChessComUsernameLabel" xml:space="preserve">
+    <value>Имя пользователя Chess.com</value>
+  </data>
+  <data name="FetchRatingsLabel" xml:space="preserve">
+    <value>Получить рейтинги</value>
+  </data>
+  <data name="LichessUsernameLabel" xml:space="preserve">
+    <value>Имя пользователя Lichess</value>
+  </data>
+  <data name="FideIdLabel" xml:space="preserve">
+    <value>ID FIDE</value>
+  </data>
+  <data name="UscfIdLabel" xml:space="preserve">
+    <value>ID USCF (США)</value>
+  </data>
+  <data name="CbxIdLabel" xml:space="preserve">
+    <value>ID CBX (Бразилия)</value>
+  </data>
+  <data name="ChessTitleLabel" xml:space="preserve">
+    <value>Шахматное звание</value>
+  </data>
+  <data name="PlayerInformationLabel" xml:space="preserve">
+    <value>Сведения об игроке</value>
+  </data>
+  <data name="RatingsLabel" xml:space="preserve">
+    <value>Рейтинги</value>
+  </data>
+  <data name="ExternalProfilesLabel" xml:space="preserve">
+    <value>Внешние профили</value>
+  </data>
+  <data name="ContactInformationSection" xml:space="preserve">
+    <value>Контактные данные</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Электронная почта</value>
+  </data>
+  <data name="PhoneLabel" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="BirthDateLabel" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="BirthDateHelp" xml:space="preserve">
+    <value>Необязательная дата рождения игрока</value>
+  </data>
+  <data name="InvalidBirthDateMessage" xml:space="preserve">
+    <value>Дата рождения не может быть в будущем</value>
+  </data>
+  <data name="Max20CharactersHelpText" xml:space="preserve">
+    <value>не более 20 символов</value>
+  </data>
+  <data name="IdentifierNameCannotChangeHelpText" xml:space="preserve">
+    <value>Это поле нельзя изменить</value>
+  </data>
+  <data name="Max100CharactersHelpText" xml:space="preserve">
+    <value>не более 100 символов</value>
+  </data>
+  <data name="Max50CharactersHelpText" xml:space="preserve">
+    <value>не более 50 символов</value>
+  </data>
+  <data name="NumericMax12CharactersHelpText" xml:space="preserve">
+    <value>только цифры, не более 12 символов</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>Обязательные поля</value>
+  </data>
+  <data name="OptionalFields" xml:space="preserve">
+    <value>Необязательные поля</value>
+  </data>
+  <data name="RatingsDescription" xml:space="preserve">
+    <value>Сведения о рейтинге</value>
+  </data>
+  <data name="LowercaseLettersNumbersMaxHelpText" xml:space="preserve">
+    <value>только строчные буквы и цифры, не более 50 символов</value>
+  </data>
+  <data name="DeletePlayerButton" xml:space="preserve">
+    <value>Удалить игрока</value>
+  </data>
+  <data name="EnterPlayerIdentifierMessage" xml:space="preserve">
+    <value>Введите идентификатор игрока</value>
+  </data>
+  <data name="InvalidPlayerIdentifierMessage" xml:space="preserve">
+    <value>Идентификатор игрока может содержать только строчные буквы и цифры</value>
+  </data>
+  <data name="PlayerIdentifierExistsMessage" xml:space="preserve">
+    <value>Игрок с таким идентификатором уже существует в этом клубе</value>
+  </data>
+  <data name="InvalidUscfIdMessage" xml:space="preserve">
+    <value>ID USCF должен содержать только цифры, не более 12</value>
+  </data>
+  <data name="EnterPlayerDisplayNameMessage" xml:space="preserve">
+    <value>Введите отображаемое имя игрока</value>
+  </data>
+  <data name="PlayerCreatedMessage" xml:space="preserve">
+    <value>Игрок успешно создан</value>
+  </data>
+  <data name="FetchRatingsResultMessage" xml:space="preserve">
+    <value>Для пользователя '{1}' получено значений рейтинга с Chess.com: {0}.</value>
+  </data>
+  <data name="FetchLichessRatingsResultMessage" xml:space="preserve">
+    <value>Для пользователя '{1}' получено значений рейтинга с Lichess: {0}.</value>
+  </data>
+  <data name="FetchFideRatingsResultMessage" xml:space="preserve">
+    <value>Для пользователя '{1}' получено значений рейтинга FIDE: {0}.</value>
+  </data>
+  <data name="PlayerSavedMessage" xml:space="preserve">
+    <value>Сведения об игроке успешно сохранены</value>
+  </data>
+  <data name="PlayerDeletedMessage" xml:space="preserve">
+    <value>Игрок успешно удалён</value>
+  </data>
+  <data name="DeletePlayerConfirmation" xml:space="preserve">
+    <value>Удалить этого игрока? Это действие нельзя отменить.</value>
+  </data>
+  <data name="IdentifierNameColumnTooltip" xml:space="preserve">
+    <value>Уникальный идентификатор игрока в клубе. Щёлкните, чтобы просмотреть сведения об игроке.</value>
+  </data>
+  <data name="DisplayNameColumnTooltip" xml:space="preserve">
+    <value>Отображаемое имя игрока</value>
+  </data>
+  <data name="ChessTitleColumnTooltip" xml:space="preserve">
+    <value>Шахматное звание, присвоенное шахматной организацией (НМ, КМ, МФ, ММ, ГМ)</value>
+  </data>
+  <data name="CreationDateColumnTooltip" xml:space="preserve">
+    <value>Дата и время создания игрока</value>
+  </data>
+  <data name="BulletRatingColumnTooltip" xml:space="preserve">
+    <value>Рейтинг игрока в пулю. Значения включают рейтинг, неопределённость (?) и место (#).</value>
+  </data>
+  <data name="BlitzRatingColumnTooltip" xml:space="preserve">
+    <value>Рейтинг игрока в блице. Значения включают рейтинг, неопределённость (?) и место (#).</value>
+  </data>
+  <data name="RapidRatingColumnTooltip" xml:space="preserve">
+    <value>Рейтинг игрока в рапиде. Значения включают рейтинг, неопределённость (?) и место (#).</value>
+  </data>
+  <data name="ClassicalRatingColumnTooltip" xml:space="preserve">
+    <value>Рейтинг игрока в классических шахматах. Значения включают рейтинг, неопределённость (?) и место (#).</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Элементов на странице:</value>
+  </data>
+  <data name="PageSize10" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="PageSize50" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="PageSize100" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="BackToDashboardButtonLabel" xml:space="preserve">
+    <value>Назад к панели управления</value>
+  </data>
+  <data name="PreviousPageButtonLabel" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="NextPageButtonLabel" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="PageIndicator" xml:space="preserve">
+    <value>Страница {0} из {1}</value>
+  </data>
+  <data name="GamesPage" xml:space="preserve">
+    <value>Партии</value>
+  </data>
+  <data name="GamePage" xml:space="preserve">
+    <value>Партия</value>
+  </data>
+  <data name="CreateGame" xml:space="preserve">
+    <value>Создание партии</value>
+  </data>
+  <data name="GameIdLabel" xml:space="preserve">
+    <value>ID партии</value>
+  </data>
+  <data name="ParticipantsLabel" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="ResultLabel" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="TimeFormatLabel" xml:space="preserve">
+    <value>Контроль времени</value>
+  </data>
+  <data name="RatedLabel" xml:space="preserve">
+    <value>Рейтинговая</value>
+  </data>
+  <data name="RatingChangeLabel" xml:space="preserve">
+    <value>Изменение рейтинга</value>
+  </data>
+  <data name="CompetitionIdLabel" xml:space="preserve">
+    <value>ID турнира</value>
+  </data>
+  <data name="PgnLabel" xml:space="preserve">
+    <value>PGN</value>
+  </data>
+  <data name="CreateGameButtonLabel" xml:space="preserve">
+    <value>Создать партию</value>
+  </data>
+  <data name="BackToGamesButtonLabel" xml:space="preserve">
+    <value>Назад к партиям</value>
+  </data>
+  <data name="BackToPlayersButtonLabel" xml:space="preserve">
+    <value>Назад к игрокам</value>
+  </data>
+  <data name="SavePgnButtonLabel" xml:space="preserve">
+    <value>Сохранить PGN</value>
+  </data>
+  <data name="DeleteGameButton" xml:space="preserve">
+    <value>Удалить партию</value>
+  </data>
+  <data name="WhitePlayerLabel" xml:space="preserve">
+    <value>Белые</value>
+  </data>
+  <data name="BlackPlayerLabel" xml:space="preserve">
+    <value>Чёрные</value>
+  </data>
+  <data name="GameCreatedMessage" xml:space="preserve">
+    <value>Партия успешно создана</value>
+  </data>
+  <data name="GameSavedMessage" xml:space="preserve">
+    <value>Сведения о партии успешно сохранены</value>
+  </data>
+  <data name="GameDeletedMessage" xml:space="preserve">
+    <value>Партия успешно удалена</value>
+  </data>
+  <data name="DeleteGameConfirmation" xml:space="preserve">
+    <value>Удалить эту партию? Это действие нельзя отменить.</value>
+  </data>
+  <data name="InvalidGameSelectionMessage" xml:space="preserve">
+    <value>Выбрана недопустимая партия.</value>
+  </data>
+  <data name="GameNotFoundMessage" xml:space="preserve">
+    <value>Партия не найдена.</value>
+  </data>
+  <data name="SelectTwoPlayersMessage" xml:space="preserve">
+    <value>Выберите обоих игроков.</value>
+  </data>
+  <data name="SelectDifferentPlayersMessage" xml:space="preserve">
+    <value>Выберите двух разных игроков.</value>
+  </data>
+  <data name="YesLabel" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="NoLabel" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="NotAvailableShort" xml:space="preserve">
+    <value>Н/Д</value>
+  </data>
+  <data name="PlayersSearchPlaceholder" xml:space="preserve">
+    <value>Поиск по отображаемому имени или идентификатору...</value>
+  </data>
+  <data name="CompetitionsSearchPlaceholder" xml:space="preserve">
+    <value>Поиск турниров по названию...</value>
+  </data>
+  <data name="SelectedPlayerLabel" xml:space="preserve">
+    <value>Выбранный игрок</value>
+  </data>
+  <data name="RemoveParticipantButtonLabel" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="AnalyzeOnLichessButtonLabel" xml:space="preserve">
+    <value>Анализировать на Lichess</value>
+  </data>
+  <data name="InvalidPgnForAnalysisMessage" xml:space="preserve">
+    <value>PGN недопустим для анализа. Укажите корректную запись ходов.</value>
+  </data>
+  <data name="OpenLichessFailedMessage" xml:space="preserve">
+    <value>Не удалось открыть анализ Lichess в браузере.</value>
+  </data>
+  <data name="InvalidCredentialsMessage" xml:space="preserve">
+    <value>Неверный идентификатор клуба или пароль.</value>
+  </data>
+  <data name="SignInFailedTitle" xml:space="preserve">
+    <value>Ошибка входа</value>
+  </data>
+  <data name="SignInFailedMessage" xml:space="preserve">
+    <value>Не удалось выполнить вход</value>
+  </data>
+  <data name="ChessTitle_None" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="ChessTitle_NM" xml:space="preserve">
+    <value>НМ</value>
+  </data>
+  <data name="ChessTitle_CM" xml:space="preserve">
+    <value>КМ</value>
+  </data>
+  <data name="ChessTitle_FM" xml:space="preserve">
+    <value>МФ</value>
+  </data>
+  <data name="ChessTitle_IM" xml:space="preserve">
+    <value>ММ</value>
+  </data>
+  <data name="ChessTitle_GM" xml:space="preserve">
+    <value>ГМ</value>
+  </data>
+  <data name="ChessTitle_WCM" xml:space="preserve">
+    <value>ЖКМ</value>
+  </data>
+  <data name="ChessTitle_WFM" xml:space="preserve">
+    <value>ЖМФ</value>
+  </data>
+  <data name="ChessTitle_WIM" xml:space="preserve">
+    <value>ЖММ</value>
+  </data>
+  <data name="ChessTitle_WGM" xml:space="preserve">
+    <value>ЖГМ</value>
+  </data>
+  <data name="CompetitionType_SwissSystemTournament" xml:space="preserve">
+    <value>Швейцарская система</value>
+  </data>
+  <data name="CompetitionType_RoundRobinTournament" xml:space="preserve">
+    <value>Круговой турнир</value>
+  </data>
+  <data name="CompetitionType_KnockoutTournament" xml:space="preserve">
+    <value>Турнир на выбывание</value>
+  </data>
+  <data name="CompetitionType_ChessMatch" xml:space="preserve">
+    <value>Матч</value>
+  </data>
+  <data name="CompetitionTypeMatchParticipantsLimitMessage" xml:space="preserve">
+    <value>В матче могут участвовать только 2 игрока. Нажмите «ОК», чтобы оставить в списке первых двух участников, или «Отмена», чтобы сохранить текущий тип турнира.</value>
+  </data>
+  <data name="SwissCompetitionMaxRoundsExceededMessage" xml:space="preserve">
+    <value>Указанное количество туров превышает допустимый максимум для турнира по швейцарской системе с таким числом участников. Нажмите «ОК», чтобы изменить количество туров на {0} и начать турнир, или «Отмена», чтобы вернуться без запуска.</value>
+  </data>
+  <data name="CompetitionState_Starting" xml:space="preserve">
+    <value>Не начат</value>
+  </data>
+  <data name="CompetitionState_Ongoing" xml:space="preserve">
+    <value>Идёт</value>
+  </data>
+  <data name="CompetitionState_Completed" xml:space="preserve">
+    <value>Завершён</value>
+  </data>
+  <data name="GameResult_WhiteWins" xml:space="preserve">
+    <value>1-0</value>
+  </data>
+  <data name="GameResult_BlackWins" xml:space="preserve">
+    <value>0-1</value>
+  </data>
+  <data name="GameResult_Draw" xml:space="preserve">
+    <value>½-½</value>
+  </data>
+</root>

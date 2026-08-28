@@ -108,6 +108,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public ICommand SwitchToFrenchCommand { get; private set; }
 
         /// <summary>
+        /// Gets the command for switching the UI language to German.
+        /// </summary>
+        public ICommand SwitchToGermanCommand { get; private set; }
+
+        /// <summary>
+        /// Gets the command for switching the UI language to Russian.
+        /// </summary>
+        public ICommand SwitchToRussianCommand { get; private set; }
+
+        /// <summary>
         /// Gets the command for setting the page size to 10 items.
         /// </summary>
         public ICommand SetPageSize10Command { get; private set; }
@@ -156,6 +166,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             SwitchToPortugueseCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("pt-BR"));
             SwitchToSpanishCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("es"));
             SwitchToFrenchCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("fr"));
+            SwitchToGermanCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("de"));
+            SwitchToRussianCommand = new RelayCommand(_ => _uiSettingsService.SetLanguage("ru"));
             AboutCommand = new RelayCommand(_ => ExecuteAbout());
             ProjectPageCommand = new RelayCommand(_ => ExecuteOpenProjectPage());
             ExitCommand = new RelayCommand(async _ => await ExecuteExitAsync());
@@ -279,6 +291,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string FrenchFlag => "🇫🇷";
 
         /// <summary>
+        /// Gets the emoji flag for German-speaking countries.
+        /// </summary>
+        public string GermanFlag => "🇩🇪";
+
+        /// <summary>
+        /// Gets the emoji flag for Russian-speaking countries.
+        /// </summary>
+        public string RussianFlag => "🇷🇺";
+
+        /// <summary>
         /// Gets a value indicating whether English is currently selected as the application language.
         /// </summary>
         public bool IsEnglishSelected => _uiSettingsService.CurrentAppSettings.LanguageCode == "en";
@@ -297,6 +319,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Gets a value indicating whether French is currently selected as the application language.
         /// </summary>
         public bool IsFrenchSelected => _uiSettingsService.CurrentAppSettings.LanguageCode == "fr";
+
+        /// <summary>
+        /// Gets a value indicating whether German is currently selected as the application language.
+        /// </summary>
+        public bool IsGermanSelected => _uiSettingsService.CurrentAppSettings.LanguageCode == "de";
+
+        /// <summary>
+        /// Gets a value indicating whether Russian is currently selected as the application language.
+        /// </summary>
+        public bool IsRussianSelected => _uiSettingsService.CurrentAppSettings.LanguageCode == "ru";
 
         /// <summary>
         /// Gets a value indicating whether the page size is set to 10 items.
@@ -392,6 +424,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Gets the localized label for French language option.
         /// </summary>
         public string French => LocalizationHelper.GetString("French");
+
+        /// <summary>
+        /// Gets the localized label for German language option.
+        /// </summary>
+        public string German => LocalizationHelper.GetString("German");
+
+        /// <summary>
+        /// Gets the localized label for Russian language option.
+        /// </summary>
+        public string Russian => LocalizationHelper.GetString("Russian");
 
         /// <summary>
         /// Gets the localized label for the sign-in to club option.
@@ -551,6 +593,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(Portuguese));
             OnPropertyChanged(nameof(Spanish));
             OnPropertyChanged(nameof(French));
+            OnPropertyChanged(nameof(German));
+            OnPropertyChanged(nameof(Russian));
             OnPropertyChanged(nameof(SignInToClub));
             OnPropertyChanged(nameof(ItemsPerPage));
             OnPropertyChanged(nameof(PageSize10));
@@ -560,6 +604,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(IsPortugueseSelected));
             OnPropertyChanged(nameof(IsSpanishSelected));
             OnPropertyChanged(nameof(IsFrenchSelected));
+            OnPropertyChanged(nameof(IsGermanSelected));
+            OnPropertyChanged(nameof(IsRussianSelected));
             OnPropertyChanged(nameof(WindowTitle));
         }
     }

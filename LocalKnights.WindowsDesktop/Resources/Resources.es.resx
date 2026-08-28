@@ -121,6 +121,12 @@
   <data name="French" xml:space="preserve">
     <value>Francés</value>
   </data>
+  <data name="German" xml:space="preserve">
+    <value>Alemán</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Ruso</value>
+  </data>
   <data name="SignInToClub" xml:space="preserve">
     <value>Iniciar sesión en el club</value>
   </data>

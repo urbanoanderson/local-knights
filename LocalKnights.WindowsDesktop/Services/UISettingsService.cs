@@ -195,7 +195,8 @@ namespace LocalKnights.WindowsDesktop.Services
             }
 
             string languageCode = candidate.LanguageCode;
-            if (languageCode != "en" && languageCode != "pt-BR" && languageCode != "es" && languageCode != "fr")
+            if (languageCode != "en" && languageCode != "pt-BR" && languageCode != "es"
+                && languageCode != "fr" && languageCode != "de" && languageCode != "ru")
             {
                 languageCode = defaults.LanguageCode;
             }
