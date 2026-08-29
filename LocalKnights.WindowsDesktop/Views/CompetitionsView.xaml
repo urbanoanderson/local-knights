@@ -2,13 +2,9 @@
              x:Name="CompetitionRoot"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
-             mc:Ignorable="d"
              Background="{DynamicResource BackgroundBrush}"
-             Foreground="{DynamicResource ForegroundBrush}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             Foreground="{DynamicResource ForegroundBrush}">
     <Grid Margin="{StaticResource SpacingExtraLarge}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -54,6 +54,8 @@
     <Thickness x:Key="MenuItemPadding">12,3</Thickness>
 
     <!-- Component dimensions -->
+    <sys:Double x:Key="MainWindowInitialWidth">1280</sys:Double>
+    <sys:Double x:Key="MainWindowInitialHeight">720</sys:Double>
     <sys:Double x:Key="InputHeight">36</sys:Double>
     <sys:Double x:Key="IconButtonSize">40</sys:Double>
     <sys:Double x:Key="DataGridRowHeight">40</sys:Double>
@@ -112,7 +114,7 @@
     <Style x:Key="HelpText" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource ApplicationFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
-        <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}" />
         <Setter Property="Opacity" Value="0.8" />
         <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
@@ -120,7 +122,7 @@
     <Style x:Key="PrimaryButton" TargetType="Button">
         <Setter Property="FontFamily" Value="{StaticResource ApplicationFontFamily}" />
         <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource ActionForegroundBrush}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
@@ -174,10 +176,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource SecondaryHoverBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource SecondaryBorderBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource SecondaryPressedBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{StaticResource DisabledOpacity}" />
@@ -615,7 +617,7 @@
                         <!-- Selected (Active) Tab State -->
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource PrimaryBrush}" />
-                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Foreground" Value="{DynamicResource ActionForegroundBrush}" />
                             <Setter TargetName="TabBorder" Property="Opacity" Value="1.0" />
                         </Trigger>
 
@@ -630,8 +632,8 @@
     </Style>
 
     <Style x:Key="Card" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlHighlightBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource BorderThicknessDefault}" />
         <Setter Property="CornerRadius" Value="{StaticResource CornerRadiusLarge}" />
         <Setter Property="Padding" Value="{StaticResource SpacingExtraLarge}" />
@@ -720,8 +722,8 @@
                             <Setter Property="Background" Value="{DynamicResource DataGridRowHoverBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
-                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Background" Value="{DynamicResource DataGridSelectedRowBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource DataGridSelectedRowForegroundBrush}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -750,15 +752,15 @@
 
     <Style x:Key="ModernMenu" TargetType="Menu">
         <Setter Property="FontFamily" Value="{StaticResource ApplicationFontFamily}" />
-        <Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource MenuForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
     </Style>
 
     <Style x:Key="ModernMenuItem" TargetType="MenuItem">
         <Setter Property="FontFamily" Value="{StaticResource ApplicationFontFamily}" />
-        <Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource MenuForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
@@ -823,7 +825,7 @@
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                                Placement="Right"
                                HorizontalOffset="-1">
-                            <Border Background="{DynamicResource MenuBackgroundBrush}"
+                            <Border Background="{DynamicResource ControlBackgroundBrush}"
                                     BorderBrush="{DynamicResource BorderBrush}"
                                     BorderThickness="{StaticResource BorderThicknessDefault}">
                                 <ScrollViewer CanContentScroll="True"
@@ -851,17 +853,17 @@
 
                         <!-- Highlighted (mouse hover or keyboard navigation). -->
                         <Trigger Property="IsHighlighted" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MenuHighlightBrush}"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ControlHighlightBrush}"/>
                         </Trigger>
                         <!-- Keep parent highlighted while its submenu is open. -->
                         <Trigger Property="IsSubmenuOpen" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MenuHighlightBrush}"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ControlHighlightBrush}"/>
                         </Trigger>
 
                         <!-- Checked state (checkable items such as Dark Mode, language, page size). -->
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ActionForegroundBrush}"/>
                         </Trigger>
 
                         <!-- Hide icon placeholder when no icon is assigned. -->
@@ -993,7 +995,7 @@
                                 CornerRadius="3">
                             <Path x:Name="CheckMark"
                                   Data="M 2 8 L 6 12 L 14 3"
-                                  Stroke="White"
+                                    Stroke="{DynamicResource ActionForegroundBrush}"
                                   StrokeThickness="2"
                                   StrokeStartLineCap="Round"
                                   StrokeEndLineCap="Round"

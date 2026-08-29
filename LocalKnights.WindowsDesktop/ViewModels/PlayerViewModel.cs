@@ -439,6 +439,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(IdentifierNameLabel));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(CreationDateLabel));
+            OnPropertyChanged(nameof(PlayerInformationLabel));
+            OnPropertyChanged(nameof(RatingsLabel));
             OnPropertyChanged(nameof(BulletRatingLabel));
             OnPropertyChanged(nameof(BlitzRatingLabel));
             OnPropertyChanged(nameof(RapidRatingLabel));

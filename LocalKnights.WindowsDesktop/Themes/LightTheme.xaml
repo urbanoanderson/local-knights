@@ -1,47 +1,60 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#EEEEEE" />
-    <SolidColorBrush x:Key="WindowForegroundBrush" Color="#222222" />
-    <SolidColorBrush x:Key="BackgroundBrush" Color="#EEEEEE" />
-    <SolidColorBrush x:Key="ForegroundBrush" Color="#333333" />
-    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#EEEEEE" />
-    <SolidColorBrush x:Key="ControlForegroundBrush" Color="#444444" />
-    <!-- Foreground color for disabled/read-only controls -->
-    <SolidColorBrush x:Key="ControlDisabledForegroundBrush" Color="#6B6B6B" />
-    <!-- Scrollbar thumb colors -->
-    <SolidColorBrush x:Key="ScrollbarThumbBrush" Color="#B0B0B0" />
-    <SolidColorBrush x:Key="ScrollbarThumbHoverBrush" Color="#9A9A9A" />
-    <SolidColorBrush x:Key="BorderBrush" Color="#CCCCCC" />
-    <SolidColorBrush x:Key="SecondaryBorderBrush" Color="#DDDDDD" />
-    <SolidColorBrush x:Key="HighlightBrush" Color="#007BFF" />
-    <SolidColorBrush x:Key="PrimaryBrush" Color="#007BFF" />
-    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#0056B3" />
-    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="#004085" />
-    <SolidColorBrush x:Key="SecondaryBrush" Color="#555555" />
-    <SolidColorBrush x:Key="SuccessBrush" Color="#28A745" />
-    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#218838" />
-    <SolidColorBrush x:Key="SuccessPressedBrush" Color="#1E7E34" />
-    <SolidColorBrush x:Key="DangerBrush" Color="#DC3545" />
-    <SolidColorBrush x:Key="DangerHoverBrush" Color="#C82333" />
-    <SolidColorBrush x:Key="DangerPressedBrush" Color="#BD2130" />
-    <SolidColorBrush x:Key="WarningBrush" Color="#CF9C06" />
-    <SolidColorBrush x:Key="WarningHoverBrush" Color="#E8B006" />
-    <SolidColorBrush x:Key="WarningPressedBrush" Color="#AB8204" />
-    <SolidColorBrush x:Key="InfoBrush" Color="#17A2B8" />
-    <SolidColorBrush x:Key="LinkBrush" Color="#007BFF" />
-    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#E8E8E8" />
-    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#555555" />
-    <SolidColorBrush x:Key="MenuHighlightBrush" Color="#CCCCCC" />
-    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#EEEEEE" />
-    <SolidColorBrush x:Key="CardBorderBrush" Color="#DDDDDD" />
-    <SolidColorBrush x:Key="ShadowBrush" Color="#000000" Opacity="0.1" />
-    <SolidColorBrush x:Key="DataGridHeaderRowBackgroundBrush" Color="#BBBBBB" />
-    <SolidColorBrush x:Key="DataGridRowBackgroundBrush" Color="#DDDDDD" />
-    <SolidColorBrush x:Key="DataGridAlternatingRowBackgroundBrush" Color="#CCCCCC" />
-    <SolidColorBrush x:Key="DataGridRowHoverBackgroundBrush" Color="#AAAAAA" />
-    <SolidColorBrush x:Key="DataGridSortGlyphBrush" Color="#0056B3" />
+    <!-- Neutral palette -->
+    <Color x:Key="CanvasColor">#EEF2F6</Color>
+    <Color x:Key="SurfaceColor">#F7F9FC</Color>
+    <Color x:Key="SurfaceRaisedColor">#FFFFFF</Color>
+    <Color x:Key="SurfaceHoverColor">#E3EAF2</Color>
+    <Color x:Key="BorderColor">#C7D1DC</Color>
+    <Color x:Key="TextPrimaryColor">#1F2937</Color>
+    <Color x:Key="TextMutedColor">#667085</Color>
 
-    <sys:Double x:Key="CardShadowOpacity" xmlns:sys="clr-namespace:System;assembly=mscorlib">0.1</sys:Double>
+    <!-- Semantic neutrals -->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource CanvasColor}" />
+    <SolidColorBrush x:Key="WindowForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource SurfaceRaisedColor}" />
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="ControlHighlightBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="ControlDisabledForegroundBrush" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="MutedForegroundBrush" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="ScrollbarThumbBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="ScrollbarThumbHoverBrush" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="SecondaryBorderBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="MenuForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="{StaticResource BorderColor}" />
+
+    <!-- Actions and status -->
+    <SolidColorBrush x:Key="ActionForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#B9DCF7" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#A6D1F2" />
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="#8DBFE8" />
+    <SolidColorBrush x:Key="SecondaryHoverBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="SecondaryPressedBrush" Color="{StaticResource CanvasColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="#BFE3CB" />
+    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#ABD9BA" />
+    <SolidColorBrush x:Key="SuccessPressedBrush" Color="#91CBA5" />
+    <SolidColorBrush x:Key="DangerBrush" Color="#F2C2C7" />
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="#EAAEB5" />
+    <SolidColorBrush x:Key="DangerPressedBrush" Color="#DF929C" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#F4D99B" />
+    <SolidColorBrush x:Key="WarningHoverBrush" Color="#EBCB80" />
+    <SolidColorBrush x:Key="WarningPressedBrush" Color="#DFB960" />
+    <SolidColorBrush x:Key="InfoBrush" Color="#277A8A" />
+    <SolidColorBrush x:Key="LinkBrush" Color="#1E6FB8" />
+
+    <!-- Table aliases -->
+    <SolidColorBrush x:Key="DataGridHeaderRowBackgroundBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="DataGridRowBackgroundBrush" Color="{StaticResource SurfaceRaisedColor}" />
+    <SolidColorBrush x:Key="DataGridAlternatingRowBackgroundBrush" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="DataGridRowHoverBackgroundBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="DataGridSelectedRowBackgroundBrush" Color="#D7EAFB" />
+    <SolidColorBrush x:Key="DataGridSelectedRowForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="DataGridSortGlyphBrush" Color="#1E6FB8" />
+
+    <sys:Double x:Key="CardShadowOpacity" xmlns:sys="clr-namespace:System;assembly=mscorlib">0.12</sys:Double>
 
 </ResourceDictionary>
