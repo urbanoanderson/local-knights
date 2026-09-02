@@ -83,7 +83,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string NumberOfRoundsLabel => LocalizationHelper.GetString("NumberOfRoundsLabel");
         public string DoubleRoundRobinLabel => LocalizationHelper.GetString("DoubleRoundRobinLabel");
         public string ByeValueLabel => LocalizationHelper.GetString("ByeValueLabel");
-        public string StateLabel => LocalizationHelper.GetString("StateLabel");
         public string WinnerLabel => LocalizationHelper.GetString("WinnerLabel");
         public string SaveButtonLabel => LocalizationHelper.GetString("SaveButtonLabel");
         public string DeleteButtonLabel => LocalizationHelper.GetString("DeleteButtonLabel");
@@ -966,7 +965,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(NumberOfRoundsLabel));
             OnPropertyChanged(nameof(DoubleRoundRobinLabel));
             OnPropertyChanged(nameof(ByeValueLabel));
-            OnPropertyChanged(nameof(StateLabel));
             OnPropertyChanged(nameof(WinnerLabel));
             OnPropertyChanged(nameof(SaveButtonLabel));
             OnPropertyChanged(nameof(DeleteButtonLabel));

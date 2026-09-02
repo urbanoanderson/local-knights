@@ -7,8 +7,10 @@
              Background="{DynamicResource BackgroundBrush}"
              Foreground="{DynamicResource ForegroundBrush}">
     <UserControl.Resources>
-        <Style x:Key="CompetitionStateTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}">
+        <Style x:Key="CompetitionStateTextStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding CompetitionStateBrushKey}" Value="InfoBrush">
                     <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
@@ -34,7 +36,8 @@
                    Text="{Binding CompetitionPage}"
                    Style="{DynamicResource PageTitle}" />
 
-        <TabControl Grid.Row="1" Style="{StaticResource ModernTabControl}" ItemContainerStyle="{StaticResource ModernTabItem}" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
+        <Grid Grid.Row="1">
+            <TabControl Style="{StaticResource ModernTabControl}" ItemContainerStyle="{StaticResource ModernTabItem}" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
                 <TabItem Header="{Binding InformationTabHeader}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="{StaticResource SpacingExtraLargeRight}">
                         <StackPanel Margin="20,12,20,20">
@@ -77,9 +80,6 @@
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
                                  Margin="{StaticResource SpacingLargeBottom}" />
-
-                        <TextBlock Text="{Binding StateLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding CompetitionStateDisplay, Mode=OneWay}" Style="{StaticResource CompetitionStateTextBoxStyle}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}" />
 
                         <TextBlock Text="{Binding WinnerLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding WinnerDisplayName, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}" />
@@ -527,6 +527,15 @@
                     </Grid>
                 </TabItem>
             </TabControl>
+
+            <TextBlock Text="{Binding CompetitionStateDisplay, Mode=OneWay}"
+                       Style="{StaticResource CompetitionStateTextStyle}"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Margin="0,18,20,0"
+                       Panel.ZIndex="2"
+                       IsHitTestVisible="False" />
+        </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="{StaticResource ActionRowTopSpacing}">
             <Button Content="{Binding BackButtonLabel}" Command="{Binding BackCommand}" Style="{DynamicResource SecondaryButton}" Margin="{StaticResource SpacingLargeRight}" />
