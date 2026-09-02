@@ -794,7 +794,8 @@
                                                   HorizontalAlignment="Center"
                                                   SnapsToDevicePixels="True"/>
 
-                                <ContentPresenter Grid.Column="1"
+                                <ContentPresenter x:Name="HeaderPresenter"
+                                                  Grid.Column="1"
                                                   ContentSource="Header"
                                                   RecognizesAccessKey="True"
                                                   VerticalAlignment="Center"/>
@@ -845,6 +846,9 @@
                         <Trigger Property="Role" Value="TopLevelHeader">
                             <Setter TargetName="PART_Popup" Property="Placement" Value="Bottom"/>
                             <Setter TargetName="Icon" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="HeaderPresenter" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="HeaderPresenter" Property="Grid.ColumnSpan" Value="4"/>
+                            <Setter TargetName="HeaderPresenter" Property="HorizontalAlignment" Value="Center"/>
                         </Trigger>
                         <!-- Role: submenu header shows the right-arrow glyph. -->
                         <Trigger Property="Role" Value="SubmenuHeader">
