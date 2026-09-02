@@ -543,7 +543,12 @@
             <Button Content="{Binding StartCompetitionButtonLabel}" Command="{Binding StartCompetitionCommand}" Style="{DynamicResource PrimaryButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsStartCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsStartCompetitionEnabled}" />
             <Button Content="{Binding AdvanceRoundButtonLabel}" Command="{Binding AdvanceRoundCommand}" Style="{DynamicResource PrimaryButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsAdvanceRoundVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsAdvanceRoundEnabled}" />
             <Button Content="{Binding CompleteCompetitionButtonLabel}" Command="{Binding CompleteCompetitionCommand}" Style="{DynamicResource SuccessButton}" Margin="{StaticResource SpacingLargeRight}" Visibility="{Binding IsCompleteCompetitionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsEnabled="{Binding IsCompleteCompetitionEnabled}" />
-            <Button Content="{Binding ExportButtonLabel}" Command="{Binding ExportCommand}" Style="{DynamicResource SuccessButton}" Margin="{StaticResource SpacingLargeRight}" />
+            <controls:CustomDropDownButton Header="{Binding ExportButtonLabel}"
+                                           ButtonStyle="{DynamicResource SuccessButton}"
+                                           Margin="{StaticResource SpacingLargeRight}">
+                <controls:CustomDropDownButtonItem Content="{Binding ExportToExcelLabel}" Command="{Binding ExportCommand}" />
+                <controls:CustomDropDownButtonItem Content="{Binding ExportToTrf16Label}" />
+            </controls:CustomDropDownButton>
             <Button Content="{Binding DeleteButtonLabel}" Command="{Binding DeleteCommand}" Style="{DynamicResource DangerButton}" />
         </StackPanel>
     </Grid>

@@ -92,6 +92,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string CompleteCompetitionButtonLabel => LocalizationHelper.GetString("CompleteCompetitionButtonLabel");
         public string UndoRoundButtonLabel => LocalizationHelper.GetString("UndoRoundButtonLabel");
         public string ExportButtonLabel => LocalizationHelper.GetString("ExportButtonLabel");
+        public string ExportToExcelLabel => LocalizationHelper.GetString("ExportToExcelLabel");
+        public string ExportToTrf16Label => LocalizationHelper.GetString("ExportToTrf16Label");
         public string PreviousPageButtonLabel => LocalizationHelper.GetString("PreviousPageButtonLabel");
         public string NextPageButtonLabel => LocalizationHelper.GetString("NextPageButtonLabel");
         public string AddParticipantButtonLabel => LocalizationHelper.GetString("AddButtonLabel");
@@ -973,6 +975,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(AdvanceRoundButtonLabel));
             OnPropertyChanged(nameof(CompleteCompetitionButtonLabel));
             OnPropertyChanged(nameof(UndoRoundButtonLabel));
+            OnPropertyChanged(nameof(ExportButtonLabel));
+            OnPropertyChanged(nameof(ExportToExcelLabel));
+            OnPropertyChanged(nameof(ExportToTrf16Label));
             OnPropertyChanged(nameof(CurrentRoundLabelDisplay));
             OnPropertyChanged(nameof(ParticipantsLabel));
             OnPropertyChanged(nameof(SearchPlaceholder));

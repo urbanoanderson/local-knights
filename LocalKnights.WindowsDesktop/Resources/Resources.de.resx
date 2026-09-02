@@ -481,6 +481,12 @@
   <data name="ExportButtonLabel" xml:space="preserve">
     <value>Exportieren</value>
   </data>
+  <data name="ExportToExcelLabel" xml:space="preserve">
+    <value>Nach Excel exportieren</value>
+  </data>
+  <data name="ExportToTrf16Label" xml:space="preserve">
+    <value>Nach TRF 16 exportieren</value>
+  </data>
   <data name="ExportFileDialogFilter" xml:space="preserve">
     <value>Excel-Dateien (*.xlsx)|*.xlsx</value>
   </data>
