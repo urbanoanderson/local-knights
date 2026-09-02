@@ -13,6 +13,37 @@ namespace LocalKnights.WindowsDesktop.Tests;
 public sealed class CompetitionViewModelTests
 {
     [Fact]
+    public void CompetitionFederation_LowercaseValue_UppercasesAndPersistsValue()
+    {
+        Competition competition = new()
+        {
+            Id = 42,
+            Title = "Federation test",
+            Type = CompetitionType.SwissSystemTournament,
+            State = CompetitionState.Starting,
+            TimeFormat = TimeFormat.Blitz,
+        };
+        Mock<ICompetitionService> competitionServiceMock = CreateCompetitionServiceMock(competition);
+        CompetitionViewModel viewModel = new(
+            logger: NullLogger.Instance,
+            pageNavigationService: CreatePageNavigationServiceMock().Object,
+            clubService: CreateClubServiceMock().Object,
+            competitionService: competitionServiceMock.Object,
+            playerService: CreatePlayerServiceMock().Object,
+            gameService: CreateGameServiceMock().Object,
+            messageBoxService: CreateMessageBoxServiceMock(CustomMessageBoxResult.OK).Object,
+            timeProvider: TimeProvider.System);
+        SetCompetition(viewModel, competition);
+
+        viewModel.CompetitionFederation = "bra";
+
+        Assert.Equal("BRA", viewModel.CompetitionFederation);
+        competitionServiceMock.Verify(
+            service => service.UpdateCompetitionAsync(It.Is<Competition>(updated => updated.Federation == "BRA")),
+            Times.Once);
+    }
+
+    [Fact]
     public void StartCompetitionCommand_SwissCompetitionWithTooManyRounds_ShowsWarningBeforeStarting()
     {
         Competition competition = new()

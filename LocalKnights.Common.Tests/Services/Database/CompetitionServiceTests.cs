@@ -377,6 +377,9 @@ public class CompetitionServiceTests : IDisposable
         Competition competition = new()
         {
             Title = "Created Competition",
+            City = "Recife",
+            ChiefArbiter = "Alex Silva",
+            Federation = "BRA",
             Type = CompetitionType.ChessMatch,
             State = CompetitionState.Starting,
             TimeFormat = TimeFormat.Blitz,
@@ -388,18 +391,24 @@ public class CompetitionServiceTests : IDisposable
 
         Assert.Equal(createdCompetition.Id, persistedCompetition.Id);
         Assert.Equal("Created Competition", persistedCompetition.Title);
+        Assert.Equal("Recife", persistedCompetition.City);
+        Assert.Equal("Alex Silva", persistedCompetition.ChiefArbiter);
+        Assert.Equal("BRA", persistedCompetition.Federation);
         Assert.Empty(persistedCompetition.CompetitionParticipants);
         Assert.Empty(persistedCompetition.CompetitionPairings);
     }
 
     [Fact]
-    public async Task UpdateCompetitionAsync_PersistsWinnerIdAndCompletedAt()
+    public async Task UpdateCompetitionAsync_PersistsCompetitionMetadataWinnerIdAndCompletedAt()
     {
         Competition competition = (await _competitionService.GetCompetitionByIdAsync(1))!;
         DateTime completedAt = _timeProvider.GetUtcNow().UtcDateTime;
 
         competition.WinnerId = "black-player";
         competition.CompletedAt = completedAt;
+        competition.City = "São Paulo";
+        competition.ChiefArbiter = "Morgan Lee";
+        competition.Federation = "BRA";
 
         await _competitionService.UpdateCompetitionAsync(competition);
 
@@ -407,6 +416,9 @@ public class CompetitionServiceTests : IDisposable
 
         Assert.Equal("black-player", persistedCompetition.WinnerId);
         Assert.Equal(completedAt, persistedCompetition.CompletedAt);
+        Assert.Equal("São Paulo", persistedCompetition.City);
+        Assert.Equal("Morgan Lee", persistedCompetition.ChiefArbiter);
+        Assert.Equal("BRA", persistedCompetition.Federation);
         Assert.Equal(2, persistedCompetition.CompetitionParticipants.Count);
     }
 
@@ -416,6 +428,9 @@ public class CompetitionServiceTests : IDisposable
         Competition competition = (await _competitionService.GetCompetitionByIdAsync(1))!;
 
         competition.Description = null;
+        competition.City = null;
+        competition.ChiefArbiter = null;
+        competition.Federation = null;
         competition.ByeValue = null;
         competition.CompletedAt = null;
         competition.WinnerId = null;
@@ -425,6 +440,9 @@ public class CompetitionServiceTests : IDisposable
         Competition persistedCompetition = (await _competitionService.GetCompetitionByIdAsync(1))!;
 
         Assert.Null(persistedCompetition.Description);
+        Assert.Null(persistedCompetition.City);
+        Assert.Null(persistedCompetition.ChiefArbiter);
+        Assert.Null(persistedCompetition.Federation);
         Assert.Null(persistedCompetition.ByeValue);
         Assert.Null(persistedCompetition.CompletedAt);
         Assert.Null(persistedCompetition.WinnerId);

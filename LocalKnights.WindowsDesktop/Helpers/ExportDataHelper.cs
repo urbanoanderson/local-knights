@@ -73,6 +73,9 @@ namespace LocalKnights.WindowsDesktop.Helpers
 
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TitleLabel"), DataType.String).AddCell(competition.Title ?? string.Empty, infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("DescriptionLabel"), DataType.String).AddCell(competition.Description ?? string.Empty, infoValueOptions);
+            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("CityLabel"), DataType.String).AddCell(competition.City ?? string.Empty, infoValueOptions);
+            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("ChiefArbiterLabel"), DataType.String).AddCell(competition.ChiefArbiter ?? string.Empty, infoValueOptions);
+            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("FederationLabel"), DataType.String).AddCell(competition.Federation ?? string.Empty, infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("StateLabel"), DataType.String).AddCell(competition.State.ToString(), infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TypeLabel"), DataType.String).AddCell(competition.Type.ToString(), infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TimeFormatLabel"), DataType.String).AddCell(competition.TimeFormat.ToString(), infoValueOptions);

@@ -418,6 +418,24 @@
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="ChiefArbiterLabel" xml:space="preserve">
+    <value>Hauptschiedsrichter</value>
+  </data>
+  <data name="FederationLabel" xml:space="preserve">
+    <value>Verband</value>
+  </data>
+  <data name="CityTooltip" xml:space="preserve">
+    <value>Stadt, in der der Wettbewerb stattfindet (max. 100 Zeichen).</value>
+  </data>
+  <data name="ChiefArbiterTooltip" xml:space="preserve">
+    <value>Name des Hauptschiedsrichters des Wettbewerbs (max. 100 Zeichen).</value>
+  </data>
+  <data name="FederationTooltip" xml:space="preserve">
+    <value>Dreibuchstabiger Verbandscode, z. B. GER oder BRA.</value>
+  </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
     <value>Passwort bestätigen</value>
   </data>

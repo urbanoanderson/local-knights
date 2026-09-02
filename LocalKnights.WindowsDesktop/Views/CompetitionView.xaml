@@ -53,6 +53,31 @@
                                  TextWrapping="Wrap"
                                  MinHeight="100" />
 
+                        <TextBlock Text="{Binding CityLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding CompetitionCity, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="100"
+                                 ToolTip="{Binding CityTooltip}"
+                                 Style="{DynamicResource ModernTextBox}"
+                                 IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
+                                 Margin="{StaticResource SpacingLargeBottom}" />
+
+                        <TextBlock Text="{Binding ChiefArbiterLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding CompetitionChiefArbiter, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="100"
+                                 ToolTip="{Binding ChiefArbiterTooltip}"
+                                 Style="{DynamicResource ModernTextBox}"
+                                 IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
+                                 Margin="{StaticResource SpacingLargeBottom}" />
+
+                        <TextBlock Text="{Binding FederationLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding CompetitionFederation, UpdateSourceTrigger=PropertyChanged}"
+                                 MaxLength="3"
+                                 CharacterCasing="Upper"
+                                 ToolTip="{Binding FederationTooltip}"
+                                 Style="{DynamicResource ModernTextBox}"
+                                 IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
+                                 Margin="{StaticResource SpacingLargeBottom}" />
+
                         <TextBlock Text="{Binding StateLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionStateDisplay, Mode=OneWay}" Style="{StaticResource CompetitionStateTextBoxStyle}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}" />
 

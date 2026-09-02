@@ -385,6 +385,24 @@
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Descrição</value>
   </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>Cidade</value>
+  </data>
+  <data name="ChiefArbiterLabel" xml:space="preserve">
+    <value>Árbitro-chefe</value>
+  </data>
+  <data name="FederationLabel" xml:space="preserve">
+    <value>Federação</value>
+  </data>
+  <data name="CityTooltip" xml:space="preserve">
+    <value>Cidade onde a competição é realizada (máximo de 100 caracteres).</value>
+  </data>
+  <data name="ChiefArbiterTooltip" xml:space="preserve">
+    <value>Nome do árbitro-chefe da competição (máximo de 100 caracteres).</value>
+  </data>
+  <data name="FederationTooltip" xml:space="preserve">
+    <value>Código de três letras da federação, como BRA ou USA.</value>
+  </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
     <value>Confirmar Senha</value>
   </data>

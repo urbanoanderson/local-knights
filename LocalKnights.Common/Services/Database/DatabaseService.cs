@@ -442,13 +442,7 @@ namespace LocalKnights.Common.Services.Database
                 return;
             }
 
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "CreatedAt", "TEXT", "'0001-01-01 00:00:00'");
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "MinRating", "REAL", Common.Helpers.CommonConstants.DefaultMinRating.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "MaxRating", "REAL", Common.Helpers.CommonConstants.DefaultMaxRating.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "Competitions", "StartedAt", "TEXT");
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "Competitions", "CompletedAt", "TEXT");
-
-            // Add initial seeding preference to Competitions (Rating by default).
+            // Example: Add InitialSeeding property to Competition.
             //await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "Competitions", "InitialSeeding", "INTEGER", "0");
 
             // Add future migrations here as needed.

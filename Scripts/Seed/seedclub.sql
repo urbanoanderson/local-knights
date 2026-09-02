@@ -206,13 +206,16 @@ SELECT
 FROM (SELECT * FROM RandomNumbers LIMIT (SELECT num_games FROM SeedConfig));
 
 -- Generate competitions
-INSERT INTO Competitions (CreatedAt, State, Title, Description, Type, TimeFormat, IsRated, NumberOfRounds, ByeValue, IsDoubleRoundRobin, InitialSeeding, CurrentRound)
+INSERT INTO Competitions (CreatedAt, State, Title, Description, City, ChiefArbiter, Federation, Type, TimeFormat, IsRated, NumberOfRounds, ByeValue, IsDoubleRoundRobin, InitialSeeding, CurrentRound)
 SELECT
   datetime('now', '-' || (rnd_n % 365) || ' days') AS CreatedAt,
   0 AS State, -- Starting
   'Seed Competition ' || ROW_NUMBER() OVER (ORDER BY rnd_n) || ' - ' ||
     (CASE (rnd_n % 4) WHEN 0 THEN 'Swiss' WHEN 1 THEN 'RoundRobin' WHEN 2 THEN 'Knockout' ELSE 'Match' END) AS Title,
   'Auto-generated competition for testing' AS Description,
+  'Recife' AS City,
+  'Seed Arbiter ' || ((rnd_n % 20) + 1) AS ChiefArbiter,
+  'BRA' AS Federation,
   (rnd_n % 4) AS Type, -- 0:Swiss,1:RoundRobin,2:Knockout,3:Match
   (rnd_n % 4) AS TimeFormat, -- 0..3 -> Bullet,Blitz,Rapid,Classical
   (rnd_n % 2) AS IsRated,
@@ -225,12 +228,15 @@ FROM (SELECT * FROM RandomCompetitions LIMIT (SELECT num_competitions FROM SeedC
 
 -- Add one fixed Swiss tournament in starting state with the first 200 players as participants.
 -- Only create it when the seed generated more than 200 players.
-INSERT INTO Competitions (CreatedAt, State, Title, Description, Type, TimeFormat, IsRated, NumberOfRounds, ByeValue, IsDoubleRoundRobin, InitialSeeding, CurrentRound)
+INSERT INTO Competitions (CreatedAt, State, Title, Description, City, ChiefArbiter, Federation, Type, TimeFormat, IsRated, NumberOfRounds, ByeValue, IsDoubleRoundRobin, InitialSeeding, CurrentRound)
 SELECT
   datetime('now') AS CreatedAt,
   0 AS State,
   'Seed Competition - Fixed Swiss' AS Title,
   'Fixed Swiss tournament seeded for testing' AS Description,
+  'Recife' AS City,
+  'Seed Chief Arbiter' AS ChiefArbiter,
+  'BRA' AS Federation,
   0 AS Type,
   2 AS TimeFormat,
   1 AS IsRated,

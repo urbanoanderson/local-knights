@@ -49,6 +49,24 @@ namespace LocalKnights.Common.Models
         public string? Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the city where the competition is held.
+        /// </summary>
+        [StringLength(100)]
+        public string? City { get; set; }
+
+        /// <summary>
+        /// Gets or sets the competition's chief arbiter.
+        /// </summary>
+        [StringLength(100)]
+        public string? ChiefArbiter { get; set; }
+
+        /// <summary>
+        /// Gets or sets the three-character federation code.
+        /// </summary>
+        [StringLength(3)]
+        public string? Federation { get; set; }
+
+        /// <summary>
         /// Gets or sets the type of competition (Swiss, RoundRobin, Knockout, or Match).
         /// </summary>
         public CompetitionType Type { get; set; }

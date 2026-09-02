@@ -74,6 +74,21 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         }
 
+        public string City { get; set; } = string.Empty;
+
+        public string ChiefArbiter { get; set; } = string.Empty;
+
+        private string _federation = string.Empty;
+        public string Federation
+        {
+            get => _federation;
+            set
+            {
+                _federation = value?.ToUpperInvariant() ?? string.Empty;
+                OnPropertyChanged(nameof(Federation));
+            }
+        }
+
         private CompetitionType _type;
 
         /// <summary>
@@ -202,6 +217,13 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public string DescriptionLabel => LocalizationHelper.GetString("DescriptionLabel");
 
+        public string CityLabel => LocalizationHelper.GetString("CityLabel");
+        public string ChiefArbiterLabel => LocalizationHelper.GetString("ChiefArbiterLabel");
+        public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
+        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
+        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
+        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
+
         /// <summary>
         /// Gets the localized label for the competition type selection.
         /// </summary>
@@ -253,7 +275,10 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 CreatedAt = _timeProvider.GetUtcNow().DateTime,
                 Title = validatedTitle,
-                Description = Description,
+                Description = NormalizeOptionalValue(Description),
+                City = NormalizeOptionalValue(City),
+                ChiefArbiter = NormalizeOptionalValue(ChiefArbiter),
+                Federation = NormalizeOptionalValue(Federation),
                 Type = Type,
                 TimeFormat = TimeFormat,
                 IsRated = IsRated,
@@ -264,6 +289,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             await _competitionService.CreateCompetitionAsync(competition);
             _pageNavigationService.HardNavigateTo<CompetitionsViewModel>();
+        }
+
+        private static string? NormalizeOptionalValue(string? value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         }
 
         private bool TryValidateCompetitionTitle(string? title, out string validatedTitle)
@@ -311,6 +341,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(CreateCompetition));
             OnPropertyChanged(nameof(TitleLabel));
             OnPropertyChanged(nameof(DescriptionLabel));
+            OnPropertyChanged(nameof(CityLabel));
+            OnPropertyChanged(nameof(ChiefArbiterLabel));
+            OnPropertyChanged(nameof(FederationLabel));
+            OnPropertyChanged(nameof(CityTooltip));
+            OnPropertyChanged(nameof(ChiefArbiterTooltip));
+            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(TimeFormatLabel));
             OnPropertyChanged(nameof(RatedLabel));
             OnPropertyChanged(nameof(TypeLabel));

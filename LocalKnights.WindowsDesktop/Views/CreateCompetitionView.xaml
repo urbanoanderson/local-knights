@@ -31,6 +31,15 @@
                         <TextBlock Text="{Binding DescriptionLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding Description}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="100" />
 
+                        <TextBlock Text="{Binding CityLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding City}" MaxLength="100" ToolTip="{Binding CityTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+
+                        <TextBlock Text="{Binding ChiefArbiterLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding ChiefArbiter}" MaxLength="100" ToolTip="{Binding ChiefArbiterTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+
+                        <TextBlock Text="{Binding FederationLabel}" Style="{DynamicResource LabelText}" />
+                        <TextBox Text="{Binding Federation, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" CharacterCasing="Upper" ToolTip="{Binding FederationTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+
                         <TextBlock Text="{Binding TimeFormatLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding TimeFormatOptions}"
                                   SelectedItem="{Binding TimeFormat}"

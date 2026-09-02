@@ -418,6 +418,24 @@
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="ChiefArbiterLabel" xml:space="preserve">
+    <value>Chief Arbiter</value>
+  </data>
+  <data name="FederationLabel" xml:space="preserve">
+    <value>Federation</value>
+  </data>
+  <data name="CityTooltip" xml:space="preserve">
+    <value>City where the competition is held (max 100 characters).</value>
+  </data>
+  <data name="ChiefArbiterTooltip" xml:space="preserve">
+    <value>Name of the competition's chief arbiter (max 100 characters).</value>
+  </data>
+  <data name="FederationTooltip" xml:space="preserve">
+    <value>Three-letter federation code, such as USA or BRA.</value>
+  </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
     <value>Confirm Password</value>
   </data>

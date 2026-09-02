@@ -56,6 +56,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string StandingsTabHeader => LocalizationHelper.GetString("StandingsTabHeader");
         public string TitleLabel => LocalizationHelper.GetString("TitleLabel");
         public string DescriptionLabel => LocalizationHelper.GetString("DescriptionLabel");
+        public string CityLabel => LocalizationHelper.GetString("CityLabel");
+        public string ChiefArbiterLabel => LocalizationHelper.GetString("ChiefArbiterLabel");
+        public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
+        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
+        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
+        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
         public string DisplayNameLabel => LocalizationHelper.GetString("DisplayNameLabel");
         public string IdentifierNameLabel => LocalizationHelper.GetString("IdentifierNameLabel");
         public string TypeLabel => LocalizationHelper.GetString("TypeLabel");
@@ -215,6 +221,44 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                     OnPropertyChanged(nameof(CompetitionDescription));
                 }
             }
+        }
+
+        public string? CompetitionCity
+        {
+            get => Competition?.City;
+            set => UpdateCompetitionMetadata(value, Competition?.City, normalizedValue => Competition.City = normalizedValue, nameof(CompetitionCity));
+        }
+
+        public string? CompetitionChiefArbiter
+        {
+            get => Competition?.ChiefArbiter;
+            set => UpdateCompetitionMetadata(value, Competition?.ChiefArbiter, normalizedValue => Competition.ChiefArbiter = normalizedValue, nameof(CompetitionChiefArbiter));
+        }
+
+        public string? CompetitionFederation
+        {
+            get => Competition?.Federation;
+            set
+            {
+                string? normalizedValue = NormalizeOptionalValue(value)?.ToUpperInvariant();
+                UpdateCompetitionMetadata(normalizedValue, Competition?.Federation, federation => Competition.Federation = federation, nameof(CompetitionFederation));
+            }
+        }
+
+        private void UpdateCompetitionMetadata(string? value, string? currentValue, Action<string?> update, string propertyName)
+        {
+            string? normalizedValue = NormalizeOptionalValue(value);
+            if (Competition != null && currentValue != normalizedValue)
+            {
+                update(normalizedValue);
+                Competition = _competitionService.UpdateCompetitionAsync(Competition).GetAwaiter().GetResult();
+                OnPropertyChanged(propertyName);
+            }
+        }
+
+        private static string? NormalizeOptionalValue(string? value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         }
 
         public bool IsCompetitionRated
@@ -480,6 +524,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         {
             OnPropertyChanged(nameof(CompetitionTitle));
             OnPropertyChanged(nameof(CompetitionDescription));
+            OnPropertyChanged(nameof(CompetitionCity));
+            OnPropertyChanged(nameof(CompetitionChiefArbiter));
+            OnPropertyChanged(nameof(CompetitionFederation));
             OnPropertyChanged(nameof(IsCompetitionRated));
             OnPropertyChanged(nameof(CompetitionNumberOfRounds));
             OnPropertyChanged(nameof(IsCompetitionDoubleRoundRobin));
@@ -903,6 +950,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(StandingsTabHeader));
             OnPropertyChanged(nameof(TitleLabel));
             OnPropertyChanged(nameof(DescriptionLabel));
+            OnPropertyChanged(nameof(CityLabel));
+            OnPropertyChanged(nameof(ChiefArbiterLabel));
+            OnPropertyChanged(nameof(FederationLabel));
+            OnPropertyChanged(nameof(CityTooltip));
+            OnPropertyChanged(nameof(ChiefArbiterTooltip));
+            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(IdentifierNameLabel));
             OnPropertyChanged(nameof(TypeLabel));

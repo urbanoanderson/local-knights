@@ -418,6 +418,24 @@
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Описание</value>
   </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="ChiefArbiterLabel" xml:space="preserve">
+    <value>Главный арбитр</value>
+  </data>
+  <data name="FederationLabel" xml:space="preserve">
+    <value>Федерация</value>
+  </data>
+  <data name="CityTooltip" xml:space="preserve">
+    <value>Город проведения соревнования (не более 100 символов).</value>
+  </data>
+  <data name="ChiefArbiterTooltip" xml:space="preserve">
+    <value>Имя главного арбитра соревнования (не более 100 символов).</value>
+  </data>
+  <data name="FederationTooltip" xml:space="preserve">
+    <value>Трёхбуквенный код федерации, например RUS или BRA.</value>
+  </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
     <value>Подтверждение пароля</value>
   </data>
