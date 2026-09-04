@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using LocalKnights.Common.Helpers;
 using LocalKnights.Common.Helpers.ChessAlgorithms.Pairing;
 using LocalKnights.Common.Models;
+using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 using LocalKnights.Common.Helpers.ChessAlgorithms.Standings;
 using LocalKnights.WindowsDesktop.Converters;
@@ -27,6 +28,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private readonly ICompetitionService _competitionService;
         private readonly IPlayerService _playerService;
         private readonly IGameService _gameService;
+        private readonly IFileSystemService _fileSystemService;
         private readonly IMessageBoxService _messageBoxService;
         private readonly TimeProvider _timeProvider;
 
@@ -34,6 +36,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Commands
         /// </summary>
         public ICommand ExportCommand { get; }
+        public ICommand ExportToTrf16Command { get; }
         public ICommand DeleteCommand { get; }
         public ICommand BackCommand { get; }
         public ICommand AddParticipantCommand { get; }
@@ -394,6 +397,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <param name="competitionService">The competition service.</param>
         /// <param name="playerService">The player service.</param>
         /// <param name="gameService">The game service.</param>
+        /// <param name="fileSystemService">The file system service.</param>
         /// <param name="messageBoxService">The message box service.</param>
         /// <param name="timeProvider">The time provider.</param>
         public CompetitionViewModel(
@@ -403,6 +407,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             ICompetitionService competitionService,
             IPlayerService playerService,
             IGameService gameService,
+            IFileSystemService fileSystemService,
             IMessageBoxService messageBoxService,
             TimeProvider timeProvider)
         {
@@ -412,12 +417,14 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _competitionService = competitionService;
             _playerService = playerService;
             _gameService = gameService;
+            _fileSystemService = fileSystemService;
             _messageBoxService = messageBoxService;
             _timeProvider = timeProvider;
 
             BackCommand = new RelayCommand(execute: _ => _pageNavigationService.NavigateBack());
             DeleteCommand = new RelayCommand(execute: async _ => await DeleteCompetitionAsync());
             ExportCommand = new RelayCommand(execute: async _ => await ExportCompetitionAsync());
+            ExportToTrf16Command = new RelayCommand(execute: async _ => await ExportCompetitionToTrf16Async());
             AddParticipantCommand = new RelayCommand(execute: async parameter => await AddParticipantAsync(parameter), canExecute: _ => IsParticipantEditEnabled);
             RemoveParticipantCommand = new RelayCommand(execute: RemoveParticipant, canExecute: _ => IsParticipantEditEnabled);
             OpenParticipantPlayerCommand = new RelayCommand(
@@ -785,7 +792,52 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                         .ToList();
                 }
 
-                await Task.Run(() => ExportDataHelper.ExportCompetitionToExcel(Competition, dlg.FileName, standingsToExport, _playerService, _timeProvider));
+                await Task.Run(() => ExportToExcelHelper.ExportCompetitionToExcel(Competition, dlg.FileName, standingsToExport, _playerService, _timeProvider));
+                _messageBoxService.ShowInfo(LocalizationHelper.GetString("ExportSuccessMessage"), LocalizationHelper.GetString("ExportCompleteTitle"));
+            }
+            catch (Exception ex)
+            {
+                _messageBoxService.ShowError(LocalizationHelper.GetString("ExportFailedMessage") + "\n" + ex.Message, LocalizationHelper.GetString("ErrorTitle"));
+            }
+        }
+
+        /// <summary>
+        /// Exports a completed competition to a user-selected TRF16 file.
+        /// </summary>
+        private async Task ExportCompetitionToTrf16Async()
+        {
+            if (Competition == null)
+            {
+                _messageBoxService.ShowError(LocalizationHelper.GetString("NoCompetitionSelectedMessage"), LocalizationHelper.GetString("ErrorTitle"));
+                return;
+            }
+
+            if (Competition.State != CompetitionState.Completed)
+            {
+                _messageBoxService.ShowWarning(
+                    LocalizationHelper.GetString("TrfExportCompletedCompetitionOnlyMessage"),
+                    ExportButtonLabel);
+                return;
+            }
+
+            Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = Competition.Title,
+                DefaultExt = ".trf",
+                Filter = LocalizationHelper.GetString("TrfExportFileDialogFilter"),
+                AddExtension = true,
+            };
+
+            bool? result = dialog.ShowDialog();
+            if (result != true || string.IsNullOrWhiteSpace(dialog.FileName))
+            {
+                return;
+            }
+
+            try
+            {
+                string trfContent = await ExportToTRFHelper.ExportCompetitionToTrf16(Competition, _playerService);
+                _fileSystemService.WriteAllText(dialog.FileName, trfContent);
                 _messageBoxService.ShowInfo(LocalizationHelper.GetString("ExportSuccessMessage"), LocalizationHelper.GetString("ExportCompleteTitle"));
             }
             catch (Exception ex)

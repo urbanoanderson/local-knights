@@ -8,7 +8,7 @@ using LocalKnights.WindowsDesktop.DisplayObjects;
 
 namespace LocalKnights.WindowsDesktop.Helpers
 {
-    public static class ExportDataHelper
+    public static class ExportToExcelHelper
     {
         private static readonly DomainEnumStringConverter DomainEnumStringConverter = new DomainEnumStringConverter();
 

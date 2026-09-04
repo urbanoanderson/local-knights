@@ -487,6 +487,12 @@
   <data name="ExportToTrf16Label" xml:space="preserve">
     <value>Экспорт в TRF 16</value>
   </data>
+  <data name="TrfExportFileDialogFilter" xml:space="preserve">
+    <value>Файлы TRF (*.trf)|*.trf</value>
+  </data>
+  <data name="TrfExportCompletedCompetitionOnlyMessage" xml:space="preserve">
+    <value>Только завершённые турниры можно экспортировать в формате TRF.</value>
+  </data>
   <data name="ExportFileDialogFilter" xml:space="preserve">
     <value>Файлы Excel (*.xlsx)|*.xlsx</value>
   </data>

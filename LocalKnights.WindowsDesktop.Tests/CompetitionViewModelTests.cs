@@ -2,8 +2,10 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using Microsoft.Extensions.Logging.Abstractions;
 using LocalKnights.Common.Models;
+using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 using LocalKnights.WindowsDesktop.DisplayObjects;
+using LocalKnights.WindowsDesktop.Helpers;
 using LocalKnights.WindowsDesktop.Services;
 using LocalKnights.WindowsDesktop.ViewModels;
 using Moq;
@@ -31,6 +33,7 @@ public sealed class CompetitionViewModelTests
             competitionService: competitionServiceMock.Object,
             playerService: CreatePlayerServiceMock().Object,
             gameService: CreateGameServiceMock().Object,
+            fileSystemService: CreateFileSystemServiceMock().Object,
             messageBoxService: CreateMessageBoxServiceMock(CustomMessageBoxResult.OK).Object,
             timeProvider: TimeProvider.System);
         SetCompetition(viewModel, competition);
@@ -71,6 +74,7 @@ public sealed class CompetitionViewModelTests
             competitionService: competitionServiceMock.Object,
             playerService: CreatePlayerServiceMock().Object,
             gameService: CreateGameServiceMock().Object,
+            fileSystemService: CreateFileSystemServiceMock().Object,
             messageBoxService: messageBoxServiceMock.Object,
             timeProvider: TimeProvider.System);
 
@@ -104,6 +108,40 @@ public sealed class CompetitionViewModelTests
             Times.Once);
 
         competitionServiceMock.Verify(service => service.StartCompetitionAsync(competition), Times.Once);
+    }
+
+    [Fact]
+    public void ExportToTrf16Command_IncompleteCompetition_ShowsWarningWithoutWritingFile()
+    {
+        Competition competition = new()
+        {
+            Id = 42,
+            Title = "Ongoing competition",
+            State = CompetitionState.Ongoing,
+            TimeFormat = TimeFormat.Blitz,
+        };
+        Mock<IMessageBoxService> messageBoxServiceMock = CreateMessageBoxServiceMock(CustomMessageBoxResult.OK);
+        Mock<IFileSystemService> fileSystemServiceMock = CreateFileSystemServiceMock();
+        CompetitionViewModel viewModel = new CompetitionViewModel(
+            logger: NullLogger.Instance,
+            pageNavigationService: CreatePageNavigationServiceMock().Object,
+            clubService: CreateClubServiceMock().Object,
+            competitionService: CreateCompetitionServiceMock(competition).Object,
+            playerService: CreatePlayerServiceMock().Object,
+            gameService: CreateGameServiceMock().Object,
+            fileSystemService: fileSystemServiceMock.Object,
+            messageBoxService: messageBoxServiceMock.Object,
+            timeProvider: TimeProvider.System);
+        SetCompetition(viewModel, competition);
+
+        viewModel.ExportToTrf16Command.Execute(null);
+
+        messageBoxServiceMock.Verify(
+            service => service.ShowWarning(
+                LocalizationHelper.GetString("TrfExportCompletedCompetitionOnlyMessage"),
+                LocalizationHelper.GetString("ExportButtonLabel")),
+            Times.Once);
+        fileSystemServiceMock.VerifyNoOtherCalls();
     }
 
     private static void SetCompetition(CompetitionViewModel viewModel, Competition competition)
@@ -144,6 +182,11 @@ public sealed class CompetitionViewModelTests
         mock.Setup(service => service.ShowInfo(It.IsAny<string>(), It.IsAny<string>())).Returns(nextResult);
         mock.Setup(service => service.ShowWarning(It.IsAny<string>(), It.IsAny<string>())).Returns(nextResult);
         return mock;
+    }
+
+    private static Mock<IFileSystemService> CreateFileSystemServiceMock()
+    {
+        return new Mock<IFileSystemService>();
     }
 
     private static Mock<IPageNavigationService> CreatePageNavigationServiceMock()

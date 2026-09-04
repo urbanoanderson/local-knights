@@ -547,7 +547,7 @@
                                            ButtonStyle="{DynamicResource SuccessButton}"
                                            Margin="{StaticResource SpacingLargeRight}">
                 <controls:CustomDropDownButtonItem Content="{Binding ExportToExcelLabel}" Command="{Binding ExportCommand}" />
-                <controls:CustomDropDownButtonItem Content="{Binding ExportToTrf16Label}" />
+                <controls:CustomDropDownButtonItem Content="{Binding ExportToTrf16Label}" Command="{Binding ExportToTrf16Command}" />
             </controls:CustomDropDownButton>
             <Button Content="{Binding DeleteButtonLabel}" Command="{Binding DeleteCommand}" Style="{DynamicResource DangerButton}" />
         </StackPanel>
