@@ -206,7 +206,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                         return;
                     }
 
-                    Competition.Title = validatedTitle;
+                    Competition.Title = value;
                     Competition = _competitionService.UpdateCompetitionAsync(Competition).GetAwaiter().GetResult();
                     OnPropertyChanged(nameof(CompetitionTitle));
                     OnPropertyChanged(nameof(CompetitionPage));

@@ -349,34 +349,13 @@ public static class ExportToTRFHelper
     {
         builder.Append("132");
 
-        int roundNumber = 0;
         foreach (DateTime roundDate in roundDates)
         {
-            int fieldStartIndex = 91 + (roundNumber * 10);
-            if (builder.Length > 0)
-            {
-                int currentLineLength = GetCurrentLineLength(builder);
-                builder.Append(' ', fieldStartIndex - currentLineLength);
-            }
-
-            builder.Append(roundDate.ToString("yy/MM/dd", CultureInfo.InvariantCulture));
-            roundNumber++;
+            builder.Append(' ');
+            builder.Append(roundDate.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture));
         }
 
         builder.Append(RecordTerminator);
-    }
-
-    private static int GetCurrentLineLength(StringBuilder builder)
-    {
-        for (int index = builder.Length - 1; index >= 0; index--)
-        {
-            if (builder[index] == RecordTerminator)
-            {
-                return builder.Length - index - 1;
-            }
-        }
-
-        return builder.Length;
     }
 
     private static void AppendPlayer(StringBuilder builder, Trf16Player player)
@@ -386,7 +365,7 @@ public static class ExportToTRFHelper
         builder.Append(Fit(FormatNumber(player.StartingRankNumber), 4, true));
         builder.Append(' ');
         builder.Append(Fit(player.Sex, 1));
-        builder.Append(Fit(player.Title, 3));
+        builder.Append(Fit(player.Title, 3, true));
         builder.Append(' ');
         builder.Append(Fit(player.Name, 33));
         builder.Append(' ');
@@ -452,7 +431,9 @@ public static class ExportToTRFHelper
 
     private static string FormatOpponent(int? opponentStartingRankNumber)
     {
-        return opponentStartingRankNumber?.ToString("0000", CultureInfo.InvariantCulture) ?? "0000";
+        return !opponentStartingRankNumber.HasValue || opponentStartingRankNumber.Value == 0
+            ? "0000"
+            : opponentStartingRankNumber.Value.ToString(CultureInfo.InvariantCulture);
     }
 }
 

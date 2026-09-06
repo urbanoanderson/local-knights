@@ -124,28 +124,27 @@ public sealed class ExportToTRFHelperTests
         Assert.Contains("082 0", lines);
         Assert.Contains("092 Swiss-System Dutch", lines);
         Assert.Contains("102 Arbiter Name", lines);
-        Assert.Equal("26/04/08", roundDatesLine.Substring(91, 8));
-        Assert.Equal("26/04/08", roundDatesLine.Substring(101, 8));
+        Assert.Equal("132 2026/04/08 2026/04/08", roundDatesLine);
 
         Assert.Equal("   1", alphaLine.Substring(4, 4));
         Assert.Equal("   ", alphaLine.Substring(10, 3));
         Assert.Equal("   0", alphaLine.Substring(48, 4));
         Assert.Equal(" 1.5", alphaLine.Substring(80, 4));
         Assert.Equal("   1", alphaLine.Substring(85, 4));
-        Assert.Equal("0002", alphaLine.Substring(91, 4));
+        Assert.Equal("   2", alphaLine.Substring(91, 4));
         Assert.Equal('w', alphaLine[96]);
         Assert.Equal('1', alphaLine[98]);
         Assert.Equal("0000", alphaLine.Substring(101, 4));
         Assert.Equal('H', alphaLine[108]);
 
         Assert.Equal("   2", zuluLine.Substring(4, 4));
-        Assert.Equal("GM ", zuluLine.Substring(10, 3));
+        Assert.Equal(" GM", zuluLine.Substring(10, 3));
         Assert.Equal("2469", zuluLine.Substring(48, 4));
         Assert.Equal("    1234567", zuluLine.Substring(57, 11));
         Assert.Equal("1990/02/03", zuluLine.Substring(69, 10));
         Assert.Equal('b', zuluLine[96]);
         Assert.Equal('0', zuluLine[98]);
-        Assert.Equal("0003", zuluLine.Substring(101, 4));
+        Assert.Equal("   3", zuluLine.Substring(101, 4));
         Assert.Equal('w', zuluLine[106]);
         Assert.Equal('=', zuluLine[108]);
 
@@ -155,7 +154,7 @@ public sealed class ExportToTRFHelperTests
         Assert.Equal("   0", deletedLine.Substring(48, 4));
         Assert.Equal("           ", deletedLine.Substring(57, 11));
         Assert.Equal('H', deletedLine[98]);
-        Assert.Equal("0002", deletedLine.Substring(101, 4));
+        Assert.Equal("   2", deletedLine.Substring(101, 4));
         Assert.Equal('b', deletedLine[106]);
         Assert.Equal('=', deletedLine[108]);
         playerService.Verify(
@@ -346,6 +345,33 @@ public sealed class ExportToTRFHelperTests
     }
 
     /// <summary>
+    /// Verifies two-character titles are right-aligned while three-character titles fill the TRF title field.
+    /// </summary>
+    [Theory]
+    [InlineData("m", "GM", "m GM")]
+    [InlineData("w", "WGM", "wWGM")]
+    public void ExportCompetitionToTrf16_WithTitle_UsesReferenceTitleLayout(
+        string sex,
+        string title,
+        string expectedLayout)
+    {
+        Trf16Player player = new Trf16Player
+        {
+            StartingRankNumber = 1,
+            Sex = sex,
+            Title = title,
+            Name = "Player",
+        };
+
+        string result = ExportToTRFHelper.ExportCompetitionToTrf16(new Trf16Tournament(), [player]);
+        string playerLine = Assert.Single(
+            result.Split('\r', StringSplitOptions.RemoveEmptyEntries),
+            line => line.StartsWith("001", StringComparison.Ordinal));
+
+        Assert.Equal(expectedLayout, playerLine.Substring(9, 4));
+    }
+
+    /// <summary>
     /// Verifies tournament records, player columns, round blocks, and CR terminators.
     /// </summary>
     [Fact]
@@ -407,14 +433,13 @@ public sealed class ExportToTRFHelperTests
         Assert.Contains("042 2026/04/08", lines);
         Assert.Contains("052 2026/04/15", lines);
         Assert.Equal(2, lines.Count(line => line.StartsWith("112 ", StringComparison.Ordinal)));
-        Assert.Equal("26/04/08", roundDatesLine.Substring(91, 8));
-        Assert.Equal("26/04/15", roundDatesLine.Substring(101, 8));
+        Assert.Equal("132 2026/04/08 2026/04/15", roundDatesLine);
 
         Assert.Equal(109, playerLine.Length);
         Assert.Equal("001", playerLine[..3]);
         Assert.Equal("   2", playerLine.Substring(4, 4));
         Assert.Equal('m', playerLine[9]);
-        Assert.Equal("FM ", playerLine.Substring(10, 3));
+        Assert.Equal(" FM", playerLine.Substring(10, 3));
         Assert.Equal("Doe, John", playerLine.Substring(14, 33).TrimEnd());
         Assert.Equal("2150", playerLine.Substring(48, 4));
         Assert.Equal("ESP", playerLine.Substring(53, 3));
@@ -422,7 +447,7 @@ public sealed class ExportToTRFHelperTests
         Assert.Equal("1990/02/03", playerLine.Substring(69, 10));
         Assert.Equal(" 1.5", playerLine.Substring(80, 4));
         Assert.Equal("   1", playerLine.Substring(85, 4));
-        Assert.Equal("0001", playerLine.Substring(91, 4));
+        Assert.Equal("   1", playerLine.Substring(91, 4));
         Assert.Equal('w', playerLine[96]);
         Assert.Equal('1', playerLine[98]);
         Assert.Equal("0000", playerLine.Substring(101, 4));

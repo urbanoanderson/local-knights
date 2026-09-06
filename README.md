@@ -34,9 +34,10 @@
 ### Organize Competitive Play 🏆
 
 - Support for both [Glicko-2](https://en.wikipedia.org/wiki/Glicko_rating_system#Glicko-2_algorithm) and [Elo](https://en.wikipedia.org/wiki/Elo_rating_system) rating systems. Update ratings as games and tournament results are recorded
-- Record individual Games (rated or unrated) and even store [PNG](https://en.wikipedia.org/wiki/Portable_Game_Notation) notations for them if needed.
+- Record individual Games (rated or unrated) and even store [PNG](https://en.wikipedia.org/wiki/Portable_Game_Notation) notations for them if needed
 - Organize [Swiss](https://en.wikipedia.org/wiki/Swiss-system_tournament), [Round-Robin](https://en.wikipedia.org/wiki/Round-robin_tournament), [Knockout](https://en.wikipedia.org/wiki/Single-elimination_tournament) and two-player Match competitions. Tracking rounds, pairings, standings and results in one place
 - Generate swiss pairings using FIDE-approved pairing logic via [Chesspairing](https://github.com/gnutterts/chesspairing/) library
+- Export competitions in user-friedly Excel format or FIDE official TRF format
 
 ### Modern Desktop App Experience 💻
 
