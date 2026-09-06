@@ -1,5 +1,6 @@
 using LocalKnights.Common.Helpers.ChessAlgorithms.Standings;
 using LocalKnights.Common.Models;
+using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 using LocalKnights.WindowsDesktop.Helpers;
 using Moq;
@@ -79,6 +80,7 @@ public sealed class ExportToTRFHelperTests
                 IdentifierName = "alpha",
                 DisplayName = "Alpha Player",
                 ChessTitle = ChessTitle.NM,
+                FideId = " ",
             },
             ["zulu"] = new Player
             {
@@ -93,8 +95,19 @@ public sealed class ExportToTRFHelperTests
         playerService
             .Setup(service => service.GetPlayerByIdentifierAsync(It.IsAny<string>()))
             .ReturnsAsync((string identifier) => players.GetValueOrDefault(identifier));
+        Mock<IFideApiService> fideApiService = CreateFideApiServiceMock();
+        fideApiService
+            .Setup(service => service.GetPlayerRatingsAsync("1234567"))
+            .ReturnsAsync(new Dictionary<TimeFormat, double>
+            {
+                [TimeFormat.Classical] = 2468.6d,
+            });
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
+            competition,
+            new ClubPreferences(),
+            playerService.Object,
+            fideApiService.Object);
         string[] lines = result.Split('\r', StringSplitOptions.RemoveEmptyEntries);
         string roundDatesLine = Assert.Single(lines, line => line.StartsWith("132", StringComparison.Ordinal));
         string alphaLine = FindPlayerLine(lines, "Alpha Player");
@@ -107,7 +120,7 @@ public sealed class ExportToTRFHelperTests
         Assert.Contains("042 2026/04/01", lines);
         Assert.Contains("052 2026/04/08", lines);
         Assert.Contains("062 3", lines);
-        Assert.Contains("072 0", lines);
+        Assert.Contains("072 1", lines);
         Assert.Contains("082 0", lines);
         Assert.Contains("092 Swiss-System Dutch", lines);
         Assert.Contains("102 Arbiter Name", lines);
@@ -116,7 +129,7 @@ public sealed class ExportToTRFHelperTests
 
         Assert.Equal("   1", alphaLine.Substring(4, 4));
         Assert.Equal("   ", alphaLine.Substring(10, 3));
-        Assert.Equal("2200", alphaLine.Substring(48, 4));
+        Assert.Equal("   0", alphaLine.Substring(48, 4));
         Assert.Equal(" 1.5", alphaLine.Substring(80, 4));
         Assert.Equal("   1", alphaLine.Substring(85, 4));
         Assert.Equal("0002", alphaLine.Substring(91, 4));
@@ -127,6 +140,7 @@ public sealed class ExportToTRFHelperTests
 
         Assert.Equal("   2", zuluLine.Substring(4, 4));
         Assert.Equal("GM ", zuluLine.Substring(10, 3));
+        Assert.Equal("2469", zuluLine.Substring(48, 4));
         Assert.Equal("    1234567", zuluLine.Substring(57, 11));
         Assert.Equal("1990/02/03", zuluLine.Substring(69, 10));
         Assert.Equal('b', zuluLine[96]);
@@ -138,7 +152,7 @@ public sealed class ExportToTRFHelperTests
         Assert.Equal("   3", deletedLine.Substring(4, 4));
         Assert.Equal(' ', deletedLine[9]);
         Assert.Equal("deleted", deletedLine.Substring(14, 33).TrimEnd());
-        Assert.Equal("1801", deletedLine.Substring(48, 4));
+        Assert.Equal("   0", deletedLine.Substring(48, 4));
         Assert.Equal("           ", deletedLine.Substring(57, 11));
         Assert.Equal('H', deletedLine[98]);
         Assert.Equal("0002", deletedLine.Substring(101, 4));
@@ -147,6 +161,8 @@ public sealed class ExportToTRFHelperTests
         playerService.Verify(
             service => service.GetPlayerByIdentifierAsync(It.IsAny<string>()),
             Times.Exactly(3));
+        fideApiService.Verify(service => service.GetPlayerRatingsAsync("1234567"), Times.Once);
+        fideApiService.VerifyNoOtherCalls();
     }
 
     /// <summary>
@@ -173,7 +189,11 @@ public sealed class ExportToTRFHelperTests
         };
         Mock<IPlayerService> playerService = new();
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
+            competition,
+            new ClubPreferences(),
+            playerService.Object,
+            CreateFideApiServiceMock().Object);
 
         Assert.Contains($"092 {expectedDescription}\r", result, StringComparison.Ordinal);
         Assert.Contains("022 Unknown\r", result, StringComparison.Ordinal);
@@ -203,7 +223,8 @@ public sealed class ExportToTRFHelperTests
         string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
             competition,
             clubPreferences,
-            new Mock<IPlayerService>().Object);
+            new Mock<IPlayerService>().Object,
+            CreateFideApiServiceMock().Object);
 
         Assert.Contains("022 Recife\r", result, StringComparison.Ordinal);
         Assert.Contains("032 BRA\r", result, StringComparison.Ordinal);
@@ -223,11 +244,17 @@ public sealed class ExportToTRFHelperTests
             TimeFormat = TimeFormat.Rapid,
         };
         Mock<IPlayerService> playerService = new();
+        Mock<IFideApiService> fideApiService = CreateFideApiServiceMock();
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
+            competition,
+            new ClubPreferences(),
+            playerService.Object,
+            fideApiService.Object);
 
         Assert.Empty(result);
         playerService.VerifyNoOtherCalls();
+        fideApiService.VerifyNoOtherCalls();
     }
 
     /// <summary>
@@ -260,12 +287,62 @@ public sealed class ExportToTRFHelperTests
             .Setup(service => service.GetPlayerByIdentifierAsync("player"))
             .ReturnsAsync(player);
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
+            competition,
+            new ClubPreferences(),
+            playerService.Object,
+            CreateFideApiServiceMock().Object);
         string playerLine = FindPlayerLine(
             result.Split('\r', StringSplitOptions.RemoveEmptyEntries),
             "Player");
 
         Assert.Equal(expectedSexCode, playerLine[9]);
+    }
+
+    /// <summary>
+    /// Verifies a player is unrated when FIDE has no rating for the competition time format.
+    /// </summary>
+    [Fact]
+    public async Task ExportCompetitionToTrf16_WithoutMatchingFideTimeFormat_UsesZeroRating()
+    {
+        CompetitionParticipant participant = CreateParticipant("player", 2100d);
+        Competition competition = new Competition
+        {
+            Title = "Rapid Tournament",
+            State = CompetitionState.Completed,
+            TimeFormat = TimeFormat.Rapid,
+            CompetitionParticipants = [participant],
+        };
+        Player player = new Player
+        {
+            IdentifierName = "player",
+            DisplayName = "Player",
+            FideId = "7654321",
+        };
+        Mock<IPlayerService> playerService = new();
+        playerService
+            .Setup(service => service.GetPlayerByIdentifierAsync("player"))
+            .ReturnsAsync(player);
+        Mock<IFideApiService> fideApiService = CreateFideApiServiceMock();
+        fideApiService
+            .Setup(service => service.GetPlayerRatingsAsync("7654321"))
+            .ReturnsAsync(new Dictionary<TimeFormat, double>
+            {
+                [TimeFormat.Blitz] = 1900d,
+            });
+
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
+            competition,
+            new ClubPreferences(),
+            playerService.Object,
+            fideApiService.Object);
+        string playerLine = FindPlayerLine(
+            result.Split('\r', StringSplitOptions.RemoveEmptyEntries),
+            "Player");
+
+        Assert.Contains("072 0\r", result, StringComparison.Ordinal);
+        Assert.Equal("   0", playerLine.Substring(48, 4));
+        fideApiService.Verify(service => service.GetPlayerRatingsAsync("7654321"), Times.Once);
     }
 
     /// <summary>
@@ -404,6 +481,14 @@ public sealed class ExportToTRFHelperTests
             ParticipantIdentifierName = identifierName,
             OldRating = new ChessRating { Rating = rating },
         };
+    }
+
+    private static Mock<IFideApiService> CreateFideApiServiceMock()
+    {
+        Mock<IFideApiService> mock = new();
+        mock.Setup(service => service.GetPlayerRatingsAsync(It.IsAny<string>()))
+            .ReturnsAsync(new Dictionary<TimeFormat, double>());
+        return mock;
     }
 
     private static CompetitionStandingEntry CreateStanding(

@@ -32,6 +32,7 @@ public sealed class CompetitionViewModelTests
             clubService: CreateClubServiceMock().Object,
             competitionService: competitionServiceMock.Object,
             playerService: CreatePlayerServiceMock().Object,
+            fideApiService: CreateFideApiServiceMock().Object,
             gameService: CreateGameServiceMock().Object,
             fileSystemService: CreateFileSystemServiceMock().Object,
             messageBoxService: CreateMessageBoxServiceMock(CustomMessageBoxResult.OK).Object,
@@ -73,6 +74,7 @@ public sealed class CompetitionViewModelTests
             clubService: CreateClubServiceMock().Object,
             competitionService: competitionServiceMock.Object,
             playerService: CreatePlayerServiceMock().Object,
+            fideApiService: CreateFideApiServiceMock().Object,
             gameService: CreateGameServiceMock().Object,
             fileSystemService: CreateFileSystemServiceMock().Object,
             messageBoxService: messageBoxServiceMock.Object,
@@ -128,6 +130,7 @@ public sealed class CompetitionViewModelTests
             clubService: CreateClubServiceMock().Object,
             competitionService: CreateCompetitionServiceMock(competition).Object,
             playerService: CreatePlayerServiceMock().Object,
+            fideApiService: CreateFideApiServiceMock().Object,
             gameService: CreateGameServiceMock().Object,
             fileSystemService: fileSystemServiceMock.Object,
             messageBoxService: messageBoxServiceMock.Object,
@@ -187,6 +190,14 @@ public sealed class CompetitionViewModelTests
     private static Mock<IFileSystemService> CreateFileSystemServiceMock()
     {
         return new Mock<IFileSystemService>();
+    }
+
+    private static Mock<IFideApiService> CreateFideApiServiceMock()
+    {
+        Mock<IFideApiService> mock = new();
+        mock.Setup(service => service.GetPlayerRatingsAsync(It.IsAny<string>()))
+            .ReturnsAsync(new Dictionary<TimeFormat, double>());
+        return mock;
     }
 
     private static Mock<IPageNavigationService> CreatePageNavigationServiceMock()

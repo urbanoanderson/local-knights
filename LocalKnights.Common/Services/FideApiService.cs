@@ -63,7 +63,9 @@ namespace LocalKnights.Common.Services
                 await using System.IO.Stream contentStream = await response.Content.ReadAsStreamAsync();
                 using JsonDocument jsonDocument = await JsonDocument.ParseAsync(contentStream);
                 JsonElement rootElement = jsonDocument.RootElement;
-                if (!rootElement.TryGetProperty("current", out JsonElement currentElement))
+                if (rootElement.ValueKind != JsonValueKind.Object
+                    || !rootElement.TryGetProperty("current", out JsonElement currentElement)
+                    || currentElement.ValueKind != JsonValueKind.Object)
                 {
                     return ratings;
                 }
@@ -94,18 +96,34 @@ namespace LocalKnights.Common.Services
                 return;
             }
 
-            if (!ratingGroupElement.TryGetProperty("rating", out JsonElement ratingElement))
+            if (ratingGroupElement.ValueKind != JsonValueKind.Object
+                || !ratingGroupElement.TryGetProperty("rating", out JsonElement ratingElement))
             {
                 return;
             }
 
-            string? ratingText = ratingElement.GetString();
-            if (string.IsNullOrWhiteSpace(ratingText))
+            double rating;
+            if (ratingElement.ValueKind == JsonValueKind.Number)
             {
-                return;
+                if (!ratingElement.TryGetDouble(out rating))
+                {
+                    return;
+                }
             }
-
-            if (!double.TryParse(ratingText, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out double rating))
+            else if (ratingElement.ValueKind == JsonValueKind.String)
+            {
+                string? ratingText = ratingElement.GetString();
+                if (string.IsNullOrWhiteSpace(ratingText)
+                    || !double.TryParse(
+                        ratingText,
+                        NumberStyles.Float | NumberStyles.AllowThousands,
+                        CultureInfo.InvariantCulture,
+                        out rating))
+                {
+                    return;
+                }
+            }
+            else
             {
                 return;
             }

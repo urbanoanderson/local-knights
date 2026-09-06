@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text;
 using LocalKnights.Common.Helpers.ChessAlgorithms.Standings;
 using LocalKnights.Common.Models;
+using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 
 namespace LocalKnights.WindowsDesktop.Helpers;
@@ -20,11 +21,13 @@ public static class ExportToTRFHelper
     /// <param name="competition">The completed competition to export.</param>
     /// <param name="clubPreferences">The club defaults used when competition metadata is empty.</param>
     /// <param name="playerService">The service used to retrieve current player profile information.</param>
+    /// <param name="fideApiService">The service used to retrieve official FIDE ratings.</param>
     /// <returns>The TRF16 content, or an empty string when the competition is not completed.</returns>
     public static async Task<string> ExportCompetitionToTrf16(
         Competition competition,
         ClubPreferences clubPreferences,
-        IPlayerService playerService)
+        IPlayerService playerService,
+        IFideApiService fideApiService)
     {
         ArgumentNullException.ThrowIfNull(competition);
 
@@ -35,17 +38,30 @@ public static class ExportToTRFHelper
 
         ArgumentNullException.ThrowIfNull(clubPreferences);
         ArgumentNullException.ThrowIfNull(playerService);
+        ArgumentNullException.ThrowIfNull(fideApiService);
 
-        List<(CompetitionParticipant Participant, Player? Player)> participantData = [];
+        List<(CompetitionParticipant Participant, Player? Player, double? FideRating)> participantData = [];
         foreach (CompetitionParticipant participant in competition.CompetitionParticipants)
         {
             Player? player = await playerService
                 .GetPlayerByIdentifierAsync(participant.ParticipantIdentifierName)
                 .ConfigureAwait(false);
-            participantData.Add((participant, player));
+            double? fideRating = null;
+            if (!string.IsNullOrWhiteSpace(player?.FideId))
+            {
+                IDictionary<TimeFormat, double> fideRatings = await fideApiService
+                    .GetPlayerRatingsAsync(player.FideId)
+                    .ConfigureAwait(false);
+                if (fideRatings.TryGetValue(competition.TimeFormat, out double timeFormatRating))
+                {
+                    fideRating = timeFormatRating;
+                }
+            }
+
+            participantData.Add((participant, player, fideRating));
         }
 
-        List<(CompetitionParticipant Participant, Player? Player)> orderedParticipants = participantData
+        List<(CompetitionParticipant Participant, Player? Player, double? FideRating)> orderedParticipants = participantData
             .OrderByDescending(item => item.Participant.OldRating.Rating)
             .ThenBy(
                 item => item.Player?.DisplayName ?? item.Participant.ParticipantIdentifierName,
@@ -62,9 +78,15 @@ public static class ExportToTRFHelper
                 item => item.StartingRank,
                 StringComparer.OrdinalIgnoreCase);
 
-        Trf16Tournament tournament = ConvertTournament(competition, clubPreferences);
+        int numberOfRatedPlayers = orderedParticipants.Count(item => item.FideRating.HasValue);
+        Trf16Tournament tournament = ConvertTournament(competition, clubPreferences, numberOfRatedPlayers);
         List<Trf16Player> players = orderedParticipants
-            .Select(item => ConvertPlayer(competition, item.Participant, item.Player, startingRanks))
+            .Select(item => ConvertPlayer(
+                competition,
+                item.Participant,
+                item.Player,
+                item.FideRating,
+                startingRanks))
             .ToList();
 
         return ExportCompetitionToTrf16(tournament, players);
@@ -125,7 +147,10 @@ public static class ExportToTRFHelper
         AppendRoundDatesRecord(builder, tournament.RoundDates);
     }
 
-    private static Trf16Tournament ConvertTournament(Competition competition, ClubPreferences clubPreferences)
+    private static Trf16Tournament ConvertTournament(
+        Competition competition,
+        ClubPreferences clubPreferences,
+        int numberOfRatedPlayers)
     {
         List<DateTime> roundDates = competition.CompletedAt.HasValue
             ? Enumerable.Repeat(competition.CompletedAt.Value, competition.NumberOfRounds).ToList()
@@ -139,7 +164,7 @@ public static class ExportToTRFHelper
             StartDate = competition.StartedAt,
             EndDate = competition.CompletedAt,
             NumberOfPlayers = competition.CompetitionParticipants.Count,
-            NumberOfRatedPlayers = 0,
+            NumberOfRatedPlayers = numberOfRatedPlayers,
             NumberOfTeams = 0,
             TournamentType = FormatTournamentType(competition),
             ChiefArbiter = GetRequiredValueOrFallback(competition.ChiefArbiter, clubPreferences.DefaultChiefArbiter),
@@ -163,6 +188,7 @@ public static class ExportToTRFHelper
         Competition competition,
         CompetitionParticipant participant,
         Player? player,
+        double? fideRating,
         IReadOnlyDictionary<string, int> startingRanks)
     {
         CompetitionStandingEntry? standing = competition.ComputedStandings?.FirstOrDefault(
@@ -184,7 +210,9 @@ public static class ExportToTRFHelper
             Sex = FormatSex(player?.Gender),
             Title = FormatFideTitle(player?.ChessTitle),
             Name = player?.DisplayName ?? participant.ParticipantIdentifierName,
-            FideRating = (int)Math.Round(participant.OldRating.Rating, MidpointRounding.AwayFromZero),
+            FideRating = fideRating.HasValue
+                ? (int)Math.Round(fideRating.Value, MidpointRounding.AwayFromZero)
+                : 0,
             FideFederation = string.Empty,
             FideNumber = player?.FideId,
             BirthDate = player?.BirthDate,

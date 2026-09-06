@@ -27,6 +27,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private readonly IClubService _clubService;
         private readonly ICompetitionService _competitionService;
         private readonly IPlayerService _playerService;
+        private readonly IFideApiService _fideApiService;
         private readonly IGameService _gameService;
         private readonly IFileSystemService _fileSystemService;
         private readonly IMessageBoxService _messageBoxService;
@@ -396,6 +397,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <param name="clubService">The club service.</param>
         /// <param name="competitionService">The competition service.</param>
         /// <param name="playerService">The player service.</param>
+        /// <param name="fideApiService">The FIDE API service.</param>
         /// <param name="gameService">The game service.</param>
         /// <param name="fileSystemService">The file system service.</param>
         /// <param name="messageBoxService">The message box service.</param>
@@ -406,6 +408,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             IClubService clubService,
             ICompetitionService competitionService,
             IPlayerService playerService,
+            IFideApiService fideApiService,
             IGameService gameService,
             IFileSystemService fileSystemService,
             IMessageBoxService messageBoxService,
@@ -416,6 +419,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _clubService = clubService;
             _competitionService = competitionService;
             _playerService = playerService;
+            _fideApiService = fideApiService;
             _gameService = gameService;
             _fileSystemService = fileSystemService;
             _messageBoxService = messageBoxService;
@@ -836,7 +840,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             try
             {
-                string trfContent = await ExportToTRFHelper.ExportCompetitionToTrf16(Competition, _clubService.CurrentClub, _playerService);
+                string trfContent = await ExportToTRFHelper.ExportCompetitionToTrf16(
+                    Competition,
+                    _clubService.CurrentClub,
+                    _playerService,
+                    _fideApiService);
                 _fileSystemService.WriteAllText(dialog.FileName, trfContent);
                 _messageBoxService.ShowInfo(LocalizationHelper.GetString("ExportSuccessMessage"), LocalizationHelper.GetString("ExportCompleteTitle"));
             }
