@@ -442,8 +442,9 @@ namespace LocalKnights.Common.Services.Database
                 return;
             }
 
-            // Example: Add InitialSeeding property to Competition.
-            //await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "Competitions", "InitialSeeding", "INTEGER", "0");
+            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "City", "TEXT", "''");
+            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "Federation", "TEXT", "''");
+            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "DefaultChiefArbiter", "TEXT", "''");
 
             // Add future migrations here as needed.
             // ...

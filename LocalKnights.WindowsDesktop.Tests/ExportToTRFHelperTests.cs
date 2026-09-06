@@ -94,7 +94,7 @@ public sealed class ExportToTRFHelperTests
             .Setup(service => service.GetPlayerByIdentifierAsync(It.IsAny<string>()))
             .ReturnsAsync((string identifier) => players.GetValueOrDefault(identifier));
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
         string[] lines = result.Split('\r', StringSplitOptions.RemoveEmptyEntries);
         string roundDatesLine = Assert.Single(lines, line => line.StartsWith("132", StringComparison.Ordinal));
         string alphaLine = FindPlayerLine(lines, "Alpha Player");
@@ -173,12 +173,41 @@ public sealed class ExportToTRFHelperTests
         };
         Mock<IPlayerService> playerService = new();
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
 
         Assert.Contains($"092 {expectedDescription}\r", result, StringComparison.Ordinal);
         Assert.Contains("022 Unknown\r", result, StringComparison.Ordinal);
         Assert.Contains("032 Unknown\r", result, StringComparison.Ordinal);
         Assert.Contains("102 Unknown\r", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task ExportCompetitionToTrf16_WithMissingCompetitionMetadata_UsesClubDefaults()
+    {
+        Competition competition = new Competition
+        {
+            Title = "Tournament",
+            City = " ",
+            Federation = null,
+            ChiefArbiter = string.Empty,
+            State = CompetitionState.Completed,
+            TimeFormat = TimeFormat.Blitz,
+        };
+        ClubPreferences clubPreferences = new()
+        {
+            City = "Recife",
+            Federation = "BRA",
+            DefaultChiefArbiter = "Alex Silva",
+        };
+
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(
+            competition,
+            clubPreferences,
+            new Mock<IPlayerService>().Object);
+
+        Assert.Contains("022 Recife\r", result, StringComparison.Ordinal);
+        Assert.Contains("032 BRA\r", result, StringComparison.Ordinal);
+        Assert.Contains("102 Alex Silva\r", result, StringComparison.Ordinal);
     }
 
     /// <summary>
@@ -195,7 +224,7 @@ public sealed class ExportToTRFHelperTests
         };
         Mock<IPlayerService> playerService = new();
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
 
         Assert.Empty(result);
         playerService.VerifyNoOtherCalls();
@@ -231,7 +260,7 @@ public sealed class ExportToTRFHelperTests
             .Setup(service => service.GetPlayerByIdentifierAsync("player"))
             .ReturnsAsync(player);
 
-        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, playerService.Object);
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, new ClubPreferences(), playerService.Object);
         string playerLine = FindPlayerLine(
             result.Split('\r', StringSplitOptions.RemoveEmptyEntries),
             "Player");

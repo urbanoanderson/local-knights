@@ -48,6 +48,21 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         }
 
+        public string City { get; set; } = string.Empty;
+
+        private string _federation = string.Empty;
+        public string Federation
+        {
+            get => _federation;
+            set
+            {
+                _federation = value?.ToUpperInvariant() ?? string.Empty;
+                OnPropertyChanged(nameof(Federation));
+            }
+        }
+
+        public string DefaultChiefArbiter { get; set; } = string.Empty;
+
         private string _password = string.Empty;
         public string Password
         {
@@ -215,6 +230,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string VolatilityLabel => LocalizationHelper.GetString("VolatilityLabel");
         public string ProvisionalGamesLabel => LocalizationHelper.GetString("ProvisionalGamesLabel");
         public string DescriptionLabel => LocalizationHelper.GetString("DescriptionLabel");
+        public string CityLabel => LocalizationHelper.GetString("CityLabel");
+        public string DefaultChiefArbiterLabel => LocalizationHelper.GetString("DefaultChiefArbiterLabel");
+        public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
+        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
+        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
+        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
         public string PasswordLabel => LocalizationHelper.GetString("PasswordLabel");
         public string ConfirmPasswordLabel => LocalizationHelper.GetString("ConfirmPasswordLabel");
         public string SocialMediaLinksLabel => LocalizationHelper.GetString("SocialMediaLinksLabel");
@@ -295,6 +316,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(VolatilityLabel));
             OnPropertyChanged(nameof(ProvisionalGamesLabel));
             OnPropertyChanged(nameof(DescriptionLabel));
+            OnPropertyChanged(nameof(CityLabel));
+            OnPropertyChanged(nameof(DefaultChiefArbiterLabel));
+            OnPropertyChanged(nameof(FederationLabel));
+            OnPropertyChanged(nameof(CityTooltip));
+            OnPropertyChanged(nameof(ChiefArbiterTooltip));
+            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(PasswordLabel));
             OnPropertyChanged(nameof(ConfirmPasswordLabel));
             OnPropertyChanged(nameof(SocialMediaLinksLabel));
@@ -347,6 +374,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                     IdentifierName = IdentifierName.ToLower(),
                     DisplayName = DisplayName,
                     Description = string.IsNullOrWhiteSpace(Description) ? null : Description,
+                    City = NormalizeOptionalValue(City),
+                    Federation = NormalizeOptionalValue(Federation),
+                    DefaultChiefArbiter = NormalizeOptionalValue(DefaultChiefArbiter),
                     SocialMediaLinks = SocialMediaLinks.Count > 0 ? SocialMediaLinks.ToList() : null,
                     RatingSystem = RatingSystem,
                     Rating = Rating,
@@ -488,6 +518,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
 
             return true;
+        }
+
+        private static string? NormalizeOptionalValue(string? value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         }
     }
 }

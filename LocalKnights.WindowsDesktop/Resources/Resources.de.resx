@@ -424,6 +424,9 @@
   <data name="ChiefArbiterLabel" xml:space="preserve">
     <value>Hauptschiedsrichter</value>
   </data>
+  <data name="DefaultChiefArbiterLabel" xml:space="preserve">
+    <value>Standard-Hauptschiedsrichter</value>
+  </data>
   <data name="FederationLabel" xml:space="preserve">
     <value>Verband</value>
   </data>

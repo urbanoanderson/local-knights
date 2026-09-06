@@ -25,6 +25,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
         private string _displayName = string.Empty;
         private string _description = string.Empty;
+        private string _city = string.Empty;
+        private string _federation = string.Empty;
+        private string _defaultChiefArbiter = string.Empty;
         private double _Rating;
         private string _RatingText = string.Empty;
         private double _minRating;
@@ -66,6 +69,36 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _description = value;
                 OnPropertyChanged(nameof(Description));
+            }
+        }
+
+        public string City
+        {
+            get => _city;
+            set
+            {
+                _city = value;
+                OnPropertyChanged(nameof(City));
+            }
+        }
+
+        public string Federation
+        {
+            get => _federation;
+            set
+            {
+                _federation = value?.ToUpperInvariant() ?? string.Empty;
+                OnPropertyChanged(nameof(Federation));
+            }
+        }
+
+        public string DefaultChiefArbiter
+        {
+            get => _defaultChiefArbiter;
+            set
+            {
+                _defaultChiefArbiter = value;
+                OnPropertyChanged(nameof(DefaultChiefArbiter));
             }
         }
 
@@ -274,6 +307,13 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Gets the localized label for "Description".
         /// </summary>
         public string DescriptionLabel => LocalizationHelper.GetString("DescriptionLabel");
+
+        public string CityLabel => LocalizationHelper.GetString("CityLabel");
+        public string DefaultChiefArbiterLabel => LocalizationHelper.GetString("DefaultChiefArbiterLabel");
+        public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
+        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
+        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
+        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
 
         /// <summary>
         /// Gets the localized label for "Created At".
@@ -532,6 +572,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             DisplayName = _clubPreferences.DisplayName;
             Description = _clubPreferences.Description ?? string.Empty;
+            City = _clubPreferences.City ?? string.Empty;
+            Federation = _clubPreferences.Federation ?? string.Empty;
+            DefaultChiefArbiter = _clubPreferences.DefaultChiefArbiter ?? string.Empty;
             Rating = _clubPreferences.Rating;
             RatingText = _clubPreferences.Rating.ToString("F0", CultureInfo.CurrentCulture);
             MinRating = _clubPreferences.MinRating;
@@ -566,6 +609,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(ClubPreferences));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(DescriptionLabel));
+            OnPropertyChanged(nameof(CityLabel));
+            OnPropertyChanged(nameof(DefaultChiefArbiterLabel));
+            OnPropertyChanged(nameof(FederationLabel));
+            OnPropertyChanged(nameof(CityTooltip));
+            OnPropertyChanged(nameof(ChiefArbiterTooltip));
+            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(CreatedAtLabel));
             OnPropertyChanged(nameof(UpdatedAtLabel));
             OnPropertyChanged(nameof(CreatedAtText));
@@ -708,6 +757,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _clubPreferences.IdentifierName = _clubPreferences.IdentifierName;
             _clubPreferences.DisplayName = DisplayName;
             _clubPreferences.Description = string.IsNullOrWhiteSpace(Description) ? null : Description;
+            _clubPreferences.City = NormalizeOptionalValue(City);
+            _clubPreferences.Federation = NormalizeOptionalValue(Federation);
+            _clubPreferences.DefaultChiefArbiter = NormalizeOptionalValue(DefaultChiefArbiter);
             _clubPreferences.RatingSystem = RatingSystem;
             _clubPreferences.Rating = Rating;
             _clubPreferences.MinRating = MinRating;
@@ -735,6 +787,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _messageBoxService.ShowError($"{LocalizationHelper.GetString("SavePreferencesFailedMessage")} {ex.Message}", LocalizationHelper.GetString("Error"));
             }
+        }
+
+        private static string? NormalizeOptionalValue(string? value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         }
 
         /// <summary>

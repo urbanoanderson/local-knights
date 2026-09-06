@@ -391,6 +391,9 @@
   <data name="ChiefArbiterLabel" xml:space="preserve">
     <value>Árbitro-chefe</value>
   </data>
+  <data name="DefaultChiefArbiterLabel" xml:space="preserve">
+    <value>Árbitro-chefe padrão</value>
+  </data>
   <data name="FederationLabel" xml:space="preserve">
     <value>Federação</value>
   </data>

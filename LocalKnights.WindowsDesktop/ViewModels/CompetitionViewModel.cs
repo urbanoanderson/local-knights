@@ -836,7 +836,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             try
             {
-                string trfContent = await ExportToTRFHelper.ExportCompetitionToTrf16(Competition, _playerService);
+                string trfContent = await ExportToTRFHelper.ExportCompetitionToTrf16(Competition, _clubService.CurrentClub, _playerService);
                 _fileSystemService.WriteAllText(dialog.FileName, trfContent);
                 _messageBoxService.ShowInfo(LocalizationHelper.GetString("ExportSuccessMessage"), LocalizationHelper.GetString("ExportCompleteTitle"));
             }

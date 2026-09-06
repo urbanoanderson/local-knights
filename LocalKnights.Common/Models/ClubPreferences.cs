@@ -30,6 +30,24 @@ namespace LocalKnights.Common.Models
         public string? Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the default city for new competitions.
+        /// </summary>
+        [StringLength(100)]
+        public string? City { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default federation code for new competitions.
+        /// </summary>
+        [StringLength(3)]
+        public string? Federation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default chief arbiter for new competitions.
+        /// </summary>
+        [StringLength(100)]
+        public string? DefaultChiefArbiter { get; set; }
+
+        /// <summary>
         /// Gets or sets the collection of social media links associated with the club.
         /// </summary>
         public List<string>? SocialMediaLinks { get; set; }

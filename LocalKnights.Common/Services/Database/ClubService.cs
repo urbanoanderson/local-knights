@@ -137,6 +137,9 @@ namespace LocalKnights.Common.Services.Database
 
             existingClubPreferences.DisplayName = updatedClubPreferences.DisplayName;
             existingClubPreferences.Description = updatedClubPreferences.Description;
+            existingClubPreferences.City = updatedClubPreferences.City;
+            existingClubPreferences.Federation = updatedClubPreferences.Federation;
+            existingClubPreferences.DefaultChiefArbiter = updatedClubPreferences.DefaultChiefArbiter;
             existingClubPreferences.SocialMediaLinks = updatedClubPreferences.SocialMediaLinks;
             existingClubPreferences.RatingSystem = updatedClubPreferences.RatingSystem;
             existingClubPreferences.Rating = updatedClubPreferences.Rating;

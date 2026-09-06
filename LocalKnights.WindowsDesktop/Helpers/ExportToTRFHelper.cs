@@ -18,10 +18,12 @@ public static class ExportToTRFHelper
     /// Converts a completed competition and its participants to TRF16 content.
     /// </summary>
     /// <param name="competition">The completed competition to export.</param>
+    /// <param name="clubPreferences">The club defaults used when competition metadata is empty.</param>
     /// <param name="playerService">The service used to retrieve current player profile information.</param>
     /// <returns>The TRF16 content, or an empty string when the competition is not completed.</returns>
     public static async Task<string> ExportCompetitionToTrf16(
         Competition competition,
+        ClubPreferences clubPreferences,
         IPlayerService playerService)
     {
         ArgumentNullException.ThrowIfNull(competition);
@@ -31,6 +33,7 @@ public static class ExportToTRFHelper
             return string.Empty;
         }
 
+        ArgumentNullException.ThrowIfNull(clubPreferences);
         ArgumentNullException.ThrowIfNull(playerService);
 
         List<(CompetitionParticipant Participant, Player? Player)> participantData = [];
@@ -59,7 +62,7 @@ public static class ExportToTRFHelper
                 item => item.StartingRank,
                 StringComparer.OrdinalIgnoreCase);
 
-        Trf16Tournament tournament = ConvertTournament(competition);
+        Trf16Tournament tournament = ConvertTournament(competition, clubPreferences);
         List<Trf16Player> players = orderedParticipants
             .Select(item => ConvertPlayer(competition, item.Participant, item.Player, startingRanks))
             .ToList();
@@ -122,7 +125,7 @@ public static class ExportToTRFHelper
         AppendRoundDatesRecord(builder, tournament.RoundDates);
     }
 
-    private static Trf16Tournament ConvertTournament(Competition competition)
+    private static Trf16Tournament ConvertTournament(Competition competition, ClubPreferences clubPreferences)
     {
         List<DateTime> roundDates = competition.CompletedAt.HasValue
             ? Enumerable.Repeat(competition.CompletedAt.Value, competition.NumberOfRounds).ToList()
@@ -131,24 +134,29 @@ public static class ExportToTRFHelper
         return new Trf16Tournament
         {
             TournamentName = competition.Title,
-            City = GetRequiredValueOrUnknown(competition.City),
-            Federation = GetRequiredValueOrUnknown(competition.Federation),
+            City = GetRequiredValueOrFallback(competition.City, clubPreferences.City),
+            Federation = GetRequiredValueOrFallback(competition.Federation, clubPreferences.Federation),
             StartDate = competition.StartedAt,
             EndDate = competition.CompletedAt,
             NumberOfPlayers = competition.CompetitionParticipants.Count,
             NumberOfRatedPlayers = 0,
             NumberOfTeams = 0,
             TournamentType = FormatTournamentType(competition),
-            ChiefArbiter = GetRequiredValueOrUnknown(competition.ChiefArbiter),
+            ChiefArbiter = GetRequiredValueOrFallback(competition.ChiefArbiter, clubPreferences.DefaultChiefArbiter),
             DeputyChiefArbiters = [],
             AllottedTime = string.Empty,
             RoundDates = roundDates,
         };
     }
 
-    private static string GetRequiredValueOrUnknown(string? value)
+    private static string GetRequiredValueOrFallback(string? value, string? fallbackValue)
     {
-        return string.IsNullOrWhiteSpace(value) ? UnknownRequiredValue : value;
+        if (!string.IsNullOrWhiteSpace(value))
+        {
+            return value;
+        }
+
+        return string.IsNullOrWhiteSpace(fallbackValue) ? UnknownRequiredValue : fallbackValue;
     }
 
     private static Trf16Player ConvertPlayer(

@@ -17,6 +17,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private readonly ILogger _logger;
         private readonly IPageNavigationService _pageNavigationService;
         private readonly ICompetitionService _competitionService;
+        private readonly IClubService _clubService;
         private readonly IMessageBoxService _messageBoxService;
         private readonly TimeProvider _timeProvider;
 
@@ -26,17 +27,20 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <param name="logger">The logger for recording service events.</param>
         /// <param name="pageNavigationService">The page navigation service.</param>
         /// <param name="competitionService">The competition service.</param>
+        /// <param name="clubService">The service providing the current club defaults.</param>
         /// <param name="messageBoxService">The message box service.</param>
         /// <param name="timeProvider">The time provider for handling time-related operations.</param>
         public CreateCompetitionViewModel(ILogger logger,
             IPageNavigationService pageNavigationService,
             ICompetitionService competitionService,
+            IClubService clubService,
             IMessageBoxService messageBoxService,
             TimeProvider timeProvider)
         {
             _logger = logger;
             _pageNavigationService = pageNavigationService;
             _competitionService = competitionService;
+            _clubService = clubService;
             _messageBoxService = messageBoxService;
             _timeProvider = timeProvider;
 
@@ -74,9 +78,27 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         }
 
-        public string City { get; set; } = string.Empty;
+        private string _city = string.Empty;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                _city = value;
+                OnPropertyChanged(nameof(City));
+            }
+        }
 
-        public string ChiefArbiter { get; set; } = string.Empty;
+        private string _chiefArbiter = string.Empty;
+        public string ChiefArbiter
+        {
+            get => _chiefArbiter;
+            set
+            {
+                _chiefArbiter = value;
+                OnPropertyChanged(nameof(ChiefArbiter));
+            }
+        }
 
         private string _federation = string.Empty;
         public string Federation
@@ -127,6 +149,15 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Gets or sets a value indicating whether the competition is rated.
         /// </summary>
         public bool IsRated { get; set; } = CommonConstants.DefaultCompetitionIsRatedValue;
+
+        /// <inheritdoc/>
+        public override void PageTransitionSetup(IDictionary<string, object> pageParameters)
+        {
+            ClubPreferences currentClub = _clubService.CurrentClub;
+            City = currentClub.City ?? string.Empty;
+            ChiefArbiter = currentClub.DefaultChiefArbiter ?? string.Empty;
+            Federation = currentClub.Federation ?? string.Empty;
+        }
 
         private int _numberOfRounds = CommonConstants.DefaultCompetitionNumberOfRounds;
         /// <summary>

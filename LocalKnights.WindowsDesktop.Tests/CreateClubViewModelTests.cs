@@ -51,6 +51,32 @@ public sealed class CreateClubViewModelTests
         Assert.Equal(CommonConstants.DefaultMaxRatingUpperBound, viewModel.MaxRating);
     }
 
+    [Fact]
+    public async Task CreateCommand_WithCompetitionDefaults_PersistsNormalizedValues()
+    {
+        TaskCompletionSource<ClubPreferences> createdClubSource = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        Mock<IClubService> clubServiceMock = CreateClubServiceMock();
+        clubServiceMock
+            .Setup(service => service.CreateClubAsync(It.IsAny<ClubPreferences>(), It.IsAny<string>()))
+            .ReturnsAsync((ClubPreferences club, string _) =>
+            {
+                createdClubSource.TrySetResult(club);
+                return club;
+            });
+        CreateClubViewModel viewModel = CreateViewModel(clubServiceMock);
+        PopulateValidRequiredFields(viewModel);
+        viewModel.City = " Recife ";
+        viewModel.Federation = "bra";
+        viewModel.DefaultChiefArbiter = " Alex Silva ";
+
+        viewModel.CreateCommand.Execute(null);
+        ClubPreferences createdClub = await createdClubSource.Task.WaitAsync(TimeSpan.FromSeconds(5));
+
+        Assert.Equal("Recife", createdClub.City);
+        Assert.Equal("BRA", createdClub.Federation);
+        Assert.Equal("Alex Silva", createdClub.DefaultChiefArbiter);
+    }
+
     private static CreateClubViewModel CreateViewModel(
         Mock<IClubService>? clubServiceMock = null,
         Mock<IPageNavigationService>? navigationServiceMock = null,

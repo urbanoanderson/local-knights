@@ -161,6 +161,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding OptionalInformationHeader}" Style="{DynamicResource SectionTitle}"
@@ -174,6 +176,24 @@
                         </StackPanel>
 
                         <StackPanel Grid.Row="2">
+                            <TextBlock Text="{Binding CityLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <TextBox Text="{Binding City}" MaxLength="100" Style="{DynamicResource ModernTextBox}"
+                                     ToolTip="{Binding CityTooltip}" Margin="{StaticResource SpacingSectionBottom}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3">
+                            <TextBlock Text="{Binding FederationLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <TextBox Text="{Binding Federation, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" CharacterCasing="Upper"
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding FederationTooltip}" Margin="{StaticResource SpacingSectionBottom}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="4">
+                            <TextBlock Text="{Binding DefaultChiefArbiterLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <TextBox Text="{Binding DefaultChiefArbiter}" MaxLength="100" Style="{DynamicResource ModernTextBox}"
+                                     ToolTip="{Binding ChiefArbiterTooltip}" Margin="{StaticResource SpacingSectionBottom}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="5">
                             <TextBlock Text="{Binding SocialMediaLinksLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <StackPanel Orientation="Horizontal" Margin="{StaticResource SpacingMediumBottom}">
                                 <TextBox Text="{Binding NewSocialMediaLink}" Width="300" Style="{DynamicResource ModernTextBox}"

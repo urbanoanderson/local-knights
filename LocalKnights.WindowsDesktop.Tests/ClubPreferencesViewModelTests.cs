@@ -24,6 +24,9 @@ public sealed class ClubPreferencesViewModelTests
 
         Assert.Equal(clubPreferences.DisplayName, viewModel.DisplayName);
         Assert.Equal(clubPreferences.Description, viewModel.Description);
+        Assert.Equal(clubPreferences.City, viewModel.City);
+        Assert.Equal(clubPreferences.Federation, viewModel.Federation);
+        Assert.Equal(clubPreferences.DefaultChiefArbiter, viewModel.DefaultChiefArbiter);
         Assert.Equal(clubPreferences.MinRating, viewModel.MinRating);
         Assert.Equal(clubPreferences.MaxRating, viewModel.MaxRating);
         Assert.Equal(createdUtc.ToLocalTime().ToString("G"), viewModel.CreatedAtText);
@@ -61,6 +64,9 @@ public sealed class ClubPreferencesViewModelTests
 
         viewModel.DisplayName = "Updated Club";
         viewModel.Description = "Updated description";
+        viewModel.City = "Recife";
+        viewModel.Federation = "bra";
+        viewModel.DefaultChiefArbiter = "Alex Silva";
         viewModel.MinRating = 130;
         viewModel.MaxRating = 3850;
 
@@ -71,6 +77,9 @@ public sealed class ClubPreferencesViewModelTests
             It.Is<ClubPreferences>(club =>
                 club.DisplayName == "Updated Club" &&
                 club.Description == "Updated description" &&
+                club.City == "Recife" &&
+                club.Federation == "BRA" &&
+                club.DefaultChiefArbiter == "Alex Silva" &&
                 club.CreatedAt == createdUtc &&
                 club.UpdatedAt >= updatedUtc &&
                 club.MinRating == 130 &&
@@ -101,6 +110,9 @@ public sealed class ClubPreferencesViewModelTests
             IdentifierName = "club",
             DisplayName = "Club",
             Description = "Description",
+            City = "Recife",
+            Federation = "BRA",
+            DefaultChiefArbiter = "Alex Silva",
             CreatedAt = createdAt ?? new DateTime(2026, 08, 10, 10, 00, 00, DateTimeKind.Utc),
             UpdatedAt = updatedAt ?? new DateTime(2026, 08, 12, 09, 00, 00, DateTimeKind.Utc),
             Rating = CommonConstants.DefaultRating,
