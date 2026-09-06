@@ -124,8 +124,13 @@ namespace LocalKnights.Common.Services.Database
         /// <inheritdoc/>
         public async Task<Competition> UpdateCompetitionAsync(Competition competition)
         {
-            competition.ComputedStandings = StandingsHelper.ComputeStandingEntries(competition);
-            await _databaseService.UpdateAsync(competition);
+            // Completed Competitions should not be updated
+            if (competition != null && competition.State != CompetitionState.Completed)
+            {
+                competition.ComputedStandings = StandingsHelper.ComputeStandingEntries(competition);
+                await _databaseService.UpdateAsync(competition);
+            }
+
             return competition;
         }
 
@@ -319,10 +324,12 @@ namespace LocalKnights.Common.Services.Database
             // Set winner and update competition state to completed
             var winner = competition.ComputedStandings.FirstOrDefault(s => s.Classification == 1);
             competition.WinnerId = winner?.Participant.ParticipantIdentifierName;
-            competition.State = CompetitionState.Completed;
             competition.CompletedAt = _timeProvider.GetUtcNow().DateTime;
+            competition.State = CompetitionState.Completed;
 
-            return await this.UpdateCompetitionAsync(competition);
+            // Don't use UpdateCompetitionAsync here because we want to update a completed competition (to set it as completed)
+            await _databaseService.UpdateAsync(competition);
+            return competition;
         }
 
         private static void EnsureNumberOfRounds(Competition competition)

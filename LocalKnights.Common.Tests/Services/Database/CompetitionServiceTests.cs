@@ -401,10 +401,13 @@ public class CompetitionServiceTests : IDisposable
     [Fact]
     public async Task UpdateCompetitionAsync_PersistsCompetitionMetadataWinnerIdAndCompletedAt()
     {
-        Competition competition = (await _competitionService.GetCompetitionByIdAsync(1))!;
+        Competition competition = await CreateStartingCompetitionAsync(
+            CompetitionType.ChessMatch,
+            numberOfRounds: 1,
+            participantIdentifiers: ["meta-a", "meta-b"]);
         DateTime completedAt = _timeProvider.GetUtcNow().UtcDateTime;
 
-        competition.WinnerId = "black-player";
+        competition.WinnerId = "meta-b";
         competition.CompletedAt = completedAt;
         competition.City = "São Paulo";
         competition.ChiefArbiter = "Morgan Lee";
@@ -412,9 +415,9 @@ public class CompetitionServiceTests : IDisposable
 
         await _competitionService.UpdateCompetitionAsync(competition);
 
-        Competition persistedCompetition = (await _competitionService.GetCompetitionByIdAsync(1))!;
+        Competition persistedCompetition = (await _competitionService.GetCompetitionByIdAsync(competition.Id))!;
 
-        Assert.Equal("black-player", persistedCompetition.WinnerId);
+        Assert.Equal("meta-b", persistedCompetition.WinnerId);
         Assert.Equal(completedAt, persistedCompetition.CompletedAt);
         Assert.Equal("São Paulo", persistedCompetition.City);
         Assert.Equal("Morgan Lee", persistedCompetition.ChiefArbiter);
@@ -425,7 +428,10 @@ public class CompetitionServiceTests : IDisposable
     [Fact]
     public async Task UpdateCompetitionAsync_PersistsNullOptionalFields()
     {
-        Competition competition = (await _competitionService.GetCompetitionByIdAsync(1))!;
+        Competition competition = await CreateStartingCompetitionAsync(
+            CompetitionType.ChessMatch,
+            numberOfRounds: 1,
+            participantIdentifiers: ["null-a", "null-b"]);
 
         competition.Description = null;
         competition.City = null;
@@ -437,7 +443,7 @@ public class CompetitionServiceTests : IDisposable
 
         await _competitionService.UpdateCompetitionAsync(competition);
 
-        Competition persistedCompetition = (await _competitionService.GetCompetitionByIdAsync(1))!;
+        Competition persistedCompetition = (await _competitionService.GetCompetitionByIdAsync(competition.Id))!;
 
         Assert.Null(persistedCompetition.Description);
         Assert.Null(persistedCompetition.City);
