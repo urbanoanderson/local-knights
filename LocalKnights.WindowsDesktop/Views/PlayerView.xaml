@@ -177,6 +177,18 @@
                         <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource ModernDatePicker}" Margin="{StaticResource SpacingMediumBottom}" />
                         <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+
+                        <!-- Gender -->
+                        <TextBlock Text="{Binding GenderLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                        <ComboBox ItemsSource="{Binding GenderTypes}" SelectedItem="{Binding SelectedGender}"
+                                  Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingSectionBottom}"
+                                  ToolTip="{Binding GenderTooltip}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                 </Border>
 

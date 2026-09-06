@@ -86,6 +86,11 @@ namespace LocalKnights.Common.Models
         public ChessTitle ChessTitle { get; set; } = ChessTitle.None;
 
         /// <summary>
+        /// Gets or sets the player's gender.
+        /// </summary>
+        public GenderType Gender { get; set; } = GenderType.Other;
+
+        /// <summary>
         /// Gets or sets the date and time when the player was created (UTC).
         /// </summary>
         public DateTime CreatedAt { get; set; }

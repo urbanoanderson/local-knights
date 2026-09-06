@@ -1045,4 +1045,19 @@
   <data name="GameResult_Draw" xml:space="preserve">
     <value>½-½</value>
   </data>
+  <data name="GenderLabel" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="GenderTooltip" xml:space="preserve">
+    <value>Indique le genre du joueur. Cette information peut être utilisée lors de l’exportation des compétitions.</value>
+  </data>
+  <data name="GenderType_Male" xml:space="preserve">
+    <value>Homme</value>
+  </data>
+  <data name="GenderType_Female" xml:space="preserve">
+    <value>Femme</value>
+  </data>
+  <data name="GenderType_Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
 </root>

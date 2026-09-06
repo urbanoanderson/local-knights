@@ -1045,4 +1045,19 @@
   <data name="EditProvisionalGamesTooltip" xml:space="preserve">
     <value>Número de partidas provisórias para novos jogadores no ELO.</value>
   </data>
+  <data name="GenderLabel" xml:space="preserve">
+    <value>Gênero</value>
+  </data>
+  <data name="GenderTooltip" xml:space="preserve">
+    <value>Indica o gênero do jogador. Esta informação pode ser usada ao exportar competições.</value>
+  </data>
+  <data name="GenderType_Male" xml:space="preserve">
+    <value>Masculino</value>
+  </data>
+  <data name="GenderType_Female" xml:space="preserve">
+    <value>Feminino</value>
+  </data>
+  <data name="GenderType_Other" xml:space="preserve">
+    <value>Outro</value>
+  </data>
 </root>

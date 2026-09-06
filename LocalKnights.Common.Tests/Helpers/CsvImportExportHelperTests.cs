@@ -44,6 +44,7 @@ public sealed class CsvImportExportHelperTests : IDisposable
                     CbxId = "654321",
                     UscfId = "111222",
                     ChessTitle = ChessTitle.FM,
+                    Gender = GenderType.Female,
                     BirthDate = new DateTime(1990, 4, 20),
                     BulletRating = new ChessRating { Rating = 1800, Deviation = 45, Volatility = 0.06 },
                     BlitzRating = new ChessRating { Rating = 1810, Deviation = 46, Volatility = 0.06 },
@@ -57,8 +58,8 @@ public sealed class CsvImportExportHelperTests : IDisposable
             string[] lines = await File.ReadAllLinesAsync(filePath);
 
             Assert.Equal(2, lines.Length);
-            Assert.Equal("IdentifierName,DisplayName,LichessUsername,ChessComUsername,Email,Phone,FideId,CbxId,UscfId,ChessTitle,BirthDate,BulletRating,BulletDeviation,BlitzRating,BlitzDeviation,RapidRating,RapidDeviation,ClassicalRating,ClassicalDeviation", lines[0]);
-            Assert.Equal("alpha1,Alpha One,alpha-lichess,alpha-chesscom,alpha@example.com,555-0101,123456,654321,111222,FM,04/20/1990,1800,45,1810,46,1820,47,1830,48", lines[1]);
+            Assert.Equal("IdentifierName,DisplayName,LichessUsername,ChessComUsername,Email,Phone,FideId,CbxId,UscfId,ChessTitle,Gender,BirthDate,BulletRating,BulletDeviation,BlitzRating,BlitzDeviation,RapidRating,RapidDeviation,ClassicalRating,ClassicalDeviation", lines[0]);
+            Assert.Equal("alpha1,Alpha One,alpha-lichess,alpha-chesscom,alpha@example.com,555-0101,123456,654321,111222,FM,Female,04/20/1990,1800,45,1810,46,1820,47,1830,48", lines[1]);
         }
         finally
         {
@@ -84,6 +85,7 @@ public sealed class CsvImportExportHelperTests : IDisposable
         Assert.Equal("alpha1", validPlayers[0].IdentifierName);
         Assert.Equal("Alpha One", validPlayers[0].DisplayName);
         Assert.Null(validPlayers[0].LichessUsername);
+        Assert.Equal(GenderType.Other, validPlayers[0].Gender);
 
         Assert.Equal("bravo2", validPlayers[1].IdentifierName);
         Assert.Equal("Bravo Two", validPlayers[1].DisplayName);
@@ -98,8 +100,8 @@ public sealed class CsvImportExportHelperTests : IDisposable
         try
         {
             string filePath = CreateTempCsv(
-                "IdentifierName,DisplayName,ChessTitle,BirthDate,LichessUsername,BulletRating,BlitzRating,RapidRating,ClassicalRating",
-                "Alpha1,Alpha One,FM,1990-04-20,alpha-lichess,1800,1810,1820,1830");
+                "IdentifierName,DisplayName,ChessTitle,Gender,BirthDate,LichessUsername,BulletRating,BlitzRating,RapidRating,ClassicalRating",
+                "Alpha1,Alpha One,FM,Male,1990-04-20,alpha-lichess,1800,1810,1820,1830");
 
             Mock<IPlayerService> playerServiceMock = CreatePlayerServiceMock();
             ClubPreferences clubPreferences = new ClubPreferences
@@ -114,6 +116,7 @@ public sealed class CsvImportExportHelperTests : IDisposable
             Assert.Equal(0, invalidCount);
             Assert.Equal("alpha1", player.IdentifierName);
             Assert.Equal(ChessTitle.FM, player.ChessTitle);
+            Assert.Equal(GenderType.Male, player.Gender);
             Assert.Equal(new DateTime(1990, 4, 20), player.BirthDate);
             Assert.Equal("alpha-lichess", player.LichessUsername);
             Assert.Equal(1800, player.BulletRating.Rating);
@@ -171,6 +174,7 @@ public sealed class CsvImportExportHelperTests : IDisposable
                     CbxId = "654321",
                     UscfId = "111222",
                     ChessTitle = ChessTitle.FM,
+                    Gender = GenderType.Female,
                     BirthDate = new DateTime(1990, 4, 20),
                     BulletRating = new ChessRating { Rating = 1800, Deviation = 45, Volatility = 0.06 },
                     BlitzRating = new ChessRating { Rating = 1810, Deviation = 46, Volatility = 0.06 },
@@ -182,6 +186,7 @@ public sealed class CsvImportExportHelperTests : IDisposable
                     IdentifierName = "bravo2",
                     DisplayName = "Bravo Two",
                     ChessTitle = ChessTitle.None,
+                    Gender = GenderType.Male,
                     BirthDate = new DateTime(1985, 12, 1),
                     BulletRating = new ChessRating { Rating = 1500, Deviation = 60, Volatility = 0.07 },
                     BlitzRating = new ChessRating { Rating = 1510, Deviation = 61, Volatility = 0.07 },
@@ -318,6 +323,7 @@ public sealed class CsvImportExportHelperTests : IDisposable
         Assert.Equal(expected.CbxId, actual.CbxId);
         Assert.Equal(expected.UscfId, actual.UscfId);
         Assert.Equal(expected.ChessTitle, actual.ChessTitle);
+        Assert.Equal(expected.Gender, actual.Gender);
         Assert.Equal(expected.BirthDate, actual.BirthDate);
         Assert.Equal(expected.BulletRating.Rating, actual.BulletRating.Rating);
         Assert.Equal(expected.BulletRating.Deviation, actual.BulletRating.Deviation);

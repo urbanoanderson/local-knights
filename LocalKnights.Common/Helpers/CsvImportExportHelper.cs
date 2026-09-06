@@ -26,6 +26,7 @@ namespace LocalKnights.Common.Helpers
             "CbxId",
             "UscfId",
             "ChessTitle",
+            "Gender",
             "BirthDate",
             "BulletRating",
             "BulletDeviation",
@@ -100,6 +101,12 @@ namespace LocalKnights.Common.Helpers
                     if (!string.IsNullOrWhiteSpace(titleStr) && Enum.TryParse<ChessTitle>(titleStr, true, out var ct))
                     {
                         player.ChessTitle = ct;
+                    }
+
+                    string? genderString = GetOptionalTrimmedField(csv, "Gender");
+                    if (!string.IsNullOrWhiteSpace(genderString) && Enum.TryParse<GenderType>(genderString, true, out GenderType gender))
+                    {
+                        player.Gender = gender;
                     }
 
                     // BirthDate
@@ -246,6 +253,7 @@ namespace LocalKnights.Common.Helpers
                 player.CbxId ?? string.Empty,
                 player.UscfId ?? string.Empty,
                 player.ChessTitle == ChessTitle.None ? string.Empty : player.ChessTitle.ToString(),
+                player.Gender.ToString(),
                 player.BirthDate?.ToString("d", CultureInfo.CurrentCulture) ?? string.Empty,
                 FormatRatingValue(player.BulletRating),
                 FormatDeviationValue(player.BulletRating),

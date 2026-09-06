@@ -51,6 +51,7 @@ public class PlayerServiceTests : IDisposable
         {
             IdentifierName = "createdplayer",
             DisplayName = "Created Player",
+            Gender = GenderType.Female,
         };
 
         Player createdPlayer = await _playerService.CreatePlayerAsync(player);
@@ -59,6 +60,7 @@ public class PlayerServiceTests : IDisposable
         Assert.Equal(expectedCreatedAt, createdPlayer.CreatedAt);
         Assert.NotNull(persistedPlayer);
         Assert.Equal("Created Player", persistedPlayer!.DisplayName);
+        Assert.Equal(GenderType.Female, persistedPlayer.Gender);
         Assert.Equal(expectedCreatedAt, persistedPlayer.CreatedAt);
     }
 

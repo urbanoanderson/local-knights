@@ -42,6 +42,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private int? _rapidGamesPlayedSinceLastYear = null;
         private int? _classicalGamesPlayedSinceLastYear = null;
         private ChessTitle _selectedChessTitle = ChessTitle.None;
+        private GenderType _selectedGender = GenderType.Other;
 
         public string IdentifierName { get; private set; } = string.Empty;
 
@@ -157,6 +158,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         }
 
+        public GenderType SelectedGender
+        {
+            get => _selectedGender;
+            set
+            {
+                _selectedGender = value;
+                OnPropertyChanged(nameof(SelectedGender));
+            }
+        }
+
         public string CreatedAt { get; private set; } = string.Empty;
         public string BulletRating { get; private set; } = string.Empty;
         public string BlitzRating { get; private set; } = string.Empty;
@@ -168,6 +179,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string ClassicalRatingTooltip { get; private set; } = string.Empty;
 
         private ObservableCollection<ChessTitle> _chessTitles = new ObservableCollection<ChessTitle>(Enum.GetValues<ChessTitle>());
+        private ObservableCollection<GenderType> _genderTypes = new ObservableCollection<GenderType>(Enum.GetValues<GenderType>());
 
         public ObservableCollection<ChessTitle> ChessTitles
         {
@@ -179,9 +191,27 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         }
 
+        public ObservableCollection<GenderType> GenderTypes
+        {
+            get => _genderTypes;
+            private set
+            {
+                _genderTypes = value;
+                OnPropertyChanged(nameof(GenderTypes));
+            }
+        }
+
         private void RefreshChessTitles()
         {
             ChessTitles = new ObservableCollection<ChessTitle>(Enum.GetValues<ChessTitle>());
+        }
+
+        private void RefreshGenderTypes()
+        {
+            GenderType previous = SelectedGender;
+            GenderTypes = new ObservableCollection<GenderType>(Enum.GetValues<GenderType>());
+            SelectedGender = previous;
+            OnPropertyChanged(nameof(SelectedGender));
         }
 
         public string PlayerProfile => $"{AppConstants.DefaultPlayerIcon} " + LocalizationHelper.GetString("PlayerProfile");
@@ -202,6 +232,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string FideIdLabel => LocalizationHelper.GetString("FideIdLabel");
         public string UscfIdLabel => LocalizationHelper.GetString("UscfIdLabel");
         public string ChessTitleLabel => LocalizationHelper.GetString("ChessTitleLabel");
+        public string GenderLabel => LocalizationHelper.GetString("GenderLabel");
+        public string GenderTooltip => LocalizationHelper.GetString("GenderTooltip");
         public string SaveButtonLabel => LocalizationHelper.GetString("SaveButtonLabel");
         public string DeletePlayerButton => LocalizationHelper.GetString("DeletePlayerButton");
         public string CancelLabel => LocalizationHelper.GetString("BackButtonLabel");
@@ -281,6 +313,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 FideId = _currentPlayer.FideId ?? string.Empty;
                 UscfId = _currentPlayer.UscfId ?? string.Empty;
                 SelectedChessTitle = _currentPlayer.ChessTitle;
+                SelectedGender = _currentPlayer.Gender;
                 CreatedAt = _currentPlayer.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture);
 
                 _ = LoadProfileImageAsync(_currentPlayer.ChessComUsername);
@@ -384,6 +417,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 _currentPlayer.FideId = string.IsNullOrWhiteSpace(FideId) ? null : FideId;
                 _currentPlayer.UscfId = string.IsNullOrWhiteSpace(UscfId) ? null : UscfId;
                 _currentPlayer.ChessTitle = SelectedChessTitle;
+                _currentPlayer.Gender = SelectedGender;
 
                 await Task.Run(async () => await _playerService.UpdatePlayerAsync(_currentPlayer));
 
@@ -469,7 +503,10 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(FideIdLabel));
             OnPropertyChanged(nameof(UscfIdLabel));
             OnPropertyChanged(nameof(ChessTitleLabel));
+            OnPropertyChanged(nameof(GenderLabel));
+            OnPropertyChanged(nameof(GenderTooltip));
             RefreshChessTitles();
+            RefreshGenderTypes();
             OnPropertyChanged(nameof(SaveButtonLabel));
             OnPropertyChanged(nameof(DeletePlayerButton));
             OnPropertyChanged(nameof(CancelLabel));

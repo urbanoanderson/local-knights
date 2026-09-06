@@ -136,6 +136,7 @@ public sealed class ExportToTRFHelperTests
         Assert.Equal('=', zuluLine[108]);
 
         Assert.Equal("   3", deletedLine.Substring(4, 4));
+        Assert.Equal(' ', deletedLine[9]);
         Assert.Equal("deleted", deletedLine.Substring(14, 33).TrimEnd());
         Assert.Equal("1801", deletedLine.Substring(48, 4));
         Assert.Equal("           ", deletedLine.Substring(57, 11));
@@ -198,6 +199,44 @@ public sealed class ExportToTRFHelperTests
 
         Assert.Empty(result);
         playerService.VerifyNoOtherCalls();
+    }
+
+    /// <summary>
+    /// Verifies player genders are converted to the TRF16 sex codes.
+    /// </summary>
+    [Theory]
+    [InlineData(GenderType.Male, 'm')]
+    [InlineData(GenderType.Female, 'w')]
+    [InlineData(GenderType.Other, ' ')]
+    public async Task ExportCompetitionToTrf16_WithPlayerGender_UsesExpectedSexCode(
+        GenderType gender,
+        char expectedSexCode)
+    {
+        CompetitionParticipant participant = CreateParticipant("player", 1500d);
+        Competition competition = new Competition
+        {
+            Title = "Tournament",
+            State = CompetitionState.Completed,
+            TimeFormat = TimeFormat.Blitz,
+            CompetitionParticipants = [participant],
+        };
+        Player player = new Player
+        {
+            IdentifierName = "player",
+            DisplayName = "Player",
+            Gender = gender,
+        };
+        Mock<IPlayerService> playerService = new();
+        playerService
+            .Setup(service => service.GetPlayerByIdentifierAsync("player"))
+            .ReturnsAsync(player);
+
+        string result = await ExportToTRFHelper.ExportCompetitionToTrf16(competition, playerService.Object);
+        string playerLine = FindPlayerLine(
+            result.Split('\r', StringSplitOptions.RemoveEmptyEntries),
+            "Player");
+
+        Assert.Equal(expectedSexCode, playerLine[9]);
     }
 
     /// <summary>

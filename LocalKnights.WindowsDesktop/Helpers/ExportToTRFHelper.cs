@@ -173,7 +173,7 @@ public static class ExportToTRFHelper
         return new Trf16Player
         {
             StartingRankNumber = startingRanks[participant.ParticipantIdentifierName],
-            Sex = string.Empty,
+            Sex = FormatSex(player?.Gender),
             Title = FormatFideTitle(player?.ChessTitle),
             Name = player?.DisplayName ?? participant.ParticipantIdentifierName,
             FideRating = (int)Math.Round(participant.OldRating.Rating, MidpointRounding.AwayFromZero),
@@ -183,6 +183,16 @@ public static class ExportToTRFHelper
             Points = (decimal)(standing?.Score ?? 0d),
             Rank = standing?.Classification,
             Rounds = rounds,
+        };
+    }
+
+    private static string FormatSex(GenderType? gender)
+    {
+        return gender switch
+        {
+            GenderType.Male => "m",
+            GenderType.Female => "w",
+            _ => string.Empty,
         };
     }
 

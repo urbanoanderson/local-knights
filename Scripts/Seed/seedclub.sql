@@ -143,7 +143,7 @@ SET DisplayName = (SELECT club_display_name FROM SeedConfig),
 WHERE Id = 1;
 
 -- Generate players
-INSERT INTO Players (IdentifierName, DisplayName, ChessTitle, CreatedAt, BirthDate,
+INSERT INTO Players (IdentifierName, DisplayName, ChessTitle, Gender, CreatedAt, BirthDate,
     BulletRating_Rating, BulletRating_Deviation, BulletRating_Volatility,
     BlitzRating_Rating, BlitzRating_Deviation, BlitzRating_Volatility,
     RapidRating_Rating, RapidRating_Deviation, RapidRating_Volatility,
@@ -153,6 +153,7 @@ SELECT
     LOWER(first_name || last_name || id) AS IdentifierName,
     first_name || ' ' || last_name AS DisplayName,
     CASE WHEN base_rating > 2400 THEN 5 WHEN base_rating > 2000 THEN 4 WHEN base_rating > 1600 THEN 3 ELSE 0 END AS ChessTitle,
+    ABS(RANDOM()) % 3 AS Gender,
     datetime('now', '-' || (ABS(RANDOM()) % 365) || ' days') AS CreatedAt,
     date('now', '-' || birth_year_diff || ' years', '-' || (ABS(RANDOM()) % 365) || ' days') AS BirthDate,
     -- Bullet rating (typically highest)

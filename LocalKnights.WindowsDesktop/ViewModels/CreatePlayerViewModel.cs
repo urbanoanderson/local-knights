@@ -215,7 +215,18 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         } = ChessTitle.None;
 
+        public GenderType SelectedGender
+        {
+            get => field;
+            set
+            {
+                field = value;
+                OnPropertyChanged(nameof(SelectedGender));
+            }
+        } = GenderType.Other;
+
         private ObservableCollection<ChessTitle> _chessTitles = new(Enum.GetValues(typeof(ChessTitle)).Cast<ChessTitle>());
+        private ObservableCollection<GenderType> _genderTypes = new(Enum.GetValues<GenderType>());
 
         public ObservableCollection<ChessTitle> ChessTitles
         {
@@ -227,6 +238,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
         }
 
+        public ObservableCollection<GenderType> GenderTypes
+        {
+            get => _genderTypes;
+            private set
+            {
+                _genderTypes = value;
+                OnPropertyChanged(nameof(GenderTypes));
+            }
+        }
+
         private void RefreshChessTitles()
         {
             // Preserve selection while rebuilding localized items
@@ -234,6 +255,14 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             ChessTitles = new ObservableCollection<ChessTitle>(Enum.GetValues(typeof(ChessTitle)).Cast<ChessTitle>());
             SelectedChessTitle = previous;
             OnPropertyChanged(nameof(SelectedChessTitle));
+        }
+
+        private void RefreshGenderTypes()
+        {
+            GenderType previous = SelectedGender;
+            GenderTypes = new ObservableCollection<GenderType>(Enum.GetValues<GenderType>());
+            SelectedGender = previous;
+            OnPropertyChanged(nameof(SelectedGender));
         }
 
         public string CreatePlayer => $"{AppConstants.DefaultPlayerIcon} " + LocalizationHelper.GetString("CreatePlayer");
@@ -256,6 +285,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string FideIdLabel => LocalizationHelper.GetString("FideIdLabel");
         public string UscfIdLabel => LocalizationHelper.GetString("UscfIdLabel");
         public string ChessTitleLabel => LocalizationHelper.GetString("ChessTitleLabel");
+        public string GenderLabel => LocalizationHelper.GetString("GenderLabel");
+        public string GenderTooltip => LocalizationHelper.GetString("GenderTooltip");
         public string BirthDateLabel => LocalizationHelper.GetString("BirthDateLabel");
         public string BirthDateHelp => LocalizationHelper.GetString("BirthDateHelp");
         public string CreateButtonLabel => LocalizationHelper.GetString("CreateButtonLabel");
@@ -459,6 +490,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                     FideId = string.IsNullOrWhiteSpace(FideId) ? null : FideId,
                     UscfId = string.IsNullOrWhiteSpace(UscfId) ? null : UscfId,
                     ChessTitle = SelectedChessTitle,
+                    Gender = SelectedGender,
                     Email = string.IsNullOrWhiteSpace(Email) ? null : Email,
                     Phone = string.IsNullOrWhiteSpace(Phone) ? null : Phone,
                     BirthDate = BirthDate
@@ -541,8 +573,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(CbxIdLabel));
             OnPropertyChanged(nameof(FideIdLabel));
             OnPropertyChanged(nameof(ChessTitleLabel));
+            OnPropertyChanged(nameof(GenderLabel));
+            OnPropertyChanged(nameof(GenderTooltip));
             OnPropertyChanged(nameof(UscfIdLabel));
             RefreshChessTitles();
+            RefreshGenderTypes();
             OnPropertyChanged(nameof(CreateButtonLabel));
             OnPropertyChanged(nameof(CancelLabel));
             OnPropertyChanged(nameof(FetchRatingsLabel));

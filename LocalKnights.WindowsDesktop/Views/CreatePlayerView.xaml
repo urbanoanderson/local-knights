@@ -296,6 +296,25 @@
                             <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}"/>
                         </StackPanel>
 
+                        <!-- Gender -->
+                        <StackPanel Margin="{StaticResource SpacingSectionBottom}">
+                            <TextBlock Text="{Binding GenderLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="160"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding GenderTypes}" SelectedItem="{Binding SelectedGender}"
+                                          Style="{DynamicResource ModernComboBox}" ToolTip="{Binding GenderTooltip}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
+                        </StackPanel>
+
                     </StackPanel>
                 </Border>
 

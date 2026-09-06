@@ -1045,4 +1045,19 @@
   <data name="GameResult_Draw" xml:space="preserve">
     <value>½-½</value>
   </data>
+  <data name="GenderLabel" xml:space="preserve">
+    <value>Пол</value>
+  </data>
+  <data name="GenderTooltip" xml:space="preserve">
+    <value>Указывает пол игрока. Эта информация может использоваться при экспорте соревнований.</value>
+  </data>
+  <data name="GenderType_Male" xml:space="preserve">
+    <value>Мужской</value>
+  </data>
+  <data name="GenderType_Female" xml:space="preserve">
+    <value>Женский</value>
+  </data>
+  <data name="GenderType_Other" xml:space="preserve">
+    <value>Другое</value>
+  </data>
 </root>
