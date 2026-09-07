@@ -20,8 +20,8 @@ CREATE TEMP TABLE SeedConfig (
   club_display_name TEXT    -- Display name for the club
 );
 
--- INSERT INTO SeedConfig VALUES (100, 1000, 100, 'Small Club');
-INSERT INTO SeedConfig VALUES (10000, 200000, 1000, 'Big Club');
+-- INSERT INTO SeedConfig VALUES (100, 1000, 200, 'Small Club');
+INSERT INTO SeedConfig VALUES (10000, 200000, 50000, 'Big Club');
 
 -- ============================================
 -- AUXILIARY TABLES
