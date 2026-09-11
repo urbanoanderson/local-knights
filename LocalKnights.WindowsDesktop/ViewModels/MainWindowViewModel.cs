@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
+using LocalKnights.Common.Helpers;
 using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 using LocalKnights.WindowsDesktop.Helpers;
@@ -492,6 +493,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         {
             string message = AppConstants.AppDisplayName + Environment.NewLine +
                             LocalizationHelper.GetStringFormat("AppVersionLabel", "{0}: {1}{2}", $"v{AppConstants.AppVersion.ToString(3)}", Environment.NewLine) +
+                            LocalizationHelper.GetStringFormat("DatabaseSchemaVersionLabel", "{0}: {1}{2}", DatabaseMigrationHelper.SchemaVersion, Environment.NewLine) +
                             LocalizationHelper.GetStringFormat("AppCreatorLabel", "{0}: {1}{2}", "Anderson Urbano", Environment.NewLine) +
                             LocalizationHelper.GetStringFormat("AppLicenseLabel", "{0}: {1}", LocalizationHelper.GetString("AppLicenseValue"));
 

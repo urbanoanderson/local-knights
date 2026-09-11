@@ -48,6 +48,15 @@ namespace LocalKnights.Common.Services.Database
         Task<ClubPreferences?> ClubSignInAsync(string identifierName, string password);
 
         /// <summary>
+        /// Signs in to a club after requesting approval when its database requires migration.
+        /// </summary>
+        /// <param name="identifierName">The identifier name of the club.</param>
+        /// <param name="password">The password to decrypt the club's database file.</param>
+        /// <param name="confirmMigrationAsync">Called with the stored and current schema versions when migration is required.</param>
+        /// <returns>The club preferences if credentials are valid and migration is approved; otherwise null.</returns>
+        Task<ClubPreferences?> ClubSignInAsync(string identifierName, string password, Func<int, int, Task<bool>> confirmMigrationAsync);
+
+        /// <summary>
         /// Signs out the current club asynchronously and closes its database connection.
         /// </summary>
         /// <returns>A task representing the asynchronous operation.</returns>

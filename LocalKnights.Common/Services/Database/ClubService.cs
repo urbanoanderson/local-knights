@@ -62,6 +62,12 @@ namespace LocalKnights.Common.Services.Database
         /// <inheritdoc/>
         public async Task<ClubPreferences?> ClubSignInAsync(string identifierName, string password)
         {
+            return await ClubSignInAsync(identifierName, password, (_, _) => Task.FromResult(true));
+        }
+
+        /// <inheritdoc/>
+        public async Task<ClubPreferences?> ClubSignInAsync(string identifierName, string password, Func<int, int, Task<bool>> confirmMigrationAsync)
+        {
             if (!ClubExists(identifierName))
                 return null;
 
@@ -73,6 +79,25 @@ namespace LocalKnights.Common.Services.Database
                 }
 
                 await _databaseService.OpenConnectionAsync(identifierName, password);
+
+                int storedSchemaVersion = await _databaseService.GetSchemaVersionAsync();
+                if (storedSchemaVersion > DatabaseMigrationHelper.SchemaVersion)
+                {
+                    throw new UnsupportedDatabaseSchemaVersionException(storedSchemaVersion, DatabaseMigrationHelper.SchemaVersion);
+                }
+
+                if (storedSchemaVersion < DatabaseMigrationHelper.SchemaVersion)
+                {
+                    bool migrationConfirmed = await confirmMigrationAsync(storedSchemaVersion, DatabaseMigrationHelper.SchemaVersion);
+                    if (!migrationConfirmed)
+                    {
+                        await _databaseService.CloseConnectionAsync();
+                        return null;
+                    }
+
+                    await _databaseService.ApplyMigrationsAsync();
+                }
+
                 this.CurrentClub = await _databaseService.QuerySingleOrDefaultAsync<ClubPreferences>(query => query);
                 this.CurrentClub!.IdentifierName = identifierName; // Ensure the identifier is set
 
@@ -83,8 +108,15 @@ namespace LocalKnights.Common.Services.Database
 
                 return CurrentClub;
             }
+            catch (UnsupportedDatabaseSchemaVersionException)
+            {
+                await _databaseService.CloseConnectionAsync();
+                this.CurrentClub = null;
+                throw;
+            }
             catch (Exception ex)
             {
+                await _databaseService.CloseConnectionAsync();
                 this.CurrentClub = null;
                 _logger.LogError(ex, $"Failed to open club database for identifier '{identifierName}'. Possible invalid password or corrupted database. Exception: {ex.Message}. StackTrace: {ex.StackTrace}");
                 return null;

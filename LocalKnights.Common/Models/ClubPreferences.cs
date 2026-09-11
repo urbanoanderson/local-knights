@@ -94,10 +94,9 @@ namespace LocalKnights.Common.Models
         public int ProvisionalGames { get; set; } = CommonConstants.DefaultProvisionalGames;
 
         /// <summary>
-        /// Schema version for the ClubPreferences row. Reserved for future schema migration
-        /// logic. Default is 0.
+        /// Schema version for the ClubPreferences row used for schema migrations. Defaults to the current schema version defined in <see cref="DatabaseMigrationHelper.SchemaVersion"/>.
         /// </summary>
-        public int SchemaVersion { get; set; } = 0;
+        public int SchemaVersion { get; set; } = DatabaseMigrationHelper.SchemaVersion;
 
         /// <summary>
         /// Gets or sets the date and time when the club was created (UTC).

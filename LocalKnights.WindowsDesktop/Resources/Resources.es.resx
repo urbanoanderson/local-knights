@@ -94,6 +94,9 @@
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Versión</value>
   </data>
+  <data name="DatabaseSchemaVersionLabel" xml:space="preserve">
+    <value>Versión del esquema de la base de datos</value>
+  </data>
   <data name="AppCreatorLabel" xml:space="preserve">
     <value>Creada por</value>
   </data>
@@ -981,6 +984,17 @@
   </data>
   <data name="SignInFailedMessage" xml:space="preserve">
     <value>No se pudo iniciar sesión</value>
+  </data>
+  <data name="DatabaseMigrationTitle" xml:space="preserve">
+    <value>Se requiere actualizar la base de datos</value>
+  </data>
+  <data name="DatabaseMigrationConfirmationMessage" xml:space="preserve">
+    <value>El esquema de la base de datos del club seleccionado está en la versión {0}, que está desactualizada. ¿Desea aplicar las migraciones necesarias para actualizarlo a la versión {1}? Esto puede tardar unos segundos.
+
+ADVERTENCIA: Asegúrese de hacer una copia de seguridad de los datos del club antes de aplicar las migraciones.</value>
+  </data>
+  <data name="DatabaseSchemaTooNewMessage" xml:space="preserve">
+    <value>El esquema de la base de datos del club seleccionado está en la versión {0}, pero esta versión de Local Knights solo admite versiones de esquema hasta la {1}. Actualice Local Knights antes de iniciar sesión.</value>
   </data>
   <data name="ChessTitle_None" xml:space="preserve">
     <value>Ninguno</value>

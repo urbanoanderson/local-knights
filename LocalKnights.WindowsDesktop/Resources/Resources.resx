@@ -94,6 +94,9 @@
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Version</value>
   </data>
+  <data name="DatabaseSchemaVersionLabel" xml:space="preserve">
+    <value>Database Schema Version</value>
+  </data>
   <data name="AppCreatorLabel" xml:space="preserve">
     <value>Created by</value>
   </data>
@@ -981,6 +984,17 @@
   </data>
   <data name="SignInFailedMessage" xml:space="preserve">
     <value>Sign in failed</value>
+  </data>
+  <data name="DatabaseMigrationTitle" xml:space="preserve">
+    <value>Database Update Required</value>
+  </data>
+  <data name="DatabaseMigrationConfirmationMessage" xml:space="preserve">
+    <value>The selected club's database schema is at version {0}, which is outdated. Do you want to apply the required migrations to update it to version {1}? This may take a few seconds.
+
+WARNING: Make sure to back up your club's data before applying the migrations.</value>
+  </data>
+  <data name="DatabaseSchemaTooNewMessage" xml:space="preserve">
+    <value>The selected club's database schema is at version {0}, but this version of Local Knights only supports schema versions up to {1}. Update Local Knights before signing in.</value>
   </data>
   <data name="ChessTitle_None" xml:space="preserve">
     <value>None</value>

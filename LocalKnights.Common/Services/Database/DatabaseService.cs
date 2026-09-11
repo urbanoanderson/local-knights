@@ -136,7 +136,6 @@ namespace LocalKnights.Common.Services.Database
 
                 await _context.Database.EnsureCreatedAsync();
                 await _context.Database.CanConnectAsync();
-                await EnsureSchemaCorrectnessAsync();
             }
             catch (Exception ex)
             {
@@ -149,6 +148,26 @@ namespace LocalKnights.Common.Services.Database
             {
                 this.IsReadOperationInProgress = false;
             }
+        }
+
+        /// <inheritdoc/>
+        public async Task<int> GetSchemaVersionAsync()
+        {
+            return await ExecuteReadAsync(async () =>
+            {
+                return await _context!.ClubPreferences
+                    .Select(preferences => preferences.SchemaVersion)
+                    .FirstAsync();
+            });
+        }
+
+        /// <inheritdoc/>
+        public async Task ApplyMigrationsAsync()
+        {
+            await ExecuteWriteAsync(async () =>
+            {
+                await DatabaseMigrationHelper.MigrateDatabaseSchema(_logger, _context!);
+            });
         }
 
         /// <inheritdoc/>
@@ -433,21 +452,6 @@ namespace LocalKnights.Common.Services.Database
 
             var generic = method.MakeGenericMethod(typeof(T), propertyAccess.Type);
             return (IQueryable<T>)generic.Invoke(null, new object[] { query, orderByExpression })!;
-        }
-
-        private async Task EnsureSchemaCorrectnessAsync()
-        {
-            if (_context == null)
-            {
-                return;
-            }
-
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "City", "TEXT", "''");
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "Federation", "TEXT", "''");
-            await DatabaseMigrationHelper.AddColumnIfMissingAsync(_logger, _context, "ClubPreferences", "DefaultChiefArbiter", "TEXT", "''");
-
-            // Add future migrations here as needed.
-            // ...
         }
     }
 }

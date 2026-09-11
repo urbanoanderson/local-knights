@@ -94,6 +94,9 @@
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Version</value>
   </data>
+  <data name="DatabaseSchemaVersionLabel" xml:space="preserve">
+    <value>Datenbankschemaversion</value>
+  </data>
   <data name="AppCreatorLabel" xml:space="preserve">
     <value>Erstellt von</value>
   </data>
@@ -981,6 +984,17 @@
   </data>
   <data name="SignInFailedMessage" xml:space="preserve">
     <value>Die Anmeldung ist fehlgeschlagen</value>
+  </data>
+  <data name="DatabaseMigrationTitle" xml:space="preserve">
+    <value>Datenbankaktualisierung erforderlich</value>
+  </data>
+  <data name="DatabaseMigrationConfirmationMessage" xml:space="preserve">
+    <value>Das Datenbankschema des ausgewählten Vereins hat die veraltete Version {0}. Möchten Sie die erforderlichen Migrationen anwenden, um es auf Version {1} zu aktualisieren? Dies kann einige Sekunden dauern.
+
+WARNUNG: Sichern Sie unbedingt die Daten Ihres Vereins, bevor Sie die Migrationen anwenden.</value>
+  </data>
+  <data name="DatabaseSchemaTooNewMessage" xml:space="preserve">
+    <value>Das Datenbankschema des ausgewählten Vereins hat Version {0}, aber diese Version von Local Knights unterstützt nur Schemaversionen bis {1}. Aktualisieren Sie Local Knights, bevor Sie sich anmelden.</value>
   </data>
   <data name="ChessTitle_None" xml:space="preserve">
     <value>Keiner</value>

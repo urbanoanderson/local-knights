@@ -94,6 +94,9 @@
   <data name="AppVersionLabel" xml:space="preserve">
     <value>Версия</value>
   </data>
+  <data name="DatabaseSchemaVersionLabel" xml:space="preserve">
+    <value>Версия схемы базы данных</value>
+  </data>
   <data name="AppCreatorLabel" xml:space="preserve">
     <value>Автор</value>
   </data>
@@ -981,6 +984,17 @@
   </data>
   <data name="SignInFailedMessage" xml:space="preserve">
     <value>Не удалось выполнить вход</value>
+  </data>
+  <data name="DatabaseMigrationTitle" xml:space="preserve">
+    <value>Требуется обновление базы данных</value>
+  </data>
+  <data name="DatabaseMigrationConfirmationMessage" xml:space="preserve">
+    <value>Схема базы данных выбранного клуба имеет устаревшую версию {0}. Применить необходимые миграции для обновления до версии {1}? Это может занять несколько секунд.
+
+ПРЕДУПРЕЖДЕНИЕ: Перед применением миграций обязательно создайте резервную копию данных клуба.</value>
+  </data>
+  <data name="DatabaseSchemaTooNewMessage" xml:space="preserve">
+    <value>Схема базы данных выбранного клуба имеет версию {0}, но эта версия Local Knights поддерживает схемы только до версии {1}. Обновите Local Knights перед входом.</value>
   </data>
   <data name="ChessTitle_None" xml:space="preserve">
     <value>Нет</value>

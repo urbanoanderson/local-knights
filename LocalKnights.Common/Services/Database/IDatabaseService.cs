@@ -36,6 +36,18 @@ namespace LocalKnights.Common.Services.Database
         Task OpenConnectionAsync(string clubIdentifier, string password);
 
         /// <summary>
+        /// Gets the schema version stored in the connected database.
+        /// </summary>
+        /// <returns>The stored schema version.</returns>
+        Task<int> GetSchemaVersionAsync();
+
+        /// <summary>
+        /// Applies all pending schema migrations to the connected database.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task ApplyMigrationsAsync();
+
+        /// <summary>
         /// Gets a value indicating whether a database connection is currently open.
         /// </summary>
         bool IsConnected { get; }

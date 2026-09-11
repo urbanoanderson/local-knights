@@ -138,20 +138,42 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             IsSigningIn = true;
             try
             {
-                // Not block UI thread while database query is running
-                ClubPreferences? clubPreferences = await Task.Run(async () => await _clubService.ClubSignInAsync(SelectedClub, Password));
+                bool migrationDeclined = false;
+                ClubPreferences? clubPreferences = await _clubService.ClubSignInAsync(
+                    SelectedClub,
+                    Password,
+                    (storedVersion, currentVersion) =>
+                    {
+                        string message = string.Format(
+                            LocalizationHelper.GetString("DatabaseMigrationConfirmationMessage"),
+                            storedVersion,
+                            currentVersion);
+                        CustomMessageBoxResult result = _messageBoxService.ShowConfirmation(
+                            message,
+                            LocalizationHelper.GetString("DatabaseMigrationTitle"));
+                        migrationDeclined = result != CustomMessageBoxResult.Yes;
+                        return Task.FromResult(!migrationDeclined);
+                    });
 
                 if (clubPreferences != null)
                 {
                     _pageNavigationService.HardNavigateTo<DashboardViewModel>();
                 }
-                else
+                else if (!migrationDeclined)
                 {
                     // Show error message - invalid password or club not found
                     string errorMessage = LocalizationHelper.GetString("InvalidCredentialsMessage");
                     string errorTitle = LocalizationHelper.GetString("SignInFailedTitle");
                     _messageBoxService.ShowError(errorMessage, errorTitle);
                 }
+            }
+            catch (UnsupportedDatabaseSchemaVersionException ex)
+            {
+                string message = string.Format(
+                    LocalizationHelper.GetString("DatabaseSchemaTooNewMessage"),
+                    ex.StoredVersion,
+                    ex.SupportedVersion);
+                _messageBoxService.ShowError(message, LocalizationHelper.GetString("SignInFailedTitle"));
             }
             catch (Exception ex)
             {
