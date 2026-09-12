@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
 using LocalKnights.Common.Helpers;
 using LocalKnights.Common.Services;
@@ -18,6 +19,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
     /// </summary>
     public class MainWindowViewModel : BaseAppViewModel
     {
+        private static readonly TimeSpan DataAccessIndicatorMinimumVisibleDuration = TimeSpan.FromMilliseconds(500);
+
         /// <summary>
         /// Logger for the application.
         /// </summary>
@@ -52,6 +55,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Service for displaying user-facing message boxes.
         /// </summary>
         private readonly IMessageBoxService _messageBoxService;
+
+        private readonly DispatcherTimer _dataAccessHideTimer;
 
         /// <summary>
         /// Gets the command for signing out from the current club.
@@ -159,6 +164,19 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _fileSystemService = fileSystemService;
             _messageBoxService = messageBoxService;
 
+            _dataAccessHideTimer = new DispatcherTimer
+            {
+                Interval = DataAccessIndicatorMinimumVisibleDuration
+            };
+            _dataAccessHideTimer.Tick += (_, _) =>
+            {
+                _dataAccessHideTimer.Stop();
+                if (!_databaseService.IsReadOperationInProgress && !_databaseService.IsWriteOperationInProgress)
+                {
+                    ShowDataAccess = false;
+                }
+            };
+
             SignOutCommand = new RelayCommand(_ => ExecuteSignOut(), _ => _clubService.CurrentClub != null);
             ClubDashboardCommand = new RelayCommand(_ => _pageNavigationService.HardNavigateTo<DashboardViewModel>(), _ => CanNavigateToClubDashboard);
             PreferencesCommand = new RelayCommand(_ => _pageNavigationService.NavigateTo<ClubPreferencesViewModel>(), _ => _clubService.CurrentClub != null);
@@ -203,13 +221,10 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 bool show = _databaseService.IsReadOperationInProgress || _databaseService.IsWriteOperationInProgress;
 
-                // Ensure UI update happens on UI thread
-                if (Application.Current?.Dispatcher != null)
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => ShowDataAccess = show));
+                if (Application.Current?.Dispatcher != null && !Application.Current.Dispatcher.CheckAccess())
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => UpdateDataAccessIndicator(show)));
                 else
-                    ShowDataAccess = show;
-
-                OnPropertyChanged(nameof(ShowDataAccess));
+                    UpdateDataAccessIndicator(show);
             };
 
             _pageNavigationService.OnSetActivePage += (p) => {
@@ -243,7 +258,39 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <summary>
         /// Gets or sets a value indicating whether the data access indicator is shown.
         /// </summary>
-        public bool ShowDataAccess { get; set; }
+        public bool ShowDataAccess
+        {
+            get => _showDataAccess;
+            private set
+            {
+                if (_showDataAccess == value)
+                    return;
+
+                _showDataAccess = value;
+                OnPropertyChanged(nameof(ShowDataAccess));
+            }
+        }
+
+        private bool _showDataAccess;
+
+        private void UpdateDataAccessIndicator(bool show)
+        {
+            _dataAccessHideTimer.Stop();
+
+            if (show)
+            {
+                ShowDataAccess = true;
+                return;
+            }
+
+            if (Application.Current == null)
+            {
+                ShowDataAccess = false;
+                return;
+            }
+
+            _dataAccessHideTimer.Start();
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the application should use dark mode theme.

@@ -102,26 +102,33 @@
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Style="{DynamicResource ModernStatusBar}">
-            <StatusBarItem>
-                <TextBlock Text="{Binding Source={x:Static helpers:AppConstants.AppDisplayName}, StringFormat='© 2026 {0}'}" />
-            </StatusBarItem>
-            <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock Text="💽"
-                           Opacity="1"
-                           Visibility="{Binding ShowDataAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <TextBlock.Triggers>
-                        <EventTrigger RoutedEvent="TextBlock.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
-                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                     From="1"
-                                                     To="0.0"
-                                                     Duration="{StaticResource StatusPulseDuration}" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </TextBlock.Triggers>
-                </TextBlock>
+            <StatusBarItem HorizontalContentAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding Source={x:Static helpers:AppConstants.AppDisplayName}, StringFormat='© 2026 {0}'}" />
+                    <TextBlock Grid.Column="1"
+                               Text="💽"
+                               FontFamily="Segoe UI Emoji"
+                               Opacity="1"
+                               Visibility="{Binding ShowDataAccess, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="TextBlock.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         From="1"
+                                                         To="0.0"
+                                                         Duration="{StaticResource StatusPulseDuration}" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
+                </Grid>
             </StatusBarItem>
         </StatusBar>
         <ContentControl Content="{Binding CurrentViewModel}" Background="{DynamicResource WindowBackgroundBrush}" />
