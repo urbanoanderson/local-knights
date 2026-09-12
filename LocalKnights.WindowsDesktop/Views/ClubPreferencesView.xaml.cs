@@ -8,6 +8,27 @@ namespace LocalKnights.WindowsDesktop.Views
         public ClubPreferencesView()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
+
+        private void OnDataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue is ClubPreferencesViewModel oldViewModel)
+            {
+                oldViewModel.PasswordsCleared -= ClearPasswords;
+            }
+
+            if (e.NewValue is ClubPreferencesViewModel newViewModel)
+            {
+                newViewModel.PasswordsCleared += ClearPasswords;
+            }
+        }
+
+        private void ClearPasswords()
+        {
+            CurrentPasswordInput.Clear();
+            NewPasswordInput.Clear();
+            ConfirmNewPasswordInput.Clear();
         }
 
         private void CurrentPasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)

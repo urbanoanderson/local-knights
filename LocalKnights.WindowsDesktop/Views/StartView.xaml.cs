@@ -11,6 +11,25 @@ namespace LocalKnights.WindowsDesktop.Views
         public StartView()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
+
+        private void OnDataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue is StartViewModel oldViewModel)
+            {
+                oldViewModel.PasswordCleared -= ClearPassword;
+            }
+
+            if (e.NewValue is StartViewModel newViewModel)
+            {
+                newViewModel.PasswordCleared += ClearPassword;
+            }
+        }
+
+        private void ClearPassword()
+        {
+            PasswordInput.Clear();
         }
 
         private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)

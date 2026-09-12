@@ -56,7 +56,7 @@
 
                         <StackPanel Grid.Row="3" Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding PasswordLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
-                            <PasswordBox Style="{DynamicResource ModernPasswordBox}"
+                            <PasswordBox x:Name="PasswordInput" Style="{DynamicResource ModernPasswordBox}"
                                          ToolTip="{Binding CreatePasswordTooltip}"
                                          Margin="{StaticResource SpacingSmallBottom}"
                                          PasswordChanged="PasswordBox_PasswordChanged" />
@@ -65,7 +65,7 @@
 
                         <StackPanel Grid.Row="4">
                             <TextBlock Text="{Binding ConfirmPasswordLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
-                            <PasswordBox Style="{DynamicResource ModernPasswordBox}"
+                            <PasswordBox x:Name="ConfirmPasswordInput" Style="{DynamicResource ModernPasswordBox}"
                                          ToolTip="{Binding CreateConfirmPasswordTooltip}"
                                          Margin="{StaticResource SpacingSmallBottom}"
                                          PasswordChanged="ConfirmPasswordBox_PasswordChanged" />

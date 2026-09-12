@@ -281,6 +281,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         }
 
         /// <summary>
+        /// Raised when password inputs should be cleared from the view.
+        /// </summary>
+        public event Action? PasswordsCleared;
+
+        /// <summary>
         /// Gets or sets a new social media link to be added to the club's social media list.
         /// </summary>
         public string NewSocialMediaLink
@@ -681,6 +686,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 if (string.IsNullOrWhiteSpace(CurrentPassword))
                 {
                     _messageBoxService.ShowWarning(LocalizationHelper.GetString("CurrentPasswordRequiredMessage"), LocalizationHelper.GetString("ValidationError"));
+                    ClearPasswords();
                     return;
                 }
 
@@ -688,6 +694,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 if (!await VerifyCurrentPasswordAsync(_clubPreferences.IdentifierName, CurrentPassword))
                 {
                     _messageBoxService.ShowWarning(LocalizationHelper.GetString("InvalidCurrentPasswordMessage"), LocalizationHelper.GetString("ValidationError"));
+                    ClearPasswords();
                     return;
                 }
 
@@ -695,6 +702,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 if (NewPassword != ConfirmNewPassword)
                 {
                     _messageBoxService.ShowWarning(LocalizationHelper.GetString("PasswordsDoNotMatchMessage"), LocalizationHelper.GetString("ValidationError"));
+                    ClearPasswords();
                     return;
                 }
 
@@ -702,6 +710,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 if (string.IsNullOrWhiteSpace(NewPassword))
                 {
                     _messageBoxService.ShowWarning(LocalizationHelper.GetString("NewPasswordCannotBeEmptyMessage"), LocalizationHelper.GetString("ValidationError"));
+                    ClearPasswords();
                     return;
                 }
             }
@@ -773,9 +782,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
             try
             {
-                // Pass new password only if user is changing it
-                string? passwordToChange = isChangingPassword ? NewPassword : null;
-                ClubPreferences? updatedClubPreferences = await _clubService.UpdateClubAsync(_clubPreferences, passwordToChange);
+                ClubPreferences? updatedClubPreferences = isChangingPassword
+                    ? await _clubService.UpdateClubAsync(_clubPreferences, CurrentPassword, NewPassword)
+                    : await _clubService.UpdateClubAsync(_clubPreferences);
 
                 if (updatedClubPreferences != null)
                 {
@@ -787,6 +796,18 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _messageBoxService.ShowError($"{LocalizationHelper.GetString("SavePreferencesFailedMessage")} {ex.Message}", LocalizationHelper.GetString("Error"));
             }
+            finally
+            {
+                ClearPasswords();
+            }
+        }
+
+        private void ClearPasswords()
+        {
+            CurrentPassword = string.Empty;
+            NewPassword = string.Empty;
+            ConfirmNewPassword = string.Empty;
+            PasswordsCleared?.Invoke();
         }
 
         private static string? NormalizeOptionalValue(string? value)
@@ -857,11 +878,15 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             var message = LocalizationHelper.GetString("DeleteClubConfirmation");
             CustomMessageBoxResult result = _messageBoxService.ShowConfirmation(message, LocalizationHelper.GetString("Confirm"));
             if (result != CustomMessageBoxResult.Yes)
+            {
+                ClearPasswords();
                 return;
+            }
 
             if (string.IsNullOrWhiteSpace(CurrentPassword))
             {
                 _messageBoxService.ShowWarning(LocalizationHelper.GetString("CurrentPasswordRequiredForDeletionMessage"), LocalizationHelper.GetString("ValidationError"));
+                ClearPasswords();
                 return;
             }
 
@@ -877,6 +902,10 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             catch (Exception ex)
             {
                 _messageBoxService.ShowError($"{LocalizationHelper.GetString("DeleteClubFailedMessage")} {ex.Message}", LocalizationHelper.GetString("Error"));
+            }
+            finally
+            {
+                ClearPasswords();
             }
         }
     }

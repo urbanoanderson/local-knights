@@ -2,6 +2,8 @@ using LocalKnights.Common.Models;
 using LocalKnights.Common.Helpers;
 using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
+using LocalKnights.Common.Tests.TestUtils;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -12,6 +14,77 @@ namespace LocalKnights.Common.Tests.Services.Database;
 /// </summary>
 public sealed class ClubServiceTests
 {
+    [Fact]
+    public async Task UpdateClubAsync_WhenPostRekeyVerificationFails_RestoresBackupAndOldConnection()
+    {
+        const string identifier = "club";
+        const string currentPassword = "current-password";
+        const string newPassword = "new-password";
+        string temporaryDirectory = Path.Combine(Path.GetTempPath(), $"LocalKnights-{Guid.NewGuid():N}");
+        string databasePath = Path.Combine(temporaryDirectory, $"{identifier}.db");
+        string backupPath = $"{databasePath}.password-change-backup";
+        Mock<IFileSystemService> fileSystemServiceMock = new();
+        fileSystemServiceMock.Setup(service => service.GetClubsDirectory()).Returns(temporaryDirectory);
+        fileSystemServiceMock.Setup(service => service.GetDbFilePath(identifier)).Returns(databasePath);
+        fileSystemServiceMock.Setup(service => service.FileExists(databasePath)).Returns(() => File.Exists(databasePath));
+        fileSystemServiceMock.Setup(service => service.FileExists(backupPath)).Returns(() => File.Exists(backupPath));
+        fileSystemServiceMock.Setup(service => service.CreateDirectory(It.IsAny<string>()))
+            .Callback<string>(path => Directory.CreateDirectory(path));
+        fileSystemServiceMock.Setup(service => service.CopyFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()))
+            .Callback<string, string, bool>((source, destination, overwrite) => File.Copy(source, destination, overwrite));
+        fileSystemServiceMock.Setup(service => service.DeleteFile(It.IsAny<string>()))
+            .Callback<string>(path => File.Delete(path));
+
+        try
+        {
+            using (DatabaseService databaseCreator = new DatabaseService(fileSystemServiceMock.Object, MockHelper.CreateMockLogger()))
+            {
+                await databaseCreator.OpenConnectionAsync(identifier, currentPassword);
+                await databaseCreator.CloseConnectionAsync();
+            }
+
+            ClubPreferences existingPreferences = new() { IdentifierName = identifier, DisplayName = "Club" };
+            ClubPreferences restoredPreferences = new() { IdentifierName = identifier, DisplayName = "Club" };
+            Mock<IDatabaseService> databaseServiceMock = new();
+            databaseServiceMock.SetupGet(service => service.IsConnected).Returns(true);
+            databaseServiceMock.Setup(service => service.CloseConnectionAsync()).Returns(Task.CompletedTask);
+            databaseServiceMock.Setup(service => service.OpenConnectionAsync(identifier, It.IsAny<string>())).Returns(Task.CompletedTask);
+            databaseServiceMock.Setup(service => service.UpdateAsync(It.IsAny<ClubPreferences>())).Returns(Task.CompletedTask);
+            databaseServiceMock.Setup(service => service.RekeyAsync(newPassword)).Returns(Task.CompletedTask);
+            databaseServiceMock
+                .SetupSequence(service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>() ))
+                .ReturnsAsync(existingPreferences)
+                .ThrowsAsync(new InvalidOperationException("Post-rekey verification failed."))
+                .ReturnsAsync(restoredPreferences);
+            ClubService clubService = new ClubService(
+                databaseServiceMock.Object,
+                fileSystemServiceMock.Object,
+                MockHelper.CreateMockLogger());
+
+            InvalidOperationException exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                clubService.UpdateClubAsync(existingPreferences, currentPassword, newPassword));
+
+            Assert.Equal("Post-rekey verification failed.", exception.Message);
+            Assert.False(File.Exists(backupPath));
+            fileSystemServiceMock.Verify(service => service.CopyFile(databasePath, backupPath, true), Times.Once);
+            fileSystemServiceMock.Verify(service => service.CopyFile(backupPath, databasePath, true), Times.Once);
+            databaseServiceMock.Verify(service => service.OpenConnectionAsync(identifier, currentPassword), Times.Exactly(2));
+            databaseServiceMock.Verify(service => service.OpenConnectionAsync(identifier, newPassword), Times.Once);
+            databaseServiceMock.Verify(
+                service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>()),
+                Times.Exactly(3));
+            Assert.Same(restoredPreferences, clubService.CurrentClub);
+        }
+        finally
+        {
+            SqliteConnection.ClearAllPools();
+            if (Directory.Exists(temporaryDirectory))
+            {
+                Directory.Delete(temporaryDirectory, true);
+            }
+        }
+    }
+
     [Fact]
     public async Task ClubSignInAsync_WhenSchemaIsNewerThanSupported_ClosesConnectionAndThrows()
     {

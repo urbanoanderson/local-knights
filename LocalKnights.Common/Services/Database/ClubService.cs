@@ -157,40 +157,129 @@ namespace LocalKnights.Common.Services.Database
         }
 
         /// <inheritdoc/>
-        public async Task<ClubPreferences?> UpdateClubAsync(ClubPreferences updatedClubPreferences, string? newPassword = null)
+        public async Task<ClubPreferences?> UpdateClubAsync(ClubPreferences updatedClubPreferences)
+        {
+            return await UpdateClubInternalAsync(updatedClubPreferences, null, null);
+        }
+
+        /// <inheritdoc/>
+        public async Task<ClubPreferences?> UpdateClubAsync(ClubPreferences updatedClubPreferences, string currentPassword, string newPassword)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(currentPassword);
+            ArgumentException.ThrowIfNullOrWhiteSpace(newPassword);
+
+            return await UpdateClubInternalAsync(updatedClubPreferences, currentPassword, newPassword);
+        }
+
+        private async Task<ClubPreferences?> UpdateClubInternalAsync(
+            ClubPreferences updatedClubPreferences,
+            string? currentPassword,
+            string? newPassword)
         {
             if (!ClubExists(updatedClubPreferences.IdentifierName))
                 return null;
 
-            ClubPreferences? existingClubPreferences = await _databaseService.QuerySingleOrDefaultAsync<ClubPreferences>(query => query);
+            bool isChangingPassword = currentPassword != null && newPassword != null;
+            bool backupCreated = false;
+            string databasePath = _fileSystemService.GetDbFilePath(updatedClubPreferences.IdentifierName);
+            string backupPath = $"{databasePath}.password-change-backup";
 
-            if (existingClubPreferences == null)
-                return null;
-
-            existingClubPreferences.DisplayName = updatedClubPreferences.DisplayName;
-            existingClubPreferences.Description = updatedClubPreferences.Description;
-            existingClubPreferences.City = updatedClubPreferences.City;
-            existingClubPreferences.Federation = updatedClubPreferences.Federation;
-            existingClubPreferences.DefaultChiefArbiter = updatedClubPreferences.DefaultChiefArbiter;
-            existingClubPreferences.SocialMediaLinks = updatedClubPreferences.SocialMediaLinks;
-            existingClubPreferences.RatingSystem = updatedClubPreferences.RatingSystem;
-            existingClubPreferences.Rating = updatedClubPreferences.Rating;
-            existingClubPreferences.MinRating = updatedClubPreferences.MinRating;
-            existingClubPreferences.MaxRating = updatedClubPreferences.MaxRating;
-            existingClubPreferences.Deviation = updatedClubPreferences.Deviation;
-            existingClubPreferences.Volatility = updatedClubPreferences.Volatility;
-            existingClubPreferences.ProvisionalGames = updatedClubPreferences.ProvisionalGames;
-            existingClubPreferences.UpdatedAt = updatedClubPreferences.UpdatedAt;
-
-            await _databaseService.UpdateAsync(existingClubPreferences);
-            this.CurrentClub = existingClubPreferences;
-
-            if (!string.IsNullOrWhiteSpace(newPassword))
+            if (isChangingPassword)
             {
-                await ChangePasswordAsync(updatedClubPreferences.IdentifierName, newPassword);
+                await VerifyPasswordAsync(updatedClubPreferences.IdentifierName, currentPassword!);
             }
 
-            return existingClubPreferences;
+            try
+            {
+                if (isChangingPassword)
+                {
+                    await _databaseService.CloseConnectionAsync();
+                    SqliteConnection.ClearAllPools();
+                    _fileSystemService.CopyFile(databasePath, backupPath, true);
+                    backupCreated = true;
+                    await _databaseService.OpenConnectionAsync(updatedClubPreferences.IdentifierName, currentPassword!);
+                }
+
+                ClubPreferences? existingClubPreferences = await _databaseService.QuerySingleOrDefaultAsync<ClubPreferences>(query => query);
+
+                if (existingClubPreferences == null)
+                {
+                    if (isChangingPassword)
+                    {
+                        throw new InvalidOperationException("Club preferences are missing from the database.");
+                    }
+
+                    return null;
+                }
+
+                existingClubPreferences.DisplayName = updatedClubPreferences.DisplayName;
+                existingClubPreferences.Description = updatedClubPreferences.Description;
+                existingClubPreferences.City = updatedClubPreferences.City;
+                existingClubPreferences.Federation = updatedClubPreferences.Federation;
+                existingClubPreferences.DefaultChiefArbiter = updatedClubPreferences.DefaultChiefArbiter;
+                existingClubPreferences.SocialMediaLinks = updatedClubPreferences.SocialMediaLinks;
+                existingClubPreferences.RatingSystem = updatedClubPreferences.RatingSystem;
+                existingClubPreferences.Rating = updatedClubPreferences.Rating;
+                existingClubPreferences.MinRating = updatedClubPreferences.MinRating;
+                existingClubPreferences.MaxRating = updatedClubPreferences.MaxRating;
+                existingClubPreferences.Deviation = updatedClubPreferences.Deviation;
+                existingClubPreferences.Volatility = updatedClubPreferences.Volatility;
+                existingClubPreferences.ProvisionalGames = updatedClubPreferences.ProvisionalGames;
+                existingClubPreferences.UpdatedAt = updatedClubPreferences.UpdatedAt;
+
+                await _databaseService.UpdateAsync(existingClubPreferences);
+
+                if (isChangingPassword)
+                {
+                    await ChangePasswordAsync(newPassword!);
+                    await _databaseService.CloseConnectionAsync();
+                    SqliteConnection.ClearAllPools();
+                    await _databaseService.OpenConnectionAsync(updatedClubPreferences.IdentifierName, newPassword!);
+                    existingClubPreferences = await _databaseService.QuerySingleOrDefaultAsync<ClubPreferences>(query => query)
+                        ?? throw new InvalidOperationException("Club preferences are missing after changing the database password.");
+                    existingClubPreferences.IdentifierName = updatedClubPreferences.IdentifierName;
+                    TryDeletePasswordChangeBackup(backupPath);
+                }
+
+                this.CurrentClub = existingClubPreferences;
+                return existingClubPreferences;
+            }
+            catch when (isChangingPassword)
+            {
+                await _databaseService.CloseConnectionAsync();
+                SqliteConnection.ClearAllPools();
+
+                if (backupCreated)
+                {
+                    _fileSystemService.CopyFile(backupPath, databasePath, true);
+                    TryDeletePasswordChangeBackup(backupPath);
+                }
+                else if (_fileSystemService.FileExists(backupPath))
+                {
+                    TryDeletePasswordChangeBackup(backupPath);
+                }
+
+                await _databaseService.OpenConnectionAsync(updatedClubPreferences.IdentifierName, currentPassword!);
+                this.CurrentClub = await _databaseService.QuerySingleOrDefaultAsync<ClubPreferences>(query => query);
+                if (this.CurrentClub != null)
+                {
+                    this.CurrentClub.IdentifierName = updatedClubPreferences.IdentifierName;
+                }
+
+                throw;
+            }
+        }
+
+        private void TryDeletePasswordChangeBackup(string backupPath)
+        {
+            try
+            {
+                _fileSystemService.DeleteFile(backupPath);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Unable to delete password-change backup file at '{BackupPath}'.", backupPath);
+            }
         }
 
         /// <inheritdoc/>
@@ -213,7 +302,7 @@ namespace LocalKnights.Common.Services.Database
             {
                 await connection.OpenAsync();
                 await using var command = connection.CreateCommand();
-                command.CommandText = "SELECT 1;";
+                command.CommandText = "SELECT COUNT(*) FROM sqlite_master;";
                 await command.ExecuteScalarAsync();
             }
             catch (Exception ex)
@@ -307,10 +396,9 @@ namespace LocalKnights.Common.Services.Database
         /// Changes the password of the club's database by executing the PRAGMA rekey command.
         /// This method assumes that the database connection is already open and authenticated with the current password.
         /// </summary>
-        /// <param name="clubIdentifier">The identifier of the club whose password is to be changed.</param>
         /// <param name="newPassword">The new password to set for the club's database.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        private async Task ChangePasswordAsync(string clubIdentifier, string newPassword)
+        private async Task ChangePasswordAsync(string newPassword)
         {
             if (!_databaseService.IsConnected)
             {
@@ -319,10 +407,7 @@ namespace LocalKnights.Common.Services.Database
 
             try
             {
-                //Escape Sql Literal
-                string escapedPassword = newPassword.Replace("'", "''");
-                string pragmaCommand = $"PRAGMA rekey = '{escapedPassword}';";
-                await _databaseService.ExecuteSqlAsync(pragmaCommand);
+                await _databaseService.RekeyAsync(newPassword);
             }
             catch (Exception ex)
             {

@@ -277,6 +277,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public ICommand AddSocialMediaLinkCommand { get; }
         public ICommand RemoveSocialMediaLinkCommand { get; }
 
+        /// <summary>
+        /// Raised when password inputs should be cleared from the view.
+        /// </summary>
+        public event Action? PasswordsCleared;
+
         private readonly ILogger _logger;
         private readonly IPageNavigationService _pageNavigationService;
         private readonly IClubService _clubService;
@@ -393,6 +398,12 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             catch (Exception ex)
             {
                 _messageBoxService.ShowError($"Failed to create club: {ex.Message}", "Error");
+            }
+            finally
+            {
+                Password = string.Empty;
+                ConfirmPassword = string.Empty;
+                PasswordsCleared?.Invoke();
             }
         }
 

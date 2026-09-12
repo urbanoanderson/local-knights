@@ -1,4 +1,5 @@
 using System.Text;
+using LocalKnights.Common.Models;
 using LocalKnights.Common.Services;
 using LocalKnights.Common.Services.Database;
 using LocalKnights.Common.Tests.TestUtils;
@@ -23,8 +24,13 @@ public sealed class SqliteEncryptionTests : IDisposable
         Mock<IFileSystemService> fileSystemService = new Mock<IFileSystemService>();
         fileSystemService.Setup(service => service.GetClubsDirectory()).Returns(_temporaryDirectory);
         fileSystemService.Setup(service => service.GetDbFilePath(ClubIdentifier)).Returns(_databasePath);
+        fileSystemService.Setup(service => service.FileExists(_databasePath)).Returns(() => File.Exists(_databasePath));
         fileSystemService.Setup(service => service.CreateDirectory(It.IsAny<string>()))
             .Callback<string>(path => Directory.CreateDirectory(path));
+        fileSystemService.Setup(service => service.CopyFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()))
+            .Callback<string, string, bool>((source, destination, overwrite) => File.Copy(source, destination, overwrite));
+        fileSystemService.Setup(service => service.DeleteFile(It.IsAny<string>()))
+            .Callback<string>(path => File.Delete(path));
         _fileSystemService = fileSystemService.Object;
     }
 
@@ -66,14 +72,27 @@ public sealed class SqliteEncryptionTests : IDisposable
     }
 
     [Fact]
+    public async Task VerifyPasswordAsync_WrongPassword_ThrowsInvalidOperationException()
+    {
+        using DatabaseService databaseService = CreateDatabaseService();
+        await databaseService.OpenConnectionAsync(ClubIdentifier, CorrectPassword);
+        await databaseService.CloseConnectionAsync();
+        ClubService clubService = new ClubService(databaseService, _fileSystemService, MockHelper.CreateMockLogger());
+
+        await clubService.VerifyPasswordAsync(ClubIdentifier, CorrectPassword);
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            clubService.VerifyPasswordAsync(ClubIdentifier, "wrong-password"));
+    }
+
+    [Fact]
     public async Task ExecuteSqlAsync_RekeyDatabase_RequiresNewPassword()
     {
-        const string newPassword = "new-password";
+        const string newPassword = "new'password";
 
         using (DatabaseService databaseService = CreateDatabaseService())
         {
             await databaseService.OpenConnectionAsync(ClubIdentifier, CorrectPassword);
-            await databaseService.ExecuteSqlAsync($"PRAGMA rekey = '{newPassword}';");
+            await databaseService.RekeyAsync(newPassword);
             await databaseService.CloseConnectionAsync();
         }
 
@@ -90,6 +109,30 @@ public sealed class SqliteEncryptionTests : IDisposable
             await databaseService.OpenConnectionAsync(ClubIdentifier, newPassword);
             await databaseService.CloseConnectionAsync();
         }
+    }
+
+    [Fact]
+    public async Task UpdateClubAsync_WithPasswordChange_ReopensWithNewPasswordAndRemovesBackup()
+    {
+        const string newPassword = "new'password";
+        string backupPath = $"{_databasePath}.password-change-backup";
+        using DatabaseService databaseService = CreateDatabaseService();
+        ClubService clubService = new ClubService(databaseService, _fileSystemService, MockHelper.CreateMockLogger());
+        ClubPreferences preferences = new ClubPreferences
+        {
+            IdentifierName = ClubIdentifier,
+            DisplayName = "Encrypted Club"
+        };
+        await clubService.CreateClubAsync(preferences, CorrectPassword);
+
+        ClubPreferences? result = await clubService.UpdateClubAsync(preferences, CorrectPassword, newPassword);
+
+        Assert.NotNull(result);
+        Assert.True(databaseService.IsConnected);
+        Assert.False(File.Exists(backupPath));
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            clubService.VerifyPasswordAsync(ClubIdentifier, CorrectPassword));
+        await clubService.VerifyPasswordAsync(ClubIdentifier, newPassword);
     }
 
     public void Dispose()

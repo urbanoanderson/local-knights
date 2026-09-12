@@ -34,6 +34,7 @@ public sealed class StartViewModelTests
         Assert.NotNull(errorMessage);
         Assert.Contains("4", errorMessage);
         Assert.Contains("3", errorMessage);
+        Assert.Empty(viewModel.Password);
         messageBoxServiceMock.Verify(service => service.ShowConfirmation(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         navigationServiceMock.Verify(service => service.HardNavigateTo<DashboardViewModel>(), Times.Never);
     }
@@ -64,6 +65,7 @@ public sealed class StartViewModelTests
         Assert.NotNull(confirmationMessage);
         Assert.Contains("2", confirmationMessage);
         Assert.Contains("3", confirmationMessage);
+        Assert.Empty(viewModel.Password);
         navigationServiceMock.Verify(service => service.HardNavigateTo<DashboardViewModel>(), Times.Never);
         messageBoxServiceMock.Verify(service => service.ShowError(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
     }
@@ -90,6 +92,7 @@ public sealed class StartViewModelTests
         viewModel.SignInCommand.Execute(null);
         await WaitForSignInToFinishAsync(viewModel);
 
+        Assert.Empty(viewModel.Password);
         navigationServiceMock.Verify(service => service.HardNavigateTo<DashboardViewModel>(), Times.Once);
         messageBoxServiceMock.Verify(service => service.ShowError(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
     }

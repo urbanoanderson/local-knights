@@ -83,11 +83,34 @@ public sealed class ClubPreferencesViewModelTests
                 club.CreatedAt == createdUtc &&
                 club.UpdatedAt >= updatedUtc &&
                 club.MinRating == 130 &&
-                club.MaxRating == 3850),
-            null), Times.Once);
+                club.MaxRating == 3850)), Times.Once);
 
         pageNavigationServiceMock.Verify(service => service.HardNavigateTo<DashboardViewModel>(), Times.Once);
         messageBoxServiceMock.Verify(service => service.ShowInfo(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task SaveCommand_WithPasswordChange_UsesBothPasswordsAndClearsPasswordFields()
+    {
+        ClubPreferences currentClub = CreateCurrentClub();
+        Mock<IClubService> clubServiceMock = CreateClubServiceMock(currentClub);
+        clubServiceMock
+            .Setup(service => service.UpdateClubAsync(currentClub, "current-password", "new-password"))
+            .ReturnsAsync(currentClub);
+        ClubPreferencesViewModel viewModel = CreateViewModel(currentClub, clubServiceMock);
+        viewModel.CurrentPassword = "current-password";
+        viewModel.NewPassword = "new-password";
+        viewModel.ConfirmNewPassword = "new-password";
+
+        viewModel.SaveCommand.Execute(null);
+        await Task.Yield();
+
+        clubServiceMock.Verify(
+            service => service.UpdateClubAsync(currentClub, "current-password", "new-password"),
+            Times.Once);
+        Assert.Empty(viewModel.CurrentPassword);
+        Assert.Empty(viewModel.NewPassword);
+        Assert.Empty(viewModel.ConfirmNewPassword);
     }
 
     private static ClubPreferencesViewModel CreateViewModel(
@@ -130,8 +153,10 @@ public sealed class ClubPreferencesViewModelTests
     {
         Mock<IClubService> mock = new();
         mock.SetupGet(service => service.CurrentClub).Returns(currentClub);
-        mock.Setup(service => service.UpdateClubAsync(It.IsAny<ClubPreferences>(), It.IsAny<string?>()))
-            .ReturnsAsync((ClubPreferences club, string? _) => club);
+        mock.Setup(service => service.UpdateClubAsync(It.IsAny<ClubPreferences>()))
+            .ReturnsAsync((ClubPreferences club) => club);
+        mock.Setup(service => service.UpdateClubAsync(It.IsAny<ClubPreferences>(), It.IsAny<string>(), It.IsAny<string>()))
+            .ReturnsAsync((ClubPreferences club, string _, string _) => club);
         mock.Setup(service => service.VerifyPasswordAsync(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.CompletedTask);
         mock.Setup(service => service.DeleteClubAsync(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.CompletedTask);
         return mock;

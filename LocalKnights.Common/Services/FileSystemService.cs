@@ -139,6 +139,12 @@ namespace LocalKnights.Common.Services
             File.Delete(path);
         }
 
+        /// <inheritdoc/>
+        public void CopyFile(string sourcePath, string destinationPath, bool overwrite)
+        {
+            File.Copy(sourcePath, destinationPath, overwrite);
+        }
+
         private static string GetDirectoryOpenCommand()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

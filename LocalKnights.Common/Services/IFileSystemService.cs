@@ -84,5 +84,13 @@ namespace LocalKnights.Common.Services
         /// </summary>
         /// <param name="path">The path of the file to delete.</param>
         void DeleteFile(string path);
+
+        /// <summary>
+        /// Copies a file to a new path.
+        /// </summary>
+        /// <param name="sourcePath">The source file path.</param>
+        /// <param name="destinationPath">The destination file path.</param>
+        /// <param name="overwrite">Whether an existing destination file may be overwritten.</param>
+        void CopyFile(string sourcePath, string destinationPath, bool overwrite);
     }
 }

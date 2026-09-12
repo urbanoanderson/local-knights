@@ -74,9 +74,17 @@ namespace LocalKnights.Common.Services.Database
         /// Updates club's preferences asynchronously.
         /// </summary>
         /// <param name="updatedClubPreferences">The club preferences with updated information.</param>
-        /// <param name="newPassword">The new password to re-encrypt the database (optional). If null, the database will not be re-encrypted.</param>
         /// <returns>The updated club preferences, or null if the club was not found.</returns>
-        Task<ClubPreferences?> UpdateClubAsync(ClubPreferences updatedClubPreferences, string? newPassword = null);
+        Task<ClubPreferences?> UpdateClubAsync(ClubPreferences updatedClubPreferences);
+
+        /// <summary>
+        /// Updates club preferences and securely changes the database password.
+        /// </summary>
+        /// <param name="updatedClubPreferences">The club preferences with updated information.</param>
+        /// <param name="currentPassword">The current database password.</param>
+        /// <param name="newPassword">The new database password.</param>
+        /// <returns>The updated club preferences, or null if the club was not found.</returns>
+        Task<ClubPreferences?> UpdateClubAsync(ClubPreferences updatedClubPreferences, string currentPassword, string newPassword);
 
         /// <summary>
         /// Deletes a club asynchronously.

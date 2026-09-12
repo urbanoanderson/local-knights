@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System.Data;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -167,6 +169,33 @@ namespace LocalKnights.Common.Services.Database
             await ExecuteWriteAsync(async () =>
             {
                 await DatabaseMigrationHelper.MigrateDatabaseSchema(_logger, _context!);
+            });
+        }
+
+        /// <inheritdoc/>
+        public async Task RekeyAsync(string newPassword)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(newPassword);
+
+            await ExecuteWriteAsync(() =>
+            {
+                SqliteConnection connection = (SqliteConnection)_context!.Database.GetDbConnection();
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(newPassword);
+
+                try
+                {
+                    int result = SQLitePCL.raw.sqlite3_rekey(connection.Handle, passwordBytes);
+                    if (result != SQLitePCL.raw.SQLITE_OK)
+                    {
+                        throw new SqliteException("Failed to change the database encryption key.", result);
+                    }
+                }
+                finally
+                {
+                    CryptographicOperations.ZeroMemory(passwordBytes);
+                }
+
+                return Task.CompletedTask;
             });
         }
 

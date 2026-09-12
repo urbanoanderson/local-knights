@@ -23,7 +23,7 @@
             </ComboBox>
             <TextBlock Text="{Binding PasswordLabel}" Style="{DynamicResource LabelText}"
                        Margin="{StaticResource SpacingMediumBottom}" />
-            <PasswordBox Style="{DynamicResource ModernPasswordBox}"
+            <PasswordBox x:Name="PasswordInput" Style="{DynamicResource ModernPasswordBox}"
                          Margin="{StaticResource SpacingSectionBottom}"
                          ToolTip="{Binding SignInPasswordTooltip}"
                          PasswordChanged="PasswordBox_PasswordChanged"

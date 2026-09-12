@@ -64,6 +64,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public ICommand SignInCommand { get; }
         public ICommand CreateClubCommand { get; }
 
+        /// <summary>
+        /// Raised when the password input should be cleared from the view.
+        /// </summary>
+        public event Action? PasswordCleared;
+
         private readonly ILogger _logger;
         private readonly IPageNavigationService _pageNavigationService;
         private readonly IClubService _clubService;
@@ -182,6 +187,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             }
             finally
             {
+                Password = string.Empty;
+                PasswordCleared?.Invoke();
                 IsSigningIn = false;
             }
         }

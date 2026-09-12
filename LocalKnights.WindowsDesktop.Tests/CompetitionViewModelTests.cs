@@ -224,7 +224,7 @@ public sealed class CompetitionViewModelTests
         mock.Setup(service => service.DeleteClubAsync(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.CompletedTask);
         mock.Setup(service => service.GetExistingClubIdentifiers()).Returns([]);
         mock.Setup(service => service.ClubSignOutAsync()).Returns(Task.CompletedTask);
-        mock.Setup(service => service.UpdateClubAsync(It.IsAny<ClubPreferences>(), It.IsAny<string?>())).ReturnsAsync((ClubPreferences club, string? _) => club);
+        mock.Setup(service => service.UpdateClubAsync(It.IsAny<ClubPreferences>())).ReturnsAsync((ClubPreferences club) => club);
         mock.Setup(service => service.VerifyPasswordAsync(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.CompletedTask);
         return mock;
     }

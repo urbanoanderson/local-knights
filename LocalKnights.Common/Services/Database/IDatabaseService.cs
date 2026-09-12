@@ -48,6 +48,13 @@ namespace LocalKnights.Common.Services.Database
         Task ApplyMigrationsAsync();
 
         /// <summary>
+        /// Changes the encryption key of the connected database.
+        /// </summary>
+        /// <param name="newPassword">The new database encryption password.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task RekeyAsync(string newPassword);
+
+        /// <summary>
         /// Gets a value indicating whether a database connection is currently open.
         /// </summary>
         bool IsConnected { get; }

@@ -71,10 +71,13 @@ public sealed class CreateClubViewModelTests
 
         viewModel.CreateCommand.Execute(null);
         ClubPreferences createdClub = await createdClubSource.Task.WaitAsync(TimeSpan.FromSeconds(5));
+        await Task.Yield();
 
         Assert.Equal("Recife", createdClub.City);
         Assert.Equal("BRA", createdClub.Federation);
         Assert.Equal("Alex Silva", createdClub.DefaultChiefArbiter);
+        Assert.Empty(viewModel.Password);
+        Assert.Empty(viewModel.ConfirmPassword);
     }
 
     private static CreateClubViewModel CreateViewModel(
