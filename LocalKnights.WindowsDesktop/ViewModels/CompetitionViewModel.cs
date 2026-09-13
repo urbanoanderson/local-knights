@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using LocalKnights.Common.Helpers;
@@ -55,6 +56,32 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Localized Texts.
         /// </summary>
         public string CompetitionPage => $"{AppConstants.DefaultCompetitionIcon} " + string.Format(LocalizationHelper.GetString("CompetitionPage"), GetDisplayCompetitionTitle());
+        public string CompetitionTitleHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionTitleHelp"), CommonConstants.CompetitionTitleMaxLength);
+        public string CompetitionDescriptionHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionDescriptionHelp"), CommonConstants.DescriptionMaxLength);
+        public string CompetitionCityHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionCityHelp"), CommonConstants.CityMaxLength);
+        public string CompetitionChiefArbiterHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionChiefArbiterHelp"), CommonConstants.ChiefArbiterMaxLength);
+        public string CompetitionFederationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionFederationHelp"), CommonConstants.FederationCodeLength);
+        public string CompetitionWinnerHelp => LocalizationHelper.GetString("CompetitionWinnerHelp");
+        public string CompetitionTimeFormatHelp => LocalizationHelper.GetString("CompetitionTimeFormatHelp");
+        public string CompetitionRatedHelp => LocalizationHelper.GetString("CompetitionRatedHelp");
+        public string CompetitionTypeHelp => LocalizationHelper.GetString("CompetitionTypeHelp");
+        public string CompetitionRoundsHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionRoundsHelp"), CommonConstants.CompetitionRoundsMinimum, CommonConstants.CompetitionRoundsMaximum);
+        public string CompetitionDoubleRoundRobinHelp => LocalizationHelper.GetString("CompetitionDoubleRoundRobinHelp");
+        public string CompetitionByeValueHelp => LocalizationHelper.GetString("CompetitionByeValueHelp");
+        public string CompetitionParticipantSearchHelp => LocalizationHelper.GetString("CompetitionParticipantSearchHelp");
+        public string EditCompetitionTitleTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditCompetitionTitleTooltip"), CommonConstants.CompetitionTitleMaxLength);
+        public string EditCompetitionDescriptionTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditCompetitionDescriptionTooltip"), CommonConstants.DescriptionMaxLength);
+        public string EditCompetitionCityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditCompetitionCityTooltip"), CommonConstants.CityMaxLength);
+        public string EditCompetitionChiefArbiterTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditCompetitionChiefArbiterTooltip"), CommonConstants.ChiefArbiterMaxLength);
+        public string EditCompetitionFederationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditCompetitionFederationTooltip"), CommonConstants.FederationCodeLength);
+        public string CompetitionWinnerTooltip => LocalizationHelper.GetString("CompetitionWinnerTooltip");
+        public string EditCompetitionTimeFormatTooltip => LocalizationHelper.GetString("EditCompetitionTimeFormatTooltip");
+        public string EditCompetitionRatedTooltip => LocalizationHelper.GetString("EditCompetitionRatedTooltip");
+        public string EditCompetitionTypeTooltip => LocalizationHelper.GetString("EditCompetitionTypeTooltip");
+        public string EditCompetitionRoundsTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditCompetitionRoundsTooltip"), CommonConstants.CompetitionRoundsMinimum, CommonConstants.CompetitionRoundsMaximum, CommonConstants.DefaultCompetitionNumberOfRounds);
+        public string EditCompetitionDoubleRoundRobinTooltip => LocalizationHelper.GetString("EditCompetitionDoubleRoundRobinTooltip");
+        public string EditCompetitionByeValueTooltip => LocalizationHelper.GetString("EditCompetitionByeValueTooltip");
+        public string CompetitionParticipantSearchTooltip => LocalizationHelper.GetString("CompetitionParticipantSearchTooltip");
         public string InformationTabHeader => LocalizationHelper.GetString("InformationTabHeader");
         public string RoundsTabHeader => LocalizationHelper.GetString("RoundsTabHeader");
         public string StandingsTabHeader => LocalizationHelper.GetString("StandingsTabHeader");
@@ -63,9 +90,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string CityLabel => LocalizationHelper.GetString("CityLabel");
         public string ChiefArbiterLabel => LocalizationHelper.GetString("ChiefArbiterLabel");
         public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
-        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
-        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
-        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
         public string DisplayNameLabel => LocalizationHelper.GetString("DisplayNameLabel");
         public string IdentifierNameLabel => LocalizationHelper.GetString("IdentifierNameLabel");
         public string TypeLabel => LocalizationHelper.GetString("TypeLabel");
@@ -1005,6 +1029,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(CompetitionPage));
             OnPropertyChanged(nameof(InformationTabHeader));
             OnPropertyChanged(nameof(RoundsTabHeader));
@@ -1014,9 +1039,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(CityLabel));
             OnPropertyChanged(nameof(ChiefArbiterLabel));
             OnPropertyChanged(nameof(FederationLabel));
-            OnPropertyChanged(nameof(CityTooltip));
-            OnPropertyChanged(nameof(ChiefArbiterTooltip));
-            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(IdentifierNameLabel));
             OnPropertyChanged(nameof(TypeLabel));
@@ -1060,6 +1082,32 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(BuchholzScoreLabel));
             OnPropertyChanged(nameof(SonnebornBergerScoreLabel));
             OnPropertyChanged(nameof(RatingLabel));
+            OnPropertyChanged(nameof(CompetitionTitleHelp));
+            OnPropertyChanged(nameof(CompetitionDescriptionHelp));
+            OnPropertyChanged(nameof(CompetitionCityHelp));
+            OnPropertyChanged(nameof(CompetitionChiefArbiterHelp));
+            OnPropertyChanged(nameof(CompetitionFederationHelp));
+            OnPropertyChanged(nameof(CompetitionWinnerHelp));
+            OnPropertyChanged(nameof(CompetitionTimeFormatHelp));
+            OnPropertyChanged(nameof(CompetitionRatedHelp));
+            OnPropertyChanged(nameof(CompetitionTypeHelp));
+            OnPropertyChanged(nameof(CompetitionRoundsHelp));
+            OnPropertyChanged(nameof(CompetitionDoubleRoundRobinHelp));
+            OnPropertyChanged(nameof(CompetitionByeValueHelp));
+            OnPropertyChanged(nameof(CompetitionParticipantSearchHelp));
+            OnPropertyChanged(nameof(EditCompetitionTitleTooltip));
+            OnPropertyChanged(nameof(EditCompetitionDescriptionTooltip));
+            OnPropertyChanged(nameof(EditCompetitionCityTooltip));
+            OnPropertyChanged(nameof(EditCompetitionChiefArbiterTooltip));
+            OnPropertyChanged(nameof(EditCompetitionFederationTooltip));
+            OnPropertyChanged(nameof(CompetitionWinnerTooltip));
+            OnPropertyChanged(nameof(EditCompetitionTimeFormatTooltip));
+            OnPropertyChanged(nameof(EditCompetitionRatedTooltip));
+            OnPropertyChanged(nameof(EditCompetitionTypeTooltip));
+            OnPropertyChanged(nameof(EditCompetitionRoundsTooltip));
+            OnPropertyChanged(nameof(EditCompetitionDoubleRoundRobinTooltip));
+            OnPropertyChanged(nameof(EditCompetitionByeValueTooltip));
+            OnPropertyChanged(nameof(CompetitionParticipantSearchTooltip));
             RefreshPageActionElements();
             RefreshInformationTabElements();
             RefreshRoundsTabElements();

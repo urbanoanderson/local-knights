@@ -116,7 +116,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _minRating = Math.Clamp(value, CommonConstants.DefaultMinRatingLowerBound, CommonConstants.DefaultMinRatingUpperBound);
                 OnPropertyChanged(nameof(MinRating));
-                OnPropertyChanged(nameof(CreateRatingTooltip));
+                OnPropertyChanged(nameof(ClubInitialRatingTooltip));
             }
         }
 
@@ -128,7 +128,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _maxRating = Math.Clamp(value, CommonConstants.DefaultMaxRatingLowerBound, CommonConstants.DefaultMaxRatingUpperBound);
                 OnPropertyChanged(nameof(MaxRating));
-                OnPropertyChanged(nameof(CreateRatingTooltip));
+                OnPropertyChanged(nameof(ClubInitialRatingTooltip));
             }
         }
 
@@ -233,9 +233,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string CityLabel => LocalizationHelper.GetString("CityLabel");
         public string DefaultChiefArbiterLabel => LocalizationHelper.GetString("DefaultChiefArbiterLabel");
         public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
-        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
-        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
-        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
         public string PasswordLabel => LocalizationHelper.GetString("PasswordLabel");
         public string ConfirmPasswordLabel => LocalizationHelper.GetString("ConfirmPasswordLabel");
         public string SocialMediaLinksLabel => LocalizationHelper.GetString("SocialMediaLinksLabel");
@@ -246,31 +243,39 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string RequiredInformationHeader => LocalizationHelper.GetString("RequiredInformationHeader");
         public string RatingParametersHeader => LocalizationHelper.GetString("RatingParametersHeader");
         public string OptionalInformationHeader => LocalizationHelper.GetString("OptionalInformationHeader");
-        public string IdentifierNameHelp => LocalizationHelper.GetString("IdentifierNameHelp");
-        public string DisplayNameHelp => LocalizationHelper.GetString("DisplayNameHelp");
-        public string RatingHelp => LocalizationHelper.GetString("RatingHelp");
-        public string DeviationHelp => LocalizationHelper.GetString("DeviationHelp");
-        public string VolatilityHelp => LocalizationHelper.GetString("VolatilityHelp");
-        public string ProvisionalGamesHelp => LocalizationHelper.GetString("ProvisionalGamesHelp");
-        public string RatingSystemHelp => LocalizationHelper.GetString("RatingSystemHelp");
-        public string DescriptionHelp => LocalizationHelper.GetString("DescriptionHelp");
-        public string PasswordHelp => LocalizationHelper.GetString("PasswordHelp");
-        public string ConfirmPasswordHelp => LocalizationHelper.GetString("ConfirmPasswordHelp");
-        public string SocialMediaHelp => LocalizationHelper.GetString("SocialMediaHelp");
+        public string ClubIdentifierNameHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubIdentifierNameHelp"), CommonConstants.IdentifierMaxLength);
+        public string ClubDisplayNameHelp => LocalizationHelper.GetString("CreateClubDisplayNameHelp");
+        public string ClubRatingSystemHelp => LocalizationHelper.GetString("CreateClubRatingSystemHelp");
+        public string ClubInitialRatingHelp => LocalizationHelper.GetString("CreateClubInitialRatingHelp");
+        public string ClubInitialDeviationHelp => LocalizationHelper.GetString("CreateClubInitialDeviationHelp");
+        public string ClubInitialVolatilityHelp => LocalizationHelper.GetString("CreateClubInitialVolatilityHelp");
+        public string ClubProvisionalGamesHelp => LocalizationHelper.GetString("CreateClubProvisionalGamesHelp");
+        public string ClubMinimumRatingHelp => LocalizationHelper.GetString("CreateClubMinimumRatingHelp");
+        public string ClubMaximumRatingHelp => LocalizationHelper.GetString("CreateClubMaximumRatingHelp");
+        public string ClubDescriptionHelp => LocalizationHelper.GetString("CreateClubDescriptionHelp");
+        public string ClubCityHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubCityHelp"), CommonConstants.CityMaxLength);
+        public string ClubFederationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubFederationHelp"), CommonConstants.FederationCodeLength);
+        public string ClubDefaultChiefArbiterHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubDefaultChiefArbiterHelp"), CommonConstants.ChiefArbiterMaxLength);
+        public string ClubPasswordHelp => LocalizationHelper.GetString("CreateClubPasswordHelp");
+        public string ClubConfirmPasswordHelp => LocalizationHelper.GetString("CreateClubConfirmPasswordHelp");
+        public string ClubSocialMediaHelp => LocalizationHelper.GetString("CreateClubSocialMediaHelp");
         public string CreateClub => LocalizationHelper.GetString("CreateClub");
-        public string CreateIdentifierNameTooltip => LocalizationHelper.GetString("CreateIdentifierNameTooltip");
-        public string CreateDisplayNameTooltip => LocalizationHelper.GetString("CreateDisplayNameTooltip");
-        public string CreateRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateRatingTooltip"), MinRating, MaxRating, CommonConstants.DefaultRating);
-        public string CreateMinRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateMinRatingTooltip"), CommonConstants.DefaultMinRatingLowerBound, CommonConstants.DefaultMinRatingUpperBound, CommonConstants.DefaultMinRating);
-        public string CreateMaxRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateMaxRatingTooltip"), CommonConstants.DefaultMaxRatingLowerBound, CommonConstants.DefaultMaxRatingUpperBound, CommonConstants.DefaultMaxRating);
-        public string CreateDeviationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateDeviationTooltip"), CommonConstants.DefaultDeviationLowerBound.ToString("F1", CultureInfo.CurrentCulture), CommonConstants.DefaultDeviationUpperBound.ToString("F1", CultureInfo.CurrentCulture), CommonConstants.DefaultDeviation.ToString("F1", CultureInfo.CurrentCulture));
-        public string CreateVolatilityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateVolatilityTooltip"), CommonConstants.DefaultVolatilityLowerBound.ToString("F2", CultureInfo.CurrentCulture), CommonConstants.DefaultVolatilityUpperBound.ToString("F2", CultureInfo.CurrentCulture), CommonConstants.DefaultVolatility.ToString("F2", CultureInfo.CurrentCulture));
-        public string CreateProvisionalGamesTooltip => LocalizationHelper.GetString("CreateProvisionalGamesTooltip");
-        public string CreateRatingSystemTooltip => LocalizationHelper.GetString("CreateRatingSystemTooltip");
-        public string CreateDescriptionTooltip => LocalizationHelper.GetString("CreateDescriptionTooltip");
-        public string CreatePasswordTooltip => LocalizationHelper.GetString("CreatePasswordTooltip");
-        public string CreateConfirmPasswordTooltip => LocalizationHelper.GetString("CreateConfirmPasswordTooltip");
-        public string CreateSocialMediaTooltip => LocalizationHelper.GetString("CreateSocialMediaTooltip");
+        public string ClubIdentifierNameTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubIdentifierNameTooltip"), CommonConstants.IdentifierMaxLength);
+        public string ClubDisplayNameTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubDisplayNameTooltip"), CommonConstants.DisplayNameMaxLength);
+        public string ClubInitialRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubInitialRatingTooltip"), MinRating, MaxRating, CommonConstants.DefaultRating);
+        public string ClubMinimumRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubMinimumRatingTooltip"), CommonConstants.DefaultMinRatingLowerBound, CommonConstants.DefaultMinRatingUpperBound, CommonConstants.DefaultMinRating);
+        public string ClubMaximumRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubMaximumRatingTooltip"), CommonConstants.DefaultMaxRatingLowerBound, CommonConstants.DefaultMaxRatingUpperBound, CommonConstants.DefaultMaxRating);
+        public string ClubInitialDeviationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubInitialDeviationTooltip"), CommonConstants.DefaultDeviationLowerBound.ToString("F1", CultureInfo.CurrentCulture), CommonConstants.DefaultDeviationUpperBound.ToString("F1", CultureInfo.CurrentCulture), CommonConstants.DefaultDeviation.ToString("F1", CultureInfo.CurrentCulture));
+        public string ClubInitialVolatilityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubInitialVolatilityTooltip"), CommonConstants.DefaultVolatilityLowerBound.ToString("F2", CultureInfo.CurrentCulture), CommonConstants.DefaultVolatilityUpperBound.ToString("F2", CultureInfo.CurrentCulture), CommonConstants.DefaultVolatility.ToString("F2", CultureInfo.CurrentCulture));
+        public string ClubProvisionalGamesTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubProvisionalGamesTooltip"), CommonConstants.DefaultProvisionalGamesLowerBound, CommonConstants.DefaultProvisionalGamesUpperBound, CommonConstants.DefaultProvisionalGames);
+        public string ClubRatingSystemTooltip => LocalizationHelper.GetString("CreateClubRatingSystemTooltip");
+        public string ClubDescriptionTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubDescriptionTooltip"), CommonConstants.DescriptionMaxLength);
+        public string ClubCityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubCityTooltip"), CommonConstants.CityMaxLength);
+        public string ClubFederationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubFederationTooltip"), CommonConstants.FederationCodeLength);
+        public string ClubDefaultChiefArbiterTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubDefaultChiefArbiterTooltip"), CommonConstants.ChiefArbiterMaxLength);
+        public string ClubPasswordTooltip => LocalizationHelper.GetString("CreateClubPasswordTooltip");
+        public string ClubConfirmPasswordTooltip => LocalizationHelper.GetString("CreateClubConfirmPasswordTooltip");
+        public string ClubSocialMediaTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateClubSocialMediaTooltip"), CommonConstants.SocialMediaLinkLimit);
 
         public ICommand CreateCommand { get; }
         public ICommand CancelCommand { get; }
@@ -310,13 +315,16 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(CreateClubTitle));
             OnPropertyChanged(nameof(IdentifierNameLabel));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(RatingSystemLabel));
             OnPropertyChanged(nameof(RatingLabel));
             OnPropertyChanged(nameof(MinRatingLabel));
+            OnPropertyChanged(nameof(ClubMinimumRatingHelp));
             OnPropertyChanged(nameof(MaxRatingLabel));
+            OnPropertyChanged(nameof(ClubMaximumRatingHelp));
             OnPropertyChanged(nameof(DeviationLabel));
             OnPropertyChanged(nameof(VolatilityLabel));
             OnPropertyChanged(nameof(ProvisionalGamesLabel));
@@ -324,9 +332,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(CityLabel));
             OnPropertyChanged(nameof(DefaultChiefArbiterLabel));
             OnPropertyChanged(nameof(FederationLabel));
-            OnPropertyChanged(nameof(CityTooltip));
-            OnPropertyChanged(nameof(ChiefArbiterTooltip));
-            OnPropertyChanged(nameof(FederationTooltip));
+            OnPropertyChanged(nameof(ClubCityTooltip));
+            OnPropertyChanged(nameof(ClubDefaultChiefArbiterTooltip));
+            OnPropertyChanged(nameof(ClubFederationTooltip));
             OnPropertyChanged(nameof(PasswordLabel));
             OnPropertyChanged(nameof(ConfirmPasswordLabel));
             OnPropertyChanged(nameof(SocialMediaLinksLabel));
@@ -337,31 +345,36 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(RequiredInformationHeader));
             OnPropertyChanged(nameof(RatingParametersHeader));
             OnPropertyChanged(nameof(OptionalInformationHeader));
-            OnPropertyChanged(nameof(IdentifierNameHelp));
-            OnPropertyChanged(nameof(DisplayNameHelp));
-            OnPropertyChanged(nameof(RatingHelp));
-            OnPropertyChanged(nameof(DeviationHelp));
-            OnPropertyChanged(nameof(VolatilityHelp));
-            OnPropertyChanged(nameof(ProvisionalGamesHelp));
-            OnPropertyChanged(nameof(RatingSystemHelp));
-            OnPropertyChanged(nameof(DescriptionHelp));
-            OnPropertyChanged(nameof(PasswordHelp));
-            OnPropertyChanged(nameof(ConfirmPasswordHelp));
-            OnPropertyChanged(nameof(SocialMediaHelp));
+            OnPropertyChanged(nameof(ClubIdentifierNameHelp));
+            OnPropertyChanged(nameof(ClubDisplayNameHelp));
+            OnPropertyChanged(nameof(ClubRatingSystemHelp));
+            OnPropertyChanged(nameof(ClubInitialRatingHelp));
+            OnPropertyChanged(nameof(ClubInitialDeviationHelp));
+            OnPropertyChanged(nameof(ClubInitialVolatilityHelp));
+            OnPropertyChanged(nameof(ClubProvisionalGamesHelp));
+            OnPropertyChanged(nameof(ClubMinimumRatingHelp));
+            OnPropertyChanged(nameof(ClubMaximumRatingHelp));
+            OnPropertyChanged(nameof(ClubDescriptionHelp));
+            OnPropertyChanged(nameof(ClubCityHelp));
+            OnPropertyChanged(nameof(ClubFederationHelp));
+            OnPropertyChanged(nameof(ClubDefaultChiefArbiterHelp));
+            OnPropertyChanged(nameof(ClubPasswordHelp));
+            OnPropertyChanged(nameof(ClubConfirmPasswordHelp));
+            OnPropertyChanged(nameof(ClubSocialMediaHelp));
             OnPropertyChanged(nameof(CreateClub));
-            OnPropertyChanged(nameof(CreateIdentifierNameTooltip));
-            OnPropertyChanged(nameof(CreateDisplayNameTooltip));
-            OnPropertyChanged(nameof(CreateRatingTooltip));
-            OnPropertyChanged(nameof(CreateMinRatingTooltip));
-            OnPropertyChanged(nameof(CreateMaxRatingTooltip));
-            OnPropertyChanged(nameof(CreateDeviationTooltip));
-            OnPropertyChanged(nameof(CreateVolatilityTooltip));
-            OnPropertyChanged(nameof(CreateProvisionalGamesTooltip));
-            OnPropertyChanged(nameof(CreateRatingSystemTooltip));
-            OnPropertyChanged(nameof(CreateDescriptionTooltip));
-            OnPropertyChanged(nameof(CreatePasswordTooltip));
-            OnPropertyChanged(nameof(CreateConfirmPasswordTooltip));
-            OnPropertyChanged(nameof(CreateSocialMediaTooltip));
+            OnPropertyChanged(nameof(ClubIdentifierNameTooltip));
+            OnPropertyChanged(nameof(ClubDisplayNameTooltip));
+            OnPropertyChanged(nameof(ClubInitialRatingTooltip));
+            OnPropertyChanged(nameof(ClubMinimumRatingTooltip));
+            OnPropertyChanged(nameof(ClubMaximumRatingTooltip));
+            OnPropertyChanged(nameof(ClubInitialDeviationTooltip));
+            OnPropertyChanged(nameof(ClubInitialVolatilityTooltip));
+            OnPropertyChanged(nameof(ClubProvisionalGamesTooltip));
+            OnPropertyChanged(nameof(ClubRatingSystemTooltip));
+            OnPropertyChanged(nameof(ClubDescriptionTooltip));
+            OnPropertyChanged(nameof(ClubPasswordTooltip));
+            OnPropertyChanged(nameof(ClubConfirmPasswordTooltip));
+            OnPropertyChanged(nameof(ClubSocialMediaTooltip));
         }
 
         private async void CreateClubAsync(object? parameter)
@@ -409,7 +422,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
 
         private void AddSocialMediaLink(object? parameter)
         {
-            if (!string.IsNullOrWhiteSpace(NewSocialMediaLink) && SocialMediaLinks.Count < 5)
+            if (!string.IsNullOrWhiteSpace(NewSocialMediaLink) && SocialMediaLinks.Count < CommonConstants.SocialMediaLinkLimit)
             {
                 SocialMediaLinks.Add(NewSocialMediaLink);
                 NewSocialMediaLink = string.Empty;
@@ -438,7 +451,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 return false;
             }
 
-            if (IdentifierName.Length > 50)
+            if (IdentifierName.Length > CommonConstants.IdentifierMaxLength)
             {
                 _messageBoxService.ShowWarning(LocalizationHelper.GetString("IdentifierNameMaxLengthMessage"), LocalizationHelper.GetString("ValidationError"));
                 return false;
@@ -456,13 +469,13 @@ namespace LocalKnights.WindowsDesktop.ViewModels
                 return false;
             }
 
-            if (DisplayName.Length > 100)
+            if (DisplayName.Length > CommonConstants.DisplayNameMaxLength)
             {
                 _messageBoxService.ShowWarning(LocalizationHelper.GetString("DisplayNameMaxLengthMessage"), LocalizationHelper.GetString("ValidationError"));
                 return false;
             }
 
-            if (!string.IsNullOrWhiteSpace(Description) && Description.Length > 500)
+            if (!string.IsNullOrWhiteSpace(Description) && Description.Length > CommonConstants.DescriptionMaxLength)
             {
                 _messageBoxService.ShowWarning(LocalizationHelper.GetString("DescriptionMaxLengthMessage"), LocalizationHelper.GetString("ValidationError"));
                 return false;

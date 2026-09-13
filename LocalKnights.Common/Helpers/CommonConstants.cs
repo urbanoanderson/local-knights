@@ -13,6 +13,23 @@ namespace LocalKnights.Common.Helpers
         /// </summary>
         public const string AppDisplayName = "Local Knights";
 
+        public const int IdentifierMaxLength = 50;
+        public const int DisplayNameMaxLength = 100;
+        public const int DescriptionMaxLength = 500;
+        public const int CityMaxLength = 100;
+        public const int ChiefArbiterMaxLength = 100;
+        public const int FederationCodeLength = 3;
+        public const int SocialMediaLinkLimit = 5;
+        public const int ExternalUsernameMaxLength = 50;
+        public const int FederationIdMaxLength = 12;
+        public const int EmailMaxLength = 100;
+        public const int PhoneMaxLength = 20;
+        public const int CompetitionTitleMaxLength = 100;
+        public const int CompetitionRoundsMinimum = 1;
+        public const int CompetitionRoundsMaximum = 30;
+        public const double CompetitionRoundsMinimumControlValue = CompetitionRoundsMinimum;
+        public const double CompetitionRoundsMaximumControlValue = CompetitionRoundsMaximum;
+
         /// <summary>
         /// The default rating for new players.
         /// </summary>

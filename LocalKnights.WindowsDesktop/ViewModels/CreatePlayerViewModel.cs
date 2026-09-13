@@ -266,6 +266,29 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         }
 
         public string CreatePlayer => $"{AppConstants.DefaultPlayerIcon} " + LocalizationHelper.GetString("CreatePlayer");
+        public string CreatePlayerIdentifierHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreatePlayerIdentifierHelp"), CommonConstants.IdentifierMaxLength);
+        public string PlayerDisplayNameHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("PlayerDisplayNameHelp"), CommonConstants.DisplayNameMaxLength);
+        public string BulletRatingHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("BulletRatingHelp"), RatingLowerBound, RatingUpperBound);
+        public string BulletDeviationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("BulletDeviationHelp"), CommonConstants.DefaultDeviation);
+        public string BlitzRatingHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("BlitzRatingHelp"), RatingLowerBound, RatingUpperBound);
+        public string BlitzDeviationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("BlitzDeviationHelp"), CommonConstants.DefaultDeviation);
+        public string RapidRatingHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("RapidRatingHelp"), RatingLowerBound, RatingUpperBound);
+        public string RapidDeviationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("RapidDeviationHelp"), CommonConstants.DefaultDeviation);
+        public string ClassicalRatingHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClassicalRatingHelp"), RatingLowerBound, RatingUpperBound);
+        public string ClassicalDeviationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClassicalDeviationHelp"), CommonConstants.DefaultDeviation);
+        public string PlayerChessTitleHelp => LocalizationHelper.GetString("PlayerChessTitleHelp");
+        public string CreatePlayerChessComUsernameHelp => LocalizationHelper.GetString("CreatePlayerChessComUsernameHelp");
+        public string CreatePlayerChessComUsernameTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreatePlayerChessComUsernameTooltip"), CommonConstants.ExternalUsernameMaxLength);
+        public string CreatePlayerLichessUsernameHelp => LocalizationHelper.GetString("CreatePlayerLichessUsernameHelp");
+        public string CreatePlayerLichessUsernameTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreatePlayerLichessUsernameTooltip"), CommonConstants.ExternalUsernameMaxLength);
+        public string CreatePlayerFideIdHelp => LocalizationHelper.GetString("CreatePlayerFideIdHelp");
+        public string CreatePlayerFideIdTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreatePlayerFideIdTooltip"), CommonConstants.FederationIdMaxLength);
+        public string PlayerUscfIdHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("PlayerUscfIdHelp"), CommonConstants.FederationIdMaxLength);
+        public string PlayerCbxIdHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("PlayerCbxIdHelp"), CommonConstants.FederationIdMaxLength);
+        public string PlayerEmailHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("PlayerEmailHelp"), CommonConstants.EmailMaxLength);
+        public string PlayerPhoneHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("PlayerPhoneHelp"), CommonConstants.PhoneMaxLength);
+        public string PlayerBirthDateHelp => LocalizationHelper.GetString("PlayerBirthDateHelp");
+        public string PlayerGenderHelp => LocalizationHelper.GetString("PlayerGenderHelp");
         public string IdentifierNameLabel => LocalizationHelper.GetString("IdentifierNameLabel");
         public string DisplayNameLabel => LocalizationHelper.GetString("DisplayNameLabel");
         public string BulletRatingLabel => $"{AppConstants.BulletTimeFormatIcon} {LocalizationHelper.GetString("TimeFormat_Bullet")}";
@@ -286,26 +309,17 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string UscfIdLabel => LocalizationHelper.GetString("UscfIdLabel");
         public string ChessTitleLabel => LocalizationHelper.GetString("ChessTitleLabel");
         public string GenderLabel => LocalizationHelper.GetString("GenderLabel");
-        public string GenderTooltip => LocalizationHelper.GetString("GenderTooltip");
         public string BirthDateLabel => LocalizationHelper.GetString("BirthDateLabel");
-        public string BirthDateHelp => LocalizationHelper.GetString("BirthDateHelp");
         public string CreateButtonLabel => LocalizationHelper.GetString("CreateButtonLabel");
         public string CancelLabel => LocalizationHelper.GetString("CancelLabel");
         public string FetchRatingsLabel => LocalizationHelper.GetString("FetchRatingsLabel");
         public string FetchLichessRatingsResultMessage => LocalizationHelper.GetString("FetchLichessRatingsResultMessage");
         public string FetchFideRatingsResultMessage => LocalizationHelper.GetString("FetchFideRatingsResultMessage");
-        public string CreateIdentifierNameTooltip => LocalizationHelper.GetString("CreateIdentifierNameTooltip");
-        public string CreateDisplayNameTooltip => LocalizationHelper.GetString("CreateDisplayNameTooltip");
         public string RequiredFields => LocalizationHelper.GetString("RequiredFields");
         public string OptionalFields => LocalizationHelper.GetString("OptionalFields");
         public string RatingsDescription => LocalizationHelper.GetString("RatingsDescription");
         public string ExternalProfilesLabel => LocalizationHelper.GetString("ExternalProfilesLabel");
         public string ContactInformationSection => LocalizationHelper.GetString("ContactInformationSection");
-        public string LowercaseLettersNumbersMaxHelpText => LocalizationHelper.GetString("LowercaseLettersNumbersMaxHelpText");
-        public string Max100CharactersHelpText => LocalizationHelper.GetString("Max100CharactersHelpText");
-        public string Max50CharactersHelpText => LocalizationHelper.GetString("Max50CharactersHelpText");
-        public string Max20CharactersHelpText => LocalizationHelper.GetString("Max20CharactersHelpText");
-        public string NumericMax12CharactersHelpText => LocalizationHelper.GetString("NumericMax12CharactersHelpText");
 
         public ICommand CreateCommand { get; }
         public ICommand CancelCommand { get; }
@@ -552,7 +566,31 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(CreatePlayer));
+            OnPropertyChanged(nameof(CreatePlayerIdentifierHelp));
+            OnPropertyChanged(nameof(PlayerDisplayNameHelp));
+            OnPropertyChanged(nameof(BulletRatingHelp));
+            OnPropertyChanged(nameof(BulletDeviationHelp));
+            OnPropertyChanged(nameof(BlitzRatingHelp));
+            OnPropertyChanged(nameof(BlitzDeviationHelp));
+            OnPropertyChanged(nameof(RapidRatingHelp));
+            OnPropertyChanged(nameof(RapidDeviationHelp));
+            OnPropertyChanged(nameof(ClassicalRatingHelp));
+            OnPropertyChanged(nameof(ClassicalDeviationHelp));
+            OnPropertyChanged(nameof(PlayerChessTitleHelp));
+            OnPropertyChanged(nameof(CreatePlayerChessComUsernameHelp));
+            OnPropertyChanged(nameof(CreatePlayerChessComUsernameTooltip));
+            OnPropertyChanged(nameof(CreatePlayerLichessUsernameHelp));
+            OnPropertyChanged(nameof(CreatePlayerLichessUsernameTooltip));
+            OnPropertyChanged(nameof(CreatePlayerFideIdHelp));
+            OnPropertyChanged(nameof(CreatePlayerFideIdTooltip));
+            OnPropertyChanged(nameof(PlayerUscfIdHelp));
+            OnPropertyChanged(nameof(PlayerCbxIdHelp));
+            OnPropertyChanged(nameof(PlayerEmailHelp));
+            OnPropertyChanged(nameof(PlayerPhoneHelp));
+            OnPropertyChanged(nameof(PlayerBirthDateHelp));
+            OnPropertyChanged(nameof(PlayerGenderHelp));
             OnPropertyChanged(nameof(IdentifierNameLabel));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(BulletRatingLabel));
@@ -569,12 +607,10 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(EmailLabel));
             OnPropertyChanged(nameof(PhoneLabel));
             OnPropertyChanged(nameof(BirthDateLabel));
-            OnPropertyChanged(nameof(BirthDateHelp));
             OnPropertyChanged(nameof(CbxIdLabel));
             OnPropertyChanged(nameof(FideIdLabel));
             OnPropertyChanged(nameof(ChessTitleLabel));
             OnPropertyChanged(nameof(GenderLabel));
-            OnPropertyChanged(nameof(GenderTooltip));
             OnPropertyChanged(nameof(UscfIdLabel));
             RefreshChessTitles();
             RefreshGenderTypes();
@@ -588,11 +624,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(RatingsDescription));
             OnPropertyChanged(nameof(ExternalProfilesLabel));
             OnPropertyChanged(nameof(ContactInformationSection));
-            OnPropertyChanged(nameof(LowercaseLettersNumbersMaxHelpText));
-            OnPropertyChanged(nameof(Max100CharactersHelpText));
-            OnPropertyChanged(nameof(Max50CharactersHelpText));
-            OnPropertyChanged(nameof(Max20CharactersHelpText));
-            OnPropertyChanged(nameof(NumericMax12CharactersHelpText));
         }
 
         private static bool TryGetNumericValue(string rawValue, out double value)

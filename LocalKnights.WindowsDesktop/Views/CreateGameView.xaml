@@ -28,10 +28,11 @@
                                  x:Name="WhitePlayerSearchBox"
                                  Style="{DynamicResource ModernAutoSuggestInput}"
                                  Tag="{Binding SearchPlaceholder}"
-                                 ToolTip="{Binding SearchPlaceholder}"
+                                 ToolTip="{Binding CreateGameWhitePlayerTooltip}"
                                  GotFocus="WhitePlayerSearchBox_GotFocus"
                                  LostFocus="WhitePlayerSearchBox_LostFocus"
-                                 Margin="{StaticResource SpacingMediumBottom}" />
+                                 Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CreateGameWhitePlayerHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateGameWhitePlayerTooltip}" Margin="{StaticResource SpacingMediumBottom}" />
 
                         <Border x:Name="WhiteSuggestionsContainer" Margin="{StaticResource SpacingLargeBottom}">
                             <Border.Style>
@@ -86,10 +87,11 @@
                                  x:Name="BlackPlayerSearchBox"
                                  Style="{DynamicResource ModernAutoSuggestInput}"
                                  Tag="{Binding SearchPlaceholder}"
-                                 ToolTip="{Binding SearchPlaceholder}"
+                                 ToolTip="{Binding CreateGameBlackPlayerTooltip}"
                                  GotFocus="BlackPlayerSearchBox_GotFocus"
                                  LostFocus="BlackPlayerSearchBox_LostFocus"
-                                 Margin="{StaticResource SpacingMediumBottom}" />
+                                 Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CreateGameBlackPlayerHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateGameBlackPlayerTooltip}" Margin="{StaticResource SpacingMediumBottom}" />
 
                         <Border x:Name="BlackSuggestionsContainer" Margin="{StaticResource SpacingLargeBottom}">
                             <Border.Style>
@@ -143,28 +145,31 @@
                         <ComboBox ItemsSource="{Binding TimeFormats}"
                                   SelectedItem="{Binding SelectedTimeFormat}"
                                   Style="{DynamicResource ModernComboBox}"
-                                  Margin="{StaticResource SpacingLargeBottom}">
+                                  ToolTip="{Binding CreateGameTimeFormatTooltip}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding CreateGameTimeFormatHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateGameTimeFormatTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding ResultLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding Results}"
                                   SelectedItem="{Binding SelectedResult}"
                                   Style="{DynamicResource ModernComboBox}"
-                                  Margin="{StaticResource SpacingLargeBottom}">
+                                  ToolTip="{Binding CreateGameResultTooltip}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding CreateGameResultHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateGameResultTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding RatedLabel}" Style="{DynamicResource LabelText}" />
-                        <CheckBox IsChecked="{Binding IsRated}" Style="{DynamicResource ModernCheckBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                        <CheckBox IsChecked="{Binding IsRated}" Style="{DynamicResource ModernCheckBox}" ToolTip="{Binding CreateGameRatedTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CreateGameRatedHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateGameRatedTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding PgnLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding Pgn, UpdateSourceTrigger=PropertyChanged}"
@@ -172,7 +177,8 @@
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Auto"
-                                 MinHeight="220" />
+                                 MinHeight="220" ToolTip="{Binding CreateGamePgnTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CreateGamePgnHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateGamePgnTooltip}" />
                     </StackPanel>
                 </Border>
             </StackPanel>

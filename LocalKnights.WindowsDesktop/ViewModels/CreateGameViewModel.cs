@@ -164,6 +164,18 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         }
 
         public string CreateGame => $"{AppConstants.DefaultGameIcon} " + LocalizationHelper.GetString("CreateGame");
+        public string CreateGameWhitePlayerHelp => LocalizationHelper.GetString("CreateGameWhitePlayerHelp");
+        public string CreateGameBlackPlayerHelp => LocalizationHelper.GetString("CreateGameBlackPlayerHelp");
+        public string CreateGameTimeFormatHelp => LocalizationHelper.GetString("CreateGameTimeFormatHelp");
+        public string CreateGameResultHelp => LocalizationHelper.GetString("CreateGameResultHelp");
+        public string CreateGameRatedHelp => LocalizationHelper.GetString("CreateGameRatedHelp");
+        public string CreateGamePgnHelp => LocalizationHelper.GetString("CreateGamePgnHelp");
+        public string CreateGameWhitePlayerTooltip => LocalizationHelper.GetString("CreateGameWhitePlayerTooltip");
+        public string CreateGameBlackPlayerTooltip => LocalizationHelper.GetString("CreateGameBlackPlayerTooltip");
+        public string CreateGameTimeFormatTooltip => LocalizationHelper.GetString("CreateGameTimeFormatTooltip");
+        public string CreateGameResultTooltip => LocalizationHelper.GetString("CreateGameResultTooltip");
+        public string CreateGameRatedTooltip => LocalizationHelper.GetString("CreateGameRatedTooltip");
+        public string CreateGamePgnTooltip => LocalizationHelper.GetString("CreateGamePgnTooltip");
         public string ParticipantsLabel => LocalizationHelper.GetString("ParticipantsLabel");
         public string WhitePlayerLabel => LocalizationHelper.GetString("WhitePlayerLabel");
         public string BlackPlayerLabel => LocalizationHelper.GetString("BlackPlayerLabel");
@@ -432,7 +444,20 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(CreateGame));
+            OnPropertyChanged(nameof(CreateGameWhitePlayerHelp));
+            OnPropertyChanged(nameof(CreateGameBlackPlayerHelp));
+            OnPropertyChanged(nameof(CreateGameTimeFormatHelp));
+            OnPropertyChanged(nameof(CreateGameResultHelp));
+            OnPropertyChanged(nameof(CreateGameRatedHelp));
+            OnPropertyChanged(nameof(CreateGamePgnHelp));
+            OnPropertyChanged(nameof(CreateGameWhitePlayerTooltip));
+            OnPropertyChanged(nameof(CreateGameBlackPlayerTooltip));
+            OnPropertyChanged(nameof(CreateGameTimeFormatTooltip));
+            OnPropertyChanged(nameof(CreateGameResultTooltip));
+            OnPropertyChanged(nameof(CreateGameRatedTooltip));
+            OnPropertyChanged(nameof(CreateGamePgnTooltip));
             OnPropertyChanged(nameof(ParticipantsLabel));
             OnPropertyChanged(nameof(WhitePlayerLabel));
             OnPropertyChanged(nameof(BlackPlayerLabel));

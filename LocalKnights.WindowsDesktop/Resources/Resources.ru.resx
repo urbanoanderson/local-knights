@@ -544,7 +544,7 @@
   <data name="OptionalInformationHeader" xml:space="preserve">
     <value>Необязательные сведения</value>
   </data>
-  <data name="IdentifierNameHelp" xml:space="preserve">
+  <data name="ClubIdentifierNameHelp" xml:space="preserve">
     <value>Уникальный идентификатор (только строчные буквы и цифры, не более 50 символов)</value>
   </data>
   <data name="DisplayNameHelp" xml:space="preserve">
@@ -755,19 +755,19 @@
     <value>Дата рождения не может быть в будущем</value>
   </data>
   <data name="Max20CharactersHelpText" xml:space="preserve">
-    <value>не более 20 символов</value>
+    <value>Необязательно. Не более 20 символов.</value>
   </data>
   <data name="IdentifierNameCannotChangeHelpText" xml:space="preserve">
-    <value>Это поле нельзя изменить</value>
+    <value>Только чтение. Этот идентификатор нельзя изменить.</value>
   </data>
   <data name="Max100CharactersHelpText" xml:space="preserve">
     <value>не более 100 символов</value>
   </data>
   <data name="Max50CharactersHelpText" xml:space="preserve">
-    <value>не более 50 символов</value>
+    <value>Необязательно. Не более 50 символов.</value>
   </data>
   <data name="NumericMax12CharactersHelpText" xml:space="preserve">
-    <value>только цифры, не более 12 символов</value>
+    <value>Необязательно. Только цифры, не более 12 символов.</value>
   </data>
   <data name="RequiredFields" xml:space="preserve">
     <value>Обязательные поля</value>
@@ -1077,4 +1077,207 @@
   <data name="GenderType_Other" xml:space="preserve">
     <value>Другое</value>
   </data>
+  <data name="RequiredTextHelp" xml:space="preserve"><value>Обязательное поле. Не более 100 символов.</value></data>
+  <data name="OptionalTextHelp" xml:space="preserve"><value>Необязательное поле.</value></data>
+  <data name="OptionalText100Help" xml:space="preserve"><value>Необязательное поле. Не более 100 символов.</value></data>
+  <data name="OptionalFederationHelp" xml:space="preserve"><value>Необязательно. Трёхбуквенный код федерации.</value></data>
+  <data name="RequiredChoiceHelp" xml:space="preserve"><value>Обязательное поле. Выберите вариант.</value></data>
+  <data name="OptionalChoiceHelp" xml:space="preserve"><value>Необязательное поле. Выберите вариант.</value></data>
+  <data name="RequiredToggleHelp" xml:space="preserve"><value>Обязательная настройка. Включите или выключите.</value></data>
+  <data name="OptionalToggleHelp" xml:space="preserve"><value>Необязательная настройка. Включите или выключите.</value></data>
+  <data name="RoundsHelp" xml:space="preserve"><value>Обязательное поле. От 1 до 30 туров.</value></data>
+  <data name="PlayerSearchHelp" xml:space="preserve"><value>Обязательное поле. Начните поиск и выберите игрока.</value></data>
+  <data name="RatingEntryHelp" xml:space="preserve"><value>Необязательный рейтинг в пределах клуба.</value></data>
+  <data name="DeviationEntryHelp" xml:space="preserve"><value>Необязательное отклонение Glicko-2.</value></data>
+  <data name="ReadOnlyMetadataHelp" xml:space="preserve"><value>Только чтение. Задаётся автоматически.</value></data>
+  <data name="ReadOnlyCalculatedHelp" xml:space="preserve"><value>Только чтение. Рассчитано по сохранённым данным.</value></data>
+  <data name="CompetitionTitleHelp" xml:space="preserve"><value>Обязательное название соревнования. Не более {0} символов.</value></data>
+  <data name="CompetitionDescriptionHelp" xml:space="preserve"><value>Необязательное описание соревнования. Не более {0} символов.</value></data>
+  <data name="CompetitionCityHelp" xml:space="preserve"><value>Необязательный город проведения. Не более {0} символов.</value></data>
+  <data name="CompetitionChiefArbiterHelp" xml:space="preserve"><value>Необязательный главный судья. Не более {0} символов.</value></data>
+  <data name="CompetitionFederationHelp" xml:space="preserve"><value>Необязательный {0}-буквенный код федерации-организатора.</value></data>
+  <data name="CompetitionTimeFormatHelp" xml:space="preserve"><value>Обязательная категория контроля времени.</value></data>
+  <data name="CompetitionRatedHelp" xml:space="preserve"><value>Определяет, влияют ли результаты на рейтинги игроков.</value></data>
+  <data name="CompetitionTypeHelp" xml:space="preserve"><value>Обязательная система жеребьёвки.</value></data>
+  <data name="CompetitionRoundsHelp" xml:space="preserve"><value>Обязательное число туров от {0} до {1}.</value></data>
+  <data name="CompetitionDoubleRoundRobinHelp" xml:space="preserve"><value>Каждый участник дважды играет с каждым соперником.</value></data>
+  <data name="CompetitionByeValueHelp" xml:space="preserve"><value>Очки участнику за пропуск тура.</value></data>
+  <data name="CompetitionWinnerHelp" xml:space="preserve"><value>Победитель, вычисленный после завершения соревнования.</value></data>
+  <data name="CompetitionParticipantSearchHelp" xml:space="preserve"><value>Поиск существующих игроков для добавления в участники.</value></data>
+  <data name="CreateCompetitionTitleTooltip" xml:space="preserve"><value>Обязательное поле. Введите название до {0} символов; оно обозначает соревнование в списках и заголовках.</value></data>
+  <data name="CreateCompetitionDescriptionTooltip" xml:space="preserve"><value>Необязательное поле. Введите до {0} символов; переносы строк сохраняются при создании соревнования.</value></data>
+  <data name="CreateCompetitionCityTooltip" xml:space="preserve"><value>Необязательное поле. Введите город проведения длиной до {0} символов.</value></data>
+  <data name="CreateCompetitionChiefArbiterTooltip" xml:space="preserve"><value>Необязательное поле. Введите имя главного судьи длиной до {0} символов.</value></data>
+  <data name="CreateCompetitionFederationTooltip" xml:space="preserve"><value>Необязательное поле. Введите {0}-буквенный код федерации-организатора; он сохраняется в верхнем регистре.</value></data>
+  <data name="CreateCompetitionTimeFormatTooltip" xml:space="preserve"><value>Обязательное поле. Выберите категорию контроля времени для организации соревнования и его рейтингов.</value></data>
+  <data name="CreateCompetitionRatedTooltip" xml:space="preserve"><value>Обязательная настройка. Если включена, завершённые результаты изменяют рейтинги игроков.</value></data>
+  <data name="CreateCompetitionTypeTooltip" xml:space="preserve"><value>Обязательное поле. Выберите систему жеребьёвки; она определяет доступные дополнительные настройки.</value></data>
+  <data name="CreateCompetitionRoundsTooltip" xml:space="preserve"><value>Обязательно для швейцарских соревнований и матчей. Введите от {0} до {1} туров; значение по умолчанию — {2}.</value></data>
+  <data name="CreateCompetitionDoubleRoundRobinTooltip" xml:space="preserve"><value>Необязательная настройка кругового турнира. Если включена, каждый участник дважды играет с каждым соперником.</value></data>
+  <data name="CreateCompetitionByeValueTooltip" xml:space="preserve"><value>Обязательно, когда поле отображается. Выберите очки участнику за пропуск тура.</value></data>
+  <data name="EditCompetitionTitleTooltip" xml:space="preserve"><value>Обязательное поле, не более {0} символов. До начала соревнования изменения сохраняются сразу; затем название доступно только для чтения.</value></data>
+  <data name="EditCompetitionDescriptionTooltip" xml:space="preserve"><value>Необязательное поле, не более {0} символов. Переносы строк сохраняются; редактирование доступно только до начала соревнования.</value></data>
+  <data name="EditCompetitionCityTooltip" xml:space="preserve"><value>Необязательный город проведения, не более {0} символов. Изменения сохраняются сразу, а после начала поле доступно только для чтения.</value></data>
+  <data name="EditCompetitionChiefArbiterTooltip" xml:space="preserve"><value>Необязательный главный судья, не более {0} символов. Изменения сохраняются сразу, а после начала поле доступно только для чтения.</value></data>
+  <data name="EditCompetitionFederationTooltip" xml:space="preserve"><value>Необязательный {0}-буквенный код федерации в верхнем регистре. Его можно изменить только до начала соревнования.</value></data>
+  <data name="EditCompetitionTimeFormatTooltip" xml:space="preserve"><value>Обязательная категория контроля времени. До начала изменения сохраняются сразу; затем выбор отключается.</value></data>
+  <data name="EditCompetitionRatedTooltip" xml:space="preserve"><value>Обязательная настройка. Если включена, соревнование изменяет рейтинги; настройку можно изменить только до начала.</value></data>
+  <data name="EditCompetitionTypeTooltip" xml:space="preserve"><value>Обязательная система жеребьёвки. До начала изменения сохраняются сразу и могут требовать подтверждения, если текущие участники несовместимы с новым форматом.</value></data>
+  <data name="EditCompetitionRoundsTooltip" xml:space="preserve"><value>Обязательно для швейцарских соревнований и матчей. Выберите от {0} до {1} туров; значение по умолчанию — {2}, после начала редактирование блокируется.</value></data>
+  <data name="EditCompetitionDoubleRoundRobinTooltip" xml:space="preserve"><value>Необязательная настройка кругового турнира. Если включена, каждый участник дважды играет с каждым соперником; после начала редактирование блокируется.</value></data>
+  <data name="EditCompetitionByeValueTooltip" xml:space="preserve"><value>Обязательно, когда поле отображается. Задаёт очки за пропуск тура и изменяется только до начала.</value></data>
+  <data name="CompetitionWinnerTooltip" xml:space="preserve"><value>Только чтение. Победитель вычисляется по итоговой таблице после завершения соревнования.</value></data>
+  <data name="CompetitionParticipantSearchTooltip" xml:space="preserve"><value>Необязательное поле с подсказками, доступное до начала. Введите имя или идентификатор игрока и выберите результат, чтобы добавить игрока один раз.</value></data>
+  <data name="CompetitionTitleTooltip" xml:space="preserve"><value>Обязательное редактируемое название до 100 символов. Оно обозначает соревнование в списках и заголовках.</value></data>
+  <data name="DescriptionTooltip" xml:space="preserve"><value>Необязательное редактируемое описание. Допускает переносы строк и сохраняется вместе с записью.</value></data>
+  <data name="TimeFormatTooltip" xml:space="preserve"><value>Обязательный выбор. Задаёт категорию контроля времени для партии или соревнования.</value></data>
+  <data name="RatedTooltip" xml:space="preserve"><value>Обязательная настройка. Если включена, результаты изменяют рейтинги игроков.</value></data>
+  <data name="CompetitionTypeTooltip" xml:space="preserve"><value>Обязательный выбор. Задаёт систему жеребьёвки и доступные дополнительные настройки.</value></data>
+  <data name="RoundsTooltip" xml:space="preserve"><value>Обязательное редактируемое число от 1 до 30. Задаёт число туров швейцарского соревнования.</value></data>
+  <data name="DoubleRoundRobinTooltip" xml:space="preserve"><value>Необязательная редактируемая настройка. Если включена, каждый участник дважды играет с каждым соперником.</value></data>
+  <data name="ByeValueTooltip" xml:space="preserve"><value>Обязательный выбор для швейцарских соревнований. Задаёт очки за пропуск тура.</value></data>
+  <data name="PlayerSearchTooltip" xml:space="preserve"><value>Обязательное поле с подсказками. Введите имя или идентификатор и выберите игрока; один игрок не может играть за оба цвета.</value></data>
+  <data name="RatingEntryTooltip" xml:space="preserve"><value>Необязательный редактируемый рейтинг в пределах минимума и максимума текущего клуба.</value></data>
+  <data name="DeviationEntryTooltip" xml:space="preserve"><value>Необязательное редактируемое отклонение рейтинга Glicko-2. Меньшее значение означает большую точность.</value></data>
+  <data name="ChessTitleTooltip" xml:space="preserve"><value>Необязательное редактируемое шахматное звание. Выберите признанное звание или вариант без звания.</value></data>
+  <data name="UsernameTooltip" xml:space="preserve"><value>Необязательное редактируемое имя пользователя до 50 символов. Рейтинги загружаются именно для этого имени.</value></data>
+  <data name="NumericIdTooltip" xml:space="preserve"><value>Необязательный редактируемый идентификатор федерации. Только цифры, до 12 символов.</value></data>
+  <data name="EmailTooltip" xml:space="preserve"><value>Необязательный редактируемый адрес электронной почты до 100 символов. Сохраняется как контакт игрока.</value></data>
+  <data name="PhoneTooltip" xml:space="preserve"><value>Необязательный редактируемый телефон до 20 символов. Сохраняется как контакт игрока.</value></data>
+  <data name="BirthDateTooltip" xml:space="preserve"><value>Необязательная редактируемая дата рождения. Будущие даты запрещены; очистите поле, чтобы удалить дату.</value></data>
+  <data name="ReadOnlyMetadataTooltip" xml:space="preserve"><value>Созданное приложением значение только для чтения. На этой странице его нельзя изменить.</value></data>
+  <data name="ReadOnlyCalculatedTooltip" xml:space="preserve"><value>Значение только для чтения, рассчитанное по сохранённым партиям или рейтингам. Напрямую не изменяется.</value></data>
+  <data name="CreateGameWhitePlayerHelp" xml:space="preserve"><value>Обязательное поле. Найдите и выберите игрока белыми.</value></data>
+  <data name="CreateGameWhitePlayerTooltip" xml:space="preserve"><value>Обязательный поиск игрока белыми. Введите имя или идентификатор и выберите подсказку; один игрок не может играть за оба цвета.</value></data>
+  <data name="CreateGameBlackPlayerHelp" xml:space="preserve"><value>Обязательное поле. Найдите и выберите игрока чёрными.</value></data>
+  <data name="CreateGameBlackPlayerTooltip" xml:space="preserve"><value>Обязательный поиск игрока чёрными. Введите имя или идентификатор и выберите подсказку; один игрок не может играть за оба цвета.</value></data>
+  <data name="CreateGameTimeFormatHelp" xml:space="preserve"><value>Обязательное поле. Выберите категорию контроля времени партии.</value></data>
+  <data name="CreateGameTimeFormatTooltip" xml:space="preserve"><value>Обязательная категория контроля времени партии. Она определяет, какой рейтинг игроков используется.</value></data>
+  <data name="CreateGameResultHelp" xml:space="preserve"><value>Обязательное поле. Выберите записанный результат партии.</value></data>
+  <data name="CreateGameResultTooltip" xml:space="preserve"><value>Обязательный результат партии. Он сохраняется с новой партией и определяет изменение рейтинга для рейтинговой партии.</value></data>
+  <data name="CreateGameRatedHelp" xml:space="preserve"><value>Обязательное поле. Укажите, влияет ли эта партия на рейтинги игроков.</value></data>
+  <data name="CreateGameRatedTooltip" xml:space="preserve"><value>Обязательная настройка рейтинга. Если включена, при создании партии её результат применяется к рейтингам обоих игроков.</value></data>
+  <data name="CreateGamePgnHelp" xml:space="preserve"><value>Необязательно. Добавьте ходы и теги партии в формате PGN.</value></data>
+  <data name="CreateGamePgnTooltip" xml:space="preserve"><value>Необязательный PGN этой партии. Вставьте корректные ходы и теги, чтобы сохранить их с новой партией для последующего редактирования или анализа.</value></data>
+  <data name="GameIdHelp" xml:space="preserve"><value>Только чтение. Идентифицирует эту сохранённую партию.</value></data>
+  <data name="GameIdTooltip" xml:space="preserve"><value>Уникальный идентификатор, присвоенный этой партии при создании. Его нельзя изменить.</value></data>
+  <data name="GameCreationDateHelp" xml:space="preserve"><value>Только чтение. Показывает время создания записи этой партии.</value></data>
+  <data name="GameCreationDateTooltip" xml:space="preserve"><value>Дата и время добавления этой партии в клуб. Их нельзя изменить.</value></data>
+  <data name="GameParticipantsHelp" xml:space="preserve"><value>Только чтение. Показывает игроков и назначенные им цвета.</value></data>
+  <data name="GameParticipantsTooltip" xml:space="preserve"><value>Сохранённые игроки белыми и чёрными в этой партии. Здесь участников изменить нельзя.</value></data>
+  <data name="GameDetailTimeFormatHelp" xml:space="preserve"><value>Только чтение. Показывает категорию контроля времени партии.</value></data>
+  <data name="GameDetailTimeFormatTooltip" xml:space="preserve"><value>Сохранённая категория контроля времени этой партии, определяющая используемый рейтинг. Здесь её изменить нельзя.</value></data>
+  <data name="GameDetailResultHelp" xml:space="preserve"><value>Только чтение. Показывает записанный результат партии.</value></data>
+  <data name="GameDetailResultTooltip" xml:space="preserve"><value>Сохранённый результат этой партии. Здесь его изменить нельзя; для рейтинговой партии он определяет показанное изменение рейтинга.</value></data>
+  <data name="GameDetailRatedHelp" xml:space="preserve"><value>Только чтение. Показывает, повлияла ли эта партия на рейтинги игроков.</value></data>
+  <data name="GameDetailRatedTooltip" xml:space="preserve"><value>Показывает, был ли результат этой партии применён к рейтингам игроков. Здесь настройку изменить нельзя.</value></data>
+  <data name="GameRatingChangeHelp" xml:space="preserve"><value>Только чтение. Показывает полученные или потерянные очки рейтинга.</value></data>
+  <data name="GameRatingChangeTooltip" xml:space="preserve"><value>Изменение рейтинга игроков, рассчитанное по этой сохранённой партии. Партии без рейтинга не меняют рейтинги.</value></data>
+  <data name="GameCompetitionIdHelp" xml:space="preserve"><value>Только чтение. Идентифицирует связанное с партией соревнование, если оно есть.</value></data>
+  <data name="GameCompetitionIdTooltip" xml:space="preserve"><value>Идентификатор соревнования, создавшего эту партию. Для партий вне соревнований поле пусто.</value></data>
+  <data name="GameDetailPgnHelp" xml:space="preserve"><value>Необязательно. Измените ходы и теги этой партии в формате PGN.</value></data>
+  <data name="GameDetailPgnTooltip" xml:space="preserve"><value>Необязательный PGN этой партии. Кнопка «Сохранить PGN» сохраняет изменения; анализ использует текущий текст.</value></data>
+  <data name="PlayerDisplayNameTooltip" xml:space="preserve"><value>Обязательное редактируемое имя игрока до 100 символов. Оно отображается в жеребьёвках, партиях и таблицах.</value></data>
+  <data name="GameResultTooltip" xml:space="preserve"><value>Обязательный редактируемый результат. Он сохраняется с партией и определяет изменение рейтинга для рейтинговой партии.</value></data>
+  <data name="CreateClubIdentifierNameHelp" xml:space="preserve"><value>Уникальный идентификатор клуба. После создания его нельзя изменить. Не более {0} символов.</value></data>
+  <data name="CreateClubDisplayNameHelp" xml:space="preserve"><value>Отображаемое название клуба. Его можно изменить в любое время.</value></data>
+  <data name="CreateClubRatingSystemHelp" xml:space="preserve"><value>Система рейтинга клуба (рекомендуется Glicko-2).</value></data>
+  <data name="CreateClubInitialRatingHelp" xml:space="preserve"><value>Рейтинг, назначаемый новым игрокам по умолчанию.</value></data>
+  <data name="CreateClubInitialDeviationHelp" xml:space="preserve"><value>Начальный доверительный интервал рейтингов новых игроков.</value></data>
+  <data name="CreateClubInitialVolatilityHelp" xml:space="preserve"><value>Начальная скорость изменения рейтинга Glicko-2 для новых игроков. Для большинства клубов настоятельно рекомендуется значение по умолчанию.</value></data>
+  <data name="CreateClubProvisionalGamesHelp" xml:space="preserve"><value>Количество партий, в течение которых новый игрок считается предварительным в рейтинговой системе ELO.</value></data>
+  <data name="CreateClubMinimumRatingHelp" xml:space="preserve"><value>Самый низкий допустимый рейтинг игроков этого клуба при любом контроле времени.</value></data>
+  <data name="CreateClubMaximumRatingHelp" xml:space="preserve"><value>Самый высокий допустимый рейтинг игроков этого клуба при любом контроле времени.</value></data>
+  <data name="CreateClubDescriptionHelp" xml:space="preserve"><value>Краткое описание клуба.</value></data>
+  <data name="CreateClubCityHelp" xml:space="preserve"><value>Необязательный город клуба. Не более {0} символов.</value></data>
+  <data name="CreateClubFederationHelp" xml:space="preserve"><value>Необязательный код федерации FIDE из {0} букв, например USA или BRA.</value></data>
+  <data name="CreateClubDefaultChiefArbiterHelp" xml:space="preserve"><value>Необязательный главный судья, назначаемый по умолчанию для новых соревнований. Не более {0} символов.</value></data>
+  <data name="CreateClubPasswordHelp" xml:space="preserve"><value>Пароль, необходимый для доступа к клубу.</value></data>
+  <data name="CreateClubConfirmPasswordHelp" xml:space="preserve"><value>Повторите тот же пароль.</value></data>
+  <data name="CreateClubSocialMediaHelp" xml:space="preserve"><value>Ссылки клуба на социальные сети (Facebook, Instagram, веб-сайт и т. д.).</value></data>
+  <data name="CreateClubIdentifierNameTooltip" xml:space="preserve"><value>Используйте только строчные буквы и цифры, не более {0} символов.</value></data>
+  <data name="CreateClubDisplayNameTooltip" xml:space="preserve"><value>Не более {0} символов. Пробелы разрешены.</value></data>
+  <data name="CreateClubInitialRatingTooltip" xml:space="preserve"><value>Рейтинг, назначаемый новым игрокам ({0}-{1}). Значение по умолчанию: {2}.</value></data>
+  <data name="CreateClubMinimumRatingTooltip" xml:space="preserve"><value>Минимальный рейтинг клуба ({0}-{1}). Значение по умолчанию: {2}.</value></data>
+  <data name="CreateClubMaximumRatingTooltip" xml:space="preserve"><value>Максимальный рейтинг клуба ({0}-{1}). Значение по умолчанию: {2}.</value></data>
+  <data name="CreateClubInitialDeviationTooltip" xml:space="preserve"><value>Определяет доверительный интервал (±) рейтингов Glicko-2. Меньшие значения означают большую уверенность ({0}-{1}, по умолчанию: {2}).</value></data>
+  <data name="CreateClubInitialVolatilityTooltip" xml:space="preserve"><value>Начальный параметр волатильности рейтинга Glicko-2 ({0}-{1}, по умолчанию: {2}). Большие значения ускоряют изменение рейтинга. Для большинства клубов настоятельно рекомендуется значение по умолчанию.</value></data>
+  <data name="CreateClubProvisionalGamesTooltip" xml:space="preserve"><value>Количество предварительных партий для игроков ELO ({0}-{1}). Влияет на коэффициент K при расчётах. Значение по умолчанию: {2}.</value></data>
+  <data name="CreateClubRatingSystemTooltip" xml:space="preserve"><value>Систему рейтинга можно изменить в любое время без потери существующих рейтингов.</value></data>
+  <data name="CreateClubDescriptionTooltip" xml:space="preserve"><value>Необязательное краткое описание клуба, не более {0} символов.</value></data>
+  <data name="CreateClubCityTooltip" xml:space="preserve"><value>Необязательный город клуба, не более {0} символов.</value></data>
+  <data name="CreateClubFederationTooltip" xml:space="preserve"><value>Необязательный код федерации из {0} букв, используемый FIDE, например USA или BRA.</value></data>
+  <data name="CreateClubDefaultChiefArbiterTooltip" xml:space="preserve"><value>Необязательный главный судья, назначаемый по умолчанию для новых соревнований, не более {0} символов.</value></data>
+  <data name="CreateClubPasswordTooltip" xml:space="preserve"><value>Рекомендуется создать надёжный пароль из строчных и прописных букв и специальных символов. Сохраните его резервную копию: утраченный пароль восстановить невозможно.</value></data>
+  <data name="CreateClubConfirmPasswordTooltip" xml:space="preserve"><value>Должен совпадать с полем пароля, чтобы избежать опечаток.</value></data>
+  <data name="CreateClubSocialMediaTooltip" xml:space="preserve"><value>Необязательные ссылки на социальные сети. Можно сохранить до {0} ссылок.</value></data>
+  <data name="ClubDisplayNameHelp" xml:space="preserve"><value>Название, отображаемое во всём клубе. Изменения вступят в силу после сохранения.</value></data>
+  <data name="ClubDescriptionHelp" xml:space="preserve"><value>Необязательное краткое описание в профиле этого клуба.</value></data>
+  <data name="ClubCityHelp" xml:space="preserve"><value>Необязательный город этого клуба. Не более {0} символов.</value></data>
+  <data name="ClubFederationHelp" xml:space="preserve"><value>Необязательный код федерации FIDE этого клуба из {0} букв.</value></data>
+  <data name="ClubChiefArbiterHelp" xml:space="preserve"><value>Необязательный арбитр, предлагаемый для новых соревнований клуба. Не более {0} символов.</value></data>
+  <data name="ClubCreatedAtHelp" xml:space="preserve"><value>Дата и время создания этого клуба, доступные только для чтения.</value></data>
+  <data name="ClubUpdatedAtHelp" xml:space="preserve"><value>Дата и время последнего сохранения клуба, доступные только для чтения.</value></data>
+  <data name="ClubRatingSystemHelp" xml:space="preserve"><value>Метод рейтинга для рейтинговых партий этого клуба.</value></data>
+  <data name="ClubInitialRatingHelp" xml:space="preserve"><value>Рейтинг, назначаемый новым игрокам этого клуба.</value></data>
+  <data name="ClubMinimumRatingHelp" xml:space="preserve"><value>Минимальный рейтинг, разрешённый настройками этого клуба.</value></data>
+  <data name="ClubMaximumRatingHelp" xml:space="preserve"><value>Максимальный рейтинг, разрешённый настройками этого клуба.</value></data>
+  <data name="ClubInitialDeviationHelp" xml:space="preserve"><value>Начальная неопределённость Glicko-2 для новых игроков.</value></data>
+  <data name="ClubInitialVolatilityHelp" xml:space="preserve"><value>Начальная скорость изменения Glicko-2 для новых игроков.</value></data>
+  <data name="ClubProvisionalGamesHelp" xml:space="preserve"><value>Количество рейтинговых партий до снятия предварительного статуса ELO.</value></data>
+  <data name="ClubCurrentPasswordHelp" xml:space="preserve"><value>Текущий пароль клуба для подтверждения смены пароля.</value></data>
+  <data name="ClubNewPasswordHelp" xml:space="preserve"><value>Новый пароль этого клуба; оставьте поле пустым, чтобы сохранить текущий.</value></data>
+  <data name="ClubConfirmNewPasswordHelp" xml:space="preserve"><value>Точно повторите новый пароль этого клуба.</value></data>
+  <data name="ClubSocialMediaHelp" xml:space="preserve"><value>Ссылка для добавления в сохранённый список соцсетей клуба.</value></data>
+  <data name="ClubDisplayNameTooltip" xml:space="preserve"><value>Обязательное изменяемое название клуба, не более {0} символов. Сохранение обновляет название во всём клубе.</value></data>
+  <data name="ClubDescriptionTooltip" xml:space="preserve"><value>Необязательное изменяемое описание клуба, не более {0} символов. Сохранение записывает новый текст профиля.</value></data>
+  <data name="ClubCityTooltip" xml:space="preserve"><value>Необязательный изменяемый город клуба, не более {0} символов. Сохранение записывает новое местоположение.</value></data>
+  <data name="ClubFederationTooltip" xml:space="preserve"><value>Необязательный изменяемый код федерации FIDE из {0} букв. При сохранении он записывается прописными буквами.</value></data>
+  <data name="ClubChiefArbiterTooltip" xml:space="preserve"><value>Необязательный изменяемый главный арбитр по умолчанию, не более {0} символов. После сохранения он используется для будущих соревнований.</value></data>
+  <data name="ClubCreatedAtTooltip" xml:space="preserve"><value>Автоматически записанное время создания клуба. Оно доступно только для чтения и здесь не изменяется.</value></data>
+  <data name="ClubUpdatedAtTooltip" xml:space="preserve"><value>Время последнего сохранённого изменения клуба. Оно доступно только для чтения и обновляется автоматически.</value></data>
+  <data name="ClubRatingSystemTooltip" xml:space="preserve"><value>Изменяемый метод рейтинга для будущих расчётов. Сохранение переключает метод, не удаляя существующие рейтинги.</value></data>
+  <data name="ClubInitialRatingTooltip" xml:space="preserve"><value>Изменяемый рейтинг новых игроков по умолчанию в пределах клуба. Сохранение не переписывает существующие рейтинги.</value></data>
+  <data name="ClubMinimumRatingTooltip" xml:space="preserve"><value>Изменяемая нижняя граница рейтинга ({0}-{1}); по умолчанию {2}. Сохранение применяет её к последующим вводам и расчётам.</value></data>
+  <data name="ClubMaximumRatingTooltip" xml:space="preserve"><value>Изменяемая верхняя граница рейтинга ({0}-{1}); по умолчанию {2}. Сохранение применяет её к последующим вводам и расчётам.</value></data>
+  <data name="ClubInitialDeviationTooltip" xml:space="preserve"><value>Изменяемое начальное отклонение Glicko-2 ({0}-{1}); по умолчанию {2}. Сохранение влияет на новых игроков, а не на существующие рейтинги.</value></data>
+  <data name="ClubInitialVolatilityTooltip" xml:space="preserve"><value>Изменяемая начальная волатильность Glicko-2 ({0}-{1}); по умолчанию {2}. Сохранение влияет на новых игроков, а не на существующие рейтинги.</value></data>
+  <data name="ClubProvisionalGamesTooltip" xml:space="preserve"><value>Изменяемый порог ELO ({0}-{1} партий); по умолчанию {2}. Сохранение меняет момент снятия предварительного статуса.</value></data>
+  <data name="ClubCurrentPasswordTooltip" xml:space="preserve"><value>Введите текущий пароль клуба только для его смены. Перед заменой сохранение проверяет этот пароль.</value></data>
+  <data name="ClubNewPasswordTooltip" xml:space="preserve"><value>Введите новый пароль клуба. Сохранение меняет его после проверки текущего; пустое поле сохраняет прежний пароль.</value></data>
+  <data name="ClubConfirmNewPasswordTooltip" xml:space="preserve"><value>Повторите новый пароль клуба. Для сохранения требуется точное совпадение; подтверждение не хранится.</value></data>
+  <data name="ClubSocialMediaTooltip" xml:space="preserve"><value>Введите необязательную ссылку и нажмите «Добавить»; можно сохранить до {0} ссылок. Сохранение записывает изменённый список.</value></data>
+  <data name="CreatePlayerIdentifierHelp" xml:space="preserve"><value>Обязательный идентификатор игрока. Используйте строчные буквы и цифры, не более {0} символов; после создания изменить его нельзя.</value></data>
+  <data name="PlayerDisplayNameHelp" xml:space="preserve"><value>Обязательное имя игрока для жеребьёвок, партий и таблиц. Не более {0} символов.</value></data>
+  <data name="BulletRatingHelp" xml:space="preserve"><value>Необязательный начальный рейтинг в пуле от {0} до {1}.</value></data>
+  <data name="BulletDeviationHelp" xml:space="preserve"><value>Необязательная неопределённость Glicko-2 для пули; меньшее значение означает большую уверенность. По умолчанию: {0}.</value></data>
+  <data name="BlitzRatingHelp" xml:space="preserve"><value>Необязательный начальный рейтинг в блице от {0} до {1}.</value></data>
+  <data name="BlitzDeviationHelp" xml:space="preserve"><value>Необязательная неопределённость Glicko-2 для блица; меньшее значение означает большую уверенность. По умолчанию: {0}.</value></data>
+  <data name="RapidRatingHelp" xml:space="preserve"><value>Необязательный начальный рейтинг в рапиде от {0} до {1}.</value></data>
+  <data name="RapidDeviationHelp" xml:space="preserve"><value>Необязательная неопределённость Glicko-2 для рапида; меньшее значение означает большую уверенность. По умолчанию: {0}.</value></data>
+  <data name="ClassicalRatingHelp" xml:space="preserve"><value>Необязательный начальный рейтинг в классике от {0} до {1}.</value></data>
+  <data name="ClassicalDeviationHelp" xml:space="preserve"><value>Необязательная неопределённость Glicko-2 для классики; меньшее значение означает большую уверенность. По умолчанию: {0}.</value></data>
+  <data name="PlayerChessTitleHelp" xml:space="preserve"><value>Необязательное признанное шахматное звание; для игрока без звания выберите «Нет».</value></data>
+  <data name="ChessComUsernameHelp" xml:space="preserve"><value>Необязательное имя на Chess.com для загрузки рейтингов и изображения профиля. Не более {0} символов.</value></data>
+  <data name="LichessUsernameHelp" xml:space="preserve"><value>Необязательное имя на Lichess для загрузки рейтингов игрока. Не более {0} символов.</value></data>
+  <data name="CreatePlayerChessComUsernameHelp" xml:space="preserve"><value>Необязательно; можно использовать для загрузки рейтингов Chess.com и изображения профиля.</value></data>
+  <data name="CreatePlayerChessComUsernameTooltip" xml:space="preserve"><value>Введите точное имя игрока на Chess.com. Поле необязательно и может использоваться для загрузки рейтингов и изображения профиля. Не более {0} символов.</value></data>
+  <data name="CreatePlayerLichessUsernameHelp" xml:space="preserve"><value>Необязательно; можно использовать для загрузки рейтингов Lichess.</value></data>
+  <data name="CreatePlayerLichessUsernameTooltip" xml:space="preserve"><value>Введите точное имя игрока на Lichess. Поле необязательно и может использоваться для загрузки рейтингов. Не более {0} символов.</value></data>
+  <data name="CreatePlayerFideIdHelp" xml:space="preserve"><value>Необязательно; можно использовать для загрузки официальных рейтингов FIDE.</value></data>
+  <data name="CreatePlayerFideIdTooltip" xml:space="preserve"><value>Введите точный числовой идентификатор FIDE игрока. Поле необязательно и может использоваться для загрузки официальных рейтингов. Не более {0} цифр.</value></data>
+  <data name="PlayerChessComUsernameHelp" xml:space="preserve"><value>Необязательная ссылка на профиль игрока на Chess.com.</value></data>
+  <data name="PlayerChessComUsernameTooltip" xml:space="preserve"><value>Введите точное имя игрока на Chess.com, чтобы связать игрока с его внешним профилем. Поле необязательно; связанное изображение профиля может быть загружено. Не более {0} символов.</value></data>
+  <data name="PlayerLichessUsernameHelp" xml:space="preserve"><value>Необязательная ссылка на профиль игрока на Lichess.</value></data>
+  <data name="PlayerLichessUsernameTooltip" xml:space="preserve"><value>Введите точное имя игрока на Lichess, чтобы связать игрока с его внешним профилем. Поле необязательно. Не более {0} символов.</value></data>
+  <data name="PlayerFideIdHelp" xml:space="preserve"><value>Необязательная ссылка на официальную запись игрока в FIDE.</value></data>
+  <data name="PlayerFideIdTooltip" xml:space="preserve"><value>Введите точный числовой идентификатор FIDE игрока, чтобы связать его с официальной записью в FIDE. Поле необязательно. Не более {0} цифр.</value></data>
+  <data name="PlayerUscfIdHelp" xml:space="preserve"><value>Необязательный числовой идентификатор члена USCF. Не более {0} цифр.</value></data>
+  <data name="PlayerCbxIdHelp" xml:space="preserve"><value>Необязательный числовой идентификатор CBX для бразильских шахматных данных. Не более {0} цифр.</value></data>
+  <data name="PlayerEmailHelp" xml:space="preserve"><value>Необязательный адрес электронной почты в контактных данных игрока. Не более {0} символов.</value></data>
+  <data name="PlayerPhoneHelp" xml:space="preserve"><value>Необязательный номер телефона в контактных данных игрока. Не более {0} символов.</value></data>
+  <data name="PlayerBirthDateHelp" xml:space="preserve"><value>Необязательная дата рождения игрока. Будущие даты запрещены; очистите поле, чтобы удалить дату.</value></data>
+  <data name="PlayerGenderHelp" xml:space="preserve"><value>Пол игрока для экспорта соревнований, где требуются эти данные.</value></data>
+  <data name="PlayerImmutableIdentifierHelp" xml:space="preserve"><value>Идентификатор игрока только для чтения, при создании ограниченный {0} символами. Изменить его нельзя.</value></data>
+  <data name="PlayerCreationDateHelp" xml:space="preserve"><value>Дата и время создания этого игрока, доступные только для чтения.</value></data>
 </root>

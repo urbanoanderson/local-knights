@@ -139,7 +139,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _minRating = Math.Clamp(value, CommonConstants.DefaultMinRatingLowerBound, CommonConstants.DefaultMinRatingUpperBound);
                 OnPropertyChanged(nameof(MinRating));
-                OnPropertyChanged(nameof(EditRatingTooltip));
+                OnPropertyChanged(nameof(ClubInitialRatingTooltip));
             }
         }
 
@@ -153,7 +153,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 _maxRating = Math.Clamp(value, CommonConstants.DefaultMaxRatingLowerBound, CommonConstants.DefaultMaxRatingUpperBound);
                 OnPropertyChanged(nameof(MaxRating));
-                OnPropertyChanged(nameof(EditRatingTooltip));
+                OnPropertyChanged(nameof(ClubInitialRatingTooltip));
             }
         }
 
@@ -302,6 +302,15 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Gets the localized label for "Club Preferences".
         /// </summary>
         public string ClubPreferences => $"{AppConstants.DefaultPreferencesIcon} " + LocalizationHelper.GetString("ClubPreferences");
+        public string ClubDisplayNameHelp => LocalizationHelper.GetString("ClubDisplayNameHelp");
+        public string ClubDescriptionHelp => LocalizationHelper.GetString("ClubDescriptionHelp");
+        public string ClubCityHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubCityHelp"), CommonConstants.CityMaxLength);
+        public string ClubFederationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubFederationHelp"), CommonConstants.FederationCodeLength);
+        public string ClubChiefArbiterHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubChiefArbiterHelp"), CommonConstants.ChiefArbiterMaxLength);
+        public string ClubCreatedAtHelp => LocalizationHelper.GetString("ClubCreatedAtHelp");
+        public string ClubUpdatedAtHelp => LocalizationHelper.GetString("ClubUpdatedAtHelp");
+        public string ClubCreatedAtTooltip => LocalizationHelper.GetString("ClubCreatedAtTooltip");
+        public string ClubUpdatedAtTooltip => LocalizationHelper.GetString("ClubUpdatedAtTooltip");
 
         /// <summary>
         /// Gets the localized label for "Display Name".
@@ -316,9 +325,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string CityLabel => LocalizationHelper.GetString("CityLabel");
         public string DefaultChiefArbiterLabel => LocalizationHelper.GetString("DefaultChiefArbiterLabel");
         public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
-        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
-        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
-        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
+        public string ClubCityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubCityTooltip"), CommonConstants.CityMaxLength);
+        public string ClubChiefArbiterTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubChiefArbiterTooltip"), CommonConstants.ChiefArbiterMaxLength);
+        public string ClubFederationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubFederationTooltip"), CommonConstants.FederationCodeLength);
 
         /// <summary>
         /// Gets the localized label for "Created At".
@@ -413,12 +422,17 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <summary>
         /// Gets the localized help text for the rating system selection.
         /// </summary>
-        public string RatingSystemHelp => LocalizationHelper.GetString("RatingSystemHelp");
+        public string ClubRatingSystemHelp => LocalizationHelper.GetString("ClubRatingSystemHelp");
 
         /// <summary>
         /// Gets the localized help text for provisional games.
         /// </summary>
-        public string ProvisionalGamesHelp => LocalizationHelper.GetString("ProvisionalGamesHelp");
+        public string ClubProvisionalGamesHelp => LocalizationHelper.GetString("ClubProvisionalGamesHelp");
+        public string ClubInitialRatingHelp => LocalizationHelper.GetString("ClubInitialRatingHelp");
+        public string ClubMinimumRatingHelp => LocalizationHelper.GetString("ClubMinimumRatingHelp");
+        public string ClubMaximumRatingHelp => LocalizationHelper.GetString("ClubMaximumRatingHelp");
+        public string ClubInitialDeviationHelp => LocalizationHelper.GetString("ClubInitialDeviationHelp");
+        public string ClubInitialVolatilityHelp => LocalizationHelper.GetString("ClubInitialVolatilityHelp");
 
         /// <summary>
         /// Gets the localized label for "Social Media Links".
@@ -453,82 +467,83 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// <summary>
         /// Gets the localized help text for password field.
         /// </summary>
-        public string PasswordHelp => LocalizationHelper.GetString("PasswordHelp");
+        public string ClubCurrentPasswordHelp => LocalizationHelper.GetString("ClubCurrentPasswordHelp");
 
         /// <summary>
         /// Gets the localized help text for confirm password field.
         /// </summary>
-        public string ConfirmPasswordHelp => LocalizationHelper.GetString("ConfirmPasswordHelp");
+        public string ClubNewPasswordHelp => LocalizationHelper.GetString("ClubNewPasswordHelp");
+        public string ClubConfirmNewPasswordHelp => LocalizationHelper.GetString("ClubConfirmNewPasswordHelp");
 
         /// <summary>
         /// Gets the localized help text for social media field.
         /// </summary>
-        public string SocialMediaHelp => LocalizationHelper.GetString("SocialMediaHelp");
+        public string ClubSocialMediaHelp => LocalizationHelper.GetString("ClubSocialMediaHelp");
 
         /// <summary>
         /// Gets the localized tooltip for editing display name.
         /// </summary>
-        public string EditDisplayNameTooltip => LocalizationHelper.GetString("EditDisplayNameTooltip");
+        public string ClubDisplayNameTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubDisplayNameTooltip"), CommonConstants.DisplayNameMaxLength);
 
         /// <summary>
         /// Gets the localized tooltip for editing description.
         /// </summary>
-        public string EditDescriptionTooltip => LocalizationHelper.GetString("EditDescriptionTooltip");
+        public string ClubDescriptionTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubDescriptionTooltip"), CommonConstants.DescriptionMaxLength);
 
         /// <summary>
         /// Gets the localized tooltip for editing rating.
         /// </summary>
-        public string EditRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditRatingTooltip"), MinRating, MaxRating);
+        public string ClubInitialRatingTooltip => LocalizationHelper.GetString("ClubInitialRatingTooltip");
 
         /// <summary>
         /// Gets the localized tooltip for editing minimum rating.
         /// </summary>
-        public string EditMinRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditMinRatingTooltip"), CommonConstants.DefaultMinRatingLowerBound, CommonConstants.DefaultMinRatingUpperBound);
+        public string ClubMinimumRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubMinimumRatingTooltip"), CommonConstants.DefaultMinRatingLowerBound, CommonConstants.DefaultMinRatingUpperBound, CommonConstants.DefaultMinRating);
 
         /// <summary>
         /// Gets the localized tooltip for editing maximum rating.
         /// </summary>
-        public string EditMaxRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("EditMaxRatingTooltip"), CommonConstants.DefaultMaxRatingLowerBound, CommonConstants.DefaultMaxRatingUpperBound);
+        public string ClubMaximumRatingTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubMaximumRatingTooltip"), CommonConstants.DefaultMaxRatingLowerBound, CommonConstants.DefaultMaxRatingUpperBound, CommonConstants.DefaultMaxRating);
 
         /// <summary>
         /// Gets the localized tooltip for editing the rating system.
         /// </summary>
-        public string EditRatingSystemTooltip => LocalizationHelper.GetString("EditRatingSystemTooltip");
+        public string ClubRatingSystemTooltip => LocalizationHelper.GetString("ClubRatingSystemTooltip");
 
         /// <summary>
         /// Gets the localized tooltip for editing deviation.
         /// </summary>
-        public string EditDeviationTooltip => LocalizationHelper.GetString("EditDeviationTooltip");
+        public string ClubInitialDeviationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubInitialDeviationTooltip"), CommonConstants.DefaultDeviationLowerBound, CommonConstants.DefaultDeviationUpperBound, CommonConstants.DefaultDeviation);
 
         /// <summary>
         /// Gets the localized tooltip for editing volatility.
         /// </summary>
-        public string EditVolatilityTooltip => LocalizationHelper.GetString("EditVolatilityTooltip");
+        public string ClubInitialVolatilityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubInitialVolatilityTooltip"), CommonConstants.DefaultVolatilityLowerBound, CommonConstants.DefaultVolatilityUpperBound, CommonConstants.DefaultVolatility);
 
         /// <summary>
         /// Gets the localized tooltip for editing provisional games.
         /// </summary>
-        public string EditProvisionalGamesTooltip => LocalizationHelper.GetString("EditProvisionalGamesTooltip");
+        public string ClubProvisionalGamesTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubProvisionalGamesTooltip"), CommonConstants.DefaultProvisionalGamesLowerBound, CommonConstants.DefaultProvisionalGamesUpperBound, CommonConstants.DefaultProvisionalGames);
 
         /// <summary>
         /// Gets the localized tooltip for editing current password.
         /// </summary>
-        public string CurrentPasswordTooltip => LocalizationHelper.GetString("CurrentPasswordTooltip");
+        public string ClubCurrentPasswordTooltip => LocalizationHelper.GetString("ClubCurrentPasswordTooltip");
 
         /// <summary>
         /// Gets the localized tooltip for editing new password.
         /// </summary>
-        public string NewPasswordTooltip => LocalizationHelper.GetString("NewPasswordTooltip");
+        public string ClubNewPasswordTooltip => LocalizationHelper.GetString("ClubNewPasswordTooltip");
 
         /// <summary>
         /// Gets the localized tooltip for editing confirm new password.
         /// </summary>
-        public string ConfirmNewPasswordTooltip => LocalizationHelper.GetString("ConfirmNewPasswordTooltip");
+        public string ClubConfirmNewPasswordTooltip => LocalizationHelper.GetString("ClubConfirmNewPasswordTooltip");
 
         /// <summary>
         /// Gets the localized tooltip for editing social media links.
         /// </summary>
-        public string EditSocialMediaTooltip => LocalizationHelper.GetString("EditSocialMediaTooltip");
+        public string ClubSocialMediaTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("ClubSocialMediaTooltip"), CommonConstants.SocialMediaLinkLimit);
 
         /// <summary>
         /// Gets the command to save club preferences.
@@ -611,15 +626,13 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(ClubPreferences));
             OnPropertyChanged(nameof(DisplayNameLabel));
             OnPropertyChanged(nameof(DescriptionLabel));
             OnPropertyChanged(nameof(CityLabel));
             OnPropertyChanged(nameof(DefaultChiefArbiterLabel));
             OnPropertyChanged(nameof(FederationLabel));
-            OnPropertyChanged(nameof(CityTooltip));
-            OnPropertyChanged(nameof(ChiefArbiterTooltip));
-            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(CreatedAtLabel));
             OnPropertyChanged(nameof(UpdatedAtLabel));
             OnPropertyChanged(nameof(CreatedAtText));
@@ -631,11 +644,9 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(RatingParametersHeader));
             OnPropertyChanged(nameof(SecurityHeader));
             OnPropertyChanged(nameof(RatingSystemLabel));
-            OnPropertyChanged(nameof(RatingSystemHelp));
             OnPropertyChanged(nameof(DeviationLabel));
             OnPropertyChanged(nameof(VolatilityLabel));
             OnPropertyChanged(nameof(ProvisionalGamesLabel));
-            OnPropertyChanged(nameof(ProvisionalGamesHelp));
             OnPropertyChanged(nameof(CurrentPasswordLabel));
             OnPropertyChanged(nameof(NewPasswordLabel));
             OnPropertyChanged(nameof(ConfirmNewPasswordLabel));
@@ -645,23 +656,43 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(SaveButtonLabel));
             OnPropertyChanged(nameof(DeleteClubButton));
             OnPropertyChanged(nameof(CancelLabel));
-            OnPropertyChanged(nameof(PasswordHelp));
-            OnPropertyChanged(nameof(ConfirmPasswordHelp));
-            OnPropertyChanged(nameof(SocialMediaHelp));
-            OnPropertyChanged(nameof(EditDisplayNameTooltip));
-            OnPropertyChanged(nameof(EditDescriptionTooltip));
-            OnPropertyChanged(nameof(EditRatingTooltip));
-            OnPropertyChanged(nameof(EditMinRatingTooltip));
-            OnPropertyChanged(nameof(EditMaxRatingTooltip));
-            OnPropertyChanged(nameof(EditRatingSystemTooltip));
-            OnPropertyChanged(nameof(EditDeviationTooltip));
-            OnPropertyChanged(nameof(EditVolatilityTooltip));
-            OnPropertyChanged(nameof(EditProvisionalGamesTooltip));
-            OnPropertyChanged(nameof(CurrentPasswordTooltip));
-            OnPropertyChanged(nameof(NewPasswordTooltip));
-            OnPropertyChanged(nameof(ConfirmNewPasswordTooltip));
             OnPropertyChanged(nameof(SecurityHelp));
-            OnPropertyChanged(nameof(EditSocialMediaTooltip));
+            OnPropertyChanged(nameof(ClubDisplayNameHelp));
+            OnPropertyChanged(nameof(ClubDescriptionHelp));
+            OnPropertyChanged(nameof(ClubCityHelp));
+            OnPropertyChanged(nameof(ClubFederationHelp));
+            OnPropertyChanged(nameof(ClubChiefArbiterHelp));
+            OnPropertyChanged(nameof(ClubCreatedAtHelp));
+            OnPropertyChanged(nameof(ClubUpdatedAtHelp));
+            OnPropertyChanged(nameof(ClubRatingSystemHelp));
+            OnPropertyChanged(nameof(ClubInitialRatingHelp));
+            OnPropertyChanged(nameof(ClubMinimumRatingHelp));
+            OnPropertyChanged(nameof(ClubMaximumRatingHelp));
+            OnPropertyChanged(nameof(ClubInitialDeviationHelp));
+            OnPropertyChanged(nameof(ClubInitialVolatilityHelp));
+            OnPropertyChanged(nameof(ClubProvisionalGamesHelp));
+            OnPropertyChanged(nameof(ClubCurrentPasswordHelp));
+            OnPropertyChanged(nameof(ClubNewPasswordHelp));
+            OnPropertyChanged(nameof(ClubConfirmNewPasswordHelp));
+            OnPropertyChanged(nameof(ClubSocialMediaHelp));
+            OnPropertyChanged(nameof(ClubDisplayNameTooltip));
+            OnPropertyChanged(nameof(ClubDescriptionTooltip));
+            OnPropertyChanged(nameof(ClubCityTooltip));
+            OnPropertyChanged(nameof(ClubFederationTooltip));
+            OnPropertyChanged(nameof(ClubChiefArbiterTooltip));
+            OnPropertyChanged(nameof(ClubCreatedAtTooltip));
+            OnPropertyChanged(nameof(ClubUpdatedAtTooltip));
+            OnPropertyChanged(nameof(ClubRatingSystemTooltip));
+            OnPropertyChanged(nameof(ClubInitialRatingTooltip));
+            OnPropertyChanged(nameof(ClubMinimumRatingTooltip));
+            OnPropertyChanged(nameof(ClubMaximumRatingTooltip));
+            OnPropertyChanged(nameof(ClubInitialDeviationTooltip));
+            OnPropertyChanged(nameof(ClubInitialVolatilityTooltip));
+            OnPropertyChanged(nameof(ClubProvisionalGamesTooltip));
+            OnPropertyChanged(nameof(ClubCurrentPasswordTooltip));
+            OnPropertyChanged(nameof(ClubNewPasswordTooltip));
+            OnPropertyChanged(nameof(ClubConfirmNewPasswordTooltip));
+            OnPropertyChanged(nameof(ClubSocialMediaTooltip));
         }
 
         /// <summary>

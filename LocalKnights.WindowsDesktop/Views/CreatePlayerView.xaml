@@ -37,16 +37,16 @@
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding IdentifierNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding IdentifierName, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateIdentifierNameTooltip}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding LowercaseLettersNumbersMaxHelpText}" Style="{DynamicResource HelpText}"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreatePlayerIdentifierHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding CreatePlayerIdentifierHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreatePlayerIdentifierHelp}"/>
                         </StackPanel>
 
                         <!-- Display Name -->
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateDisplayNameTooltip}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerDisplayNameHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding PlayerDisplayNameHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerDisplayNameHelp}"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -72,14 +72,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
-                                           Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}" Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding BulletRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
-                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
-                                           Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" ToolTip="{Binding BulletRatingHelp}" />
+                                <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}" Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding BulletDeviationText, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding BulletDeviationHelp}"
                                          Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </StackPanel>
@@ -98,11 +96,11 @@
                                 <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding BlitzRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
+                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" ToolTip="{Binding BlitzRatingHelp}" />
                                 <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding BlitzDeviationText, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding BlitzDeviationHelp}"
                                          Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </StackPanel>
@@ -121,11 +119,11 @@
                                 <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding RapidRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
+                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" ToolTip="{Binding RapidRatingHelp}" />
                                 <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding RapidDeviationText, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding RapidDeviationHelp}"
                                          Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </StackPanel>
@@ -144,11 +142,11 @@
                                 <TextBlock Grid.Column="0" Text="{Binding RatingLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <controls:CustomNumericUpDown Grid.Column="1" Value="{Binding ClassicalRating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" />
+                                                              Minimum="{Binding RatingLowerBound}" Maximum="{Binding RatingUpperBound}" Increment="1" DecimalPlaces="0" ToolTip="{Binding ClassicalRatingHelp}" />
                                 <TextBlock Grid.Column="3" Text="{Binding DeviationLabel}" Style="{DynamicResource LabelText}" VerticalAlignment="Center" Margin="{StaticResource SpacingMediumRight}"
                                            Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 <TextBox Grid.Column="4" Text="{Binding ClassicalDeviationText, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding ClassicalDeviationHelp}"
                                          Visibility="{Binding IsDeviationVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </StackPanel>
@@ -165,7 +163,7 @@
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding ChessTitles}" SelectedItem="{Binding SelectedChessTitle}"
-                                          Style="{DynamicResource ModernComboBox}">
+                                          Style="{DynamicResource ModernComboBox}" ToolTip="{Binding PlayerChessTitleHelp}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
@@ -173,6 +171,7 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </Grid>
+                            <TextBlock Text="{Binding PlayerChessTitleHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerChessTitleHelp}" />
                         </StackPanel>
 
                     </StackPanel>
@@ -195,14 +194,14 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
                                          Text="{Binding ChessComUsername, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"/>
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreatePlayerChessComUsernameTooltip}"/>
                                 <Button Grid.Column="2"
                                         Content="{Binding FetchRatingsLabel}"
                                         Command="{Binding FetchChessComRatingsCommand}"
                                         Style="{DynamicResource SecondaryButton}"
                                         MinWidth="130"/>
                             </Grid>
-                            <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                            <TextBlock Text="{Binding CreatePlayerChessComUsernameHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreatePlayerChessComUsernameTooltip}"/>
                         </StackPanel>
 
                         <!-- Lichess Username -->
@@ -216,14 +215,14 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
                                          Text="{Binding LichessUsername, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"/>
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreatePlayerLichessUsernameTooltip}"/>
                                 <Button Grid.Column="2"
                                         Content="{Binding FetchRatingsLabel}"
                                         Command="{Binding FetchLichessRatingsCommand}"
                                         Style="{DynamicResource SecondaryButton}"
                                         MinWidth="130"/>
                             </Grid>
-                            <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                            <TextBlock Text="{Binding CreatePlayerLichessUsernameHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreatePlayerLichessUsernameTooltip}"/>
                         </StackPanel>
 
                         <!-- FIDE ID -->
@@ -237,30 +236,30 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
                                          Text="{Binding FideId, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{DynamicResource ModernTextBox}"/>
+                                         Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreatePlayerFideIdTooltip}"/>
                                 <Button Grid.Column="2"
                                         Content="{Binding FetchRatingsLabel}"
                                         Command="{Binding FetchFideRatingsCommand}"
                                         Style="{DynamicResource SecondaryButton}"
                                         MinWidth="130"/>
                             </Grid>
-                            <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                            <TextBlock Text="{Binding CreatePlayerFideIdHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreatePlayerFideIdTooltip}"/>
                         </StackPanel>
 
                         <!-- USCF ID -->
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding UscfIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding UscfId, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerUscfIdHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding PlayerUscfIdHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerUscfIdHelp}"/>
                         </StackPanel>
 
                         <!-- CBX ID -->
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding CbxIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding CbxId, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerCbxIdHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding PlayerCbxIdHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerCbxIdHelp}"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -276,24 +275,24 @@
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding EmailLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerEmailHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding PlayerEmailHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerEmailHelp}"/>
                         </StackPanel>
 
                         <!-- Phone -->
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding PhoneLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding Max20CharactersHelpText}" Style="{DynamicResource HelpText}"/>
+                                     Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerPhoneHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding PlayerPhoneHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerPhoneHelp}"/>
                         </StackPanel>
 
                         <!-- Birth Date -->
                         <StackPanel Margin="{StaticResource SpacingSectionBottom}">
                             <TextBlock Text="{Binding BirthDateLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                             <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
-                                        Style="{StaticResource ModernDatePicker}" Margin="{StaticResource SpacingSmallBottom}"/>
-                            <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}"/>
+                                        Style="{StaticResource ModernDatePicker}" ToolTip="{Binding PlayerBirthDateHelp}" Margin="{StaticResource SpacingSmallBottom}"/>
+                            <TextBlock Text="{Binding PlayerBirthDateHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerBirthDateHelp}"/>
                         </StackPanel>
 
                         <!-- Gender -->
@@ -305,7 +304,7 @@
                                     <ColumnDefinition Width="160"/>
                                 </Grid.ColumnDefinitions>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding GenderTypes}" SelectedItem="{Binding SelectedGender}"
-                                          Style="{DynamicResource ModernComboBox}" ToolTip="{Binding GenderTooltip}">
+                                          Style="{DynamicResource ModernComboBox}" ToolTip="{Binding PlayerGenderHelp}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
@@ -313,6 +312,7 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </Grid>
+                            <TextBlock Text="{Binding PlayerGenderHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerGenderHelp}" />
                         </StackPanel>
 
                     </StackPanel>

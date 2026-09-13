@@ -1,5 +1,6 @@
 using LocalKnights.Common.Models;
 using LocalKnights.Common.Services.Database;
+using LocalKnights.WindowsDesktop.Helpers;
 using LocalKnights.WindowsDesktop.Services;
 using LocalKnights.WindowsDesktop.ViewModels;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -9,6 +10,37 @@ namespace LocalKnights.WindowsDesktop.Tests;
 
 public sealed class StartViewModelTests
 {
+    [Fact]
+    public async Task SignInCommand_WhileSignInIsRunning_ShowsSigningInText()
+    {
+        using ManualResetEventSlim signInStarted = new();
+        using ManualResetEventSlim allowSignInToFinish = new();
+        Mock<IClubService> clubServiceMock = new();
+        clubServiceMock.Setup(service => service.GetExistingClubIdentifiers()).Returns(["club"]);
+        clubServiceMock
+            .Setup(service => service.ClubSignInAsync("club", "password", It.IsAny<Func<int, int, Task<bool>>>() ))
+            .Returns(() =>
+            {
+                signInStarted.Set();
+                allowSignInToFinish.Wait(TimeSpan.FromSeconds(5));
+                return Task.FromResult<ClubPreferences?>(null);
+            });
+        Mock<IPageNavigationService> navigationServiceMock = new();
+        Mock<IMessageBoxService> messageBoxServiceMock = new();
+        StartViewModel viewModel = CreateViewModel(clubServiceMock, navigationServiceMock, messageBoxServiceMock);
+        viewModel.SelectedClub = "club";
+        viewModel.Password = "password";
+
+        viewModel.SignInCommand.Execute(null);
+
+        Assert.True(signInStarted.Wait(TimeSpan.FromSeconds(1)));
+        Assert.True(viewModel.IsSigningIn);
+        Assert.Equal(LocalizationHelper.GetString("SigningInButton"), viewModel.SignInButtonText);
+
+        allowSignInToFinish.Set();
+        await WaitForSignInToFinishAsync(viewModel);
+    }
+
     [Fact]
     public async Task SignInCommand_WhenSchemaIsNewerThanSupported_ShowsLocalizedVersionError()
     {

@@ -53,19 +53,20 @@
                         <!-- Identifier Name (Read-only) -->
                         <TextBlock Text="{Binding IdentifierNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding IdentifierName, Mode=OneWay}" IsReadOnly="True"
-                                Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingSectionBottom}" />
-                        <TextBlock Text="{Binding IdentifierNameCannotChangeHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ReadOnlyFieldStyle}" ToolTip="{Binding PlayerImmutableIdentifierHelp}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding PlayerImmutableIdentifierHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerImmutableIdentifierHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Display Name -->
                         <TextBlock Text="{Binding DisplayNameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerDisplayNameHelp}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerDisplayNameHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerDisplayNameHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Creation Date (Read-only) -->
                         <TextBlock Text="{Binding CreationDateLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding CreatedAt, Mode=OneWay}" IsReadOnly="True"
-                                Style="{DynamicResource ReadOnlyFieldStyle}" Margin="{StaticResource SpacingSectionBottom}" />
+                            Style="{DynamicResource ReadOnlyFieldStyle}" ToolTip="{Binding PlayerCreationDateHelp}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding PlayerCreationDateHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerCreationDateHelp}" />
                     </StackPanel>
                 </Border>
 
@@ -82,6 +83,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -106,13 +108,14 @@
                         <!-- Chess Title -->
                         <TextBlock Text="{Binding ChessTitleLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <ComboBox ItemsSource="{Binding ChessTitles}" SelectedItem="{Binding SelectedChessTitle}"
-                                Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingSectionBottom}">
+                            Style="{DynamicResource ModernComboBox}" ToolTip="{Binding PlayerChessTitleHelp}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding PlayerChessTitleHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerChessTitleHelp}" />
 
                     </StackPanel>
                 </Border>
@@ -125,32 +128,32 @@
                         <!-- Chess.com Username -->
                         <TextBlock Text="{Binding ChessComUsernameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding ChessComUsername, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerChessComUsernameTooltip}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerChessComUsernameHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerChessComUsernameTooltip}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Lichess Username -->
                         <TextBlock Text="{Binding LichessUsernameLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding LichessUsername, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding Max50CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerLichessUsernameTooltip}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerLichessUsernameHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerLichessUsernameTooltip}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- FIDE ID -->
                         <TextBlock Text="{Binding FideIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding FideId, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerFideIdTooltip}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerFideIdHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerFideIdTooltip}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- USCF ID -->
                         <TextBlock Text="{Binding UscfIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding UscfId, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerUscfIdHelp}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerUscfIdHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerUscfIdHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- CBX ID -->
                         <TextBlock Text="{Binding CbxIdLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding CbxId, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding NumericMax12CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerCbxIdHelp}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerCbxIdHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerCbxIdHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                     </StackPanel>
                 </Border>
@@ -163,32 +166,33 @@
                         <!-- Email -->
                         <TextBlock Text="{Binding EmailLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding Max100CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerEmailHelp}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerEmailHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerEmailHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Phone -->
                         <TextBlock Text="{Binding PhoneLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding Max20CharactersHelpText}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                            Style="{DynamicResource ModernTextBox}" ToolTip="{Binding PlayerPhoneHelp}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerPhoneHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerPhoneHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Birth Date -->
                         <TextBlock Text="{Binding BirthDateLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{StaticResource ModernDatePicker}" Margin="{StaticResource SpacingMediumBottom}" />
-                        <TextBlock Text="{Binding BirthDateHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}"/>
+                                    Style="{StaticResource ModernDatePicker}" ToolTip="{Binding PlayerBirthDateHelp}" Margin="{StaticResource SpacingMediumBottom}" />
+                        <TextBlock Text="{Binding PlayerBirthDateHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerBirthDateHelp}" Margin="{StaticResource SpacingSectionBottom}"/>
 
                         <!-- Gender -->
                         <TextBlock Text="{Binding GenderLabel}" Style="{DynamicResource LabelText}" Margin="{StaticResource SpacingMediumBottom}"/>
                         <ComboBox ItemsSource="{Binding GenderTypes}" SelectedItem="{Binding SelectedGender}"
-                                  Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingSectionBottom}"
-                                  ToolTip="{Binding GenderTooltip}">
+                                  Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingMediumBottom}"
+                                  ToolTip="{Binding PlayerGenderHelp}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding PlayerGenderHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding PlayerGenderHelp}" />
                     </StackPanel>
                 </Border>
 

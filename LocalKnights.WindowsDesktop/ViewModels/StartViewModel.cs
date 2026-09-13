@@ -144,21 +144,22 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             try
             {
                 bool migrationDeclined = false;
-                ClubPreferences? clubPreferences = await _clubService.ClubSignInAsync(
-                    SelectedClub,
-                    Password,
-                    (storedVersion, currentVersion) =>
-                    {
-                        string message = string.Format(
-                            LocalizationHelper.GetString("DatabaseMigrationConfirmationMessage"),
-                            storedVersion,
-                            currentVersion);
-                        CustomMessageBoxResult result = _messageBoxService.ShowConfirmation(
-                            message,
-                            LocalizationHelper.GetString("DatabaseMigrationTitle"));
-                        migrationDeclined = result != CustomMessageBoxResult.Yes;
-                        return Task.FromResult(!migrationDeclined);
-                    });
+                ClubPreferences? clubPreferences = await Task.Run(() =>
+                    _clubService.ClubSignInAsync(
+                        SelectedClub,
+                        Password,
+                        (storedVersion, currentVersion) =>
+                        {
+                            string message = string.Format(
+                                LocalizationHelper.GetString("DatabaseMigrationConfirmationMessage"),
+                                storedVersion,
+                                currentVersion);
+                            CustomMessageBoxResult result = _messageBoxService.ShowConfirmation(
+                                message,
+                                LocalizationHelper.GetString("DatabaseMigrationTitle"));
+                            migrationDeclined = result != CustomMessageBoxResult.Yes;
+                            return Task.FromResult(!migrationDeclined);
+                        }));
 
                 if (clubPreferences != null)
                 {

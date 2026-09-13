@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
 using LocalKnights.Common.Helpers;
 using LocalKnights.Common.Models;
@@ -237,6 +238,28 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// Gets the localized page title for the competition creation screen.
         /// </summary>
         public string CreateCompetition => $"{AppConstants.DefaultCompetitionIcon} " + LocalizationHelper.GetString("CreateCompetition");
+        public string CompetitionTitleHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionTitleHelp"), CommonConstants.CompetitionTitleMaxLength);
+        public string CompetitionDescriptionHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionDescriptionHelp"), CommonConstants.DescriptionMaxLength);
+        public string CompetitionCityHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionCityHelp"), CommonConstants.CityMaxLength);
+        public string CompetitionChiefArbiterHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionChiefArbiterHelp"), CommonConstants.ChiefArbiterMaxLength);
+        public string CompetitionFederationHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionFederationHelp"), CommonConstants.FederationCodeLength);
+        public string CompetitionTimeFormatHelp => LocalizationHelper.GetString("CompetitionTimeFormatHelp");
+        public string CompetitionRatedHelp => LocalizationHelper.GetString("CompetitionRatedHelp");
+        public string CompetitionTypeHelp => LocalizationHelper.GetString("CompetitionTypeHelp");
+        public string CompetitionRoundsHelp => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CompetitionRoundsHelp"), CommonConstants.CompetitionRoundsMinimum, CommonConstants.CompetitionRoundsMaximum);
+        public string CompetitionDoubleRoundRobinHelp => LocalizationHelper.GetString("CompetitionDoubleRoundRobinHelp");
+        public string CompetitionByeValueHelp => LocalizationHelper.GetString("CompetitionByeValueHelp");
+        public string CreateCompetitionTitleTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateCompetitionTitleTooltip"), CommonConstants.CompetitionTitleMaxLength);
+        public string CreateCompetitionDescriptionTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateCompetitionDescriptionTooltip"), CommonConstants.DescriptionMaxLength);
+        public string CreateCompetitionCityTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateCompetitionCityTooltip"), CommonConstants.CityMaxLength);
+        public string CreateCompetitionChiefArbiterTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateCompetitionChiefArbiterTooltip"), CommonConstants.ChiefArbiterMaxLength);
+        public string CreateCompetitionFederationTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateCompetitionFederationTooltip"), CommonConstants.FederationCodeLength);
+        public string CreateCompetitionTimeFormatTooltip => LocalizationHelper.GetString("CreateCompetitionTimeFormatTooltip");
+        public string CreateCompetitionRatedTooltip => LocalizationHelper.GetString("CreateCompetitionRatedTooltip");
+        public string CreateCompetitionTypeTooltip => LocalizationHelper.GetString("CreateCompetitionTypeTooltip");
+        public string CreateCompetitionRoundsTooltip => string.Format(CultureInfo.CurrentCulture, LocalizationHelper.GetString("CreateCompetitionRoundsTooltip"), CommonConstants.CompetitionRoundsMinimum, CommonConstants.CompetitionRoundsMaximum, CommonConstants.DefaultCompetitionNumberOfRounds);
+        public string CreateCompetitionDoubleRoundRobinTooltip => LocalizationHelper.GetString("CreateCompetitionDoubleRoundRobinTooltip");
+        public string CreateCompetitionByeValueTooltip => LocalizationHelper.GetString("CreateCompetitionByeValueTooltip");
 
         /// <summary>
         /// Gets the localized label for the competition title input.
@@ -251,9 +274,6 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string CityLabel => LocalizationHelper.GetString("CityLabel");
         public string ChiefArbiterLabel => LocalizationHelper.GetString("ChiefArbiterLabel");
         public string FederationLabel => LocalizationHelper.GetString("FederationLabel");
-        public string CityTooltip => LocalizationHelper.GetString("CityTooltip");
-        public string ChiefArbiterTooltip => LocalizationHelper.GetString("ChiefArbiterTooltip");
-        public string FederationTooltip => LocalizationHelper.GetString("FederationTooltip");
 
         /// <summary>
         /// Gets the localized label for the competition type selection.
@@ -369,15 +389,13 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(CreateCompetition));
             OnPropertyChanged(nameof(TitleLabel));
             OnPropertyChanged(nameof(DescriptionLabel));
             OnPropertyChanged(nameof(CityLabel));
             OnPropertyChanged(nameof(ChiefArbiterLabel));
             OnPropertyChanged(nameof(FederationLabel));
-            OnPropertyChanged(nameof(CityTooltip));
-            OnPropertyChanged(nameof(ChiefArbiterTooltip));
-            OnPropertyChanged(nameof(FederationTooltip));
             OnPropertyChanged(nameof(TimeFormatLabel));
             OnPropertyChanged(nameof(RatedLabel));
             OnPropertyChanged(nameof(TypeLabel));
@@ -386,6 +404,28 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             OnPropertyChanged(nameof(ByeValueLabel));
             OnPropertyChanged(nameof(CreateButtonLabel));
             OnPropertyChanged(nameof(CancelLabel));
+            OnPropertyChanged(nameof(CompetitionTitleHelp));
+            OnPropertyChanged(nameof(CompetitionDescriptionHelp));
+            OnPropertyChanged(nameof(CompetitionCityHelp));
+            OnPropertyChanged(nameof(CompetitionChiefArbiterHelp));
+            OnPropertyChanged(nameof(CompetitionFederationHelp));
+            OnPropertyChanged(nameof(CompetitionTimeFormatHelp));
+            OnPropertyChanged(nameof(CompetitionRatedHelp));
+            OnPropertyChanged(nameof(CompetitionTypeHelp));
+            OnPropertyChanged(nameof(CompetitionRoundsHelp));
+            OnPropertyChanged(nameof(CompetitionDoubleRoundRobinHelp));
+            OnPropertyChanged(nameof(CompetitionByeValueHelp));
+            OnPropertyChanged(nameof(CreateCompetitionTitleTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionDescriptionTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionCityTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionChiefArbiterTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionFederationTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionTimeFormatTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionRatedTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionTypeTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionRoundsTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionDoubleRoundRobinTooltip));
+            OnPropertyChanged(nameof(CreateCompetitionByeValueTooltip));
             LoadInitialOptions();
         }
     }

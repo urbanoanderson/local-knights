@@ -35,6 +35,11 @@ namespace LocalKnights.WindowsDesktop.Services
         /// <inheritdoc/>
         public CustomMessageBoxResult Show(string message, string title, CustomMessageBoxButton button, CustomMessageBoxImage icon)
         {
+            if (Application.Current != null && !Application.Current.Dispatcher.CheckAccess())
+            {
+                return Application.Current.Dispatcher.Invoke(() => Show(message, title, button, icon));
+            }
+
             CustomMessageBoxWindow dialog = new(message, title, (MessageBoxButton)button, (MessageBoxImage)icon)
             {
                 Owner = Application.Current?.MainWindow

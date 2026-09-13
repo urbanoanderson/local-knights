@@ -46,6 +46,24 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         public string CompetitionIdValue { get; private set; } = string.Empty;
 
         public string GamePage => $"{AppConstants.DefaultGameIcon} " + LocalizationHelper.GetString("GamePage");
+        public string GameIdHelp => LocalizationHelper.GetString("GameIdHelp");
+        public string GameCreationDateHelp => LocalizationHelper.GetString("GameCreationDateHelp");
+        public string GameParticipantsHelp => LocalizationHelper.GetString("GameParticipantsHelp");
+        public string GameDetailTimeFormatHelp => LocalizationHelper.GetString("GameDetailTimeFormatHelp");
+        public string GameDetailResultHelp => LocalizationHelper.GetString("GameDetailResultHelp");
+        public string GameDetailRatedHelp => LocalizationHelper.GetString("GameDetailRatedHelp");
+        public string GameRatingChangeHelp => LocalizationHelper.GetString("GameRatingChangeHelp");
+        public string GameCompetitionIdHelp => LocalizationHelper.GetString("GameCompetitionIdHelp");
+        public string GameIdTooltip => LocalizationHelper.GetString("GameIdTooltip");
+        public string GameCreationDateTooltip => LocalizationHelper.GetString("GameCreationDateTooltip");
+        public string GameParticipantsTooltip => LocalizationHelper.GetString("GameParticipantsTooltip");
+        public string GameDetailTimeFormatTooltip => LocalizationHelper.GetString("GameDetailTimeFormatTooltip");
+        public string GameDetailResultTooltip => LocalizationHelper.GetString("GameDetailResultTooltip");
+        public string GameDetailRatedTooltip => LocalizationHelper.GetString("GameDetailRatedTooltip");
+        public string GameRatingChangeTooltip => LocalizationHelper.GetString("GameRatingChangeTooltip");
+        public string GameCompetitionIdTooltip => LocalizationHelper.GetString("GameCompetitionIdTooltip");
+        public string GameDetailPgnHelp => LocalizationHelper.GetString("GameDetailPgnHelp");
+        public string GameDetailPgnTooltip => LocalizationHelper.GetString("GameDetailPgnTooltip");
         public string GameIdLabel => LocalizationHelper.GetString("GameIdLabel");
         public string CreationDateLabel => LocalizationHelper.GetString("CreationDateLabel");
         public string ParticipantsLabel => LocalizationHelper.GetString("ParticipantsLabel");
@@ -227,7 +245,26 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         /// </summary>
         public override void OnLanguageChanged(string _)
         {
+            base.OnLanguageChanged(_);
             OnPropertyChanged(nameof(GamePage));
+            OnPropertyChanged(nameof(GameIdHelp));
+            OnPropertyChanged(nameof(GameCreationDateHelp));
+            OnPropertyChanged(nameof(GameParticipantsHelp));
+            OnPropertyChanged(nameof(GameDetailTimeFormatHelp));
+            OnPropertyChanged(nameof(GameDetailResultHelp));
+            OnPropertyChanged(nameof(GameDetailRatedHelp));
+            OnPropertyChanged(nameof(GameRatingChangeHelp));
+            OnPropertyChanged(nameof(GameCompetitionIdHelp));
+            OnPropertyChanged(nameof(GameDetailPgnHelp));
+            OnPropertyChanged(nameof(GameIdTooltip));
+            OnPropertyChanged(nameof(GameCreationDateTooltip));
+            OnPropertyChanged(nameof(GameParticipantsTooltip));
+            OnPropertyChanged(nameof(GameDetailTimeFormatTooltip));
+            OnPropertyChanged(nameof(GameDetailResultTooltip));
+            OnPropertyChanged(nameof(GameDetailRatedTooltip));
+            OnPropertyChanged(nameof(GameRatingChangeTooltip));
+            OnPropertyChanged(nameof(GameCompetitionIdTooltip));
+            OnPropertyChanged(nameof(GameDetailPgnTooltip));
             OnPropertyChanged(nameof(GameIdLabel));
             OnPropertyChanged(nameof(CreationDateLabel));
             OnPropertyChanged(nameof(ParticipantsLabel));

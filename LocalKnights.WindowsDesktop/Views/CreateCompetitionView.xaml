@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
              xmlns:controls="clr-namespace:LocalKnights.WindowsDesktop.Controls"
+             xmlns:helpers="clr-namespace:LocalKnights.Common.Helpers;assembly=LocalKnights.Common"
              Background="{DynamicResource BackgroundBrush}"
              Foreground="{DynamicResource ForegroundBrush}">
     <Grid Margin="{StaticResource SpacingExtraLarge}">
@@ -26,58 +27,69 @@
                 <Border Style="{DynamicResource Card}">
                     <StackPanel Margin="{StaticResource SpacingExtraLarge}">
                         <TextBlock Text="{Binding TitleLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding Title}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                        <TextBox Text="{Binding Title}" Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateCompetitionTitleTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionTitleHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionTitleTooltip}" />
 
                         <TextBlock Text="{Binding DescriptionLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding Description}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="100" />
+                        <TextBox Text="{Binding Description}" Style="{DynamicResource ModernTextBox}" ToolTip="{Binding CreateCompetitionDescriptionTooltip}" Margin="{StaticResource SpacingSmallBottom}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="100" />
+                        <TextBlock Text="{Binding CompetitionDescriptionHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionDescriptionTooltip}" />
 
                         <TextBlock Text="{Binding CityLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" MaxLength="100" ToolTip="{Binding CityTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                        <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" MaxLength="{x:Static helpers:CommonConstants.CityMaxLength}" ToolTip="{Binding CreateCompetitionCityTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionCityHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionCityTooltip}" />
 
                         <TextBlock Text="{Binding ChiefArbiterLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding ChiefArbiter, UpdateSourceTrigger=PropertyChanged}" MaxLength="100" ToolTip="{Binding ChiefArbiterTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                        <TextBox Text="{Binding ChiefArbiter, UpdateSourceTrigger=PropertyChanged}" MaxLength="{x:Static helpers:CommonConstants.ChiefArbiterMaxLength}" ToolTip="{Binding CreateCompetitionChiefArbiterTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionChiefArbiterHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionChiefArbiterTooltip}" />
 
                         <TextBlock Text="{Binding FederationLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding Federation, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" CharacterCasing="Upper" ToolTip="{Binding FederationTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                        <TextBox Text="{Binding Federation, UpdateSourceTrigger=PropertyChanged}" MaxLength="{x:Static helpers:CommonConstants.FederationCodeLength}" CharacterCasing="Upper" ToolTip="{Binding CreateCompetitionFederationTooltip}" Style="{DynamicResource ModernTextBox}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionFederationHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionFederationTooltip}" />
 
                         <TextBlock Text="{Binding TimeFormatLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding TimeFormatOptions}"
                                   SelectedItem="{Binding TimeFormat}"
-                                  Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingLargeBottom}">
+                                  Style="{DynamicResource ModernComboBox}" ToolTip="{Binding CreateCompetitionTimeFormatTooltip}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding CompetitionTimeFormatHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionTimeFormatTooltip}" />
 
                         <TextBlock Text="{Binding RatedLabel}" Style="{DynamicResource LabelText}" />
-                        <CheckBox IsChecked="{Binding IsRated}" Style="{DynamicResource ModernCheckBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                        <CheckBox IsChecked="{Binding IsRated}" Style="{DynamicResource ModernCheckBox}" ToolTip="{Binding CreateCompetitionRatedTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionRatedHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionRatedTooltip}" />
 
                         <TextBlock Text="{Binding TypeLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding CompetitionTypeOptions}"
                                   SelectedItem="{Binding Type}"
-                                  Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingLargeBottom}">
+                                  Style="{DynamicResource ModernComboBox}" ToolTip="{Binding CreateCompetitionTypeTooltip}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding CompetitionTypeHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionTypeTooltip}" />
 
                         <StackPanel Visibility="{Binding IsNumberOfRoundsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock Text="{Binding NumberOfRoundsLabel}" Style="{DynamicResource LabelText}" />
-                            <controls:CustomNumericUpDown Value="{Binding NumberOfRounds}" Minimum="1" Maximum="30" Margin="{StaticResource SpacingLargeBottom}" />
+                            <controls:CustomNumericUpDown Value="{Binding NumberOfRounds}" Minimum="{x:Static helpers:CommonConstants.CompetitionRoundsMinimumControlValue}" Maximum="{x:Static helpers:CommonConstants.CompetitionRoundsMaximumControlValue}" ToolTip="{Binding CreateCompetitionRoundsTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                            <TextBlock Text="{Binding CompetitionRoundsHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionRoundsTooltip}" />
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding IsDoubleRoundRobinVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock Text="{Binding DoubleRoundRobinLabel}" Style="{DynamicResource LabelText}" />
-                            <CheckBox IsChecked="{Binding IsDoubleRoundRobin}" Style="{DynamicResource ModernCheckBox}" Margin="{StaticResource SpacingLargeBottom}" />
+                            <CheckBox IsChecked="{Binding IsDoubleRoundRobin}" Style="{DynamicResource ModernCheckBox}" ToolTip="{Binding CreateCompetitionDoubleRoundRobinTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                            <TextBlock Text="{Binding CompetitionDoubleRoundRobinHelp}" Style="{DynamicResource HelpText}" Margin="{StaticResource SpacingSectionBottom}" ToolTip="{Binding CreateCompetitionDoubleRoundRobinTooltip}" />
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding IsByeValueVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock Text="{Binding ByeValueLabel}" Style="{DynamicResource LabelText}" />
-                            <ComboBox ItemsSource="{Binding ByeValues}" SelectedItem="{Binding ByeValue}" Style="{DynamicResource ModernComboBox}" />
+                            <ComboBox ItemsSource="{Binding ByeValues}" SelectedItem="{Binding ByeValue}" Style="{DynamicResource ModernComboBox}" ToolTip="{Binding CreateCompetitionByeValueTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                            <TextBlock Text="{Binding CompetitionByeValueHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CreateCompetitionByeValueTooltip}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>

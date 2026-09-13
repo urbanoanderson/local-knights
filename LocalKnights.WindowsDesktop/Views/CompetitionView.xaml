@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
              xmlns:controls="clr-namespace:LocalKnights.WindowsDesktop.Controls"
-            xmlns:models="clr-namespace:LocalKnights.Common.Models;assembly=LocalKnights.Common"
+             xmlns:models="clr-namespace:LocalKnights.Common.Models;assembly=LocalKnights.Common"
+             xmlns:helpers="clr-namespace:LocalKnights.Common.Helpers;assembly=LocalKnights.Common"
              Background="{DynamicResource BackgroundBrush}"
              Foreground="{DynamicResource ForegroundBrush}">
     <UserControl.Resources>
@@ -45,84 +46,93 @@
                         <TextBox Text="{Binding CompetitionTitle, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="{StaticResource SpacingLargeBottom}" />
+                                 ToolTip="{Binding EditCompetitionTitleTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionTitleHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionTitleTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding DescriptionLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionDescription, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="{StaticResource SpacingLargeBottom}"
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
-                                 MinHeight="100" />
+                                 MinHeight="100" ToolTip="{Binding EditCompetitionDescriptionTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionDescriptionHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionDescriptionTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding CityLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionCity, UpdateSourceTrigger=PropertyChanged}"
-                                 MaxLength="100"
-                                 ToolTip="{Binding CityTooltip}"
+                                 MaxLength="{x:Static helpers:CommonConstants.CityMaxLength}"
+                                 ToolTip="{Binding EditCompetitionCityTooltip}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="{StaticResource SpacingLargeBottom}" />
+                                 Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionCityHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionCityTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding ChiefArbiterLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionChiefArbiter, UpdateSourceTrigger=PropertyChanged}"
-                                 MaxLength="100"
-                                 ToolTip="{Binding ChiefArbiterTooltip}"
+                                 MaxLength="{x:Static helpers:CommonConstants.ChiefArbiterMaxLength}"
+                                 ToolTip="{Binding EditCompetitionChiefArbiterTooltip}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="{StaticResource SpacingLargeBottom}" />
+                                 Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionChiefArbiterHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionChiefArbiterTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding FederationLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding CompetitionFederation, UpdateSourceTrigger=PropertyChanged}"
-                                 MaxLength="3"
+                                 MaxLength="{x:Static helpers:CommonConstants.FederationCodeLength}"
                                  CharacterCasing="Upper"
-                                 ToolTip="{Binding FederationTooltip}"
+                                 ToolTip="{Binding EditCompetitionFederationTooltip}"
                                  Style="{DynamicResource ModernTextBox}"
                                  IsReadOnly="{Binding IsCompetitionInfoEditEnabled, Converter={StaticResource BooleanToInverseConverter}}"
-                                 Margin="{StaticResource SpacingLargeBottom}" />
+                                 Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionFederationHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionFederationTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding WinnerLabel}" Style="{DynamicResource LabelText}" />
-                        <TextBox Text="{Binding WinnerDisplayName, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" Margin="{StaticResource SpacingLargeBottom}" />
+                        <TextBox Text="{Binding WinnerDisplayName, Mode=OneWay}" Style="{DynamicResource ModernTextBox}" IsReadOnly="True" ToolTip="{Binding CompetitionWinnerTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionWinnerHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CompetitionWinnerTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding TimeFormatLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding TimeFormatOptions}"
                                   SelectedItem="{Binding SelectedTimeFormat, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{DynamicResource ModernComboBox}"
                                   IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                  Margin="{StaticResource SpacingLargeBottom}">
+                                  ToolTip="{Binding EditCompetitionTimeFormatTooltip}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding CompetitionTimeFormatHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionTimeFormatTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding RatedLabel}" Style="{DynamicResource LabelText}" />
                         <CheckBox IsChecked="{Binding IsCompetitionRated}"
                                   Style="{DynamicResource ModernCheckBox}"
                                   IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                  Margin="{StaticResource SpacingLargeBottom}" />
+                                  ToolTip="{Binding EditCompetitionRatedTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                        <TextBlock Text="{Binding CompetitionRatedHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionRatedTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <TextBlock Text="{Binding TypeLabel}" Style="{DynamicResource LabelText}" />
                         <ComboBox ItemsSource="{Binding CompetitionTypeOptions}"
                                   SelectedItem="{Binding SelectedCompetitionType, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{DynamicResource ModernComboBox}"
                                   IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                  Margin="{StaticResource SpacingLargeBottom}">
+                                  ToolTip="{Binding EditCompetitionTypeTooltip}" Margin="{StaticResource SpacingSmallBottom}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource DomainEnumStringConverter}}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
+                        <TextBlock Text="{Binding CompetitionTypeHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionTypeTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
 
                         <StackPanel Visibility="{Binding IsNumberOfRoundsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock Text="{Binding NumberOfRoundsLabel}" Style="{DynamicResource LabelText}" />
                             <controls:CustomNumericUpDown Value="{Binding CompetitionNumberOfRounds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue=1, FallbackValue=1}"
-                                                         Minimum="1"
-                                                         Maximum="30"
+                                                         Minimum="{x:Static helpers:CommonConstants.CompetitionRoundsMinimumControlValue}"
+                                                         Maximum="{x:Static helpers:CommonConstants.CompetitionRoundsMaximumControlValue}"
                                                          IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                                         Margin="{StaticResource SpacingLargeBottom}" />
+                                                         ToolTip="{Binding EditCompetitionRoundsTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                            <TextBlock Text="{Binding CompetitionRoundsHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionRoundsTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding IsDoubleRoundRobinVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -130,7 +140,8 @@
                             <CheckBox IsChecked="{Binding IsCompetitionDoubleRoundRobin}"
                                       Style="{DynamicResource ModernCheckBox}"
                                       IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                      Margin="{StaticResource SpacingLargeBottom}" />
+                                      ToolTip="{Binding EditCompetitionDoubleRoundRobinTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                            <TextBlock Text="{Binding CompetitionDoubleRoundRobinHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionDoubleRoundRobinTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding IsByeValueVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -139,17 +150,19 @@
                                       SelectedItem="{Binding CompetitionByeValue, UpdateSourceTrigger=PropertyChanged}"
                                       Style="{DynamicResource ModernComboBox}"
                                       IsEnabled="{Binding IsCompetitionInfoEditEnabled}"
-                                      Margin="{StaticResource SpacingLargeBottom}" />
+                                      ToolTip="{Binding EditCompetitionByeValueTooltip}" Margin="{StaticResource SpacingSmallBottom}" />
+                            <TextBlock Text="{Binding CompetitionByeValueHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding EditCompetitionByeValueTooltip}" Margin="{StaticResource SpacingSectionBottom}" />
                         </StackPanel>
 
                         <TextBlock Text="{Binding ParticipantsLabel}" Style="{DynamicResource LabelText}" />
                         <TextBox Text="{Binding ParticipantSearchQuery, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{DynamicResource ModernAutoSuggestInput}"
                                  Tag="{Binding SearchPlaceholder}"
-                                 ToolTip="{Binding SearchPlaceholder}"
+                                 ToolTip="{Binding CompetitionParticipantSearchTooltip}"
                                  IsEnabled="{Binding IsParticipantEditEnabled}"
                                  Margin="{StaticResource SpacingMediumBottom}"
                                  Visibility="{Binding IsParticipantEditEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <TextBlock Text="{Binding CompetitionParticipantSearchHelp}" Style="{DynamicResource HelpText}" ToolTip="{Binding CompetitionParticipantSearchTooltip}" Margin="{StaticResource SpacingMediumBottom}" Visibility="{Binding IsParticipantEditEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                         <Border Margin="{StaticResource SpacingLargeBottom}">
                             <Border.Style>
