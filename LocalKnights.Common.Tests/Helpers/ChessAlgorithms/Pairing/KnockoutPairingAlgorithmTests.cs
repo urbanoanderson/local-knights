@@ -74,6 +74,37 @@ public class KnockoutPairingAlgorithmTests
     }
 
     [Fact]
+    public void GeneratePairings_FinalRound_With9EqualRatedPlayersAndSemifinalBye_CreatesFinalPairing()
+    {
+        Competition competition = CreateKnockoutCompetition(currentRound: 4, numberOfRounds: 4,
+            CreatePlayer("A", 2000),
+            CreatePlayer("B", 2000),
+            CreatePlayer("C", 2000),
+            CreatePlayer("D", 2000),
+            CreatePlayer("E", 2000),
+            CreatePlayer("F", 2000),
+            CreatePlayer("G", 2000),
+            CreatePlayer("H", 2000),
+            CreatePlayer("I", 2000));
+
+        AddCompletedPairing(competition, 1, -1, "A", string.Empty, null);
+        AddCompletedPairing(competition, 1, 1, "B", "I", GameResult.WhiteWins);
+        AddCompletedPairing(competition, 1, 2, "C", "H", GameResult.WhiteWins);
+        AddCompletedPairing(competition, 1, 3, "D", "G", GameResult.WhiteWins);
+        AddCompletedPairing(competition, 1, 4, "E", "F", GameResult.WhiteWins);
+        AddCompletedPairing(competition, 2, -1, "A", string.Empty, null);
+        AddCompletedPairing(competition, 2, 1, "B", "E", GameResult.WhiteWins);
+        AddCompletedPairing(competition, 2, 2, "C", "D", GameResult.WhiteWins);
+        AddCompletedPairing(competition, 3, -1, "A", string.Empty, null);
+        AddCompletedPairing(competition, 3, 1, "B", "C", GameResult.WhiteWins);
+
+        List<CompetitionPairing> pairings = GenerateRoundPairings(competition, new FixedRandomService(true));
+
+        CompetitionPairing final = Assert.Single(pairings);
+        AssertPairing(final, 1, "A", "B");
+    }
+
+    [Fact]
     public void GeneratePairings_FinalRound_WithCompletedSemifinals_AddsFinalAndThirdPlacePairings()
     {
         Competition competition = CreateKnockoutCompetition(currentRound: 3, numberOfRounds: 3,

@@ -311,12 +311,14 @@ namespace LocalKnights.Common.Helpers.ChessAlgorithms.Pairing
 
         private static ParticipantSeed? TryGetWinner(CompetitionPairing pairing, IReadOnlyDictionary<string, ParticipantSeed> playersById)
         {
-            string? winnerId = pairing.Result switch
-            {
-                GameResult.WhiteWins => pairing.WhitePlayerIdentifierName,
-                GameResult.BlackWins => pairing.BlackPlayerIdentifierName,
-                _ => null
-            };
+            string? winnerId = pairing.IsByePairing()
+                ? pairing.WhitePlayerIdentifierName
+                : pairing.Result switch
+                {
+                    GameResult.WhiteWins => pairing.WhitePlayerIdentifierName,
+                    GameResult.BlackWins => pairing.BlackPlayerIdentifierName,
+                    _ => null
+                };
 
             if (string.IsNullOrWhiteSpace(winnerId))
             {
