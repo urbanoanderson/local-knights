@@ -113,6 +113,65 @@ public sealed class CompetitionViewModelTests
     }
 
     [Fact]
+    public void StartCompetitionCommand_WhenRoundsTabAlreadySelected_RefreshesPairingTable()
+    {
+        Competition startingCompetition = new()
+        {
+            Id = 42,
+            Title = "Rounds refresh test",
+            Type = CompetitionType.KnockoutTournament,
+            State = CompetitionState.Starting,
+            TimeFormat = TimeFormat.Blitz,
+            NumberOfRounds = 1,
+            CompetitionParticipants = new Collection<CompetitionParticipant>
+            {
+                new() { CompetitionId = 42, ParticipantIdentifierName = "p1", OldRating = new ChessRating() },
+                new() { CompetitionId = 42, ParticipantIdentifierName = "p2", OldRating = new ChessRating() },
+            }
+        };
+        Competition startedCompetition = new()
+        {
+            Id = 42,
+            Title = startingCompetition.Title,
+            Type = startingCompetition.Type,
+            State = CompetitionState.Ongoing,
+            TimeFormat = startingCompetition.TimeFormat,
+            NumberOfRounds = 1,
+            CurrentRound = 1,
+            CompetitionParticipants = startingCompetition.CompetitionParticipants,
+        };
+        startedCompetition.CompetitionPairings.Add(new CompetitionPairing
+        {
+            Competition = startedCompetition,
+            CompetitionId = startedCompetition.Id,
+            RoundNumber = 1,
+            TableNumber = 1,
+            WhitePlayerIdentifierName = "p1",
+            BlackPlayerIdentifierName = "p2",
+        });
+
+        CompetitionViewModel viewModel = new(
+            logger: NullLogger.Instance,
+            pageNavigationService: CreatePageNavigationServiceMock().Object,
+            clubService: CreateClubServiceMock().Object,
+            competitionService: CreateCompetitionServiceMock(startedCompetition).Object,
+            playerService: CreatePlayerServiceMock().Object,
+            fideApiService: CreateFideApiServiceMock().Object,
+            gameService: CreateGameServiceMock().Object,
+            fileSystemService: CreateFileSystemServiceMock().Object,
+            messageBoxService: CreateMessageBoxServiceMock(CustomMessageBoxResult.OK).Object,
+            timeProvider: TimeProvider.System);
+        SetCompetition(viewModel, startingCompetition);
+        viewModel.SelectedTabIndex = CompetitionViewModel.TabIndexRounds;
+
+        viewModel.StartCompetitionCommand.Execute(null);
+
+        Assert.Equal(CompetitionViewModel.TabIndexRounds, viewModel.SelectedTabIndex);
+        Assert.Equal(1, viewModel.DisplayedRound);
+        Assert.Single(viewModel.PairingTableRows);
+    }
+
+    [Fact]
     public void ExportToTrf16Command_IncompleteCompetition_ShowsWarningWithoutWritingFile()
     {
         Competition competition = new()

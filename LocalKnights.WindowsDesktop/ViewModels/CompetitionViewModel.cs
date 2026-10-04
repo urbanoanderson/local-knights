@@ -927,6 +927,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             DisplayedRound = Competition.CurrentRound;
             RefreshInformationTabElements();
             RefreshPageActionElements();
+            RefreshRoundsTabElements();
 
             // Switch to Rounds tab
             SelectedTabIndex = TabIndexRounds;
