@@ -42,6 +42,11 @@ namespace LocalKnights.WindowsDesktop.ViewModels
         private readonly IDatabaseService _databaseService;
 
         /// <summary>
+        /// Dispatcher for executing UI-related operations on the main thread.
+        /// </summary>
+        private readonly Dispatcher _dispatcher;
+
+        /// <summary>
         /// Service for managing club-related operations such as sign-in and sign-out.
         /// </summary>
         private readonly IClubService _clubService;
@@ -160,6 +165,7 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             _pageNavigationService = pageNavigationService;
             _uiSettingsService = uiSettingsService;
             _databaseService = databaseService;
+            _dispatcher = Dispatcher.CurrentDispatcher;
             _clubService = clubService;
             _fileSystemService = fileSystemService;
             _messageBoxService = messageBoxService;
@@ -221,8 +227,8 @@ namespace LocalKnights.WindowsDesktop.ViewModels
             {
                 bool show = _databaseService.IsReadOperationInProgress || _databaseService.IsWriteOperationInProgress;
 
-                if (Application.Current?.Dispatcher != null && !Application.Current.Dispatcher.CheckAccess())
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => UpdateDataAccessIndicator(show)));
+                if (!_dispatcher.CheckAccess())
+                    _dispatcher.BeginInvoke(new Action(() => UpdateDataAccessIndicator(show)));
                 else
                     UpdateDataAccessIndicator(show);
             };

@@ -33,8 +33,49 @@ jobs:
     needs: secret-scan
     runs-on: windows-latest
     permissions:
+      actions: read
       contents: read
     steps:
+      - name: Wait for dev push workflow
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'dev' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v9
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        with:
+          script: |
+            const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+            const deadline = Date.now() + 45 * 60 * 1000;
+            let run;
+
+            while (Date.now() < deadline) {
+              const response = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'ci.yml',
+                event: 'push',
+                head_sha: process.env.HEAD_SHA,
+                per_page: 10
+              });
+              run = response.data.workflow_runs
+                .sort((left, right) => new Date(right.created_at) - new Date(left.created_at))[0];
+
+              if (!run) {
+                core.info(`Waiting for the dev push workflow for ${process.env.HEAD_SHA} to start.`);
+              } else if (run.status !== 'completed') {
+                core.info(`Waiting for dev push workflow run ${run.id}; current status: ${run.status}.`);
+              } else if (run.conclusion !== 'success') {
+                core.setFailed(`Dev push workflow run ${run.id} completed with conclusion: ${run.conclusion}.`);
+                return;
+              } else {
+                core.info(`Dev push workflow run ${run.id} completed successfully.`);
+                return;
+              }
+
+              await delay(15000);
+            }
+
+            core.setFailed(`Timed out waiting for the dev push workflow for ${process.env.HEAD_SHA}.`);
+
       - uses: actions/checkout@v6
 
       - name: Setup .NET
