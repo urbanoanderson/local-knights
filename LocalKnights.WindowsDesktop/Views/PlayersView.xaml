@@ -1,0 +1,145 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.PlayersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:LocalKnights.WindowsDesktop.Converters"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}">
+    <UserControl.Resources>
+        <converters:DomainEnumStringConverter x:Key="DomainEnumStringConverter" />
+        <converters:BirthDateToAgeConverter x:Key="BirthDateToAgeConverter" />
+    </UserControl.Resources>
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" >
+            <TextBlock Text="{Binding PlayersPage}" Style="{DynamicResource PageTitle}" />
+        </Grid>
+
+        <!-- Search Bar -->
+        <TextBox Grid.Row="1"
+                 Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                 Padding="{StaticResource SpacingLarge}"
+                 Margin="{StaticResource SpacingStandardBottom}"
+                 FontSize="{StaticResource FontSizeCompact}"
+                 Background="{DynamicResource BackgroundBrush}"
+                 Foreground="{DynamicResource ForegroundBrush}"
+                 CaretBrush="{DynamicResource ForegroundBrush}"
+                 BorderThickness="{StaticResource BorderThicknessDefault}"
+                 BorderBrush="{DynamicResource BorderBrush}">
+            <TextBox.Template>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource CornerRadiusSmall}">
+                        <Grid>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="{Binding PlayersSearchPlaceholder}"
+                                       Foreground="{DynamicResource ForegroundBrush}"
+                                       Padding="{StaticResource SpacingLargeHorizontal}"
+                                       VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}" Margin="0" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+
+        <!-- Players Table -->
+        <Border Grid.Row="2" Style="{DynamicResource DataGridContainer}">
+        <DataGrid x:Name="PlayersDataGrid" ItemsSource="{Binding Players}" Style="{DynamicResource ModernDataGrid}"
+                  AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.CanContentScroll="True" EnableRowVirtualization="True" AlternationCount="2"
+                  MouseDoubleClick="PlayersDataGrid_MouseDoubleClick" Sorting="PlayersDataGrid_Sorting">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding IdentifierName}" Width="1.6*" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Foreground" Value="{DynamicResource LinkBrush}"/>
+                            <Setter Property="TextDecorations" Value="Underline"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DisplayName}" Width="1.8*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding ChessTitle, Converter={StaticResource DomainEnumStringConverter}}" Width="0.9*" IsReadOnly="True" />
+                <DataGridTemplateColumn Width="0.6*" SortMemberPath="BirthDate" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataContext.AgeLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding BirthDate, Converter={StaticResource BirthDateToAgeConverter}}"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding CreatedAt}" Width="1.3*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding BulletRating}" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding BlitzRating}" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding RapidRating}" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding ClassicalRating}" Width="1*" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        </Border>
+
+        <!-- Footer with actions and pagination -->
+        <Grid Grid.Row="3" Margin="0,16,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="{Binding BackButtonLabel}"
+                        Command="{Binding BackCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+                <Button Content="{Binding CreatePlayerButtonLabel}"
+                        Command="{Binding CreatePlayerCommand}"
+                        Style="{DynamicResource PrimaryButton}"
+                        Margin="{StaticResource SpacingLargeLeft}" />
+                <Button Content="{Binding BulkImportButtonLabel}"
+                    Command="{Binding BulkImportCommand}"
+                    Style="{DynamicResource PrimaryButton}"
+                    Margin="{StaticResource SpacingLargeLeft}" />
+                <Button Content="{Binding BulkExportButtonLabel}"
+                    Command="{Binding BulkExportCommand}"
+                    Style="{DynamicResource SuccessButton}"
+                    Margin="{StaticResource SpacingLargeLeft}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Content="{Binding PreviousPageButtonLabel}"
+                        Command="{Binding PreviousPageCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+                <TextBlock Text="{Binding CurrentPageDisplay}"
+                           Style="{DynamicResource LabelText}"
+                           VerticalAlignment="Center"
+                           Margin="{StaticResource SpacingLargeHorizontal}" />
+                <Button Content="{Binding NextPageButtonLabel}"
+                        Command="{Binding NextPageCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

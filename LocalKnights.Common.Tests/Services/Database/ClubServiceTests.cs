@@ -1,0 +1,224 @@
+using LocalKnights.Common.Models;
+using LocalKnights.Common.Helpers;
+using LocalKnights.Common.Services;
+using LocalKnights.Common.Services.Database;
+using LocalKnights.Common.Tests.TestUtils;
+using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
+using Moq;
+
+namespace LocalKnights.Common.Tests.Services.Database;
+
+/// <summary>
+/// Tests club preference persistence behavior.
+/// </summary>
+public sealed class ClubServiceTests
+{
+    [Fact]
+    public async Task UpdateClubAsync_WhenPostRekeyVerificationFails_RestoresBackupAndOldConnection()
+    {
+        const string identifier = "club";
+        const string currentPassword = "current-password";
+        const string newPassword = "new-password";
+        string temporaryDirectory = Path.Combine(Path.GetTempPath(), $"LocalKnights-{Guid.NewGuid():N}");
+        string databasePath = Path.Combine(temporaryDirectory, $"{identifier}.db");
+        string backupPath = $"{databasePath}.password-change-backup";
+        Mock<IFileSystemService> fileSystemServiceMock = new();
+        fileSystemServiceMock.Setup(service => service.GetClubsDirectory()).Returns(temporaryDirectory);
+        fileSystemServiceMock.Setup(service => service.GetDbFilePath(identifier)).Returns(databasePath);
+        fileSystemServiceMock.Setup(service => service.FileExists(databasePath)).Returns(() => File.Exists(databasePath));
+        fileSystemServiceMock.Setup(service => service.FileExists(backupPath)).Returns(() => File.Exists(backupPath));
+        fileSystemServiceMock.Setup(service => service.CreateDirectory(It.IsAny<string>()))
+            .Callback<string>(path => Directory.CreateDirectory(path));
+        fileSystemServiceMock.Setup(service => service.CopyFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()))
+            .Callback<string, string, bool>((source, destination, overwrite) => File.Copy(source, destination, overwrite));
+        fileSystemServiceMock.Setup(service => service.DeleteFile(It.IsAny<string>()))
+            .Callback<string>(path => File.Delete(path));
+
+        try
+        {
+            using (DatabaseService databaseCreator = new DatabaseService(fileSystemServiceMock.Object, MockHelper.CreateMockLogger()))
+            {
+                await databaseCreator.OpenConnectionAsync(identifier, currentPassword);
+                await databaseCreator.CloseConnectionAsync();
+            }
+
+            ClubPreferences existingPreferences = new() { IdentifierName = identifier, DisplayName = "Club" };
+            ClubPreferences restoredPreferences = new() { IdentifierName = identifier, DisplayName = "Club" };
+            Mock<IDatabaseService> databaseServiceMock = new();
+            databaseServiceMock.SetupGet(service => service.IsConnected).Returns(true);
+            databaseServiceMock.Setup(service => service.CloseConnectionAsync()).Returns(Task.CompletedTask);
+            databaseServiceMock.Setup(service => service.OpenConnectionAsync(identifier, It.IsAny<string>())).Returns(Task.CompletedTask);
+            databaseServiceMock.Setup(service => service.UpdateAsync(It.IsAny<ClubPreferences>())).Returns(Task.CompletedTask);
+            databaseServiceMock.Setup(service => service.RekeyAsync(newPassword)).Returns(Task.CompletedTask);
+            databaseServiceMock
+                .SetupSequence(service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>() ))
+                .ReturnsAsync(existingPreferences)
+                .ThrowsAsync(new InvalidOperationException("Post-rekey verification failed."))
+                .ReturnsAsync(restoredPreferences);
+            ClubService clubService = new ClubService(
+                databaseServiceMock.Object,
+                fileSystemServiceMock.Object,
+                MockHelper.CreateMockLogger());
+
+            InvalidOperationException exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                clubService.UpdateClubAsync(existingPreferences, currentPassword, newPassword));
+
+            Assert.Equal("Post-rekey verification failed.", exception.Message);
+            Assert.False(File.Exists(backupPath));
+            fileSystemServiceMock.Verify(service => service.CopyFile(databasePath, backupPath, true), Times.Once);
+            fileSystemServiceMock.Verify(service => service.CopyFile(backupPath, databasePath, true), Times.Once);
+            databaseServiceMock.Verify(service => service.OpenConnectionAsync(identifier, currentPassword), Times.Exactly(2));
+            databaseServiceMock.Verify(service => service.OpenConnectionAsync(identifier, newPassword), Times.Once);
+            databaseServiceMock.Verify(
+                service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>()),
+                Times.Exactly(3));
+            Assert.Same(restoredPreferences, clubService.CurrentClub);
+        }
+        finally
+        {
+            SqliteConnection.ClearAllPools();
+            if (Directory.Exists(temporaryDirectory))
+            {
+                Directory.Delete(temporaryDirectory, true);
+            }
+        }
+    }
+
+    [Fact]
+    public async Task ClubSignInAsync_WhenSchemaIsNewerThanSupported_ClosesConnectionAndThrows()
+    {
+        Mock<IDatabaseService> databaseServiceMock = new();
+        databaseServiceMock.SetupGet(service => service.IsConnected).Returns(false);
+        databaseServiceMock.Setup(service => service.OpenConnectionAsync("club", "password")).Returns(Task.CompletedTask);
+        databaseServiceMock.Setup(service => service.GetSchemaVersionAsync()).ReturnsAsync(DatabaseMigrationHelper.SchemaVersion + 1);
+        databaseServiceMock.Setup(service => service.CloseConnectionAsync()).Returns(Task.CompletedTask);
+        ClubService clubService = CreateClubService(databaseServiceMock);
+
+        UnsupportedDatabaseSchemaVersionException exception = await Assert.ThrowsAsync<UnsupportedDatabaseSchemaVersionException>(
+            () => clubService.ClubSignInAsync("club", "password", (_, _) => Task.FromResult(true)));
+
+        Assert.Equal(DatabaseMigrationHelper.SchemaVersion + 1, exception.StoredVersion);
+        Assert.Equal(DatabaseMigrationHelper.SchemaVersion, exception.SupportedVersion);
+        Assert.Null(clubService.CurrentClub);
+        databaseServiceMock.Verify(service => service.CloseConnectionAsync(), Times.Once);
+        databaseServiceMock.Verify(service => service.ApplyMigrationsAsync(), Times.Never);
+    }
+
+    [Fact]
+    public async Task ClubSignInAsync_WhenMigrationIsDeclined_ClosesConnectionWithoutSigningIn()
+    {
+        Mock<IDatabaseService> databaseServiceMock = new();
+        databaseServiceMock.SetupGet(service => service.IsConnected).Returns(false);
+        databaseServiceMock.Setup(service => service.OpenConnectionAsync("club", "password")).Returns(Task.CompletedTask);
+        databaseServiceMock.Setup(service => service.GetSchemaVersionAsync()).ReturnsAsync(DatabaseMigrationHelper.SchemaVersion - 1);
+        databaseServiceMock.Setup(service => service.CloseConnectionAsync()).Returns(Task.CompletedTask);
+        ClubService clubService = CreateClubService(databaseServiceMock);
+        bool signInRaised = false;
+        clubService.OnClubSignIn += _ => signInRaised = true;
+
+        ClubPreferences? result = await clubService.ClubSignInAsync("club", "password", (_, _) => Task.FromResult(false));
+
+        Assert.Null(result);
+        Assert.Null(clubService.CurrentClub);
+        Assert.False(signInRaised);
+        databaseServiceMock.Verify(service => service.ApplyMigrationsAsync(), Times.Never);
+        databaseServiceMock.Verify(service => service.CloseConnectionAsync(), Times.Once);
+        databaseServiceMock.Verify(
+            service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>()),
+            Times.Never);
+    }
+
+    [Fact]
+    public async Task ClubSignInAsync_WhenMigrationIsConfirmed_MigratesBeforeSigningIn()
+    {
+        ClubPreferences preferences = new();
+        Mock<IDatabaseService> databaseServiceMock = new();
+        databaseServiceMock.SetupGet(service => service.IsConnected).Returns(false);
+        databaseServiceMock.Setup(service => service.OpenConnectionAsync("club", "password")).Returns(Task.CompletedTask);
+        databaseServiceMock.Setup(service => service.GetSchemaVersionAsync()).ReturnsAsync(DatabaseMigrationHelper.SchemaVersion - 1);
+        databaseServiceMock.Setup(service => service.ApplyMigrationsAsync()).Returns(Task.CompletedTask);
+        databaseServiceMock
+            .Setup(service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>() ))
+            .ReturnsAsync(preferences);
+        ClubService clubService = CreateClubService(databaseServiceMock);
+        bool migrationAppliedWhenConfirmed = false;
+        ClubPreferences? signedInClub = null;
+        clubService.OnClubSignIn += club => signedInClub = club;
+
+        ClubPreferences? result = await clubService.ClubSignInAsync(
+            "club",
+            "password",
+            (storedVersion, currentVersion) =>
+            {
+                databaseServiceMock.Verify(service => service.ApplyMigrationsAsync(), Times.Never);
+                Assert.Equal(DatabaseMigrationHelper.SchemaVersion - 1, storedVersion);
+                Assert.Equal(DatabaseMigrationHelper.SchemaVersion, currentVersion);
+                migrationAppliedWhenConfirmed = true;
+                return Task.FromResult(true);
+            });
+
+        Assert.True(migrationAppliedWhenConfirmed);
+        Assert.Same(preferences, result);
+        Assert.Same(preferences, signedInClub);
+        Assert.Equal("club", result.IdentifierName);
+        databaseServiceMock.Verify(service => service.ApplyMigrationsAsync(), Times.Once);
+        databaseServiceMock.Verify(service => service.CloseConnectionAsync(), Times.Never);
+    }
+
+    [Fact]
+    public async Task UpdateClubAsync_WithCompetitionDefaults_PersistsValues()
+    {
+        ClubPreferences existingClub = new()
+        {
+            IdentifierName = "club",
+            DisplayName = "Club",
+        };
+        ClubPreferences updatedClub = new()
+        {
+            IdentifierName = "club",
+            DisplayName = "Club",
+            City = "Recife",
+            Federation = "BRA",
+            DefaultChiefArbiter = "Alex Silva",
+        };
+        Mock<IDatabaseService> databaseServiceMock = new();
+        databaseServiceMock
+            .Setup(service => service.QuerySingleOrDefaultAsync<ClubPreferences>(It.IsAny<Func<IQueryable<ClubPreferences>, IQueryable<ClubPreferences>>>() ))
+            .ReturnsAsync(existingClub);
+        databaseServiceMock
+            .Setup(service => service.UpdateAsync(It.IsAny<ClubPreferences>()))
+            .Returns(Task.CompletedTask);
+        Mock<IFileSystemService> fileSystemServiceMock = new();
+        fileSystemServiceMock.Setup(service => service.GetDbFilePath("club")).Returns("club.db");
+        fileSystemServiceMock.Setup(service => service.FileExists("club.db")).Returns(true);
+        ClubService clubService = new(
+            databaseServiceMock.Object,
+            fileSystemServiceMock.Object,
+            new Mock<ILogger>().Object);
+
+        ClubPreferences? result = await clubService.UpdateClubAsync(updatedClub);
+
+        Assert.NotNull(result);
+        Assert.Equal("Recife", result.City);
+        Assert.Equal("BRA", result.Federation);
+        Assert.Equal("Alex Silva", result.DefaultChiefArbiter);
+        databaseServiceMock.Verify(
+            service => service.UpdateAsync(It.Is<ClubPreferences>(club =>
+                club.City == "Recife"
+                && club.Federation == "BRA"
+                && club.DefaultChiefArbiter == "Alex Silva")),
+            Times.Once);
+    }
+
+    private static ClubService CreateClubService(Mock<IDatabaseService> databaseServiceMock)
+    {
+        Mock<IFileSystemService> fileSystemServiceMock = new();
+        fileSystemServiceMock.Setup(service => service.GetDbFilePath("club")).Returns("club.db");
+        fileSystemServiceMock.Setup(service => service.FileExists("club.db")).Returns(true);
+        return new ClubService(
+            databaseServiceMock.Object,
+            fileSystemServiceMock.Object,
+            new Mock<ILogger>().Object);
+    }
+}

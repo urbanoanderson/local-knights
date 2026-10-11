@@ -1,0 +1,9 @@
+<Project>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <None Include="$(MSBuildThisFileDirectory)Scripts\SQLite3MC\runtimes\win-x64\native\sqlite3mc.dll"
+          Link="sqlite3mc.dll"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          ExcludeFromSingleFile="true" />
+  </ItemGroup>
+</Project>

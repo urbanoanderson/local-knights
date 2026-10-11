@@ -1,0 +1,39 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.StartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
+             xmlns:svg="clr-namespace:SharpVectors.Converters;assembly=SharpVectors.Converters.Wpf"
+             Background="{DynamicResource WindowBackgroundBrush}"
+             Foreground="{DynamicResource WindowForegroundBrush}">
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <svg:SvgViewbox Source="/Resources/Icon/logo.svg"
+                            Width="144"
+                            Height="144"
+                            Stretch="Uniform"
+                            HorizontalAlignment="Center"
+                            Margin="{StaticResource SpacingExtraLargeBottom}" />
+            <TextBlock Text="{Binding SignInToClub}" Style="{DynamicResource PageTitle}"
+                       HorizontalAlignment="Center" Margin="{StaticResource SpacingExtraLargeBottom}" />
+            <TextBlock Text="{Binding ClubIdentifierLabel}" Style="{DynamicResource LabelText}"
+                       Margin="{StaticResource SpacingMediumBottom}" />
+            <ComboBox ItemsSource="{Binding Clubs}" SelectedItem="{Binding SelectedClub}"
+                      Style="{DynamicResource ModernComboBox}" Margin="{StaticResource SpacingSectionBottom}"
+                      ToolTip="{Binding ClubIdentifierTooltip}">
+            </ComboBox>
+            <TextBlock Text="{Binding PasswordLabel}" Style="{DynamicResource LabelText}"
+                       Margin="{StaticResource SpacingMediumBottom}" />
+            <PasswordBox x:Name="PasswordInput" Style="{DynamicResource ModernPasswordBox}"
+                         Margin="{StaticResource SpacingSectionBottom}"
+                         ToolTip="{Binding SignInPasswordTooltip}"
+                         PasswordChanged="PasswordBox_PasswordChanged"
+                         KeyDown="PasswordBox_KeyDown" />
+            <Button Command="{Binding SignInCommand}"
+                    Style="{DynamicResource PrimaryButton}" Margin="0,0,0,10"
+                    IsEnabled="{Binding IsSignInEnabled}"
+                    Content="{Binding SignInButtonText}" />
+                <Button Content="{Binding CreateClubButton}" Command="{Binding CreateClubCommand}"
+                    Style="{DynamicResource SecondaryButton}" Width="120" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>

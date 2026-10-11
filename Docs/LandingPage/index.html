@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="pageTitle"></title>
+  <meta name="description" content="" data-i18n-content="pageDescription">
+  <link rel="icon" type="image/svg+xml" href="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.svg">
+  <link rel="shortcut icon" href="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell"></div>
+
+  <header class="hero">
+    <nav class="topbar">
+      <div class="brand">
+        <img src="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.png" alt="Local Knights logo" data-i18n-alt="altBrandLogo" class="brand-logo">
+        <span data-i18n="brandName"></span>
+      </div>
+      <div class="topbar-links">
+        <a href="https://github.com/urbanoanderson/local-knights" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="topbar-icon">
+            <path fill="currentColor" d="M12 2C6.477 2 2 6.59 2 12.252c0 4.529 2.865 8.372 6.839 9.728.5.096.682-.222.682-.493 0-.243-.009-.888-.014-1.743-2.782.617-3.369-1.375-3.369-1.375-.454-1.183-1.11-1.498-1.11-1.498-.908-.636.069-.623.069-.623 1.004.072 1.532 1.056 1.532 1.056.892 1.568 2.341 1.115 2.91.852.091-.666.35-1.115.636-1.371-2.221-.259-4.555-1.14-4.555-5.073 0-1.12.39-2.036 1.029-2.754-.103-.261-.446-1.31.098-2.73 0 0 .84-.276 2.75 1.052A9.303 9.303 0 0 1 12 6.838a9.27 9.27 0 0 1 2.504.348c1.909-1.328 2.748-1.052 2.748-1.052.546 1.42.203 2.469.1 2.73.64.718 1.027 1.634 1.027 2.754 0 3.943-2.338 4.811-4.566 5.065.359.32.679.95.679 1.915 0 1.383-.012 2.499-.012 2.839 0 .273.18.593.688.492C19.138 20.62 22 16.779 22 12.252 22 6.59 17.523 2 12 2Z"/>
+          </svg>
+          <span data-i18n="navGithub"></span>
+        </a>
+        <a href="../../LICENSE" data-i18n="navLicense"></a>
+        <a href="../../THIRD-PARTY-NOTICES.md" data-i18n="navThirdParty"></a>
+        <div class="language-switcher" data-language-switcher>
+          <button class="language-button" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select language" data-i18n-aria-label="selectLanguage" data-language-toggle>
+            <span class="flag-emoji" data-current-flag>🇺🇸</span>
+          </button>
+          <div class="language-menu" hidden data-language-menu>
+            <button class="language-option" type="button" data-language-option="en">
+              <span class="flag-emoji">🇺🇸</span>
+              <span data-i18n="langEnglish"></span>
+            </button>
+            <button class="language-option" type="button" data-language-option="pt-BR">
+              <span class="flag-emoji">🇧🇷</span>
+              <span data-i18n="langPortugueseBrazil"></span>
+            </button>
+            <button class="language-option" type="button" data-language-option="es">
+              <span class="flag-emoji">🇪🇸</span>
+              <span data-i18n="langSpanish"></span>
+            </button>
+            <button class="language-option" type="button" data-language-option="fr">
+              <span class="flag-emoji">🇫🇷</span>
+              <span data-i18n="langFrench"></span>
+            </button>
+            <button class="language-option" type="button" data-language-option="de">
+              <span class="flag-emoji">🇩🇪</span>
+              <span data-i18n="langGerman"></span>
+            </button>
+            <button class="language-option" type="button" data-language-option="ru">
+              <span class="flag-emoji">🇷🇺</span>
+              <span data-i18n="langRussian"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero-grid">
+      <div class="hero-card hero-card-wide">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="heroEyebrow"></p>
+          <h1 data-i18n="heroTitle"></h1>
+          <p class="hero-text" data-i18n="heroText"></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/urbanoanderson/local-knights/releases" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="button-icon">
+                <path fill="currentColor" d="M2 3.34 11 2v9H2V3.34Zm10 8h10V.73L12 2.05v9.29ZM2 12.66h9v9.34l-9-1.34v-8Zm10 0h10v10.61L12 22v-9.34Z"/>
+              </svg>
+              <span data-i18n="downloadButton"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-preview-panel">
+          <div class="carousel hero-carousel" data-carousel>
+            <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous screenshot" data-i18n-aria-label="carouselPrev">&#10094;</button>
+
+            <div class="carousel-viewport hero-preview-frame">
+              <div class="carousel-track" data-carousel-track>
+                <figure class="carousel-slide is-active">
+                  <img src="../Screenshots/dashboard_page.png" alt="Dashboard page screenshot" data-i18n-alt="altDashboard">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionDashboard"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/players_page.png" alt="Players page screenshot" data-i18n-alt="altPlayers">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionPlayers"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/player_page.png" alt="Player profile screenshot" data-i18n-alt="altPlayerProfile">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionPlayerProfile"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/game_page.png" alt="Game page screenshot" data-i18n-alt="altGame">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionGame"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/competition_page_infotab.png" alt="Competition information screenshot" data-i18n-alt="altCompetitionInfo">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionCompetitionInfo"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/competition_page_roundstab.png" alt="Competition rounds screenshot" data-i18n-alt="altCompetitionRounds">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionCompetitionRounds"></figcaption>
+                </figure>
+                <figure class="carousel-slide">
+                  <img src="../Screenshots/competition_page_standingstab.png" alt="Competition standings screenshot" data-i18n-alt="altCompetitionStandings">
+                  <figcaption class="carousel-hover-caption" data-i18n="captionCompetitionStandings"></figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <button class="carousel-button" type="button" data-carousel-next aria-label="Next screenshot" data-i18n-aria-label="carouselNext">&#10095;</button>
+          </div>
+
+          <div class="carousel-dots" data-carousel-dots></div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section feature-section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="whyEyebrow"></p>
+        <h2 data-i18n="whyTitle"></h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3 data-i18n="featureOwnDataTitle"></h3>
+          <p data-i18n="featureOwnDataText"></p>
+        </article>
+        <article class="feature-card">
+          <h3 data-i18n="featureBackupTitle"></h3>
+          <p data-i18n="featureBackupText"></p>
+        </article>
+        <article class="feature-card">
+          <h3 data-i18n="featureUxTitle"></h3>
+          <p data-i18n="featureUxText"></p>
+        </article>
+        <article class="feature-card">
+          <h3 data-i18n="featureCompetitionTitle"></h3>
+          <p data-i18n="featureCompetitionText"></p>
+        </article>
+        <article class="feature-card">
+          <h3 data-i18n="featureRatingsTitle"></h3>
+          <p data-i18n="featureRatingsText"></p>
+        </article>
+        <article class="feature-card">
+          <h3 data-i18n="featureProfilesTitle"></h3>
+          <p data-i18n="featureProfilesText"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section spotlight-section">
+      <div class="section-heading narrow">
+        <p class="eyebrow" data-i18n="whoEyebrow"></p>
+        <h2 data-i18n="whoTitle"></h2>
+      </div>
+      <div class="spotlight-grid">
+        <div class="spotlight-copy">
+          <article class="spotlight-card">
+            <h3 data-i18n="audienceClubsTitle"></h3>
+            <p data-i18n="audienceClubsText"></p>
+          </article>
+          <article class="spotlight-card">
+            <h3 data-i18n="audienceGroupsTitle"></h3>
+            <p data-i18n="audienceGroupsText"></p>
+          </article>
+          <article class="spotlight-card">
+            <h3 data-i18n="audienceSchoolsTitle"></h3>
+            <p data-i18n="audienceSchoolsText"></p>
+          </article>
+        </div>
+        <div class="spotlight-logo-panel">
+          <img src="../../LocalKnights.WindowsDesktop/Resources/Icon/logo.png" alt="Local Knights logo" data-i18n-alt="altBrandLogo" class="spotlight-logo">
+        </div>
+      </div>
+    </section>
+
+    <section class="section demo-section">
+      <div class="section-heading narrow">
+        <p class="eyebrow" data-i18n="demoEyebrow"></p>
+        <h2 data-i18n="demoTitle"></h2>
+      </div>
+      <div class="demo-frame">
+        <img src="../Screenshots/demo.gif" alt="Local Knights demo animation" data-i18n-alt="altDemo" class="demo-gif">
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footerLicense"></p>
+    <p data-i18n="footerAuthor"></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

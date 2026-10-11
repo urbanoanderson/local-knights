@@ -1,0 +1,32 @@
+IdentifierName,DisplayName,LichessUsername,ChessComUsername,Email,Phone,FideId,CbxId,UscfId,ChessTitle,BirthDate,BulletRating,BlitzRating,RapidRating,ClassicalRating
+magnuscarlsen,Magnus Carlsen,MagnusCarlsen,magnuscarlsen@example, magnus@example.com,+47-12345678,1503014,, ,GM,1990-11-30,2900,2880,2860,2862
+garrykasparov,Garry Kasparov,garryk,garryk@example,garry@example.com,+7-98765432,0003001,, ,GM,1963-04-13,2851,2800,2790,2810
+bobbyfischer,Bobby Fischer,bfischer,bfischer,bfischer@example.com,,2200145,, ,GM,1943-03-09,2785,2763,2745,2770
+viswanathan_anand,Viswanathan Anand,anandv,anand,anand@example.com,+91-444555666,5000012,, ,GM,1969-12-11,2775,2770,2750,2765
+fabianocarua,Fabiano Caruana,caruana,caruana,caruana@example.com,+1-555-0101,2020001,, ,GM,1992-07-30,2820,2790,2785,2800
+anatolykarpov,Anatoly Karpov,karpov,karpov,karpov@example.com,+7-111222333,1700011,, ,GM,1951-05-23,2740,2720,2705,2730
+mikhailtal,Mikhail Tal,m_tal,tal,m_tal@example.com,+371-1234567,1100455,, ,GM,1936-11-09,2705,2690,2680,2695
+josecapablanca,Jose Capablanca,capablanca,capablanca,cap@example.com,,1300123,, ,GM,1888-01-19,2750,0,0,2750
+botvinnik,Botvinnik,botv,botv,botv@example.com,+7-222333444,1400022,, ,GM,1911-08-17,2680,2600,2620,2670
+alekhine,Alekhine,alekhine,alekhine,alekhine@example.com,,1200110,, ,GM,1892-10-31,2720,2700,2695,2715
+petrosian,Petrosian,petrosian,petrosian,petrosian@example.com,,1500711,, ,GM,1929-05-04,2675,2650,2660,2670
+lasker,Lasker,lasker,lasker,lasker@example.com,,1000001,, ,GM,1868-12-24,2650,0,0,2650
+steinitz,Steinitz,steinitz,steinitz,steinitz@example.com,,1100002,, ,GM,1836-05-17,2620,0,0,2620
+juditpolgar,Judit Polgar,juditp,juditp,judit@example.com,+36-12345678,7001234,, ,WGM,1976-07-23,2735,2710,2700,2725
+nigelshort,Nigel Short,nigelshort,nigelshort,nigel@example.com,+44-0207946,4000456,, ,GM,1965-06-01,2655,2640,2625,2645
+kramnik,Vladimir Kramnik,kramnik,kramnik,kramnik@example.com,,4600017,, ,GM,1975-06-25,2770,2760,2740,2765
+topalov,Veselin Topalov,topalov,topalov,topalov@example.com,,4300123,, ,GM,1975-03-15,2765,2750,2735,2755
+ivanchuk,Vassily Ivanchuk,ivanchuk,ivanchuk,ivanchuk@example.com,,4500212,, ,GM,1969-03-18,2750,2735,2720,2740
+grischuk,Alexander Grischuk,grischuk,grischuk,grischuk@example.com,,4100065,, ,GM,1983-10-31,2775,2765,2750,2768
+aronian,Levon Aronian,aronian,aronian,aronian@example.com,,4100077,, ,GM,1982-10-06,2780,2770,2755,2775
+hikaru,Hikaru Nakamura,hikaru,hikaru,hikaru@example.com,+1-555-0202,2010867,, ,GM,1987-12-09,2790,2800,2775,2785
+dingliren,Ding Liren,dingliren,dingliren,ding@example.com,+86-10-12345678,8600254,, ,GM,1992-10-24,2760,2745,2735,2755
+wesleyso,Wesley So,wesleyso,wesleyso,wesley@example.com,+1-555-0303,5200013,, ,GM,1993-10-09,2770,2760,2750,2762
+randomuser1,Random User One,,,,,, , , , ,
+randomuser2,,random2,,,,,, , , , ,
+invalid!id,Invalid Identifier,invuser,,,,, , , ,1990-01-01,1500,1500,1500,1500
+toolongidentifiertoolongidentifiertoolongidentifiertoolongidentifier,Too Long Identifier,toolong,,,,,, , ,1980-01-01,1500,1500,1500,1500
+futurebirth,Future Birth,future,birth,future@example.com,,1234567,, , ,2035-01-01,1500,1500,1500,1500
+nonnumericfide,Non Numeric FIDE,numericfide,,numfide@example.com,,ABC123DEF,, , ,1970-05-05,1500,1500,1500,1500
+duplicate,magnus duplicate,,dup@example.com,,,,, , ,1990-01-01,1500,1500,1500,1500
+magnuscarlsen,Magnus Duplicate,mdup,,mdup@example.com,,1503014,, ,GM,1990-11-30,2900,2880,2860,2862

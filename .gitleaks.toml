@@ -1,0 +1,10 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ignore sample and documentation artifacts that may intentionally contain non-production placeholders."
+paths = [
+  '''^Docs/''',
+  '''^Scripts/Seed/''',
+  '''^THIRD-PARTY-NOTICES\.md$'''
+]

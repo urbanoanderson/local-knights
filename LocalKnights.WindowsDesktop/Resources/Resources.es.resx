@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BetaTag" xml:space="preserve">
+    <value>BETA</value>
+  </data>
+  <data name="ClubMenu" xml:space="preserve">
+    <value>Club</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="OpenDatabaseLocation" xml:space="preserve">
+    <value>Abrir ubicación de la base de datos</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Preferencias</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="OptionsMenu" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="ProjectPage" xml:space="preserve">
+    <value>Página del proyecto</value>
+  </data>
+  <data name="AppNameLabel" xml:space="preserve">
+    <value>Aplicación</value>
+  </data>
+  <data name="AppVersionLabel" xml:space="preserve">
+    <value>Versión</value>
+  </data>
+  <data name="DatabaseSchemaVersionLabel" xml:space="preserve">
+    <value>Versión del esquema de la base de datos</value>
+  </data>
+  <data name="AppCreatorLabel" xml:space="preserve">
+    <value>Creada por</value>
+  </data>
+  <data name="AppLicenseLabel" xml:space="preserve">
+    <value>Licencia</value>
+  </data>
+  <data name="AppLicenseValue" xml:space="preserve">
+    <value>MPL 2.0</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Modo oscuro</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Elegir idioma</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="Portuguese" xml:space="preserve">
+    <value>Portugués de Brasil</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Francés</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Alemán</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Ruso</value>
+  </data>
+  <data name="SignInToClub" xml:space="preserve">
+    <value>Iniciar sesión en el club</value>
+  </data>
+  <data name="ClubDashboard" xml:space="preserve">
+    <value>Panel del club</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+    <value>Partidas</value>
+  </data>
+  <data name="Competitions" xml:space="preserve">
+    <value>Competiciones</value>
+  </data>
+  <data name="CreateClub" xml:space="preserve">
+    <value>Crear club</value>
+  </data>
+  <data name="ClubPreferences" xml:space="preserve">
+    <value>Preferencias del club</value>
+  </data>
+  <data name="SaveButtonLabel" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="DeleteClubButton" xml:space="preserve">
+    <value>Eliminar club</value>
+  </data>
+  <data name="DeleteClubConfirmation" xml:space="preserve">
+    <value>¿Seguro que desea eliminar este club y todos sus datos?</value>
+  </data>
+  <data name="UndoRoundConfirmation" xml:space="preserve">
+    <value>¿Está seguro? Se borrarán los emparejamientos generados y los resultados registrados de la ronda actual.</value>
+  </data>
+  <data name="CompleteCompetitionConfirmation" xml:space="preserve">
+    <value>¿Está seguro? Una vez finalizada, es posible que se actualicen los ratings y ya no se podrán editar la información de la competición ni los resultados de las partidas.</value>
+  </data>
+  <data name="PreferencesSavedMessage" xml:space="preserve">
+    <value>Las preferencias del club se guardaron correctamente.</value>
+  </data>
+  <data name="SavePreferencesFailedMessage" xml:space="preserve">
+    <value>No se pudieron guardar las preferencias del club.</value>
+  </data>
+  <data name="DeleteClubFailedMessage" xml:space="preserve">
+    <value>No se pudo eliminar el club.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Error de validación</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Éxito</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SocialMediaLimitMessage" xml:space="preserve">
+    <value>Puede añadir hasta 5 enlaces de redes sociales.</value>
+  </data>
+  <data name="EnterClubDisplayNameMessage" xml:space="preserve">
+    <value>Introduzca un nombre para mostrar del club.</value>
+  </data>
+  <data name="PasswordsDoNotMatchMessage" xml:space="preserve">
+    <value>Las contraseñas no coinciden.</value>
+  </data>
+  <data name="PasswordRequiredMessage" xml:space="preserve">
+    <value>La contraseña es obligatoria.</value>
+  </data>
+  <data name="CurrentPasswordRequiredMessage" xml:space="preserve">
+    <value>La contraseña actual es obligatoria.</value>
+  </data>
+  <data name="CurrentPasswordRequiredForDeletionMessage" xml:space="preserve">
+    <value>Se requiere la contraseña actual para eliminar el club.</value>
+  </data>
+  <data name="InvalidCurrentPasswordMessage" xml:space="preserve">
+    <value>La contraseña actual no es válida.</value>
+  </data>
+  <data name="NewPasswordCannotBeEmptyMessage" xml:space="preserve">
+    <value>La nueva contraseña no puede estar vacía.</value>
+  </data>
+  <data name="IdentifierNameRequiredMessage" xml:space="preserve">
+    <value>El nombre identificador es obligatorio.</value>
+  </data>
+  <data name="IdentifierNameInvalidFormatMessage" xml:space="preserve">
+    <value>El nombre identificador solo puede contener letras minúsculas y números.</value>
+  </data>
+  <data name="IdentifierNameMaxLengthMessage" xml:space="preserve">
+    <value>El nombre identificador debe tener 50 caracteres o menos.</value>
+  </data>
+  <data name="DisplayNameRequiredMessage" xml:space="preserve">
+    <value>El nombre para mostrar es obligatorio.</value>
+  </data>
+  <data name="DisplayNameMaxLengthMessage" xml:space="preserve">
+    <value>El nombre para mostrar debe tener 100 caracteres o menos.</value>
+  </data>
+  <data name="CreatedAtLabel" xml:space="preserve">
+    <value>Fecha de creación</value>
+  </data>
+  <data name="UpdatedAtLabel" xml:space="preserve">
+    <value>Fecha de actualización</value>
+  </data>
+  <data name="BulkImportButtonLabel" xml:space="preserve">
+    <value>Importación masiva</value>
+  </data>
+  <data name="BulkExportButtonLabel" xml:space="preserve">
+    <value>Exportación masiva</value>
+  </data>
+  <data name="BulkImportResultMessage" xml:space="preserve">
+    <value>Se importaron {0} jugadores y se omitieron {1} filas con errores o ya existentes.</value>
+  </data>
+  <data name="BulkExportSuccessMessage" xml:space="preserve">
+    <value>Los jugadores se exportaron correctamente.</value>
+  </data>
+  <data name="DescriptionMaxLengthMessage" xml:space="preserve">
+    <value>La descripción debe tener 500 caracteres o menos.</value>
+  </data>
+  <data name="InvalidRatingMessage" xml:space="preserve">
+    <value>El rating debe ser un número entero.</value>
+  </data>
+  <data name="RatingRangeMessage" xml:space="preserve">
+    <value>El rating debe estar entre {0} y {1}.</value>
+  </data>
+  <data name="MinRatingRangeMessage" xml:space="preserve">
+    <value>El rating mínimo debe estar entre {0} y {1}.</value>
+  </data>
+  <data name="MaxRatingRangeMessage" xml:space="preserve">
+    <value>El rating máximo debe estar entre {0} y {1}.</value>
+  </data>
+  <data name="RatingBoundsOrderMessage" xml:space="preserve">
+    <value>El rating mínimo debe ser inferior al rating máximo.</value>
+  </data>
+  <data name="InvalidDeviationMessage" xml:space="preserve">
+    <value>La desviación debe ser un número válido.</value>
+  </data>
+  <data name="DeviationRangeMessage" xml:space="preserve">
+    <value>La desviación inicial debe estar entre 150.0 y 1000.0.</value>
+  </data>
+  <data name="InvalidVolatilityMessage" xml:space="preserve">
+    <value>La volatilidad debe ser un número válido.</value>
+  </data>
+  <data name="VolatilityRangeMessage" xml:space="preserve">
+    <value>La volatilidad debe estar entre 0.01 y 0.1.</value>
+  </data>
+  <data name="ProvisionalGamesRangeMessage" xml:space="preserve">
+    <value>El número de partidas del período provisional debe estar entre 0 y 100.</value>
+  </data>
+  <data name="RatingSystemLabel" xml:space="preserve">
+    <value>Sistema de rating</value>
+  </data>
+  <data name="ProvisionalGamesLabel" xml:space="preserve">
+    <value>Período provisional (partidas)</value>
+  </data>
+  <data name="MinRatingLabel" xml:space="preserve">
+    <value>Rating mínimo</value>
+  </data>
+  <data name="MaxRatingLabel" xml:space="preserve">
+    <value>Rating máximo</value>
+  </data>
+  <data name="RatingSystemHelp" xml:space="preserve">
+    <value>Seleccione el sistema de rating que utilizará este club.</value>
+  </data>
+  <data name="ProvisionalGamesHelp" xml:space="preserve">
+    <value>Número de partidas durante las que un nuevo jugador permanece como provisional en el sistema de rating Elo.</value>
+  </data>
+  <data name="CreateRatingSystemTooltip" xml:space="preserve">
+    <value>Seleccione el sistema de rating del club. El predeterminado es Glicko-2.</value>
+  </data>
+  <data name="CreateProvisionalGamesTooltip" xml:space="preserve">
+    <value>Número de partidas durante las que los jugadores permanecen como provisionales en el sistema Elo. El valor predeterminado es 20.</value>
+  </data>
+  <data name="EditRatingSystemTooltip" xml:space="preserve">
+    <value>Seleccione el sistema de rating utilizado por el club.</value>
+  </data>
+  <data name="EditProvisionalGamesTooltip" xml:space="preserve">
+    <value>Número de partidas durante las que los nuevos jugadores permanecen como provisionales en el sistema Elo.</value>
+  </data>
+  <data name="ClubIdentifierTooltip" xml:space="preserve">
+    <value>Seleccione un club de la lista. Cada club tiene un identificador único (solo letras minúsculas y números).</value>
+  </data>
+  <data name="SignInPasswordTooltip" xml:space="preserve">
+    <value>Introduzca la contraseña del club seleccionado. Déjelo vacío si el club no tiene contraseña.</value>
+  </data>
+  <data name="CreateIdentifierNameTooltip" xml:space="preserve">
+    <value>Identificador único: solo letras minúsculas y números, máximo 50 caracteres. No se puede cambiar después de crearlo.</value>
+  </data>
+  <data name="CreateDisplayNameTooltip" xml:space="preserve">
+    <value>Nombre público para mostrar del club: máximo 100 caracteres. Se puede cambiar más adelante y puede contener espacios.</value>
+  </data>
+  <data name="CreateRatingTooltip" xml:space="preserve">
+    <value>Rating de ajedrez predeterminado para nuevos jugadores ({0}-{1}). El valor predeterminado es {2}.</value>
+  </data>
+  <data name="CreateMinRatingTooltip" xml:space="preserve">
+    <value>Rating más bajo permitido para los jugadores de este club ({0}-{1}). El valor predeterminado es {2}.</value>
+  </data>
+  <data name="CreateMaxRatingTooltip" xml:space="preserve">
+    <value>Rating más alto permitido para los jugadores de este club ({0}-{1}). El valor predeterminado es {2}.</value>
+  </data>
+  <data name="CreateDeviationTooltip" xml:space="preserve">
+    <value>Desviación/confianza de rating predeterminada ({0}-{1}). Los valores más bajos indican mayor confianza. El valor predeterminado es {2}.</value>
+  </data>
+  <data name="CreateVolatilityTooltip" xml:space="preserve">
+    <value>Volatilidad/tasa de cambio de rating predeterminada ({0}-{1}). Los valores más altos permiten cambios de rating más rápidos. El valor predeterminado es {2}.</value>
+  </data>
+  <data name="CreateDescriptionTooltip" xml:space="preserve">
+    <value>Descripción breve opcional del club (máximo 500 caracteres).</value>
+  </data>
+  <data name="CreatePasswordTooltip" xml:space="preserve">
+    <value>Contraseña opcional para proteger el acceso al club. Déjelo vacío para no usar protección con contraseña.</value>
+  </data>
+  <data name="CreateConfirmPasswordTooltip" xml:space="preserve">
+    <value>Confirme la contraseña anterior. Debe coincidir con el campo de contraseña.</value>
+  </data>
+  <data name="CreateSocialMediaTooltip" xml:space="preserve">
+    <value>Enlaces opcionales de redes sociales (Facebook, Instagram, LinkedIn, etc.). Máximo 5 enlaces.</value>
+  </data>
+  <data name="EditIdentifierNameTooltip" xml:space="preserve">
+    <value>Identificador único del club (solo lectura). No se puede cambiar después de crear el club.</value>
+  </data>
+  <data name="EditDisplayNameTooltip" xml:space="preserve">
+    <value>Nombre para mostrar editable del club (máximo 100 caracteres). Puede contener espacios y letras mayúsculas.</value>
+  </data>
+  <data name="EditDescriptionTooltip" xml:space="preserve">
+    <value>Descripción opcional del club (máximo 500 caracteres). Se puede editar en cualquier momento.</value>
+  </data>
+  <data name="EditRatingTooltip" xml:space="preserve">
+    <value>Rating de ajedrez predeterminado para nuevos jugadores ({0}-{1}). Solo se aplica a jugadores futuros.</value>
+  </data>
+  <data name="EditMinRatingTooltip" xml:space="preserve">
+    <value>Rating más bajo permitido para los jugadores de este club ({0}-{1}). Se aplica al limitar los ratings.</value>
+  </data>
+  <data name="EditMaxRatingTooltip" xml:space="preserve">
+    <value>Rating más alto permitido para los jugadores de este club ({0}-{1}). Se aplica al limitar los ratings.</value>
+  </data>
+  <data name="EditDeviationTooltip" xml:space="preserve">
+    <value>Desviación/confianza de rating predeterminada (150.0-1000.0). Valores más bajos = mayor confianza. Solo se aplica a jugadores futuros.</value>
+  </data>
+  <data name="EditVolatilityTooltip" xml:space="preserve">
+    <value>Volatilidad/tasa de cambio de rating predeterminada (0.01-0.1). Valores más altos = cambios de rating más rápidos. Solo se aplica a jugadores futuros.</value>
+  </data>
+  <data name="EditPasswordTooltip" xml:space="preserve">
+    <value>Cambie la contraseña del club. Déjelo vacío para quitar la protección con contraseña. Advertencia: se necesita la contraseña para eliminar el club.</value>
+  </data>
+  <data name="EditConfirmPasswordTooltip" xml:space="preserve">
+    <value>Confirme la nueva contraseña. Debe coincidir con el campo de contraseña anterior.</value>
+  </data>
+  <data name="EditSocialMediaTooltip" xml:space="preserve">
+    <value>Enlaces opcionales de redes sociales (Facebook, Instagram, LinkedIn, etc.). Máximo 5 enlaces.</value>
+  </data>
+  <data name="SignInButton" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="SigningInButton" xml:space="preserve">
+    <value>Iniciando sesión...</value>
+  </data>
+  <data name="ClubAlreadyExistsMessage" xml:space="preserve">
+    <value>Ya existe un club con ese nombre identificador.</value>
+  </data>
+  <data name="CreateClubButton" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="ClubIdentifierLabel" xml:space="preserve">
+    <value>Identificador del club</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="IdentifierNameLabel" xml:space="preserve">
+    <value>Nombre identificador</value>
+  </data>
+  <data name="AgeLabel" xml:space="preserve">
+    <value>Edad</value>
+  </data>
+  <data name="DisplayNameLabel" xml:space="preserve">
+    <value>Nombre para mostrar</value>
+  </data>
+  <data name="RatingLabel" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="DeviationLabel" xml:space="preserve">
+    <value>Desviación</value>
+  </data>
+  <data name="GamesPlayedSinceLastYearLabel" xml:space="preserve">
+    <value>Partidas jugadas desde el año pasado</value>
+  </data>
+  <data name="VolatilityLabel" xml:space="preserve">
+    <value>Volatilidad</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="ChiefArbiterLabel" xml:space="preserve">
+    <value>Árbitro principal</value>
+  </data>
+  <data name="DefaultChiefArbiterLabel" xml:space="preserve">
+    <value>Árbitro principal predeterminado</value>
+  </data>
+  <data name="FederationLabel" xml:space="preserve">
+    <value>Federación</value>
+  </data>
+  <data name="CityTooltip" xml:space="preserve">
+    <value>Ciudad donde se celebra la competición (máximo 100 caracteres).</value>
+  </data>
+  <data name="ChiefArbiterTooltip" xml:space="preserve">
+    <value>Nombre del árbitro principal de la competición (máximo 100 caracteres).</value>
+  </data>
+  <data name="FederationTooltip" xml:space="preserve">
+    <value>Código de federación de tres letras, como ESP o BRA.</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="CurrentPasswordLabel" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="ConfirmNewPasswordLabel" xml:space="preserve">
+    <value>Confirmar nueva contraseña</value>
+  </data>
+  <data name="CurrentPasswordTooltip" xml:space="preserve">
+    <value>Introduzca la contraseña actual del club para verificarla.</value>
+  </data>
+  <data name="NewPasswordTooltip" xml:space="preserve">
+    <value>Introduzca una nueva contraseña para cambiar la contraseña de la base de datos del club.</value>
+  </data>
+  <data name="ConfirmNewPasswordTooltip" xml:space="preserve">
+    <value>Confirme la nueva contraseña. Debe coincidir con la nueva contraseña anterior.</value>
+  </data>
+  <data name="SocialMediaLinksLabel" xml:space="preserve">
+    <value>Enlaces de redes sociales</value>
+  </data>
+  <data name="AddButtonLabel" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="RemoveSelectedLabel" xml:space="preserve">
+    <value>Quitar selección</value>
+  </data>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="PlusButtonLabel" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="CreateButtonLabel" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="CreatePlayerButtonLabel" xml:space="preserve">
+    <value>Crear jugador</value>
+  </data>
+  <data name="ExportButtonLabel" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="ExportToExcelLabel" xml:space="preserve">
+    <value>Exportar a Excel</value>
+  </data>
+  <data name="ExportToTrf16Label" xml:space="preserve">
+    <value>Exportar a TRF 16</value>
+  </data>
+  <data name="TrfExportFileDialogFilter" xml:space="preserve">
+    <value>Archivos TRF (*.trf)|*.trf</value>
+  </data>
+  <data name="TrfExportCompletedCompetitionOnlyMessage" xml:space="preserve">
+    <value>Solo las competiciones finalizadas se pueden exportar al formato TRF.</value>
+  </data>
+  <data name="ExportFileDialogFilter" xml:space="preserve">
+    <value>Archivos de Excel (*.xlsx)|*.xlsx</value>
+  </data>
+  <data name="ExportSuccessMessage" xml:space="preserve">
+    <value>La competición se exportó correctamente.</value>
+  </data>
+  <data name="ExportCompleteTitle" xml:space="preserve">
+    <value>Exportación completada</value>
+  </data>
+  <data name="ExportFailedMessage" xml:space="preserve">
+    <value>Error al exportar.</value>
+  </data>
+  <data name="NoCompetitionSelectedMessage" xml:space="preserve">
+    <value>No se seleccionó ninguna competición para exportar.</value>
+  </data>
+  <data name="ExportInformationSheetName" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="ExportStandingsSheetName" xml:space="preserve">
+    <value>Clasificación</value>
+  </data>
+  <data name="ExportRoundSheetNameFormat" xml:space="preserve">
+    <value>Ronda {0}</value>
+  </data>
+  <data name="InfoFieldLabel" xml:space="preserve">
+    <value>Campo</value>
+  </data>
+  <data name="InfoValueLabel" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="RequiredInformationHeader" xml:space="preserve">
+    <value>Información obligatoria</value>
+  </data>
+  <data name="BasicInformationHeader" xml:space="preserve">
+    <value>Información básica</value>
+  </data>
+  <data name="RatingParametersHeader" xml:space="preserve">
+    <value>Parámetros de rating</value>
+  </data>
+  <data name="SecurityHeader" xml:space="preserve">
+    <value>Seguridad</value>
+  </data>
+  <data name="OptionalInformationHeader" xml:space="preserve">
+    <value>Información opcional</value>
+  </data>
+  <data name="ClubIdentifierNameHelp" xml:space="preserve">
+    <value>Identificador único (solo letras minúsculas y números, máximo 50 caracteres)</value>
+  </data>
+  <data name="DisplayNameHelp" xml:space="preserve">
+    <value>Nombre público del club (máximo 100 caracteres)</value>
+  </data>
+  <data name="RatingHelp" xml:space="preserve">
+    <value>Rating predeterminado para nuevos jugadores (500-2000, predeterminado: 1500)</value>
+  </data>
+  <data name="DeviationHelp" xml:space="preserve">
+    <value>Confianza inicial del rating (150.0-1000.0, predeterminada: 350.0)</value>
+  </data>
+  <data name="VolatilityHelp" xml:space="preserve">
+    <value>Tasa inicial de cambio del rating (0.01-0.1, predeterminada: 0.06)</value>
+  </data>
+  <data name="DescriptionHelp" xml:space="preserve">
+    <value>Breve descripción del club (máximo 500 caracteres)</value>
+  </data>
+  <data name="PasswordHelp" xml:space="preserve">
+    <value>Contraseña para acceder al club (déjelo vacío para no usar contraseña)</value>
+  </data>
+  <data name="ConfirmPasswordHelp" xml:space="preserve">
+    <value>Confirme la contraseña</value>
+  </data>
+  <data name="SecurityHelp" xml:space="preserve">
+    <value>Para cambiar la contraseña del club, introduzca la contraseña actual y luego escriba dos veces la misma contraseña nueva.</value>
+  </data>
+  <data name="SocialMediaHelp" xml:space="preserve">
+    <value>Hasta 5 enlaces de redes sociales (Facebook, Instagram, etc.)</value>
+  </data>
+  <data name="PlayersPage" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="CompetitionsPage" xml:space="preserve">
+    <value>Competiciones</value>
+  </data>
+  <data name="CreateCompetition" xml:space="preserve">
+    <value>Crear competición</value>
+  </data>
+  <data name="CompetitionPage" xml:space="preserve">
+    <value>Competición: {0}</value>
+  </data>
+  <data name="CompetitionTitleRequiredMessage" xml:space="preserve">
+    <value>El título de la competición es obligatorio.</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="NumberOfRoundsLabel" xml:space="preserve">
+    <value>Número de rondas</value>
+  </data>
+  <data name="DoubleRoundRobinLabel" xml:space="preserve">
+    <value>Todos contra todos a doble vuelta</value>
+  </data>
+  <data name="ByeValueLabel" xml:space="preserve">
+    <value>Puntuación por bye</value>
+  </data>
+  <data name="StateLabel" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="WinnerLabel" xml:space="preserve">
+    <value>Ganador</value>
+  </data>
+  <data name="InformationTabHeader" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="RoundsTabHeader" xml:space="preserve">
+    <value>Rondas</value>
+  </data>
+  <data name="RoundPairingsLabel" xml:space="preserve">
+    <value>Emparejamientos de la ronda {0}</value>
+  </data>
+  <data name="CurrentRoundSuffix" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="RoundsPlaceholder" xml:space="preserve">
+    <value>Emparejamientos de la ronda</value>
+  </data>
+  <data name="RoundIndicator" xml:space="preserve">
+    <value>Ronda {0} de {1}</value>
+  </data>
+  <data name="StandingsTabHeader" xml:space="preserve">
+    <value>Clasificación</value>
+  </data>
+    <data name="TableNumberLabel" xml:space="preserve">
+      <value>Número de mesa</value>
+    </data>
+    <data name="ClassificationLabel" xml:space="preserve">
+      <value>Puesto</value>
+    </data>
+    <data name="ParticipantLabel" xml:space="preserve">
+      <value>Participante</value>
+    </data>
+    <data name="ScoreLabel" xml:space="preserve">
+      <value>Puntuación</value>
+    </data>
+    <data name="OldRatingLabel" xml:space="preserve">
+      <value>Rating anterior</value>
+    </data>
+    <data name="NewRatingLabel" xml:space="preserve">
+      <value>Nuevo rating</value>
+    </data>
+    <data name="PerformanceRatingLabel" xml:space="preserve">
+      <value>Rendimiento Elo</value>
+    </data>
+    <data name="BuchholzScoreLabel" xml:space="preserve">
+      <value>Puntuación Buchholz</value>
+    </data>
+    <data name="SonnebornBergerScoreLabel" xml:space="preserve">
+      <value>Puntuación Sonneborn-Berger</value>
+    </data>
+  <data name="DeleteButtonLabel" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="BackButtonLabel" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="StartCompetitionButtonLabel" xml:space="preserve">
+    <value>Iniciar competición</value>
+  </data>
+  <data name="AdvanceRoundButtonLabel" xml:space="preserve">
+    <value>Avanzar ronda</value>
+  </data>
+  <data name="CompleteCompetitionButtonLabel" xml:space="preserve">
+    <value>Finalizar competición</value>
+  </data>
+  <data name="UndoRoundButtonLabel" xml:space="preserve">
+    <value>Deshacer ronda</value>
+  </data>
+  <data name="PlayerProfile" xml:space="preserve">
+    <value>Perfil del jugador</value>
+  </data>
+  <data name="ChessComProfileImageTooltip" xml:space="preserve">
+    <value>Imagen de perfil de Chess.com</value>
+  </data>
+  <data name="CreatePlayer" xml:space="preserve">
+    <value>Crear jugador</value>
+  </data>
+  <data name="CreationDateLabel" xml:space="preserve">
+    <value>Fecha de creación</value>
+  </data>
+  <data name="StartedAtLabel" xml:space="preserve">
+    <value>Fecha de inicio</value>
+  </data>
+  <data name="CompletedAtLabel" xml:space="preserve">
+    <value>Fecha de finalización</value>
+  </data>
+  <data name="TimeFormat_Bullet" xml:space="preserve">
+    <value>Bullet</value>
+  </data>
+  <data name="TimeFormat_Blitz" xml:space="preserve">
+    <value>Blitz</value>
+  </data>
+  <data name="TimeFormat_Rapid" xml:space="preserve">
+    <value>Rápido</value>
+  </data>
+  <data name="TimeFormat_Classical" xml:space="preserve">
+    <value>Clásico</value>
+  </data>
+  <data name="ChessComUsernameLabel" xml:space="preserve">
+    <value>Nombre de usuario de Chess.com</value>
+  </data>
+  <data name="FetchRatingsLabel" xml:space="preserve">
+    <value>Obtener ratings</value>
+  </data>
+  <data name="LichessUsernameLabel" xml:space="preserve">
+    <value>Nombre de usuario de Lichess</value>
+  </data>
+  <data name="FideIdLabel" xml:space="preserve">
+    <value>ID FIDE</value>
+  </data>
+  <data name="UscfIdLabel" xml:space="preserve">
+    <value>ID USCF (Estados Unidos)</value>
+  </data>
+  <data name="CbxIdLabel" xml:space="preserve">
+    <value>ID CBX (Brasil)</value>
+  </data>
+  <data name="ChessTitleLabel" xml:space="preserve">
+    <value>Título de ajedrez</value>
+  </data>
+  <data name="PlayerInformationLabel" xml:space="preserve">
+    <value>Información del jugador</value>
+  </data>
+  <data name="RatingsLabel" xml:space="preserve">
+    <value>Ratings</value>
+  </data>
+  <data name="ExternalProfilesLabel" xml:space="preserve">
+    <value>Perfiles externos</value>
+  </data>
+  <data name="ContactInformationSection" xml:space="preserve">
+    <value>Información de contacto</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="PhoneLabel" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="BirthDateLabel" xml:space="preserve">
+    <value>Fecha de nacimiento</value>
+  </data>
+  <data name="BirthDateHelp" xml:space="preserve">
+    <value>Fecha de nacimiento opcional del jugador</value>
+  </data>
+  <data name="InvalidBirthDateMessage" xml:space="preserve">
+    <value>La fecha de nacimiento no puede ser futura</value>
+  </data>
+  <data name="Max20CharactersHelpText" xml:space="preserve">
+    <value>Opcional. Máximo 20 caracteres.</value>
+  </data>
+  <data name="IdentifierNameCannotChangeHelpText" xml:space="preserve">
+    <value>Solo lectura. Este identificador no se puede cambiar.</value>
+  </data>
+  <data name="Max100CharactersHelpText" xml:space="preserve">
+    <value>máximo 100 caracteres</value>
+  </data>
+  <data name="Max50CharactersHelpText" xml:space="preserve">
+    <value>Opcional. Máximo 50 caracteres.</value>
+  </data>
+  <data name="NumericMax12CharactersHelpText" xml:space="preserve">
+    <value>Opcional. Solo dígitos, máximo 12 caracteres.</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>Campos obligatorios</value>
+  </data>
+  <data name="OptionalFields" xml:space="preserve">
+    <value>Campos opcionales</value>
+  </data>
+  <data name="RatingsDescription" xml:space="preserve">
+    <value>Información de rating</value>
+  </data>
+  <data name="LowercaseLettersNumbersMaxHelpText" xml:space="preserve">
+    <value>solo letras minúsculas y números, máximo 50 caracteres</value>
+  </data>
+  <data name="DeletePlayerButton" xml:space="preserve">
+    <value>Eliminar jugador</value>
+  </data>
+  <data name="EnterPlayerIdentifierMessage" xml:space="preserve">
+    <value>Introduzca un nombre identificador para el jugador</value>
+  </data>
+  <data name="InvalidPlayerIdentifierMessage" xml:space="preserve">
+    <value>El identificador del jugador solo puede contener letras minúsculas y números</value>
+  </data>
+  <data name="PlayerIdentifierExistsMessage" xml:space="preserve">
+    <value>Ya existe un jugador con este identificador en el club</value>
+  </data>
+  <data name="InvalidUscfIdMessage" xml:space="preserve">
+    <value>El ID USCF solo puede contener números y debe tener como máximo 12 dígitos</value>
+  </data>
+  <data name="EnterPlayerDisplayNameMessage" xml:space="preserve">
+    <value>Introduzca un nombre para mostrar del jugador</value>
+  </data>
+  <data name="PlayerCreatedMessage" xml:space="preserve">
+    <value>El jugador se creó correctamente</value>
+  </data>
+  <data name="FetchRatingsResultMessage" xml:space="preserve">
+    <value>Se obtuvieron {0} valores de rating de Chess.com para el usuario '{1}'.</value>
+  </data>
+  <data name="FetchLichessRatingsResultMessage" xml:space="preserve">
+    <value>Se obtuvieron {0} valores de rating de Lichess para el usuario '{1}'.</value>
+  </data>
+  <data name="FetchFideRatingsResultMessage" xml:space="preserve">
+    <value>Se obtuvieron {0} valores de rating de la FIDE para el usuario '{1}'.</value>
+  </data>
+  <data name="PlayerSavedMessage" xml:space="preserve">
+    <value>La información del jugador se guardó correctamente</value>
+  </data>
+  <data name="PlayerDeletedMessage" xml:space="preserve">
+    <value>El jugador se eliminó correctamente</value>
+  </data>
+  <data name="DeletePlayerConfirmation" xml:space="preserve">
+    <value>¿Seguro que desea eliminar este jugador? Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="IdentifierNameColumnTooltip" xml:space="preserve">
+    <value>Identificador único del jugador dentro del club. Haga clic para ver sus detalles.</value>
+  </data>
+  <data name="DisplayNameColumnTooltip" xml:space="preserve">
+    <value>Nombre para mostrar del jugador</value>
+  </data>
+  <data name="ChessTitleColumnTooltip" xml:space="preserve">
+    <value>Título de ajedrez concedido por organizaciones ajedrecísticas (NM, CM, FM, IM, GM)</value>
+  </data>
+  <data name="CreationDateColumnTooltip" xml:space="preserve">
+    <value>Fecha y hora de creación del jugador</value>
+  </data>
+  <data name="BulletRatingColumnTooltip" xml:space="preserve">
+    <value>Rating del jugador en partidas bullet. Los números incluyen rating, incertidumbre (?) y posición (#).</value>
+  </data>
+  <data name="BlitzRatingColumnTooltip" xml:space="preserve">
+    <value>Rating del jugador en partidas blitz. Los números incluyen rating, incertidumbre (?) y posición (#).</value>
+  </data>
+  <data name="RapidRatingColumnTooltip" xml:space="preserve">
+    <value>Rating del jugador en partidas rápidas. Los números incluyen rating, incertidumbre (?) y posición (#).</value>
+  </data>
+  <data name="ClassicalRatingColumnTooltip" xml:space="preserve">
+    <value>Rating del jugador en partidas clásicas. Los números incluyen rating, incertidumbre (?) y posición (#).</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Elementos por página:</value>
+  </data>
+  <data name="PageSize10" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="PageSize50" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="PageSize100" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="BackToDashboardButtonLabel" xml:space="preserve">
+    <value>Volver al panel</value>
+  </data>
+  <data name="PreviousPageButtonLabel" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="NextPageButtonLabel" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="PageIndicator" xml:space="preserve">
+    <value>Página {0} de {1}</value>
+  </data>
+  <data name="GamesPage" xml:space="preserve">
+    <value>Partidas</value>
+  </data>
+  <data name="GamePage" xml:space="preserve">
+    <value>Partida</value>
+  </data>
+  <data name="CreateGame" xml:space="preserve">
+    <value>Crear partida</value>
+  </data>
+  <data name="GameIdLabel" xml:space="preserve">
+    <value>ID de la partida</value>
+  </data>
+  <data name="ParticipantsLabel" xml:space="preserve">
+    <value>Participantes</value>
+  </data>
+  <data name="ResultLabel" xml:space="preserve">
+    <value>Resultado</value>
+  </data>
+  <data name="TimeFormatLabel" xml:space="preserve">
+    <value>Ritmo de juego</value>
+  </data>
+  <data name="RatedLabel" xml:space="preserve">
+    <value>Computa para rating</value>
+  </data>
+  <data name="RatingChangeLabel" xml:space="preserve">
+    <value>Cambio de rating</value>
+  </data>
+  <data name="CompetitionIdLabel" xml:space="preserve">
+    <value>ID de la competición</value>
+  </data>
+  <data name="PgnLabel" xml:space="preserve">
+    <value>PGN</value>
+  </data>
+  <data name="CreateGameButtonLabel" xml:space="preserve">
+    <value>Crear partida</value>
+  </data>
+  <data name="BackToGamesButtonLabel" xml:space="preserve">
+    <value>Volver a las partidas</value>
+  </data>
+  <data name="BackToPlayersButtonLabel" xml:space="preserve">
+    <value>Volver a los jugadores</value>
+  </data>
+  <data name="SavePgnButtonLabel" xml:space="preserve">
+    <value>Guardar PGN</value>
+  </data>
+  <data name="DeleteGameButton" xml:space="preserve">
+    <value>Eliminar partida</value>
+  </data>
+  <data name="WhitePlayerLabel" xml:space="preserve">
+    <value>Jugador con blancas</value>
+  </data>
+  <data name="BlackPlayerLabel" xml:space="preserve">
+    <value>Jugador con negras</value>
+  </data>
+  <data name="GameCreatedMessage" xml:space="preserve">
+    <value>La partida se creó correctamente</value>
+  </data>
+  <data name="GameSavedMessage" xml:space="preserve">
+    <value>La información de la partida se guardó correctamente</value>
+  </data>
+  <data name="GameDeletedMessage" xml:space="preserve">
+    <value>La partida se eliminó correctamente</value>
+  </data>
+  <data name="DeleteGameConfirmation" xml:space="preserve">
+    <value>¿Seguro que desea eliminar esta partida? Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="InvalidGameSelectionMessage" xml:space="preserve">
+    <value>La selección de partida no es válida.</value>
+  </data>
+  <data name="GameNotFoundMessage" xml:space="preserve">
+    <value>No se encontró la partida.</value>
+  </data>
+  <data name="SelectTwoPlayersMessage" xml:space="preserve">
+    <value>Seleccione a ambos jugadores.</value>
+  </data>
+  <data name="SelectDifferentPlayersMessage" xml:space="preserve">
+    <value>Seleccione dos jugadores distintos.</value>
+  </data>
+  <data name="YesLabel" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="NoLabel" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NotAvailableShort" xml:space="preserve">
+    <value>N/D</value>
+  </data>
+  <data name="PlayersSearchPlaceholder" xml:space="preserve">
+    <value>Buscar por nombre para mostrar o nombre identificador...</value>
+  </data>
+  <data name="CompetitionsSearchPlaceholder" xml:space="preserve">
+    <value>Buscar competiciones por título...</value>
+  </data>
+  <data name="SelectedPlayerLabel" xml:space="preserve">
+    <value>Jugador seleccionado</value>
+  </data>
+  <data name="RemoveParticipantButtonLabel" xml:space="preserve">
+    <value>Quitar</value>
+  </data>
+  <data name="AnalyzeOnLichessButtonLabel" xml:space="preserve">
+    <value>Analizar en Lichess</value>
+  </data>
+  <data name="InvalidPgnForAnalysisMessage" xml:space="preserve">
+    <value>El PGN no es válido para el análisis. Proporcione una notación de jugadas válida.</value>
+  </data>
+  <data name="OpenLichessFailedMessage" xml:space="preserve">
+    <value>No se pudo abrir el análisis de Lichess en el navegador.</value>
+  </data>
+  <data name="InvalidCredentialsMessage" xml:space="preserve">
+    <value>El identificador del club o la contraseña no son válidos.</value>
+  </data>
+  <data name="SignInFailedTitle" xml:space="preserve">
+    <value>Error al iniciar sesión</value>
+  </data>
+  <data name="SignInFailedMessage" xml:space="preserve">
+    <value>No se pudo iniciar sesión</value>
+  </data>
+  <data name="DatabaseMigrationTitle" xml:space="preserve">
+    <value>Se requiere actualizar la base de datos</value>
+  </data>
+  <data name="DatabaseMigrationConfirmationMessage" xml:space="preserve">
+    <value>El esquema de la base de datos del club seleccionado está en la versión {0}, que está desactualizada. ¿Desea aplicar las migraciones necesarias para actualizarlo a la versión {1}? Esto puede tardar unos segundos.
+
+ADVERTENCIA: Asegúrese de hacer una copia de seguridad de los datos del club antes de aplicar las migraciones.</value>
+  </data>
+  <data name="DatabaseSchemaTooNewMessage" xml:space="preserve">
+    <value>El esquema de la base de datos del club seleccionado está en la versión {0}, pero esta versión de Local Knights solo admite versiones de esquema hasta la {1}. Actualice Local Knights antes de iniciar sesión.</value>
+  </data>
+  <data name="ChessTitle_None" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="ChessTitle_NM" xml:space="preserve">
+    <value>NM</value>
+  </data>
+  <data name="ChessTitle_CM" xml:space="preserve">
+    <value>CM</value>
+  </data>
+  <data name="ChessTitle_FM" xml:space="preserve">
+    <value>FM</value>
+  </data>
+  <data name="ChessTitle_IM" xml:space="preserve">
+    <value>IM</value>
+  </data>
+  <data name="ChessTitle_GM" xml:space="preserve">
+    <value>GM</value>
+  </data>
+  <data name="ChessTitle_WCM" xml:space="preserve">
+    <value>WCM</value>
+  </data>
+  <data name="ChessTitle_WFM" xml:space="preserve">
+    <value>WFM</value>
+  </data>
+  <data name="ChessTitle_WIM" xml:space="preserve">
+    <value>WIM</value>
+  </data>
+  <data name="ChessTitle_WGM" xml:space="preserve">
+    <value>WGM</value>
+  </data>
+  <data name="CompetitionType_SwissSystemTournament" xml:space="preserve">
+    <value>Sistema suizo</value>
+  </data>
+  <data name="CompetitionType_RoundRobinTournament" xml:space="preserve">
+    <value>Todos contra todos</value>
+  </data>
+  <data name="CompetitionType_KnockoutTournament" xml:space="preserve">
+    <value>Eliminación directa</value>
+  </data>
+  <data name="CompetitionType_ChessMatch" xml:space="preserve">
+    <value>Encuentro</value>
+  </data>
+  <data name="CompetitionTypeMatchParticipantsLimitMessage" xml:space="preserve">
+    <value>Los encuentros solo pueden tener 2 participantes. Haga clic en OK para conservar solo los dos primeros participantes de la lista o en Cancelar para mantener el tipo de competición actual.</value>
+  </data>
+  <data name="SwissCompetitionMaxRoundsExceededMessage" xml:space="preserve">
+    <value>El número de rondas configurado supera el máximo permitido para una competición por sistema suizo con esta cantidad de participantes. Haga clic en OK para cambiar el número de rondas a {0} e iniciar la competición o en Cancelar para volver sin iniciarla.</value>
+  </data>
+  <data name="CompetitionState_Starting" xml:space="preserve">
+    <value>Por iniciar</value>
+  </data>
+  <data name="CompetitionState_Ongoing" xml:space="preserve">
+    <value>En curso</value>
+  </data>
+  <data name="CompetitionState_Completed" xml:space="preserve">
+    <value>Finalizada</value>
+  </data>
+  <data name="GameResult_WhiteWins" xml:space="preserve">
+    <value>1-0</value>
+  </data>
+  <data name="GameResult_BlackWins" xml:space="preserve">
+    <value>0-1</value>
+  </data>
+  <data name="GameResult_Draw" xml:space="preserve">
+    <value>½-½</value>
+  </data>
+  <data name="GenderLabel" xml:space="preserve">
+    <value>Género</value>
+  </data>
+  <data name="GenderTooltip" xml:space="preserve">
+    <value>Indica el género del jugador. Esta información puede utilizarse al exportar competiciones.</value>
+  </data>
+  <data name="GenderType_Male" xml:space="preserve">
+    <value>Masculino</value>
+  </data>
+  <data name="GenderType_Female" xml:space="preserve">
+    <value>Femenino</value>
+  </data>
+  <data name="GenderType_Other" xml:space="preserve">
+    <value>Otro</value>
+  </data>
+  <data name="RequiredTextHelp" xml:space="preserve"><value>Obligatorio. Máximo 100 caracteres.</value></data>
+  <data name="OptionalTextHelp" xml:space="preserve"><value>Opcional.</value></data>
+  <data name="OptionalText100Help" xml:space="preserve"><value>Opcional. Máximo 100 caracteres.</value></data>
+  <data name="OptionalFederationHelp" xml:space="preserve"><value>Opcional. Código de federación de tres letras.</value></data>
+  <data name="RequiredChoiceHelp" xml:space="preserve"><value>Obligatorio. Seleccione una opción.</value></data>
+  <data name="OptionalChoiceHelp" xml:space="preserve"><value>Opcional. Seleccione una opción.</value></data>
+  <data name="RequiredToggleHelp" xml:space="preserve"><value>Configuración obligatoria. Active o desactive.</value></data>
+  <data name="OptionalToggleHelp" xml:space="preserve"><value>Configuración opcional. Active o desactive.</value></data>
+  <data name="RoundsHelp" xml:space="preserve"><value>Obligatorio. De 1 a 30 rondas.</value></data>
+  <data name="PlayerSearchHelp" xml:space="preserve"><value>Obligatorio. Escriba para buscar y seleccione un jugador.</value></data>
+  <data name="RatingEntryHelp" xml:space="preserve"><value>Valoración opcional dentro de los límites del club.</value></data>
+  <data name="DeviationEntryHelp" xml:space="preserve"><value>Desviación Glicko-2 opcional.</value></data>
+  <data name="ReadOnlyMetadataHelp" xml:space="preserve"><value>Solo lectura. Se establece automáticamente.</value></data>
+  <data name="ReadOnlyCalculatedHelp" xml:space="preserve"><value>Solo lectura. Calculado a partir de datos guardados.</value></data>
+  <data name="CompetitionTitleHelp" xml:space="preserve"><value>Nombre obligatorio de la competición. Máximo {0} caracteres.</value></data>
+  <data name="CompetitionDescriptionHelp" xml:space="preserve"><value>Resumen opcional de la competición. Máximo {0} caracteres.</value></data>
+  <data name="CompetitionCityHelp" xml:space="preserve"><value>Ciudad anfitriona opcional. Máximo {0} caracteres.</value></data>
+  <data name="CompetitionChiefArbiterHelp" xml:space="preserve"><value>Árbitro principal opcional. Máximo {0} caracteres.</value></data>
+  <data name="CompetitionFederationHelp" xml:space="preserve"><value>Código opcional de {0} letras de la federación organizadora.</value></data>
+  <data name="CompetitionTimeFormatHelp" xml:space="preserve"><value>Categoría obligatoria de ritmo de juego.</value></data>
+  <data name="CompetitionRatedHelp" xml:space="preserve"><value>Define si los resultados afectan a las valoraciones.</value></data>
+  <data name="CompetitionTypeHelp" xml:space="preserve"><value>Formato obligatorio de emparejamiento.</value></data>
+  <data name="CompetitionRoundsHelp" xml:space="preserve"><value>Número obligatorio de rondas entre {0} y {1}.</value></data>
+  <data name="CompetitionDoubleRoundRobinHelp" xml:space="preserve"><value>Cada participante juega dos veces contra cada rival.</value></data>
+  <data name="CompetitionByeValueHelp" xml:space="preserve"><value>Puntuación otorgada al participante que recibe un descanso.</value></data>
+  <data name="CompetitionWinnerHelp" xml:space="preserve"><value>Ganador calculado al completar la competición.</value></data>
+  <data name="CompetitionParticipantSearchHelp" xml:space="preserve"><value>Busque jugadores existentes para añadirlos como participantes.</value></data>
+  <data name="CreateCompetitionTitleTooltip" xml:space="preserve"><value>Obligatorio. Introduzca un título de hasta {0} caracteres; identifica la competición en listas y encabezados.</value></data>
+  <data name="CreateCompetitionDescriptionTooltip" xml:space="preserve"><value>Opcional. Introduzca hasta {0} caracteres; los saltos de línea se conservan al crear la competición.</value></data>
+  <data name="CreateCompetitionCityTooltip" xml:space="preserve"><value>Opcional. Introduzca la ciudad anfitriona con un máximo de {0} caracteres.</value></data>
+  <data name="CreateCompetitionChiefArbiterTooltip" xml:space="preserve"><value>Opcional. Introduzca el nombre del árbitro principal con un máximo de {0} caracteres.</value></data>
+  <data name="CreateCompetitionFederationTooltip" xml:space="preserve"><value>Opcional. Introduzca el código de {0} letras de la federación organizadora; se guarda en mayúsculas.</value></data>
+  <data name="CreateCompetitionTimeFormatTooltip" xml:space="preserve"><value>Obligatorio. Seleccione la categoría de ritmo usada para organizar la competición y sus valoraciones.</value></data>
+  <data name="CreateCompetitionRatedTooltip" xml:space="preserve"><value>Configuración obligatoria. Al activarla, los resultados completados actualizan las valoraciones de los jugadores.</value></data>
+  <data name="CreateCompetitionTypeTooltip" xml:space="preserve"><value>Obligatorio. Seleccione el formato de emparejamiento; determina las opciones adicionales disponibles.</value></data>
+  <data name="CreateCompetitionRoundsTooltip" xml:space="preserve"><value>Obligatorio para competiciones suizas y matches. Introduzca entre {0} y {1} rondas; el valor predeterminado es {2}.</value></data>
+  <data name="CreateCompetitionDoubleRoundRobinTooltip" xml:space="preserve"><value>Configuración opcional de liga. Al activarla, cada participante juega dos veces contra cada rival.</value></data>
+  <data name="CreateCompetitionByeValueTooltip" xml:space="preserve"><value>Obligatorio cuando se muestra. Seleccione la puntuación que recibe un participante por descanso.</value></data>
+  <data name="EditCompetitionTitleTooltip" xml:space="preserve"><value>Obligatorio, máximo {0} caracteres. Los cambios se guardan de inmediato antes de iniciar la competición; después es de solo lectura.</value></data>
+  <data name="EditCompetitionDescriptionTooltip" xml:space="preserve"><value>Opcional, máximo {0} caracteres. Conserva los saltos de línea y solo puede editarse antes de iniciar la competición.</value></data>
+  <data name="EditCompetitionCityTooltip" xml:space="preserve"><value>Ciudad anfitriona opcional, máximo {0} caracteres. Los cambios se guardan de inmediato y el campo pasa a ser de solo lectura al iniciar la competición.</value></data>
+  <data name="EditCompetitionChiefArbiterTooltip" xml:space="preserve"><value>Árbitro principal opcional, máximo {0} caracteres. Los cambios se guardan de inmediato y el campo pasa a ser de solo lectura al iniciar la competición.</value></data>
+  <data name="EditCompetitionFederationTooltip" xml:space="preserve"><value>Código federativo opcional de {0} letras guardado en mayúsculas. Solo puede cambiarse antes de iniciar la competición.</value></data>
+  <data name="EditCompetitionTimeFormatTooltip" xml:space="preserve"><value>Categoría obligatoria de ritmo. Los cambios se guardan de inmediato antes de iniciar la competición; después se deshabilita la selección.</value></data>
+  <data name="EditCompetitionRatedTooltip" xml:space="preserve"><value>Configuración obligatoria. Al activarla, la competición actualiza las valoraciones; solo puede cambiarse antes de iniciarla.</value></data>
+  <data name="EditCompetitionTypeTooltip" xml:space="preserve"><value>Formato obligatorio de emparejamiento. Los cambios se guardan de inmediato antes de iniciar la competición y pueden requerir confirmación si los participantes existentes no admiten el nuevo formato.</value></data>
+  <data name="EditCompetitionRoundsTooltip" xml:space="preserve"><value>Obligatorio para competiciones suizas y matches. Elija entre {0} y {1} rondas; el valor predeterminado es {2} y la edición se bloquea al iniciar la competición.</value></data>
+  <data name="EditCompetitionDoubleRoundRobinTooltip" xml:space="preserve"><value>Configuración opcional de liga. Al activarla, cada participante juega dos veces contra cada rival; la edición se bloquea al iniciar la competición.</value></data>
+  <data name="EditCompetitionByeValueTooltip" xml:space="preserve"><value>Obligatorio cuando se muestra. Define la puntuación por descanso y solo puede cambiarse antes de iniciar la competición.</value></data>
+  <data name="CompetitionWinnerTooltip" xml:space="preserve"><value>Solo lectura. El ganador se calcula a partir de la clasificación final al completar la competición.</value></data>
+  <data name="CompetitionParticipantSearchTooltip" xml:space="preserve"><value>Campo opcional con sugerencias disponible antes de iniciar la competición. Escriba el nombre o identificador de un jugador y seleccione un resultado para añadirlo una sola vez.</value></data>
+  <data name="CompetitionTitleTooltip" xml:space="preserve"><value>Título obligatorio y editable, con un máximo de 100 caracteres. Identifica la competición en listas y encabezados.</value></data>
+  <data name="DescriptionTooltip" xml:space="preserve"><value>Descripción opcional y editable. Admite saltos de línea y se guarda con este registro.</value></data>
+  <data name="TimeFormatTooltip" xml:space="preserve"><value>Selección obligatoria. Establece la categoría de ritmo de esta partida o competición.</value></data>
+  <data name="RatedTooltip" xml:space="preserve"><value>Configuración obligatoria. Al activarla, los resultados actualizan las valoraciones.</value></data>
+  <data name="CompetitionTypeTooltip" xml:space="preserve"><value>Selección obligatoria. Define el formato de emparejamiento y las opciones adicionales disponibles.</value></data>
+  <data name="RoundsTooltip" xml:space="preserve"><value>Número obligatorio y editable entre 1 y 30. Define las rondas de la competición suiza.</value></data>
+  <data name="DoubleRoundRobinTooltip" xml:space="preserve"><value>Configuración opcional y editable. Al activarla, cada participante juega dos veces contra cada rival.</value></data>
+  <data name="ByeValueTooltip" xml:space="preserve"><value>Selección obligatoria para competiciones suizas. Define la puntuación concedida por descanso.</value></data>
+  <data name="PlayerSearchTooltip" xml:space="preserve"><value>Campo obligatorio con sugerencias. Escriba un nombre o identificador y seleccione un jugador; un jugador no puede ocupar ambos colores.</value></data>
+  <data name="RatingEntryTooltip" xml:space="preserve"><value>Valoración opcional y editable dentro de los límites mínimo y máximo del club actual.</value></data>
+  <data name="DeviationEntryTooltip" xml:space="preserve"><value>Desviación Glicko-2 opcional y editable. Los valores menores indican mayor certeza.</value></data>
+  <data name="ChessTitleTooltip" xml:space="preserve"><value>Título ajedrecístico opcional y editable. Seleccione el título reconocido o la opción sin título.</value></data>
+  <data name="UsernameTooltip" xml:space="preserve"><value>Usuario opcional y editable, máximo 50 caracteres. La consulta de valoración usa exactamente este nombre.</value></data>
+  <data name="NumericIdTooltip" xml:space="preserve"><value>Identificador federativo opcional y editable. Solo dígitos, máximo 12 caracteres.</value></data>
+  <data name="EmailTooltip" xml:space="preserve"><value>Correo opcional y editable, máximo 100 caracteres. Se guarda como contacto del jugador.</value></data>
+  <data name="PhoneTooltip" xml:space="preserve"><value>Teléfono opcional y editable, máximo 20 caracteres. Se guarda como contacto del jugador.</value></data>
+  <data name="BirthDateTooltip" xml:space="preserve"><value>Fecha de nacimiento opcional y editable. No admite fechas futuras; borre el campo para quitarla.</value></data>
+  <data name="ReadOnlyMetadataTooltip" xml:space="preserve"><value>Valor de solo lectura generado por la aplicación. No se puede editar en esta página.</value></data>
+  <data name="ReadOnlyCalculatedTooltip" xml:space="preserve"><value>Valor de solo lectura calculado con datos guardados de partidas o valoración. No se puede editar directamente.</value></data>
+  <data name="CreateGameWhitePlayerHelp" xml:space="preserve"><value>Obligatorio. Busque y seleccione al jugador de blancas.</value></data>
+  <data name="CreateGameWhitePlayerTooltip" xml:space="preserve"><value>Búsqueda obligatoria del jugador de blancas. Escriba un nombre o identificador y seleccione una sugerencia; un jugador no puede ocupar ambos colores.</value></data>
+  <data name="CreateGameBlackPlayerHelp" xml:space="preserve"><value>Obligatorio. Busque y seleccione al jugador de negras.</value></data>
+  <data name="CreateGameBlackPlayerTooltip" xml:space="preserve"><value>Búsqueda obligatoria del jugador de negras. Escriba un nombre o identificador y seleccione una sugerencia; un jugador no puede ocupar ambos colores.</value></data>
+  <data name="CreateGameTimeFormatHelp" xml:space="preserve"><value>Obligatorio. Elija la categoría de ritmo jugada.</value></data>
+  <data name="CreateGameTimeFormatTooltip" xml:space="preserve"><value>Categoría obligatoria de ritmo de la partida. Determina qué grupo de valoración de los jugadores se utiliza.</value></data>
+  <data name="CreateGameResultHelp" xml:space="preserve"><value>Obligatorio. Elija el resultado registrado de la partida.</value></data>
+  <data name="CreateGameResultTooltip" xml:space="preserve"><value>Resultado obligatorio de la partida. Se guarda con la partida nueva y determina los cambios de valoración cuando es evaluada.</value></data>
+  <data name="CreateGameRatedHelp" xml:space="preserve"><value>Obligatorio. Elija si esta partida afecta a las valoraciones.</value></data>
+  <data name="CreateGameRatedTooltip" xml:space="preserve"><value>Configuración obligatoria de valoración. Al activarla, crear la partida aplica el resultado a las valoraciones de ambos jugadores.</value></data>
+  <data name="CreateGamePgnHelp" xml:space="preserve"><value>Opcional. Añada los movimientos y etiquetas de la partida en formato PGN.</value></data>
+  <data name="CreateGamePgnTooltip" xml:space="preserve"><value>Contenido PGN opcional de esta partida. Pegue movimientos y etiquetas válidos para guardarlos con la partida nueva y editarlos o analizarlos después.</value></data>
+  <data name="GameIdHelp" xml:space="preserve"><value>Solo lectura. Identifica esta partida guardada.</value></data>
+  <data name="GameIdTooltip" xml:space="preserve"><value>Identificador único asignado a esta partida al crearla. No se puede editar.</value></data>
+  <data name="GameCreationDateHelp" xml:space="preserve"><value>Solo lectura. Muestra cuándo se creó el registro de esta partida.</value></data>
+  <data name="GameCreationDateTooltip" xml:space="preserve"><value>Fecha y hora en que esta partida se añadió al club. No se pueden editar.</value></data>
+  <data name="GameParticipantsHelp" xml:space="preserve"><value>Solo lectura. Muestra los jugadores y sus colores asignados.</value></data>
+  <data name="GameParticipantsTooltip" xml:space="preserve"><value>Jugadores de blancas y negras guardados para esta partida. Los participantes no se pueden cambiar aquí.</value></data>
+  <data name="GameDetailTimeFormatHelp" xml:space="preserve"><value>Solo lectura. Muestra la categoría de ritmo jugada.</value></data>
+  <data name="GameDetailTimeFormatTooltip" xml:space="preserve"><value>Categoría de ritmo guardada para esta partida y usada para elegir su grupo de valoración. No se puede editar aquí.</value></data>
+  <data name="GameDetailResultHelp" xml:space="preserve"><value>Solo lectura. Muestra el resultado registrado de la partida.</value></data>
+  <data name="GameDetailResultTooltip" xml:space="preserve"><value>Resultado guardado de esta partida. No se puede editar aquí y determina el cambio de valoración mostrado cuando es evaluada.</value></data>
+  <data name="GameDetailRatedHelp" xml:space="preserve"><value>Solo lectura. Muestra si esta partida afectó a las valoraciones.</value></data>
+  <data name="GameDetailRatedTooltip" xml:space="preserve"><value>Indica si el resultado de esta partida se aplicó a las valoraciones de los jugadores. No se puede editar aquí.</value></data>
+  <data name="GameRatingChangeHelp" xml:space="preserve"><value>Solo lectura. Muestra los puntos de valoración ganados o perdidos.</value></data>
+  <data name="GameRatingChangeTooltip" xml:space="preserve"><value>Cambio de valoración calculado para los jugadores a partir de esta partida guardada. Las partidas no evaluadas no cambian valoraciones.</value></data>
+  <data name="GameCompetitionIdHelp" xml:space="preserve"><value>Solo lectura. Identifica la competición vinculada a esta partida, si corresponde.</value></data>
+  <data name="GameCompetitionIdTooltip" xml:space="preserve"><value>Identificador de la competición que creó esta partida. Está vacío en partidas creadas fuera de una competición.</value></data>
+  <data name="GameDetailPgnHelp" xml:space="preserve"><value>Opcional. Edite los movimientos y etiquetas de esta partida en formato PGN.</value></data>
+  <data name="GameDetailPgnTooltip" xml:space="preserve"><value>Contenido PGN opcional de esta partida. Guardar PGN conserva los cambios; el análisis usa el texto actual.</value></data>
+  <data name="PlayerDisplayNameTooltip" xml:space="preserve"><value>Nombre obligatorio y editable, máximo 100 caracteres. Se muestra en emparejamientos, partidas y clasificaciones.</value></data>
+  <data name="GameResultTooltip" xml:space="preserve"><value>Resultado obligatorio y editable. Se guarda con la partida y determina los cambios de valoración cuando es evaluada.</value></data>
+  <data name="CreateClubIdentifierNameHelp" xml:space="preserve"><value>Identificador único del club. No se puede cambiar después de crearlo. Máximo {0} caracteres.</value></data>
+  <data name="CreateClubDisplayNameHelp" xml:space="preserve"><value>Nombre público del club. Se puede cambiar en cualquier momento.</value></data>
+  <data name="CreateClubRatingSystemHelp" xml:space="preserve"><value>Sistema de rating utilizado por el club (se recomienda Glicko-2).</value></data>
+  <data name="CreateClubInitialRatingHelp" xml:space="preserve"><value>Rating predeterminado asignado a los nuevos jugadores.</value></data>
+  <data name="CreateClubInitialDeviationHelp" xml:space="preserve"><value>Intervalo de confianza inicial de los ratings de los nuevos jugadores.</value></data>
+  <data name="CreateClubInitialVolatilityHelp" xml:space="preserve"><value>Tasa inicial de cambio del rating Glicko-2 de los nuevos jugadores. Se recomienda encarecidamente el valor predeterminado para la mayoría de los clubes.</value></data>
+  <data name="CreateClubProvisionalGamesHelp" xml:space="preserve"><value>Número de partidas durante las que un nuevo jugador permanece provisional en el sistema de rating ELO.</value></data>
+  <data name="CreateClubMinimumRatingHelp" xml:space="preserve"><value>Rating más bajo permitido para los jugadores de este club en cualquier ritmo de juego.</value></data>
+  <data name="CreateClubMaximumRatingHelp" xml:space="preserve"><value>Rating más alto permitido para los jugadores de este club en cualquier ritmo de juego.</value></data>
+  <data name="CreateClubDescriptionHelp" xml:space="preserve"><value>Breve descripción del club.</value></data>
+  <data name="CreateClubCityHelp" xml:space="preserve"><value>Ciudad opcional asociada al club. Máximo {0} caracteres.</value></data>
+  <data name="CreateClubFederationHelp" xml:space="preserve"><value>Código de federación FIDE opcional de {0} letras, como USA o BRA.</value></data>
+  <data name="CreateClubDefaultChiefArbiterHelp" xml:space="preserve"><value>Árbitro principal opcional utilizado de forma predeterminada en nuevas competiciones. Máximo {0} caracteres.</value></data>
+  <data name="CreateClubPasswordHelp" xml:space="preserve"><value>Contraseña necesaria para acceder al club.</value></data>
+  <data name="CreateClubConfirmPasswordHelp" xml:space="preserve"><value>Confirme la misma contraseña.</value></data>
+  <data name="CreateClubSocialMediaHelp" xml:space="preserve"><value>Enlaces del club a redes sociales (Facebook, Instagram, sitio web, etc.).</value></data>
+  <data name="CreateClubIdentifierNameTooltip" xml:space="preserve"><value>Utilice solo letras minúsculas y números, con un máximo de {0} caracteres.</value></data>
+  <data name="CreateClubDisplayNameTooltip" xml:space="preserve"><value>Máximo {0} caracteres. Puede contener espacios.</value></data>
+  <data name="CreateClubInitialRatingTooltip" xml:space="preserve"><value>Rating asignado a los nuevos jugadores ({0}-{1}). El valor predeterminado es {2}.</value></data>
+  <data name="CreateClubMinimumRatingTooltip" xml:space="preserve"><value>Rating mínimo del club ({0}-{1}). El valor predeterminado es {2}.</value></data>
+  <data name="CreateClubMaximumRatingTooltip" xml:space="preserve"><value>Rating máximo del club ({0}-{1}). El valor predeterminado es {2}.</value></data>
+  <data name="CreateClubInitialDeviationTooltip" xml:space="preserve"><value>Determina el intervalo de confianza (±) de los ratings en Glicko-2. Los valores más bajos indican mayor confianza ({0}-{1}, valor predeterminado: {2}).</value></data>
+  <data name="CreateClubInitialVolatilityTooltip" xml:space="preserve"><value>Parámetro inicial de volatilidad del rating Glicko-2 ({0}-{1}, valor predeterminado: {2}). Los valores más altos permiten cambios de rating más rápidos. Se recomienda encarecidamente el valor predeterminado para la mayoría de los clubes.</value></data>
+  <data name="CreateClubProvisionalGamesTooltip" xml:space="preserve"><value>Número de partidas provisionales para jugadores ELO ({0}-{1}). Afecta al factor K de los cálculos. El valor predeterminado es {2}.</value></data>
+  <data name="CreateClubRatingSystemTooltip" xml:space="preserve"><value>El sistema de rating se puede cambiar en cualquier momento sin perder los ratings existentes.</value></data>
+  <data name="CreateClubDescriptionTooltip" xml:space="preserve"><value>Breve descripción opcional del club, con un máximo de {0} caracteres.</value></data>
+  <data name="CreateClubCityTooltip" xml:space="preserve"><value>Ciudad opcional asociada al club, con un máximo de {0} caracteres.</value></data>
+  <data name="CreateClubFederationTooltip" xml:space="preserve"><value>Código de federación opcional de {0} letras utilizado por la FIDE, como USA o BRA.</value></data>
+  <data name="CreateClubDefaultChiefArbiterTooltip" xml:space="preserve"><value>Árbitro principal opcional utilizado de forma predeterminada en nuevas competiciones, con un máximo de {0} caracteres.</value></data>
+  <data name="CreateClubPasswordTooltip" xml:space="preserve"><value>Se recomienda crear una contraseña segura con minúsculas, mayúsculas y caracteres especiales. Guárdela en un lugar seguro, ya que no podrá recuperarla si la pierde.</value></data>
+  <data name="CreateClubConfirmPasswordTooltip" xml:space="preserve"><value>Debe coincidir con el campo de contraseña para evitar errores tipográficos.</value></data>
+  <data name="CreateClubSocialMediaTooltip" xml:space="preserve"><value>Enlaces opcionales a redes sociales. Se pueden guardar hasta {0} enlaces.</value></data>
+  <data name="ClubDisplayNameHelp" xml:space="preserve"><value>Nombre mostrado en todo el club. Los cambios se aplican al guardar.</value></data>
+  <data name="ClubDescriptionHelp" xml:space="preserve"><value>Resumen opcional que forma parte del perfil de este club.</value></data>
+  <data name="ClubCityHelp" xml:space="preserve"><value>Ciudad de origen opcional de este club. Máximo {0} caracteres.</value></data>
+  <data name="ClubFederationHelp" xml:space="preserve"><value>Código opcional de federación FIDE de {0} letras para este club.</value></data>
+  <data name="ClubChiefArbiterHelp" xml:space="preserve"><value>Árbitro opcional propuesto por defecto para nuevas competiciones del club. Máximo {0} caracteres.</value></data>
+  <data name="ClubCreatedAtHelp" xml:space="preserve"><value>Fecha y hora de solo lectura en que se creó este club.</value></data>
+  <data name="ClubUpdatedAtHelp" xml:space="preserve"><value>Fecha y hora de solo lectura en que se guardó este club por última vez.</value></data>
+  <data name="ClubRatingSystemHelp" xml:space="preserve"><value>Método de rating usado en las partidas puntuadas de este club.</value></data>
+  <data name="ClubInitialRatingHelp" xml:space="preserve"><value>Rating asignado a los jugadores recién añadidos a este club.</value></data>
+  <data name="ClubMinimumRatingHelp" xml:space="preserve"><value>Rating más bajo permitido por la configuración de este club.</value></data>
+  <data name="ClubMaximumRatingHelp" xml:space="preserve"><value>Rating más alto permitido por la configuración de este club.</value></data>
+  <data name="ClubInitialDeviationHelp" xml:space="preserve"><value>Incertidumbre inicial de Glicko-2 asignada a nuevos jugadores.</value></data>
+  <data name="ClubInitialVolatilityHelp" xml:space="preserve"><value>Tasa inicial de cambio de Glicko-2 asignada a nuevos jugadores.</value></data>
+  <data name="ClubProvisionalGamesHelp" xml:space="preserve"><value>Partidas puntuadas necesarias para que un jugador ELO deje de ser provisional.</value></data>
+  <data name="ClubCurrentPasswordHelp" xml:space="preserve"><value>Contraseña actual del club usada para autorizar un cambio de contraseña.</value></data>
+  <data name="ClubNewPasswordHelp" xml:space="preserve"><value>Nueva contraseña del club; déjela vacía para conservar la actual.</value></data>
+  <data name="ClubConfirmNewPasswordHelp" xml:space="preserve"><value>Repita exactamente la nueva contraseña de este club.</value></data>
+  <data name="ClubSocialMediaHelp" xml:space="preserve"><value>Enlace que se añadirá a la lista de redes sociales guardada del club.</value></data>
+  <data name="ClubDisplayNameTooltip" xml:space="preserve"><value>Nombre editable obligatorio del club, máximo {0} caracteres. Guardar actualiza el nombre mostrado en todo el club.</value></data>
+  <data name="ClubDescriptionTooltip" xml:space="preserve"><value>Descripción editable opcional del club, máximo {0} caracteres. Guardar almacena el texto revisado del perfil.</value></data>
+  <data name="ClubCityTooltip" xml:space="preserve"><value>Ciudad editable opcional del club, máximo {0} caracteres. Guardar almacena la ubicación revisada.</value></data>
+  <data name="ClubFederationTooltip" xml:space="preserve"><value>Código editable opcional de federación FIDE de {0} letras. Guardar lo almacena en mayúsculas.</value></data>
+  <data name="ClubChiefArbiterTooltip" xml:space="preserve"><value>Árbitro principal predeterminado editable y opcional, máximo {0} caracteres. Guardar lo usa por defecto en futuras competiciones.</value></data>
+  <data name="ClubCreatedAtTooltip" xml:space="preserve"><value>Marca de tiempo de creación registrada automáticamente para este club. Es de solo lectura y no se puede cambiar aquí.</value></data>
+  <data name="ClubUpdatedAtTooltip" xml:space="preserve"><value>Marca de tiempo del último cambio guardado del club. Es de solo lectura y se actualiza automáticamente.</value></data>
+  <data name="ClubRatingSystemTooltip" xml:space="preserve"><value>Método de rating editable para cálculos futuros. Guardar cambia el método sin eliminar ratings existentes.</value></data>
+  <data name="ClubInitialRatingTooltip" xml:space="preserve"><value>Rating predeterminado editable para nuevos jugadores, limitado por el mínimo y máximo del club. Guardar no modifica ratings existentes.</value></data>
+  <data name="ClubMinimumRatingTooltip" xml:space="preserve"><value>Límite inferior editable ({0}-{1}); predeterminado {2}. Guardar lo aplica a entradas y cálculos posteriores.</value></data>
+  <data name="ClubMaximumRatingTooltip" xml:space="preserve"><value>Límite superior editable ({0}-{1}); predeterminado {2}. Guardar lo aplica a entradas y cálculos posteriores.</value></data>
+  <data name="ClubInitialDeviationTooltip" xml:space="preserve"><value>Desviación inicial editable de Glicko-2 ({0}-{1}); predeterminada {2}. Guardar afecta a nuevos jugadores, no a ratings existentes.</value></data>
+  <data name="ClubInitialVolatilityTooltip" xml:space="preserve"><value>Volatilidad inicial editable de Glicko-2 ({0}-{1}); predeterminada {2}. Guardar afecta a nuevos jugadores, no a ratings existentes.</value></data>
+  <data name="ClubProvisionalGamesTooltip" xml:space="preserve"><value>Umbral provisional ELO editable ({0}-{1} partidas); predeterminado {2}. Guardar cambia cuándo los jugadores dejan de ser provisionales.</value></data>
+  <data name="ClubCurrentPasswordTooltip" xml:space="preserve"><value>Introduzca la contraseña actual solo para cambiarla. Guardar la verifica antes de sustituirla.</value></data>
+  <data name="ClubNewPasswordTooltip" xml:space="preserve"><value>Introduzca una nueva contraseña del club. Guardar la cambia tras verificar la actual; déjela vacía para no cambiarla.</value></data>
+  <data name="ClubConfirmNewPasswordTooltip" xml:space="preserve"><value>Repita la nueva contraseña del club. Guardar exige una coincidencia exacta y no almacena esta confirmación.</value></data>
+  <data name="ClubSocialMediaTooltip" xml:space="preserve"><value>Introduzca un enlace opcional y elija Añadir; se pueden guardar hasta {0}. Guardar conserva la lista revisada.</value></data>
+  <data name="CreatePlayerIdentifierHelp" xml:space="preserve"><value>Identificador obligatorio del jugador. Use minúsculas y dígitos, hasta {0} caracteres; no se puede cambiar después de crearlo.</value></data>
+  <data name="PlayerDisplayNameHelp" xml:space="preserve"><value>Nombre obligatorio mostrado en emparejamientos, partidas y clasificaciones. Máximo {0} caracteres.</value></data>
+  <data name="BulletRatingHelp" xml:space="preserve"><value>Rating Bullet inicial opcional entre {0} y {1}.</value></data>
+  <data name="BulletDeviationHelp" xml:space="preserve"><value>Incertidumbre Glicko-2 opcional de Bullet; un valor menor indica mayor certeza. Predeterminado: {0}.</value></data>
+  <data name="BlitzRatingHelp" xml:space="preserve"><value>Rating Blitz inicial opcional entre {0} y {1}.</value></data>
+  <data name="BlitzDeviationHelp" xml:space="preserve"><value>Incertidumbre Glicko-2 opcional de Blitz; un valor menor indica mayor certeza. Predeterminado: {0}.</value></data>
+  <data name="RapidRatingHelp" xml:space="preserve"><value>Rating Rápido inicial opcional entre {0} y {1}.</value></data>
+  <data name="RapidDeviationHelp" xml:space="preserve"><value>Incertidumbre Glicko-2 opcional de Rápido; un valor menor indica mayor certeza. Predeterminado: {0}.</value></data>
+  <data name="ClassicalRatingHelp" xml:space="preserve"><value>Rating Clásico inicial opcional entre {0} y {1}.</value></data>
+  <data name="ClassicalDeviationHelp" xml:space="preserve"><value>Incertidumbre Glicko-2 opcional de Clásico; un valor menor indica mayor certeza. Predeterminado: {0}.</value></data>
+  <data name="PlayerChessTitleHelp" xml:space="preserve"><value>Título de ajedrez reconocido opcional; elija Ninguno si el jugador no tiene título.</value></data>
+  <data name="ChessComUsernameHelp" xml:space="preserve"><value>Usuario opcional de Chess.com para obtener ratings e imagen de perfil. Máximo {0} caracteres.</value></data>
+  <data name="LichessUsernameHelp" xml:space="preserve"><value>Usuario opcional de Lichess para obtener los ratings del jugador. Máximo {0} caracteres.</value></data>
+  <data name="CreatePlayerChessComUsernameHelp" xml:space="preserve"><value>Opcional; puede usarse para obtener ratings de Chess.com y la imagen de perfil.</value></data>
+  <data name="CreatePlayerChessComUsernameTooltip" xml:space="preserve"><value>Introduce el nombre de usuario exacto del jugador en Chess.com. Este campo es opcional y puede usarse para obtener ratings y la imagen de perfil. Máximo {0} caracteres.</value></data>
+  <data name="CreatePlayerLichessUsernameHelp" xml:space="preserve"><value>Opcional; puede usarse para obtener ratings de Lichess.</value></data>
+  <data name="CreatePlayerLichessUsernameTooltip" xml:space="preserve"><value>Introduce el nombre de usuario exacto del jugador en Lichess. Este campo es opcional y puede usarse para obtener ratings. Máximo {0} caracteres.</value></data>
+  <data name="CreatePlayerFideIdHelp" xml:space="preserve"><value>Opcional; puede usarse para obtener ratings FIDE oficiales.</value></data>
+  <data name="CreatePlayerFideIdTooltip" xml:space="preserve"><value>Introduce el ID FIDE numérico exacto del jugador. Este campo es opcional y puede usarse para obtener ratings oficiales. Máximo {0} dígitos.</value></data>
+  <data name="PlayerChessComUsernameHelp" xml:space="preserve"><value>Enlace opcional al perfil de Chess.com del jugador.</value></data>
+  <data name="PlayerChessComUsernameTooltip" xml:space="preserve"><value>Introduce el nombre de usuario exacto del jugador en Chess.com para vincularlo con su perfil externo. Este campo es opcional y puede cargarse la imagen de perfil asociada. Máximo {0} caracteres.</value></data>
+  <data name="PlayerLichessUsernameHelp" xml:space="preserve"><value>Enlace opcional al perfil de Lichess del jugador.</value></data>
+  <data name="PlayerLichessUsernameTooltip" xml:space="preserve"><value>Introduce el nombre de usuario exacto del jugador en Lichess para vincularlo con su perfil externo. Este campo es opcional. Máximo {0} caracteres.</value></data>
+  <data name="PlayerFideIdHelp" xml:space="preserve"><value>Enlace opcional al registro oficial FIDE del jugador.</value></data>
+  <data name="PlayerFideIdTooltip" xml:space="preserve"><value>Introduce el ID FIDE numérico exacto del jugador para vincularlo con su registro oficial FIDE. Este campo es opcional. Máximo {0} dígitos.</value></data>
+  <data name="PlayerUscfIdHelp" xml:space="preserve"><value>Identificador numérico de miembro USCF opcional. Máximo {0} dígitos.</value></data>
+  <data name="PlayerCbxIdHelp" xml:space="preserve"><value>Identificador numérico CBX opcional para registros brasileños. Máximo {0} dígitos.</value></data>
+  <data name="PlayerEmailHelp" xml:space="preserve"><value>Correo electrónico opcional guardado con los datos de contacto del jugador. Máximo {0} caracteres.</value></data>
+  <data name="PlayerPhoneHelp" xml:space="preserve"><value>Teléfono opcional guardado con los datos de contacto del jugador. Máximo {0} caracteres.</value></data>
+  <data name="PlayerBirthDateHelp" xml:space="preserve"><value>Fecha de nacimiento opcional. No se permiten fechas futuras; borre el campo para quitarla.</value></data>
+  <data name="PlayerGenderHelp" xml:space="preserve"><value>Género del jugador utilizado cuando lo requieren las exportaciones de competiciones.</value></data>
+  <data name="PlayerImmutableIdentifierHelp" xml:space="preserve"><value>Identificador del jugador de solo lectura, limitado a {0} caracteres al crearlo. No se puede cambiar.</value></data>
+  <data name="PlayerCreationDateHelp" xml:space="preserve"><value>Fecha y hora de solo lectura en que se creó este jugador.</value></data>
+</root>

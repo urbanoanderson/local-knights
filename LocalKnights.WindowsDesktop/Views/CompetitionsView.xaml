@@ -1,0 +1,124 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.CompetitionsView"
+             x:Name="CompetitionRoot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:LocalKnights.WindowsDesktop.Views"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="{Binding CompetitionsPage}"
+                   Style="{DynamicResource PageTitle}" />
+
+        <TextBox Grid.Row="1"
+                 Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                 Padding="{StaticResource SpacingLarge}"
+                 Margin="{StaticResource SpacingStandardBottom}"
+                 FontSize="{StaticResource FontSizeCompact}"
+                 Background="{DynamicResource BackgroundBrush}"
+                 Foreground="{DynamicResource ForegroundBrush}"
+                 CaretBrush="{DynamicResource ForegroundBrush}"
+                 BorderThickness="{StaticResource BorderThicknessDefault}"
+                 BorderBrush="{DynamicResource BorderBrush}">
+            <TextBox.Template>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource CornerRadiusSmall}">
+                        <Grid>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="{Binding CompetitionsSearchPlaceholder}"
+                                       Foreground="{DynamicResource ForegroundBrush}"
+                                       Padding="{StaticResource SpacingLargeHorizontal}"
+                                       VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}" Margin="0" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+
+        <Border Grid.Row="2"
+            Style="{DynamicResource DataGridContainer}"
+            Margin="{StaticResource SpacingStandardBottom}">
+        <DataGrid x:Name="CompetitionsDataGrid"
+                  ItemsSource="{Binding Competitions}"
+                  Style="{DynamicResource ModernDataGrid}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  SelectionMode="Single"
+                  Sorting="CompetitionsDataGrid_Sorting"
+                  MouseDoubleClick="CompetitionsDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Width="70" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Foreground" Value="{DynamicResource LinkBrush}"/>
+                            <Setter Property="TextDecorations" Value="Underline"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding CreatedAt}" Width="170" />
+                <DataGridTextColumn Binding="{Binding Title}" Width="*" />
+                <DataGridTextColumn Binding="{Binding Type}" Width="120" />
+                <DataGridTextColumn Binding="{Binding TimeFormat}" Width="120" />
+                <DataGridTextColumn Binding="{Binding Rated}" Width="90" />
+                <DataGridTextColumn Binding="{Binding State}" Width="110" />
+                <DataGridTextColumn Binding="{Binding Winner}" Width="140" />
+            </DataGrid.Columns>
+        </DataGrid>
+        </Border>
+
+        <Grid Grid.Row="3" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="{Binding BackButtonLabel}"
+                    Command="{Binding BackCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+                <Button Content="{Binding CreateButtonLabel}"
+                        Command="{Binding CreateCompetitionCommand}"
+                        Style="{DynamicResource PrimaryButton}"
+                        Margin="{StaticResource SpacingLargeLeft}" />
+            </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Content="{Binding PreviousPageButtonLabel}"
+                    Command="{Binding PreviousPageCommand}"
+                    Style="{DynamicResource SecondaryButton}" />
+                <TextBlock Text="{Binding CurrentPageDisplay}"
+                       Style="{DynamicResource LabelText}"
+                       VerticalAlignment="Center"
+                       Margin="{StaticResource SpacingLargeHorizontal}" />
+                <Button Content="{Binding NextPageButtonLabel}"
+                    Command="{Binding NextPageCommand}"
+                    Style="{DynamicResource SecondaryButton}" />
+                </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,79 @@
+<UserControl x:Class="LocalKnights.WindowsDesktop.Views.GamesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BackgroundBrush}"
+             Foreground="{DynamicResource ForegroundBrush}">
+    <Grid Margin="{StaticResource SpacingExtraLarge}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" >
+            <TextBlock Text="{Binding GamesPage}" Style="{DynamicResource PageTitle}" />
+        </Grid>
+
+        <Border Grid.Row="1" Style="{DynamicResource DataGridContainer}">
+        <DataGrid x:Name="GamesDataGrid"
+                  ItemsSource="{Binding Games}"
+                  Style="{DynamicResource ModernDataGrid}"
+                  AutoGenerateColumns="False"
+                  VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.CanContentScroll="True"
+                  EnableRowVirtualization="True"
+                  AlternationCount="2"
+                  MouseDoubleClick="GamesDataGrid_MouseDoubleClick"
+                  Sorting="GamesDataGrid_Sorting">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Width="0.7*" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Foreground" Value="{DynamicResource LinkBrush}"/>
+                            <Setter Property="TextDecorations" Value="Underline"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding CreatedAt}" SortMemberPath="CreatedAtSortKey" Width="1.3*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Participants}" Width="2.2*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Result}" Width="0.8*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding TimeFormat}" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Rated}" Width="0.7*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding RatingChange}" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding CompetitionId}" Width="1*" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="0,16,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="{Binding BackButtonLabel}"
+                        Command="{Binding BackCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+                <Button Content="{Binding CreateGameButtonLabel}"
+                        Command="{Binding CreateGameCommand}"
+                        Style="{DynamicResource PrimaryButton}"
+                        Margin="{StaticResource SpacingLargeLeft}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Content="{Binding PreviousPageButtonLabel}"
+                        Command="{Binding PreviousPageCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+                <TextBlock Text="{Binding CurrentPageDisplay}"
+                           Style="{DynamicResource LabelText}"
+                           VerticalAlignment="Center"
+                           Margin="{StaticResource SpacingLargeHorizontal}" />
+                <Button Content="{Binding NextPageButtonLabel}"
+                        Command="{Binding NextPageCommand}"
+                        Style="{DynamicResource SecondaryButton}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

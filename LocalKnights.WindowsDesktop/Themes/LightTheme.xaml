@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Neutral palette -->
+    <Color x:Key="CanvasColor">#EEF2F6</Color>
+    <Color x:Key="SurfaceColor">#F7F9FC</Color>
+    <Color x:Key="SurfaceRaisedColor">#FFFFFF</Color>
+    <Color x:Key="SurfaceHoverColor">#E3EAF2</Color>
+    <Color x:Key="BorderColor">#C7D1DC</Color>
+    <Color x:Key="TextPrimaryColor">#1F2937</Color>
+    <Color x:Key="TextMutedColor">#667085</Color>
+
+    <!-- Semantic neutrals -->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource CanvasColor}" />
+    <SolidColorBrush x:Key="WindowForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource SurfaceRaisedColor}" />
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="ControlHighlightBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="ControlDisabledForegroundBrush" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="MutedForegroundBrush" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="ScrollbarThumbBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="ScrollbarThumbHoverBrush" Color="{StaticResource TextMutedColor}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="SecondaryBorderBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="MenuForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="{StaticResource BorderColor}" />
+
+    <!-- Actions and status -->
+    <SolidColorBrush x:Key="ActionForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#B9DCF7" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#A6D1F2" />
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="#8DBFE8" />
+    <SolidColorBrush x:Key="SecondaryHoverBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="SecondaryPressedBrush" Color="{StaticResource CanvasColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="#BFE3CB" />
+    <SolidColorBrush x:Key="SuccessHoverBrush" Color="#ABD9BA" />
+    <SolidColorBrush x:Key="SuccessPressedBrush" Color="#91CBA5" />
+    <SolidColorBrush x:Key="DangerBrush" Color="#F2C2C7" />
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="#EAAEB5" />
+    <SolidColorBrush x:Key="DangerPressedBrush" Color="#DF929C" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#F4D99B" />
+    <SolidColorBrush x:Key="WarningHoverBrush" Color="#EBCB80" />
+    <SolidColorBrush x:Key="WarningPressedBrush" Color="#DFB960" />
+    <SolidColorBrush x:Key="InfoBrush" Color="#277A8A" />
+    <SolidColorBrush x:Key="LinkBrush" Color="#1E6FB8" />
+
+    <!-- Table aliases -->
+    <SolidColorBrush x:Key="DataGridHeaderRowBackgroundBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="DataGridRowBackgroundBrush" Color="{StaticResource SurfaceRaisedColor}" />
+    <SolidColorBrush x:Key="DataGridAlternatingRowBackgroundBrush" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="DataGridRowHoverBackgroundBrush" Color="{StaticResource SurfaceHoverColor}" />
+    <SolidColorBrush x:Key="DataGridSelectedRowBackgroundBrush" Color="#D7EAFB" />
+    <SolidColorBrush x:Key="DataGridSelectedRowForegroundBrush" Color="{StaticResource TextPrimaryColor}" />
+    <SolidColorBrush x:Key="DataGridSortGlyphBrush" Color="#1E6FB8" />
+
+    <sys:Double x:Key="CardShadowOpacity" xmlns:sys="clr-namespace:System;assembly=mscorlib">0.12</sys:Double>
+
+</ResourceDictionary>
