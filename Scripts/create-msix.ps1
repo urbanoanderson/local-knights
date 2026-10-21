@@ -21,6 +21,7 @@ param(
     [string]$PackageIdentityName = "urbanoanderson.LocalKnights",
     [string]$PackagePublisher = "CN=266293A1-A9B9-44EC-86B1-867682380E7D",
     [string]$PackageDisplayName = "Local Knights",
+    [string]$PublisherDisplayName = "urbanoanderson",
     [string]$PackageDescription = "Local Knights chess club manager",
     [string]$OutputDir = (Join-Path $PSScriptRoot "..\LocalKnights.WindowsDesktop\bin\Packages"),
     [string]$PackageName = "",
@@ -151,6 +152,7 @@ try {
     $identityNameXml = ConvertTo-ManifestText $PackageIdentityName
     $publisherXml = ConvertTo-ManifestText $PackagePublisher
     $displayNameXml = ConvertTo-ManifestText $PackageDisplayName
+    $publisherDisplayNameXml = ConvertTo-ManifestText $PublisherDisplayName
     $descriptionXml = ConvertTo-ManifestText $PackageDescription
     $executableXml = ConvertTo-ManifestText $appExe.Name
     $manifest = @"
@@ -163,7 +165,7 @@ try {
   <Identity Name="$identityNameXml" Publisher="$publisherXml" Version="$packageVersion" ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>$displayNameXml</DisplayName>
-    <PublisherDisplayName>Local Knights</PublisherDisplayName>
+    <PublisherDisplayName>$publisherDisplayNameXml</PublisherDisplayName>
     <Description>$descriptionXml</Description>
     <Logo>Assets\Square150x150Logo.png</Logo>
   </Properties>
@@ -230,6 +232,9 @@ try {
             $packedIdentity.Version -ne $packageVersion -or
             $packedIdentity.ProcessorArchitecture -ne "x64") {
             throw "The package manifest identity does not match the requested Store identity and version."
+        }
+        if ($packedManifest.Package.Properties.PublisherDisplayName -ne $PublisherDisplayName) {
+            throw "The package manifest publisher display name does not match '$PublisherDisplayName'."
         }
         if ($archive.GetEntry("AppxSignature.p7x")) {
             throw "Store submission package must be unsigned; an AppxSignature.p7x was found."
