@@ -26,8 +26,4 @@
     <ProjectReference Include="..\LocalKnights.Common\LocalKnights.Common.csproj" />
   </ItemGroup>
 
-  <Target Name="CopyGoDll" AfterTargets="Build">
-    <Copy SourceFiles="..\Scripts\ChessPairingWrapper\chesspairing.dll" DestinationFolder="$(OutputPath)" />
-  </Target>
-
 </Project>

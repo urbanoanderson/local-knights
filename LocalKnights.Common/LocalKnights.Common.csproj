@@ -27,8 +27,4 @@
     <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.10" />
   </ItemGroup>
 
-  <Target Name="CopyGoDll" AfterTargets="Build">
-    <Copy SourceFiles="..\Scripts\ChessPairingWrapper\chesspairing.dll" DestinationFolder="$(OutputPath)" />
-  </Target>
-
 </Project>

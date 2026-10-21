@@ -117,6 +117,20 @@ dotnet test ProjectSolution.slnx
 dotnet run --project LocalKnights.WindowsDesktop/LocalKnights.WindowsDesktop.csproj
 ```
 
+### Create a Microsoft Store package 📦
+
+On Windows with the .NET 10 SDK and Windows SDK installed, run:
+
+```powershell
+.\Scripts\create-msix.ps1
+```
+
+This creates an unsigned x64 MSIX at
+`LocalKnights.WindowsDesktop\bin\Packages\LocalKnights_<version>_x64.msix` using the
+package identity associated with Local Knights in Partner Center. Upload that file in
+the submission's **Packages** section; Microsoft Store signs it after submission.
+Increase the project version before submitting an update.
+
 ## License 📄
 
 Local Knights is licensed under the Mozilla Public License 2.0.
