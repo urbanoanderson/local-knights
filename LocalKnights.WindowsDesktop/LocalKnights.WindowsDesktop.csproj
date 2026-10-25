@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <AssemblyName>Local Knights</AssemblyName>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <ApplicationIcon>Resources\Icon\logo-bg.ico</ApplicationIcon>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -53,9 +53,5 @@
   <ItemGroup>
     <ProjectReference Include="..\LocalKnights.Common\LocalKnights.Common.csproj" />
   </ItemGroup>
-
-  <Target Name="CopyGoDll" AfterTargets="Build">
-    <Copy SourceFiles="..\Scripts\ChessPairingWrapper\chesspairing.dll" DestinationFolder="$(OutputPath)" />
-  </Target>
 
 </Project>

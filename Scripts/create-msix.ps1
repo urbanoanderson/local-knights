@@ -1,180 +1,183 @@
 <#
 .SYNOPSIS
-    Build an MSIX package for the Windows Desktop using MakeAppx + SignTool.
+    Builds an unsigned MSIX package for submission to Microsoft Store.
 
 .DESCRIPTION
-    Publishes the WPF app as a self-contained single-file build, creates minimal Appx manifest
-    and Assets (icons), packs the publish folder into a .msix using MakeAppx.exe and signs
-    the package with a provided certificate or a temporary self-signed certificate.
+    Publishes the Windows desktop app as a self-contained win-x64 app, creates the
+    package manifest and required logo assets, and packs them with MakeAppx.exe.
+    Microsoft Store signs the package after submission.
 
-.NOTES
-    Requires Windows SDK tools: MakeAppx.exe and SignTool.exe on PATH (installed with Windows SDK).
-    If you want a store-ready package, use a real code signing certificate and publish through Partner Center.
+.EXAMPLE
+    .\create-msix.ps1
 
-USAGE
-    .\create-msix.ps1 -PackagePublisher "CN=YourPublisher" -CertificatePath path\to\cert.pfx -CertificatePassword 'pwd'
-
+.EXAMPLE
+    .\create-msix.ps1 -PackageIdentityName "urbanoanderson.LocalKnights" `
+        -PackagePublisher "CN=266293A1-A9B9-44EC-86B1-867682380E7D"
 #>
 param(
-    [string]$ProjectPath = "${PWD}\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj",
+    [string]$ProjectPath = (Join-Path $PSScriptRoot "..\LocalKnights.WindowsDesktop\LocalKnights.WindowsDesktop.csproj"),
     [string]$Configuration = "Release",
     [string]$Runtime = "win-x64",
-    [string]$PackageId = "LocalKnights.Package",
-    [string]$PackageName = "LocalKnights.msix",
-    [string]$PackagePublisher = "CN=LocalKnightsPublisher",
-    [string]$OutputDir = "${PWD}\LocalKnights.WindowsDesktop\bin\Packages",
-    [string]$CertificatePath = "",
-    [string]$CertificatePassword = "",
-    [string]$MakeAppxPath = "",
-    [string]$SignToolPath = "",
-    [switch]$InstallToLocalMachine
-  )
+    [string]$PackageIdentityName = "urbanoanderson.LocalKnights",
+    [string]$PackagePublisher = "CN=266293A1-A9B9-44EC-86B1-867682380E7D",
+    [string]$PackageDisplayName = "Local Knights",
+    [string]$PublisherDisplayName = "urbanoanderson",
+    [string]$PackageDescription = "Local Knights chess club manager",
+    [string]$OutputDir = (Join-Path $PSScriptRoot "..\LocalKnights.WindowsDesktop\bin\Packages"),
+    [string]$PackageName = "",
+    [string]$MakeAppxPath = ""
+)
 
-  Set-StrictMode -Version Latest
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
 
-  # Prefer explicit params, then env vars, then try PATH/common SDK folders
-  if (-not $MakeAppxPath -and $env:MAKEAPPX_PATH) { $MakeAppxPath = $env:MAKEAPPX_PATH }
-  if (-not $SignToolPath -and $env:SIGNTOOL_PATH) { $SignToolPath = $env:SIGNTOOL_PATH }
+function Find-MakeAppx {
+    param([string]$ProvidedPath)
 
-  function Find-Tool {
-    param(
-      [string]$ToolName,
-      [string]$ProvidedPath
-    )
-    if ($ProvidedPath -and (Test-Path $ProvidedPath)) { return (Resolve-Path $ProvidedPath).Path }
-
-    $cmd = Get-Command $ToolName -ErrorAction SilentlyContinue
-    if ($cmd) { return $cmd.Source }
-
-    $candidates = @()
-    $sdkBase1 = "$env:ProgramFiles(x86)\Windows Kits\10\bin"
-    $sdkBase2 = "$env:ProgramFiles(x86)\Windows Kits\8.1\bin"
-    foreach ($base in @($sdkBase1, $sdkBase2)) {
-      if (Test-Path $base) {
-        Get-ChildItem -Path $base -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-          $possible = Join-Path $_.FullName "x64\$ToolName"
-          if (Test-Path $possible) { $candidates += $possible }
-          $possible = Join-Path $_.FullName "x86\$ToolName"
-          if (Test-Path $possible) { $candidates += $possible }
+    if ($ProvidedPath) {
+        if (-not (Test-Path -LiteralPath $ProvidedPath -PathType Leaf)) {
+            throw "MakeAppx.exe was not found at '$ProvidedPath'."
         }
-      }
+        return (Resolve-Path -LiteralPath $ProvidedPath).Path
     }
 
-    if ($candidates.Count -gt 0) { return $candidates[0] }
+    $onPath = Get-Command "makeappx.exe" -ErrorAction SilentlyContinue
+    if ($onPath) { return $onPath.Source }
 
-    return $null
-  }
-
-  $makeappxExe = Find-Tool -ToolName "makeappx.exe" -ProvidedPath $MakeAppxPath
-  if (-not $makeappxExe) {
-    Write-Error "makeappx.exe not found on PATH or in common Windows SDK locations. Install Windows SDK or provide -MakeAppxPath."
-    exit 1
-  }
-
-  $signtoolExe = Find-Tool -ToolName "signtool.exe" -ProvidedPath $SignToolPath
-  if (-not $signtoolExe) {
-    Write-Error "signtool.exe not found on PATH or in common Windows SDK locations. Install Windows SDK or provide -SignToolPath."
-    exit 1
-  }
-
-  if (-not (Test-Path $ProjectPath)) {
-    Write-Error "Project file not found at $ProjectPath"
-    exit 1
-  }
-
-  try {
-    [xml]$projectXml = Get-Content -Path $ProjectPath -Raw
-    $packageVersion = $projectXml.Project.PropertyGroup | Where-Object { $_.Version } | Select-Object -First 1 -ExpandProperty Version
-  }
-  catch {
-    Write-Error "Failed to read project file '$ProjectPath': $_"
-    exit 1
-  }
-
-  if ([string]::IsNullOrWhiteSpace($packageVersion)) {
-    Write-Error "Could not find a <Version> element in '$ProjectPath'."
-    exit 1
-  }
-
-  $readmePath = Join-Path (Split-Path -Path $ProjectPath -Parent | Split-Path -Parent) "README.md"
-  if (Test-Path $readmePath) {
-    $versionBadge = "![Version](https://img.shields.io/badge/version-$packageVersion-2ea44f)"
-    $readmeContent = Get-Content -Path $readmePath -Raw
-    $updatedReadmeContent = [System.Text.RegularExpressions.Regex]::Replace(
-      $readmeContent,
-      "(?m)^!\[Version\]\(https://img\.shields\.io/badge/version-[^)]+\)$",
-      [System.Text.RegularExpressions.MatchEvaluator]{ param($match) $versionBadge },
-      1
-    )
-
-    if ($updatedReadmeContent -ne $readmeContent) {
-      Set-Content -Path $readmePath -Value $updatedReadmeContent -Encoding UTF8
+    $sdkBin = Join-Path ${env:ProgramFiles(x86)} "Windows Kits\10\bin"
+    if (Test-Path -LiteralPath $sdkBin) {
+        $candidates = Get-ChildItem -Path $sdkBin -Directory |
+            Where-Object { $_.Name -match '^\d+(\.\d+)+$' } |
+            Sort-Object { [version]$_.Name } -Descending |
+            ForEach-Object { Join-Path $_.FullName "x64\makeappx.exe" } |
+            Where-Object { Test-Path -LiteralPath $_ }
+        if ($candidates) { return ($candidates | Select-Object -First 1) }
     }
-  }
 
-$publishDir = Join-Path -Path $env:TEMP -ChildPath ("LocalKnightsPublish_{0}" -f ([Guid]::NewGuid().ToString()))
-New-Item -ItemType Directory -Path $publishDir -Force | Out-Null
-
-Write-Host "Publishing project to $publishDir..."
-dotnet publish $ProjectPath -c $Configuration -r $Runtime /p:PublishSingleFile=true /p:PublishSelfContained=true /p:EnableCompressionInSingleFile=true -o $publishDir
-
-if ($LASTEXITCODE -ne 0) { Write-Error "dotnet publish failed."; exit 1 }
-
-# Prepare Assets folder and icons
-$assetsDir = Join-Path $publishDir "Assets"
-New-Item -ItemType Directory -Path $assetsDir -Force | Out-Null
-
-$sourceIcon = Join-Path (Split-Path -Path $ProjectPath -Parent) "Resources\Icon\logo-bg.png"
-if (-not (Test-Path $sourceIcon)) { Write-Warning "Source icon not found at $sourceIcon. Assets logos may be missing." }
-else {
-    Add-Type -AssemblyName System.Drawing
-    $sizes = @{"Square44x44Logo.png"=44; "Square150x150Logo.png"=150}
-    foreach ($name in $sizes.Keys) {
-        try {
-            $bmp = [System.Drawing.Image]::FromFile($sourceIcon)
-            $thumb = New-Object System.Drawing.Bitmap $sizes[$name], $sizes[$name]
-            $g = [System.Drawing.Graphics]::FromImage($thumb)
-            $g.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
-            $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-            $g.DrawImage($bmp, 0, 0, $sizes[$name], $sizes[$name])
-            $outPath = Join-Path $assetsDir $name
-            $thumb.Save($outPath, [System.Drawing.Imaging.ImageFormat]::Png)
-            $g.Dispose(); $thumb.Dispose(); $bmp.Dispose()
-        }
-        catch {
-          Write-Warning "Failed to create asset $($name): $_"
-        }
-    }
+    throw "MakeAppx.exe was not found. Install the Windows SDK or pass -MakeAppxPath."
 }
 
-# Create minimal AppxManifest.xml
-$manifestPath = Join-Path $publishDir "AppxManifest.xml"
-$exeName = Get-ChildItem -Path $publishDir -Filter "*.exe" | Where-Object { $_.Name -notlike "*vshost*" } | Select-Object -First 1
-if (-not $exeName) { Write-Error "No executable found in publish folder."; exit 1 }
+function ConvertTo-ManifestText {
+    param([string]$Value)
+    return [System.Security.SecurityElement]::Escape($Value)
+}
 
-$manifest = @"
+$projectFullPath = (Resolve-Path -LiteralPath $ProjectPath).Path
+$projectXml = [xml](Get-Content -LiteralPath $projectFullPath -Raw)
+$versionNode = $projectXml.SelectSingleNode("/Project/PropertyGroup/Version")
+if (-not $versionNode -or [string]::IsNullOrWhiteSpace($versionNode.InnerText)) {
+    throw "Could not find a project <Version> value in '$projectFullPath'."
+}
+
+$versionParts = @($versionNode.InnerText.Split("."))
+if ($versionParts.Count -lt 2 -or $versionParts.Count -gt 4) {
+    throw "Version '$($versionNode.InnerText)' must contain two to four numeric components."
+}
+foreach ($part in $versionParts) {
+    if ($part -notmatch '^\d+$' -or [int]$part -gt 65535) {
+        throw "Version '$($versionNode.InnerText)' has an invalid component: '$part'."
+    }
+}
+while ($versionParts.Count -lt 4) { $versionParts += "0" }
+$packageVersion = $versionParts -join "."
+
+if ([string]::IsNullOrWhiteSpace($PackageIdentityName) -or
+    [string]::IsNullOrWhiteSpace($PackagePublisher)) {
+    throw "Package identity name and publisher must match Partner Center > Product identity."
+}
+if ($Runtime -ne "win-x64") {
+    throw "This project currently packages only win-x64. Unsupported runtime: '$Runtime'."
+}
+
+$makeappx = Find-MakeAppx -ProvidedPath $MakeAppxPath
+$projectDir = Split-Path -Parent $projectFullPath
+$iconPath = Join-Path $projectDir "Resources\Icon\logo-bg.png"
+if (-not (Test-Path -LiteralPath $iconPath -PathType Leaf)) {
+    throw "Required package logo was not found: '$iconPath'."
+}
+
+$publishDir = Join-Path $env:TEMP ("LocalKnightsPublish_{0}" -f [Guid]::NewGuid().ToString("N"))
+if ([string]::IsNullOrWhiteSpace($PackageName)) {
+    $PackageName = "LocalKnights_$($packageVersion)_x64.msix"
+}
+if ([System.IO.Path]::GetFileName($PackageName) -ne $PackageName) {
+    throw "-PackageName must be a filename, not a path."
+}
+$outputFullPath = [System.IO.Path]::GetFullPath($OutputDir)
+$packagePath = Join-Path $outputFullPath $PackageName
+
+try {
+    New-Item -ItemType Directory -Path $publishDir -Force | Out-Null
+
+    Write-Host "Publishing $Runtime app..."
+    & dotnet publish $projectFullPath -c $Configuration -r $Runtime `
+        /p:PublishSingleFile=true /p:SelfContained=true `
+        /p:EnableCompressionInSingleFile=true /p:DebugSymbols=false `
+        /p:DebugType=None -o $publishDir
+    if ($LASTEXITCODE -ne 0) {
+        throw "dotnet publish failed with exit code $LASTEXITCODE."
+    }
+    Get-ChildItem -Path $publishDir -Filter "*.pdb" -File |
+        Remove-Item -Force
+
+    $appExe = Get-ChildItem -Path $publishDir -Filter "*.exe" |
+        Where-Object { $_.Name -notlike "*vshost*" } |
+        Select-Object -First 1
+    if (-not $appExe) { throw "No application executable was produced by dotnet publish." }
+
+    $assetsDir = Join-Path $publishDir "Assets"
+    New-Item -ItemType Directory -Path $assetsDir -Force | Out-Null
+    Add-Type -AssemblyName System.Drawing
+
+    $sourceImage = [System.Drawing.Image]::FromFile($iconPath)
+    try {
+        foreach ($asset in @(@{ Name = "Square44x44Logo.png"; Size = 44 }, @{ Name = "Square150x150Logo.png"; Size = 150 })) {
+            $bitmap = New-Object System.Drawing.Bitmap($asset.Size, $asset.Size)
+            try {
+                $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+                try {
+                    $graphics.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
+                    $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+                    $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+                    $graphics.DrawImage($sourceImage, 0, 0, $asset.Size, $asset.Size)
+                    $bitmap.Save((Join-Path $assetsDir $asset.Name), [System.Drawing.Imaging.ImageFormat]::Png)
+                }
+                finally { $graphics.Dispose() }
+            }
+            finally { $bitmap.Dispose() }
+        }
+    }
+    finally { $sourceImage.Dispose() }
+
+    $identityNameXml = ConvertTo-ManifestText $PackageIdentityName
+    $publisherXml = ConvertTo-ManifestText $PackagePublisher
+    $displayNameXml = ConvertTo-ManifestText $PackageDisplayName
+    $publisherDisplayNameXml = ConvertTo-ManifestText $PublisherDisplayName
+    $descriptionXml = ConvertTo-ManifestText $PackageDescription
+    $executableXml = ConvertTo-ManifestText $appExe.Name
+    $manifest = @"
 <?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" 
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
          xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
          xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          IgnorableNamespaces="uap desktop rescap">
-  <Identity Name="$($PackageId)" Publisher="$($PackagePublisher)" Version="$($packageVersion)" />
+  <Identity Name="$identityNameXml" Publisher="$publisherXml" Version="$packageVersion" ProcessorArchitecture="x64" />
   <Properties>
-    <DisplayName>Local Knights</DisplayName>
-    <PublisherDisplayName>Local Knights</PublisherDisplayName>
-    <Description>Local Knights chess club manager</Description>
+    <DisplayName>$displayNameXml</DisplayName>
+    <PublisherDisplayName>$publisherDisplayNameXml</PublisherDisplayName>
+    <Description>$descriptionXml</Description>
     <Logo>Assets\Square150x150Logo.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.16299.0" MaxVersionTested="10.0.19041.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
   </Dependencies>
   <Resources>
     <Resource Language="en-us" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$($exeName.Name)" EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements DisplayName="Local Knights" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Local Knights chess club manager" BackgroundColor="transparent" />
+    <Application Id="App" Executable="$executableXml" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements DisplayName="$displayNameXml" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="$descriptionXml" BackgroundColor="transparent" />
       <Extensions>
         <desktop:Extension Category="windows.fullTrustProcess" EntryPoint="Windows.FullTrustApplication">
           <desktop:FullTrustProcess />
@@ -188,73 +191,65 @@ $manifest = @"
 </Package>
 "@
 
-Set-Content -Path $manifestPath -Value $manifest -Encoding UTF8
+    $manifestPath = Join-Path $publishDir "AppxManifest.xml"
+    Set-Content -LiteralPath $manifestPath -Value $manifest -Encoding UTF8
+    $null = [xml](Get-Content -LiteralPath $manifestPath -Raw)
 
-# Pack with MakeAppx
-New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
-$packagePath = Join-Path $OutputDir $PackageName
+    New-Item -ItemType Directory -Path $outputFullPath -Force | Out-Null
 
-Write-Host "Packing MSIX to $packagePath using $makeappxExe..."
-# Remove existing package if present to avoid interactive overwrite prompt
-if (Test-Path $packagePath) {
-  try { Remove-Item -Path $packagePath -Force -ErrorAction Stop; Write-Host "Removed existing package at $packagePath" } catch { Write-Warning "Could not remove existing package: $_" }
-}
-& $makeappxExe pack /d $publishDir /p $packagePath | Write-Host
-if ($LASTEXITCODE -ne 0) { Write-Error "MakeAppx failed."; exit 1 }
+    Write-Host "Packing unsigned Store package with MakeAppx..."
+    & $makeappx pack /d $publishDir /p $packagePath /o
+    if ($LASTEXITCODE -ne 0) {
+        throw "MakeAppx failed with exit code $LASTEXITCODE."
+    }
 
-# Sign package
-if (-not [string]::IsNullOrEmpty($CertificatePath)) {
-    Write-Host "Signing package with provided certificate using $signtoolExe..."
-    & $signtoolExe sign /fd SHA256 /f $CertificatePath /p $CertificatePassword /tr http://timestamp.digicert.com /td SHA256 $packagePath
-} else {
-    Write-Host "No certificate provided. Creating temporary self-signed certificate and signing package."
-    # Use the PackagePublisher as the subject if it looks like a DN (e.g. 'CN=Name'), otherwise fall back
-    $subject = if ($PackagePublisher -and $PackagePublisher -match "^\s*CN=") { $PackagePublisher } else { "CN=LocalKnightsTestCert" }
-    $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject $subject -KeyExportPolicy Exportable -CertStoreLocation Cert:\CurrentUser\My -NotAfter (Get-Date).AddYears(5)
-    $pfxPath = Join-Path $OutputDir "LocalKnightsTempCert.pfx"
-    $pwd = [System.Guid]::NewGuid().ToString()
-    Export-PfxCertificate -Cert $cert -FilePath $pfxPath -Password (ConvertTo-SecureString -String $pwd -Force -AsPlainText)
-
-    # Make certificate trusted for current user by copying it into TrustedPeople and TrustedRoot stores
+    Write-Host "Checking package contents..."
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $archive = [System.IO.Compression.ZipFile]::OpenRead($packagePath)
     try {
-      # Import the exported PFX into CurrentUser Trusted Root and TrustedPeople
-      $securePwd = ConvertTo-SecureString -String $pwd -Force -AsPlainText
-      Import-PfxCertificate -FilePath $pfxPath -CertStoreLocation Cert:\CurrentUser\Root -Password $securePwd -Exportable | Out-Null
-      Import-PfxCertificate -FilePath $pfxPath -CertStoreLocation Cert:\CurrentUser\TrustedPeople -Password $securePwd -Exportable | Out-Null
-      Write-Host "Imported temporary PFX into CurrentUser Trusted Root and Trusted People stores."
-    }
-    catch {
-      Write-Warning "Failed to import temporary PFX into user stores: $_"
-      Write-Host "You can manually install $pfxPath into Trusted Root Certification Authorities and Trusted People (Current User)."
-    }
+        $manifestEntry = $archive.GetEntry("AppxManifest.xml")
+        if (-not $manifestEntry) { throw "The package is missing AppxManifest.xml." }
+        $executableEntry = [System.Uri]::EscapeDataString($appExe.Name)
+        foreach ($requiredEntry in @(
+            "Assets/Square44x44Logo.png",
+            "Assets/Square150x150Logo.png",
+            "sqlite3mc.dll",
+            "chesspairing.dll",
+            $executableEntry
+        )) {
+            if (-not $archive.GetEntry($requiredEntry)) {
+                throw "The package is missing required file '$requiredEntry'."
+            }
+        }
 
-    & $signtoolExe sign /fd SHA256 /f $pfxPath /p $pwd /tr http://timestamp.digicert.com /td SHA256 $packagePath
-    Write-Host "Temporary certificate exported to $pfxPath (delete if not needed)."
+        $reader = New-Object System.IO.StreamReader($manifestEntry.Open())
+        try { $packedManifest = [xml]$reader.ReadToEnd() }
+        finally { $reader.Dispose() }
 
-    if ($InstallToLocalMachine) {
-      Write-Host "Preparing to import temporary certificate into LocalMachine stores (requires elevation)..."
-      $helperScript = Join-Path $env:TEMP ("import_lm_{0}.ps1" -f ([Guid]::NewGuid().ToString()))
-      $lmScript = @"
-$securePwd = ConvertTo-SecureString -String '$pwd' -Force -AsPlainText
-# Remove existing certs with same subject from LocalMachine stores
-Get-ChildItem Cert:\LocalMachine\Root | Where-Object Subject -eq '$($cert.Subject)' | ForEach-Object { try { Remove-Item -Path ("Cert:\LocalMachine\Root\" + $_.Thumbprint) -Force -ErrorAction SilentlyContinue } catch {} }
-Get-ChildItem Cert:\LocalMachine\TrustedPeople | Where-Object Subject -eq '$($cert.Subject)' | ForEach-Object { try { Remove-Item -Path ("Cert:\LocalMachine\TrustedPeople\" + $_.Thumbprint) -Force -ErrorAction SilentlyContinue } catch {} }
-Import-PfxCertificate -FilePath '$pfxPath' -CertStoreLocation Cert:\LocalMachine\Root -Password $securePwd -Exportable | Out-Null
-Import-PfxCertificate -FilePath '$pfxPath' -CertStoreLocation Cert:\LocalMachine\TrustedPeople -Password $securePwd -Exportable | Out-Null
-Write-Host 'Imported PFX into LocalMachine Root and TrustedPeople stores.'
-"@
-      Set-Content -Path $helperScript -Value $lmScript -Encoding UTF8
-      try {
-        Start-Process -FilePath powershell -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File',"$helperScript" -Verb runAs -Wait
-        Remove-Item -Path $helperScript -Force -ErrorAction SilentlyContinue
-        Write-Host "LocalMachine import helper completed."
-      }
-      catch {
-        Write-Warning "Failed to run elevated import helper: $_"
-        Write-Host "You can manually import $pfxPath into LocalMachine Root and TrustedPeople with admin rights."
-      }
+        $packedIdentity = $packedManifest.Package.Identity
+        if ($packedIdentity.Name -ne $PackageIdentityName -or
+            $packedIdentity.Publisher -ne $PackagePublisher -or
+            $packedIdentity.Version -ne $packageVersion -or
+            $packedIdentity.ProcessorArchitecture -ne "x64") {
+            throw "The package manifest identity does not match the requested Store identity and version."
+        }
+        if ($packedManifest.Package.Properties.PublisherDisplayName -ne $PublisherDisplayName) {
+            throw "The package manifest publisher display name does not match '$PublisherDisplayName'."
+        }
+        if ($archive.GetEntry("AppxSignature.p7x")) {
+            throw "Store submission package must be unsigned; an AppxSignature.p7x was found."
+        }
+    }
+    finally { $archive.Dispose() }
+
+    Write-Host "Store upload package created: $packagePath"
+    Write-Host "Identity: $PackageIdentityName"
+    Write-Host "Publisher: $PackagePublisher"
+    Write-Host "Version: $packageVersion"
+    Write-Host "The Microsoft Store signs the package after submission."
+}
+finally {
+    if (Test-Path -LiteralPath $publishDir) {
+        Remove-Item -LiteralPath $publishDir -Recurse -Force
     }
 }
-
-Write-Host "MSIX package ready at: $packagePath"
-Write-Host "Done."

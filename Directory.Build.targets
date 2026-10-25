@@ -5,5 +5,10 @@
           CopyToOutputDirectory="PreserveNewest"
           CopyToPublishDirectory="PreserveNewest"
           ExcludeFromSingleFile="true" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\ChessPairingWrapper\chesspairing.dll"
+          Link="chesspairing.dll"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          ExcludeFromSingleFile="true" />
   </ItemGroup>
 </Project>

@@ -263,9 +263,22 @@ h3 {
 
 .hero-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  gap: 8px;
   margin-bottom: 26px;
+}
+
+.release-link {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.release-link:hover {
+  color: var(--text);
 }
 
 .button {
