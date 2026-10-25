@@ -4,6 +4,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Download-0078D4?logo=microsoft)](https://apps.microsoft.com/detail/9p78z94q4nrt)
 [![Patrocine](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
@@ -61,9 +62,9 @@ Ao contrário de ferramentas para clubes voltadas primeiro à Web, Local Knights
 
 Colocar um clube em funcionamento é intencionalmente simples.
 
-1. Baixe a versão mais recente do aplicativo como arquivo zip na nossa página de [releases](https://github.com/urbanoanderson/local-knights/releases).
-1. Extraia o conteúdo do zip para qualquer pasta desejada. Opcionalmente, crie um atalho para o executável "Local Knights.exe".
-1. Inicie o aplicativo por meio de "Local Knights.exe".
+1. Escolha uma forma de instalação:
+   - **Recomendado:** Instale o Local Knights pela [Microsoft Store](https://apps.microsoft.com/detail/9p78z94q4nrt).
+   - **Alternativa:** Baixe o ZIP mais recente no [GitHub Releases](https://github.com/urbanoanderson/local-knights/releases), extraia-o para a pasta desejada, crie um atalho opcionalmente e inicie o "Local Knights.exe".
 1. Na primeira execução, clique no botão "+" e configure o nome do clube, as preferências de rating, a senha etc.
 1. Entre no clube usando a senha criada e acesse o painel do clube.
 1. Cadastre os jogadores individualmente pelo botão Criar na página Jogadores. Como alternativa, é possível importar em massa arquivos de jogadores no formato CSV ([arquivo de importação de exemplo](Scripts/Seed/player-bulk-import-sample.csv)).

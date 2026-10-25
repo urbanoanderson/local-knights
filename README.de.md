@@ -4,6 +4,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Download-0078D4?logo=microsoft)](https://apps.microsoft.com/detail/9p78z94q4nrt)
 [![Sponsern](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
@@ -61,9 +62,9 @@ Anders als weborientierte Vereinswerkzeuge ist Local Knights auf lokale Kontroll
 
 Einen Verein einzurichten ist bewusst einfach gehalten.
 
-1. Laden Sie die neueste Version der App als ZIP-Datei von unserer [Release-Seite](https://github.com/urbanoanderson/local-knights/releases) herunter.
-1. Entpacken Sie den Inhalt in einen beliebigen Ordner. Erstellen Sie optional eine Verknüpfung zur ausführbaren Datei „Local Knights.exe“.
-1. Starten Sie die App über „Local Knights.exe“.
+1. Wählen Sie eine Installationsmethode:
+   - **Empfohlen:** Installieren Sie Local Knights über den [Microsoft Store](https://apps.microsoft.com/detail/9p78z94q4nrt).
+   - **Alternative:** Laden Sie die neueste ZIP-Datei von [GitHub Releases](https://github.com/urbanoanderson/local-knights/releases) herunter, entpacken Sie sie in den gewünschten Ordner, erstellen Sie optional eine Verknüpfung und starten Sie „Local Knights.exe“.
 1. Klicken Sie beim ersten Start auf die Schaltfläche „+“ und richten Sie Vereinsname, Wertungseinstellungen, Passwort usw. ein.
 1. Melden Sie sich mit dem erstellten Passwort bei Ihrem Verein an und öffnen Sie die Vereinsübersicht.
 1. Registrieren Sie Spieler einzeln über die Schaltfläche Erstellen auf der Spielerseite. Alternativ wird der Massenimport von Spielerdateien im CSV-Format unterstützt ([Beispielimportdatei](Scripts/Seed/player-bulk-import-sample.csv)).

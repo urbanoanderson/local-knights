@@ -4,6 +4,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Download-0078D4?logo=microsoft)](https://apps.microsoft.com/detail/9p78z94q4nrt)
 [![Поддержать](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
@@ -61,9 +62,9 @@
 
 Создать и запустить клуб намеренно просто.
 
-1. Скачайте последнюю версию приложения в виде ZIP-файла со страницы [релизов](https://github.com/urbanoanderson/local-knights/releases).
-1. Распакуйте содержимое архива в любую удобную папку. При желании создайте ярлык для исполняемого файла «Local Knights.exe».
-1. Запустите приложение с помощью «Local Knights.exe».
+1. Выберите способ установки:
+   - **Рекомендуется:** установите Local Knights из [Microsoft Store](https://apps.microsoft.com/detail/9p78z94q4nrt).
+   - **Альтернатива:** скачайте последний ZIP-файл со страницы [релизов GitHub](https://github.com/urbanoanderson/local-knights/releases), распакуйте его в нужную папку, при желании создайте ярлык и запустите «Local Knights.exe».
 1. При первом запуске нажмите кнопку «+» и укажите название клуба, настройки рейтинга, пароль и другие параметры.
 1. Войдите в клуб с созданным паролем и откройте панель управления.
 1. Регистрируйте игроков по одному кнопкой «Создать» на странице игроков. Также поддерживается массовый импорт файлов игроков в формате CSV ([пример файла импорта](Scripts/Seed/player-bulk-import-sample.csv)).

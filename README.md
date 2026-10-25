@@ -4,6 +4,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Download-0078D4?logo=microsoft)](https://apps.microsoft.com/detail/9p78z94q4nrt)
 [![Sponsor](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
@@ -61,9 +62,9 @@ Unlike web-first club tools, Local Knights is designed around local-first contro
 
 Getting a club up and running is intentionally simple.
 
-1. Download latest version of the app from our [releases](https://github.com/urbanoanderson/local-knights/releases) page as a zip file.
-1. Extract the zip contents into any desired folder. Optionally create a shortcut to the "Local Knights.exe" executable.
-1. Launch the app via "Local Knights.exe".
+1. Choose an installation method:
+   - **Recommended:** Install Local Knights from the [Microsoft Store](https://apps.microsoft.com/detail/9p78z94q4nrt).
+   - **Alternative:** Download the latest ZIP from [GitHub Releases](https://github.com/urbanoanderson/local-knights/releases), extract it to your desired folder, optionally create a shortcut, and launch "Local Knights.exe".
 1. On first launch, click on the "+" button and configure your club's name, rating preferences, password, etc.
 1. Login to your club using the created password and access the club dashboard.
 1. Register players individually via Create button on Players page. Alternatively, bulk import of player files in CSV format is supported ([sample import file](Scripts/Seed/player-bulk-import-sample.csv)).

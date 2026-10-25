@@ -4,6 +4,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Download-0078D4?logo=microsoft)](https://apps.microsoft.com/detail/9p78z94q4nrt)
 [![Patrocina](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
@@ -61,9 +62,9 @@ A diferencia de las herramientas para clubes centradas en la Web, Local Knights 
 
 Poner un club en marcha es deliberadamente sencillo.
 
-1. Descarga la última versión de la aplicación como archivo zip desde nuestra página de [versiones](https://github.com/urbanoanderson/local-knights/releases).
-1. Extrae el contenido del zip en la carpeta que prefieras. Si quieres, crea un acceso directo al ejecutable "Local Knights.exe".
-1. Inicia la aplicación mediante "Local Knights.exe".
+1. Elige un método de instalación:
+   - **Recomendado:** Instala Local Knights desde [Microsoft Store](https://apps.microsoft.com/detail/9p78z94q4nrt).
+   - **Alternativa:** Descarga el ZIP más reciente desde [GitHub Releases](https://github.com/urbanoanderson/local-knights/releases), extráelo en la carpeta que prefieras, crea un acceso directo si quieres e inicia "Local Knights.exe".
 1. En el primer inicio, pulsa el botón "+" y configura el nombre del club, las preferencias de rating, la contraseña, etc.
 1. Accede al club con la contraseña creada y abre su panel.
 1. Registra jugadores individualmente con el botón Crear de la página Jugadores. También puedes importar en bloque archivos de jugadores en formato CSV ([archivo de importación de ejemplo](Scripts/Seed/player-bulk-import-sample.csv)).

@@ -4,6 +4,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft_Store-Download-0078D4?logo=microsoft)](https://apps.microsoft.com/detail/9p78z94q4nrt)
 [![Parrainer](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
@@ -61,9 +62,9 @@ Contrairement aux outils de club privilégiant le Web, Local Knights est conçu 
 
 La mise en service d’un club est volontairement simple.
 
-1. Téléchargez la dernière version de l’application sous forme d’archive zip depuis notre page des [versions](https://github.com/urbanoanderson/local-knights/releases).
-1. Extrayez le contenu de l’archive dans le dossier de votre choix. Vous pouvez également créer un raccourci vers l’exécutable « Local Knights.exe ».
-1. Lancez l’application avec « Local Knights.exe ».
+1. Choisissez une méthode d’installation :
+   - **Recommandée :** installez Local Knights depuis le [Microsoft Store](https://apps.microsoft.com/detail/9p78z94q4nrt).
+   - **Alternative :** téléchargez le dernier ZIP depuis les [versions GitHub](https://github.com/urbanoanderson/local-knights/releases), extrayez-le dans le dossier de votre choix, créez éventuellement un raccourci, puis lancez « Local Knights.exe ».
 1. Au premier lancement, cliquez sur le bouton « + » et configurez le nom du club, les préférences de classement, le mot de passe, etc.
 1. Connectez-vous à votre club avec le mot de passe créé et accédez au tableau de bord.
 1. Inscrivez les joueurs individuellement avec le bouton Créer de la page Joueurs. Vous pouvez aussi importer en bloc des fichiers de joueurs au format CSV ([fichier d’importation d’exemple](Scripts/Seed/player-bulk-import-sample.csv)).
