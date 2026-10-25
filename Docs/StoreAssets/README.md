@@ -1,5 +1,33 @@
 # Microsoft Store artwork
 
+## Short store description
+
+### English
+
+Manage your chess club in one desktop app. Track players, games, competitions, and ratings while keeping your data local.
+
+### Português (Brasil)
+
+Gerencie seu clube de xadrez em um só aplicativo para desktop. Cadastre jogadores, partidas, competições e ratings, mantendo seus dados armazenados localmente.
+
+### Español
+
+Gestiona tu club de ajedrez desde una sola aplicación de escritorio. Registra jugadores, partidas, competiciones y ratings, y conserva tus datos localmente.
+
+### Français
+
+Gérez votre club d’échecs dans une seule application de bureau. Suivez les joueurs, les parties, les compétitions et les classements, tout en conservant vos données localement.
+
+### Deutsch
+
+Verwalten Sie Ihren Schachverein in einer Desktop-App. Erfassen Sie Spieler, Partien, Wettbewerbe und Wertungen und behalten Sie Ihre Daten lokal.
+
+### Русский
+
+Управляйте шахматным клубом в одном настольном приложении. Ведите учет игроков, партий, соревнований и рейтингов, сохраняя данные локально.
+
+## Artwork
+
 Generated from `LocalKnights.WindowsDesktop/Resources/Icon/logo.png` and
 `logo-bg.png` using `Scripts/create-store-assets.ps1`. When the script runs, it
 downloads Space Grotesk Bold over HTTPS from Google Fonts; no font file is stored in

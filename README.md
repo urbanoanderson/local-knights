@@ -2,6 +2,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 [![Download Latest Release](https://img.shields.io/github/v/release/urbanoanderson/local-knights?label=Latest%20Release)](https://github.com/urbanoanderson/local-knights/releases)
+[![Sponsor](https://img.shields.io/github/sponsors/urbanoanderson?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/urbanoanderson)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-0078D6)
 ![Built with .NET 10](https://img.shields.io/badge/.NET-10-512BD4)
 
@@ -138,3 +139,7 @@ Local Knights is licensed under the Mozilla Public License 2.0.
 See [LICENSE](LICENSE) for the full license text.
 
 For third-party components, bundled libraries, and external implementation references, see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+
+## Support the project 💖
+
+If Local Knights helped you or your club spend less time wrestling spreadsheets and more time checkmating friends, consider [sponsoring the project](https://github.com/sponsors/urbanoanderson). Even a small contribution helps keep the knights moving as horses are surprisingly expensive. 🐴♟️
