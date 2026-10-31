@@ -203,6 +203,7 @@ namespace LocalKnights.WindowsDesktop.Helpers
             return new CompetitionPageStandingTableItem()
             {
                 Classification = $"#{standingEntry.Classification}",
+                ClassificationSortKey = standingEntry.Classification,
                 ParticipantName = player == null ? standingEntry.Participant.ParticipantIdentifierName : $"{player.DisplayName} ({player.IdentifierName})",
                 Score = standingEntry.Score.ToString("F1"),
                 OldRatingDisplay = FormatRating(standingEntry.Participant.OldRating, clubPreferences.RatingSystem, null, null),

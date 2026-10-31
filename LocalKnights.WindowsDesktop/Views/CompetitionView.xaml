@@ -478,7 +478,7 @@
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="Auto" Binding="{Binding Classification}" ElementStyle="{StaticResource CenteredDataGridTextBlockStyle}" IsReadOnly="True">
+                                <DataGridTextColumn Width="Auto" Binding="{Binding Classification}" SortMemberPath="ClassificationSortKey" ElementStyle="{StaticResource CenteredDataGridTextBlockStyle}" IsReadOnly="True">
                                     <DataGridTextColumn.HeaderTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding DataContext.ClassificationLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
