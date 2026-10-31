@@ -20,12 +20,25 @@ namespace LocalKnights.WindowsDesktop.Views
                 return;
             }
 
-            if (comboBox.DataContext is not CompetitionPagePairingTableItem pairingTableItem)
+            if (comboBox.DataContext is not CompetitionPagePairingTableItem pairingTableItem ||
+                !TryGetAddedResult(e, out string selectedResult))
             {
                 return;
             }
 
-            pairingTableItem.CommitSelectedResult();
+            pairingTableItem.CommitSelectedResult(selectedResult);
+        }
+
+        internal static bool TryGetAddedResult(SelectionChangedEventArgs e, out string selectedResult)
+        {
+            selectedResult = string.Empty;
+            if (e.AddedItems.Count != 1 || e.AddedItems[0] is not string result)
+            {
+                return false;
+            }
+
+            selectedResult = result;
+            return true;
         }
     }
 }
