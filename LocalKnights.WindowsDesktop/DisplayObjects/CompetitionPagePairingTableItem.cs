@@ -66,9 +66,9 @@ namespace LocalKnights.WindowsDesktop.DisplayObjects
             }
         }
 
-        public void CommitSelectedResult()
+        public void CommitSelectedResult(string selectedResult)
         {
-            GameResult? parsedResult = FormatHelper.ParseGameResultString(SelectedResult);
+            GameResult? parsedResult = FormatHelper.ParseGameResultString(selectedResult);
             OnSetResult?.Invoke(_competitionPairing, parsedResult);
         }
 

@@ -10,8 +10,6 @@ namespace LocalKnights.WindowsDesktop.Helpers
 {
     public static class ExportToExcelHelper
     {
-        private static readonly DomainEnumStringConverter DomainEnumStringConverter = new DomainEnumStringConverter();
-
         /// <summary>
         /// Export competition details to an Excel file.
         /// This method is implemented to try to use the FreeDataExportsv2 library
@@ -76,9 +74,9 @@ namespace LocalKnights.WindowsDesktop.Helpers
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("CityLabel"), DataType.String).AddCell(competition.City ?? string.Empty, infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("ChiefArbiterLabel"), DataType.String).AddCell(competition.ChiefArbiter ?? string.Empty, infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("FederationLabel"), DataType.String).AddCell(competition.Federation ?? string.Empty, infoValueOptions);
-            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("StateLabel"), DataType.String).AddCell(competition.State.ToString(), infoValueOptions);
-            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TypeLabel"), DataType.String).AddCell(competition.Type.ToString(), infoValueOptions);
-            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TimeFormatLabel"), DataType.String).AddCell(competition.TimeFormat.ToString(), infoValueOptions);
+            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("StateLabel"), DataType.String).AddCell(DomainEnumStringConverter.Instance.Convert(competition.State), infoValueOptions);
+            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TypeLabel"), DataType.String).AddCell(DomainEnumStringConverter.Instance.Convert(competition.Type), infoValueOptions);
+            infoSheet.AddRow().AddCell(LocalizationHelper.GetString("TimeFormatLabel"), DataType.String).AddCell(DomainEnumStringConverter.Instance.Convert(competition.TimeFormat), infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("IsRatedLabel"), DataType.String).AddCell(competition.IsRated ? LocalizationHelper.GetString("Yes") : LocalizationHelper.GetString("No"), infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("NumberOfRoundsLabel"), DataType.String).AddCell(competition.NumberOfRounds.ToString(), infoValueOptions);
             infoSheet.AddRow().AddCell(LocalizationHelper.GetString("CreationDateLabel"), DataType.String).AddCell(FormatDateTimeValue(competition.CreatedAt), infoValueOptions);
@@ -157,7 +155,7 @@ namespace LocalKnights.WindowsDesktop.Helpers
                         Player blackPlayer = playerService.GetPlayerByIdentifierAsync(p.BlackPlayerIdentifierName).GetAwaiter().GetResult();
                         string whiteDisplay = whitePlayer != null ? whitePlayer.DisplayName : p.WhitePlayerIdentifierName;
                         string blackDisplay = blackPlayer != null ? blackPlayer.DisplayName : p.BlackPlayerIdentifierName;
-                        string result = p.Result.HasValue ? DomainEnumStringConverter.Convert(p.Result.Value) : string.Empty;
+                        string result = p.Result.HasValue ? DomainEnumStringConverter.Instance.Convert(p.Result.Value) : string.Empty;
 
                         // Table cell: write "BYE" for bye pairings, otherwise write table number as string
                         var tableText = string.IsNullOrWhiteSpace(p.BlackPlayerIdentifierName) ? "BYE" : p.TableNumber.ToString();

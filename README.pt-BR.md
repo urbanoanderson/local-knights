@@ -145,4 +145,4 @@ Para componentes de terceiros, bibliotecas incluídas e referências externas de
 
 ## Apoie o projeto 💖
 
-Se o Local Knights ajudou você ou seu clube a passar menos tempo lutando com planilhas e mais tempo dando xeque-mate nos amigos, considere [patrocinar o projeto](https://github.com/sponsors/urbanoanderson). Até uma pequena contribuição ajuda a manter os cavalos em movimento — e cavalos são surpreendentemente caros. 🐴♟️
+Se o Local Knights ajudou você ou seu clube a passar menos tempo lutando com planilhas e mais tempo dando xeque-mate nos amigos, considere [patrocinar o projeto](https://github.com/sponsors/urbanoanderson). Até uma pequena contribuição ajuda a manter os cavalos alimentados. 🐴♟️

@@ -145,4 +145,4 @@ For third-party components, bundled libraries, and external implementation refer
 
 ## Support the project 💖
 
-If Local Knights helped you or your club spend less time wrestling spreadsheets and more time checkmating friends, consider [sponsoring the project](https://github.com/sponsors/urbanoanderson). Even a small contribution helps keep the knights moving as horses are surprisingly expensive. 🐴♟️
+If Local Knights helped you or your club spend less time wrestling spreadsheets and more time checkmating friends, consider [sponsoring the project](https://github.com/sponsors/urbanoanderson). Even a small contribution helps keeping the knights moving as horses are surprisingly expensive. 🐴♟️

@@ -4,6 +4,8 @@ namespace LocalKnights.WindowsDesktop.DisplayObjects
     {
         public required string Classification { get; set; }
 
+        public int ClassificationSortKey { get; set; }
+
         public required string ParticipantName { get; set; }
 
         public required string Score { get; set; }
